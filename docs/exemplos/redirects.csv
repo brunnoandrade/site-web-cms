@@ -1,0 +1,4 @@
+origem;destino;tipo;onda;ativo
+/cartao-sem-anuidade/;/cartao/;301;3;sim
+/blog/noticias/post-antigo/;/blog/noticias/post-novo/;301;1;sim
+/app/;https://www.digio.com.br/app/;301;4;não

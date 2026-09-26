@@ -1,0 +1,33 @@
+{
+  "name": "site-web-digio",
+  "private": true,
+  "description": "Site V2 Digio: monorepo com o CMS (Payload) e o site p\u00fablico (Next.js)",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm --filter cms build && pnpm --filter web build",
+    "dev": "pnpm --parallel --no-bail --filter cms --filter web dev",
+    "dev:cms": "pnpm --filter cms dev",
+    "dev:web": "pnpm --filter web dev",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "generate:types": "pnpm --filter cms generate:types",
+    "lint": "pnpm -r lint",
+    "test:int": "pnpm --filter cms test:int",
+    "test:scripts": "vitest run scripts",
+    "test:unit": "pnpm -r test:unit && pnpm test:scripts",
+    "typecheck": "pnpm -r typecheck && tsc -p scripts/tsconfig.json",
+    "validate-urls": "tsx scripts/validate-urls.ts"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.9",
+    "prettier": "^3.4.2",
+    "tsx": "4.22.4",
+    "typescript": "5.7.3",
+    "vitest": "4.0.18"
+  },
+  "engines": {
+    "node": ">=20.9.0",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@12.6.0"
+}

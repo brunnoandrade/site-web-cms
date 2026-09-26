@@ -1,0 +1,11 @@
+{
+  "name": "@digio/routes",
+  "version": "0.0.0",
+  "private": true,
+  "description": "URLs públicas do site (páginas, posts) e normalização de caminhos. Fonte única para o CMS (redirects automáticos, preview, SEO) e para o site (links).",
+  "type": "module",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

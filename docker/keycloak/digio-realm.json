@@ -1,0 +1,199 @@
+{
+  "realm": "digio",
+  "displayName": "Digio (desenvolvimento local)",
+  "enabled": true,
+  "sslRequired": "none",
+  "loginWithEmailAllowed": true,
+  "registrationAllowed": false,
+  "roles": {
+    "realm": [
+      {
+        "name": "cms-super-admin",
+        "description": "Super admin do CMS (todas as propriedades)"
+      },
+      {
+        "name": "default-roles-digio",
+        "composite": false
+      }
+    ]
+  },
+  "defaultRole": {
+    "name": "default-roles-digio"
+  },
+  "groups": [
+    {
+      "name": "tenants",
+      "subGroups": [
+        {
+          "name": "digio",
+          "subGroups": [
+            {
+              "name": "admin"
+            },
+            {
+              "name": "editor"
+            },
+            {
+              "name": "seo"
+            }
+          ]
+        },
+        {
+          "name": "campanha-exemplo",
+          "subGroups": [
+            {
+              "name": "admin"
+            },
+            {
+              "name": "editor"
+            },
+            {
+              "name": "seo"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "digio-cms",
+      "name": "CMS Digio (Payload)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "digio-cms-local-secret",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": ["http://localhost:3001/auth/sso/callback"],
+      "webOrigins": ["http://localhost:3001"],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:3001/admin/login*"
+      },
+      "defaultClientScopes": ["web-origins", "profile", "roles", "email"],
+      "protocolMappers": [
+        {
+          "name": "groups",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-group-membership-mapper",
+          "config": {
+            "claim.name": "groups",
+            "full.path": "true",
+            "id.token.claim": "true",
+            "access.token.claim": "false",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "realm roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "config": {
+            "claim.name": "roles",
+            "multivalued": "true",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "false",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "sso.admin",
+      "email": "sso.admin@digio.local",
+      "firstName": "Super admin SSO",
+      "lastName": "Teste",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Senha-123",
+          "temporary": false
+        }
+      ],
+      "groups": [],
+      "realmRoles": ["default-roles-digio", "cms-super-admin"],
+      "requiredActions": []
+    },
+    {
+      "username": "sso.editor",
+      "email": "sso.editor@digio.local",
+      "firstName": "Editor Digio",
+      "lastName": "Teste",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Senha-123",
+          "temporary": false
+        }
+      ],
+      "groups": ["/tenants/digio/editor"],
+      "realmRoles": ["default-roles-digio"],
+      "requiredActions": []
+    },
+    {
+      "username": "sso.multi",
+      "email": "sso.multi@digio.local",
+      "firstName": "SEO Digio e editor Campanha",
+      "lastName": "Teste",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Senha-123",
+          "temporary": false
+        }
+      ],
+      "groups": ["/tenants/digio/seo", "/tenants/campanha-exemplo/editor"],
+      "realmRoles": ["default-roles-digio"],
+      "requiredActions": []
+    },
+    {
+      "username": "sso.semacesso",
+      "email": "sso.semacesso@digio.local",
+      "firstName": "Sem acesso",
+      "lastName": "Teste",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Senha-123",
+          "temporary": false
+        }
+      ],
+      "groups": [],
+      "realmRoles": ["default-roles-digio"],
+      "requiredActions": []
+    },
+    {
+      "username": "sso.colisao",
+      "email": "demo-author@example.com",
+      "firstName": "Colisão com conta local",
+      "lastName": "Teste",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Senha-123",
+          "temporary": false
+        }
+      ],
+      "groups": ["/tenants/digio/editor"],
+      "realmRoles": ["default-roles-digio"],
+      "requiredActions": []
+    }
+  ]
+}
