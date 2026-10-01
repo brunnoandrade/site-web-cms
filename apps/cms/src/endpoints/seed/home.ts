@@ -7,7 +7,7 @@ type HomeArgs = {
   faqs: Faq[]
 }
 
-const text = (value: string) => ({
+export const text = (value: string) => ({
   type: 'text',
   detail: 0,
   format: 0,
@@ -18,7 +18,10 @@ const text = (value: string) => ({
 })
 
 /** Lexical document with an optional heading followed by paragraphs. */
-const richText = (heading: { tag: 'h1' | 'h2'; text: string } | null, ...paragraphs: string[]) =>
+export const richText = (
+  heading: { tag: 'h1' | 'h2'; text: string } | null,
+  ...paragraphs: string[]
+) =>
   ({
     root: {
       type: 'root',
@@ -53,7 +56,7 @@ const richText = (heading: { tag: 'h1' | 'h2'; text: string } | null, ...paragra
     },
   }) as never
 
-const custom = (label: string, url: string) => ({ type: 'custom' as const, label, url })
+export const custom = (label: string, url: string) => ({ type: 'custom' as const, label, url })
 
 /**
  * Digio home built with the design system blocks. The layout follows the Uber Conta reference

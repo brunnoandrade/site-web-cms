@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url'
 
 import type { Tenant, User } from '@digio/payload-types'
 
+import { seedCampaign } from './campaign'
 import { seedCatalog } from './catalog'
 import { contactForm as contactFormData } from './contact-form'
 import { contact as contactPageData } from './contact-page'
@@ -49,6 +50,9 @@ const categories = [
   { title: 'Salvando Grana', slug: 'salvando-grana' },
   { title: 'Segurança', slug: 'seguranca' },
 ]
+
+/** Property with the full demo content; the others get the campaign content. */
+const MAIN_TENANT = 'digio'
 
 // Skips the website revalidation webhook: the website may not be running while seeding.
 const context = { disableRevalidate: true }
@@ -131,6 +135,20 @@ export const seed = async ({
     data: withTenant(imageHero1),
     file: hero1Buffer,
   })
+
+  // The main property (digio) gets the full demo: blog, catalog, help center and components page.
+  // Any other property is a campaign micro-site with its own, smaller content.
+  if (tenant.slug !== MAIN_TENANT) {
+    await seedCampaign({
+      payload,
+      req,
+      tenant,
+      images: [imageHomeDoc, image1Doc, image2Doc],
+      context,
+    })
+    payload.logger.info(`Seeded tenant "${tenant.slug}" successfully!`)
+    return
+  }
 
   const categoryDocs = await Promise.all(
     categories.map((category) =>
@@ -245,13 +263,21 @@ export const seed = async ({
           links: [
             { link: { type: 'custom' as const, label: 'Cartão de crédito', url: '/componentes/' } },
             { link: { type: 'custom' as const, label: 'Conta digital', url: '/componentes/' } },
-            { link: { type: 'custom' as const, label: 'Empréstimo pessoal', url: '/componentes/' } },
+            {
+              link: { type: 'custom' as const, label: 'Empréstimo pessoal', url: '/componentes/' },
+            },
           ],
         },
         {
           title: 'Ajuda',
           links: [
-            { link: { type: 'custom' as const, label: 'Central de ajuda', url: '/central-de-ajuda/' } },
+            {
+              link: {
+                type: 'custom' as const,
+                label: 'Central de ajuda',
+                url: '/central-de-ajuda/',
+              },
+            },
             {
               link: {
                 type: 'reference' as const,
@@ -281,7 +307,9 @@ export const seed = async ({
     }),
   })
 
-  payload.logger.info(`— Seeding products, rates, FAQs, help center, banner, components page and home...`)
+  payload.logger.info(
+    `— Seeding products, rates, FAQs, help center, banner, components page and home...`,
+  )
 
   const { faqs } = await seedCatalog({ payload, req, tenant, image: imageHomeDoc, context })
 
