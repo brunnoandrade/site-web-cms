@@ -1,0 +1,20 @@
+// Digio brand in the admin. The logo follows the admin theme: navy on light, white on dark.
+.digio-logo {
+  &__ink {
+    fill: #1c2048;
+  }
+
+  &__accent {
+    fill: #3fece2;
+  }
+}
+
+[data-theme='dark'] .digio-logo__ink {
+  fill: #fff;
+}
+
+// Login and the other unauthenticated pages.
+.login__brand .digio-logo:not(.digio-logo--icon) {
+  width: 160px;
+  height: auto;
+}

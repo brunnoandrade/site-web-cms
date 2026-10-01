@@ -34,12 +34,21 @@ export default buildConfig({
     // Light and dark are available; light is the default (see src/proxy.ts).
     theme: 'all',
     components: {
+      // Digio logo on the login page and the compact mark in the navigation.
+      graphics: {
+        Logo: '@/components/DigioLogo#DigioLogo',
+        Icon: '@/components/DigioLogo#DigioIcon',
+      },
       // "Entrar com SSO" below the local login form (see src/auth).
       afterLogin: ['@/components/SsoLogin'],
       // Local and SSO accounts have separate logouts.
       logout: {
         Button: '@/components/LogoutButton',
       },
+    },
+    meta: {
+      titleSuffix: '- Digio',
+      icons: [{ rel: 'icon', type: 'image/svg+xml', url: '/brand/icon.svg' }],
     },
     importMap: {
       baseDir: path.resolve(dirname),

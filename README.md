@@ -71,6 +71,14 @@ Para só recriar o conteúdo num banco que já tem super admin, rode sem as vari
 
 O design system do site está em `docs/design-system.md`.
 
+Marca da Digio no admin ([apps/cms/src/components/DigioLogo](apps/cms/src/components/DigioLogo/index.tsx), registrada em `admin.components.graphics` e `admin.meta` no `payload.config.ts`):
+
+- **Logo completo** na tela de login (e esqueci a senha), azul-marinho no tema claro e branco no escuro (as cores vêm de classes em `custom.scss`);
+- **Ícone "d"** no topo da navegação, onde o logo completo não cabe;
+- **Favicon** `apps/cms/public/brand/icon.svg` e título das abas com o sufixo "- Digio".
+
+Os caminhos do SVG são os de `apps/web/public/brand/logo-digio.svg`; se o logo mudar, atualize os dois.
+
 Links locais:
 
 - Admin: http://localhost:3001/admin. O seletor "Propriedade" no menu filtra o conteúdo.

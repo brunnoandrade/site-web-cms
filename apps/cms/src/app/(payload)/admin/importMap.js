@@ -35,6 +35,8 @@ import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloa
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { FolderTypeField as FolderTypeField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
 import { default as default_db9ac62598c46d0f1db201f6af05442e } from '@/components/LogoutButton'
+import { DigioIcon as DigioIcon_f77ec3bc2a97fef187a7c13c91615578 } from '@/components/DigioLogo'
+import { DigioLogo as DigioLogo_f77ec3bc2a97fef187a7c13c91615578 } from '@/components/DigioLogo'
 import { GlobalViewRedirect as GlobalViewRedirect_d6d5f193a167989e2ee7d14202901e62 } from '@payloadcms/plugin-multi-tenant/rsc'
 import { default as default_91c3143ace9a9166d2a5f1b2748f6cd7 } from '@/components/SsoLogin'
 import { TenantSelector as TenantSelector_d6d5f193a167989e2ee7d14202901e62 } from '@payloadcms/plugin-multi-tenant/rsc'
@@ -81,6 +83,8 @@ export const importMap = {
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/next/client#FolderTypeField": FolderTypeField_2b8867833a34864a02ddf429b0728a40,
   "@/components/LogoutButton#default": default_db9ac62598c46d0f1db201f6af05442e,
+  "@/components/DigioLogo#DigioIcon": DigioIcon_f77ec3bc2a97fef187a7c13c91615578,
+  "@/components/DigioLogo#DigioLogo": DigioLogo_f77ec3bc2a97fef187a7c13c91615578,
   "@payloadcms/plugin-multi-tenant/rsc#GlobalViewRedirect": GlobalViewRedirect_d6d5f193a167989e2ee7d14202901e62,
   "@/components/SsoLogin#default": default_91c3143ace9a9166d2a5f1b2748f6cd7,
   "@payloadcms/plugin-multi-tenant/rsc#TenantSelector": TenantSelector_d6d5f193a167989e2ee7d14202901e62,
