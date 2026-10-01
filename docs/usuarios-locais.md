@@ -42,8 +42,19 @@ Console de administração do Keycloak: http://localhost:8080/admin (`admin` / `
 | Serviço | Endereço | Credenciais |
 |---|---|---|
 | Site Digio | http://localhost:3000 | – |
-| Site Campanha Exemplo | http://campanha.localhost:3000 | – |
+| Site Campanha Exemplo | http://campanha.localhost:3000 (`/regulamento/`, `/contato/`) | – |
 | Console do MinIO | http://localhost:9001 | `S3_ACCESS_KEY_ID` / `S3_SECRET_ACCESS_KEY` do `.env` da raiz (padrão `minioadmin` / `minioadmin`) |
 | Postgres | `localhost:5432` | `POSTGRES_USER` / `POSTGRES_PASSWORD` do `.env` da raiz (padrão `digio` / `digio`) |
 
 As portas podem ser diferentes na sua máquina: veja o `.env` da raiz.
+
+## Conteúdo de exemplo por propriedade
+
+O `bootstrap:dev` cria conteúdo diferente em cada propriedade:
+
+| Propriedade | Conteúdo |
+|---|---|
+| Digio (`digio`) | demo completo: home, componentes, contato, 3 posts, produtos, taxas, FAQs e central de ajuda |
+| Campanha Exemplo (`campanha-exemplo`) | micro-site "Indique e ganhe": home, regulamento, contato (em português), 3 FAQs, header e footer. Sem blog e sem central de ajuda. Os textos são fictícios e não trazem valores nem datas |
+
+O contato da propriedade Digio ainda vem em inglês (formulário do template do Payload).

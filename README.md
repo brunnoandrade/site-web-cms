@@ -25,6 +25,7 @@ navegador ──► web (Next.js) ──REST──► cms (Payload) ──► Po
 - **Se o CMS cair:** o site continua servindo as páginas e os dados em cache.
 - **Build:** o site não precisa do CMS para gerar o build. As páginas são geradas no primeiro acesso (ISR).
 - **Preview:** o admin abre `/next/preview/` no site, que ativa o draft mode. Os rascunhos são lidos com a API key de um usuário de serviço (`CMS_API_KEY`).
+- **Live preview:** o admin mostra o site num iframe e, a cada salvamento automático do rascunho, o site refaz a página (`RefreshRouteOnSave`). Só funciona se o iframe entrar em draft mode, e para isso o cookie `__prerender_bypass` precisa chegar ao site. Em desenvolvimento o Next envia esse cookie como `SameSite=Lax`, e o navegador o descarta quando o admin (`localhost:3001`) e o site da propriedade (`campanha.localhost:3000`) são sites diferentes. Por isso a rota [apps/web/src/app/(frontend)/next/preview/route.ts](apps/web/src/app/(frontend)/next/preview/route.ts) reenvia o cookie como `SameSite=None; Secure` fora de produção (em produção o Next já faz isso). Se o preview continuar sem atualizar: abra o admin exatamente em `http://localhost:3001` (é a origem que o `serverURL` aceita), use um navegador que aceite cookies de terceiros em `*.localhost` (Safari não aceita `Secure` em http) e confira no console se aparece algum erro. O botão **Reverter para publicado** do admin só zera o formulário e não avisa o iframe; por isso [apps/cms/src/components/LivePreviewRevertSync](apps/cms/src/components/LivePreviewRevertSync/index.tsx), ligado em `pages` e `posts`, dispara o evento de atualização quando as versões não publicadas somem. Ao criar outra coleção com `livePreview`, adicione `admin.components.edit.beforeDocumentControls: ['@/components/LivePreviewRevertSync#LivePreviewRevertSync']` e rode `pnpm --filter cms generate:importmap`.
 
 ## Requisitos
 
@@ -53,9 +54,18 @@ O `bootstrap:dev` cria:
 - a propriedade **Digio**, servida em http://localhost:3000;
 - a propriedade **Campanha Exemplo**, servida em http://campanha.localhost:3000 (`*.localhost` já aponta para a sua máquina, sem mexer no `/etc/hosts`);
 - o seu usuário super admin e a conta de serviço do preview (`preview@digio.local`);
-- conteúdo de exemplo nas duas propriedades.
+- conteúdo de exemplo nas duas propriedades, **diferente em cada uma**:
+  - **Digio**: demo completo (home, componentes, contato, blog, produtos e taxas, central de ajuda);
+  - **Campanha Exemplo**: micro-site "Indique e ganhe" (home, regulamento, contato em português, FAQs, header e footer), sem blog nem central de ajuda. Código em [apps/cms/src/endpoints/seed/campaign.ts](apps/cms/src/endpoints/seed/campaign.ts); qualquer propriedade diferente de `digio` recebe esse conteúdo.
 
 O `bootstrap:dev` **recria todo o conteúdo** das propriedades, inclusive apagando posts migrados do WordPress. Para ter posts reais depois dele: `pnpm --filter cms blog:migrate tenant=digio limit=20`.
+
+Detalhes que costumam pegar quem roda pela primeira vez:
+
+- **Suba o `pnpm dev` antes do `bootstrap:dev`.** No fim, o script pede ao site para limpar o cache (`/api/revalidate/`). Com o site parado, o cache de dados do `next dev` (`apps/web/.next/cache`) pode continuar servindo o conteúdo antigo. Se isso acontecer, chame o webhook com `REVALIDATE_SECRET`: `curl -X POST http://localhost:3000/api/revalidate/ -H "Authorization: Bearer $REVALIDATE_SECRET" -H 'Content-Type: application/json' -d '{"tags":["cms","tenants"]}'`.
+- **Use `docker compose up -d` completo** (e não só `postgres minio`): o serviço `minio-init` cria o bucket de mídia. Sem ele o seed falha com `NoSuchBucket`.
+- **O primeiro acesso a cada rota no `next dev` compila a página** e pode responder 503 por alguns segundos. Repita a requisição.
+- **Renomear a pasta do repositório muda o nome do projeto do compose**, e com ele os volumes (`<pasta>_postgres-data`, `<pasta>_minio-data`). O banco sobe vazio; os dados antigos continuam no volume com o nome anterior. Para voltar a usá-los, defina `COMPOSE_PROJECT_NAME` com o nome antigo, ou rode o `bootstrap:dev` para recriar tudo.
 
 Para só recriar o conteúdo num banco que já tem super admin, rode sem as variáveis `BOOTSTRAP_ADMIN_*`: os usuários ficam como estão.
 
