@@ -49,6 +49,11 @@ export const Pages: CollectionConfig<'pages'> = {
     slug: true,
   },
   admin: {
+    components: {
+      edit: {
+        beforeDocumentControls: ['@/components/LivePreviewRevertSync#LivePreviewRevertSync'],
+      },
+    },
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) =>

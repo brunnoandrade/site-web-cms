@@ -60,6 +60,11 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   },
   admin: {
+    components: {
+      edit: {
+        beforeDocumentControls: ['@/components/LivePreviewRevertSync#LivePreviewRevertSync'],
+      },
+    },
     group: t('Blog', 'Blog'),
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {

@@ -1,4 +1,4 @@
-import { draftMode } from 'next/headers'
+import { cookies, draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 import type { NextRequest } from 'next/server'
 
@@ -23,6 +23,19 @@ export async function GET(req: NextRequest): Promise<Response> {
 
   const draft = await draftMode()
   draft.enable()
+
+  // The admin embeds the preview in an iframe. In production Next already sends the draft cookie
+  // as `SameSite=None; Secure`, but in development it sends `SameSite=Lax`, which the browser
+  // drops when the iframe is cross-site (e.g. admin on localhost:3001, campaign on
+  // campanha.localhost:3000), so the preview never enters draft mode. Browsers accept Secure
+  // cookies on *.localhost over http.
+  if (process.env.NODE_ENV !== 'production') {
+    const jar = await cookies()
+    const bypass = jar.get('__prerender_bypass')
+    if (bypass) {
+      jar.set({ ...bypass, httpOnly: true, path: '/', sameSite: 'none', secure: true })
+    }
+  }
 
   redirect(path)
 }
