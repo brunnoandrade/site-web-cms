@@ -74,8 +74,8 @@ O design system do site está em `docs/design-system.md`.
 Marca da Digio no admin ([apps/cms/src/components/DigioLogo](apps/cms/src/components/DigioLogo/index.tsx), registrada em `admin.components.graphics` e `admin.meta` no `payload.config.ts`):
 
 - **Logo completo** na tela de login (e esqueci a senha), azul-marinho no tema claro e branco no escuro (as cores vêm de classes em `custom.scss`);
-- **Ícone "d"** no topo da navegação, onde o logo completo não cabe;
-- **Favicon** `apps/cms/public/brand/icon.svg` e título das abas com o sufixo "- Digio".
+- **Ícone** no topo da navegação, onde o logo completo não cabe: o mesmo desenho do favicon (um "d" turquesa sobre quadrado marinho), igual nos dois temas. O `custom.scss` amplia a caixa de 18px que o Payload reserva para o ícone, senão ele fica cortado;
+- **Favicon** `apps/cms/public/brand/icon.svg` e título das abas com o sufixo "- Digio". Se mudar o desenho, atualize também o `DigioIcon`.
 
 Os caminhos do SVG são os de `apps/web/public/brand/logo-digio.svg`; se o logo mudar, atualize os dois.
 

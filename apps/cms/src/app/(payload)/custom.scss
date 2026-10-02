@@ -18,3 +18,15 @@
   width: 160px;
   height: auto;
 }
+
+// Payload sizes the navigation icon box (link and span) at 18px and clips anything wider.
+.step-nav__home:has(.digio-logo--icon) {
+  flex-shrink: 0;
+  width: auto;
+
+  span {
+    display: block;
+    width: auto;
+    height: auto;
+  }
+}
