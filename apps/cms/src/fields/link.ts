@@ -1,5 +1,7 @@
 import type { Field, GroupField } from 'payload'
 
+import { hrefValidationMessage } from '@digio/routes'
+
 import deepMerge from '@/utilities/deepMerge'
 
 export type LinkAppearances = 'default' | 'outline'
@@ -86,6 +88,8 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       },
       label: 'Custom URL',
       required: true,
+      // Allowlist of schemes: no javascript:, data:, //host.
+      validate: (value: unknown) => hrefValidationMessage(value),
     },
   ]
 

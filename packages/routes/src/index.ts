@@ -115,3 +115,5 @@ export const normalizePath = (input: string): string => {
 
   return value
 }
+
+export { hrefValidationMessage, isSafeHref } from './safeHref'

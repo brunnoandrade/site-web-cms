@@ -1,6 +1,7 @@
 'use client'
 import type { FormFieldBlock, Form as FormType } from '@payloadcms/plugin-form-builder/types'
 
+import { isSafeHref } from '@digio/routes'
 import { useRouter } from 'next/navigation'
 import React, { useCallback, useState } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
@@ -97,7 +98,7 @@ export const FormBlock: React.FC<
 
             const redirectUrl = url
 
-            if (redirectUrl) router.push(redirectUrl)
+            if (redirectUrl && isSafeHref(redirectUrl, { web: true })) router.push(redirectUrl)
           }
         } catch (err) {
           console.warn(err)

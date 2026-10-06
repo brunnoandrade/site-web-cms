@@ -1,4 +1,5 @@
 import type { TextFieldSingleValidation } from 'payload'
+import { hrefValidationMessage } from '@digio/routes'
 import {
   BoldFeature,
   ItalicFeature,
@@ -37,7 +38,8 @@ export const defaultLexical = lexicalEditor({
               if ((options?.siblingData as LinkFields)?.linkType === 'internal') {
                 return true // no validation needed, as no url should exist for internal links
               }
-              return value ? true : 'URL is required'
+              if (!value) return 'URL is required'
+              return hrefValidationMessage(value)
             }) as TextFieldSingleValidation,
           },
         ]

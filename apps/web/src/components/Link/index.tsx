@@ -1,4 +1,4 @@
-import { documentPath } from '@digio/routes'
+import { documentPath, isSafeHref } from '@digio/routes'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { cn } from '@/utilities/ui'
 import Link from 'next/link'
@@ -39,7 +39,8 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
       ? (documentPath(reference.relationTo, reference.value) ?? url)
       : url
 
-  if (!href) return null
+  // Editor-typed URLs are rendered only with an allowed scheme (never javascript:/data:).
+  if (!href || !isSafeHref(href)) return null
 
   const size = appearance === 'link' ? 'clear' : sizeFromProps
   const newTabProps = newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}

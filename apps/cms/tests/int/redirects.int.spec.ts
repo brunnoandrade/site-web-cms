@@ -133,6 +133,23 @@ describe('redirects', () => {
       ).rejects.toThrow()
     })
 
+    it.each(['javascript:alert(1)', 'data:text/html,x', '//evil.com', '/\\evil.com'])(
+      'refuses an unsafe destination (%s)',
+      async (url) => {
+        await expect(
+          createRedirect({ from: path(`unsafe-${url.length}`), to: custom(url) }),
+        ).rejects.toThrow()
+      },
+    )
+
+    it('accepts an external https destination', async () => {
+      const doc = await createRedirect({
+        from: path('externo'),
+        to: custom('https://parceiro.example.com/oferta/'),
+      })
+      expect(doc.id).toBeTruthy()
+    })
+
     it('refuses a chain through the destination (A -> B -> C)', async () => {
       await createRedirect({ from: path('b'), to: custom('/c/') })
       await expect(

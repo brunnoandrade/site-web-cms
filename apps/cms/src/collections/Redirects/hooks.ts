@@ -6,6 +6,7 @@ import type {
 } from 'payload'
 import { ValidationError } from 'payload'
 import {
+  isSafeHref,
   blogCategoryPath,
   categorySlugOf,
   documentPath,
@@ -209,6 +210,14 @@ export const validateRedirect: CollectionBeforeChangeHook<Redirect> = async ({
     { id: originalDoc?.id, from, destinationPath },
     await tenantRedirects(req, tenant),
   )
+
+  // An external destination is a Location header: only http(s) and site paths are allowed.
+  if (to?.type === 'custom' && !isSafeHref(to.url, { web: true })) {
+    errors.push({
+      path: 'to',
+      message: 'O destino precisa ser um caminho do site (/pagina/) ou uma URL http(s).',
+    })
+  }
 
   if (to?.type === 'reference' && destinationPath === null) {
     errors.push({ path: 'to', message: 'O documento de destino não foi encontrado.' })
