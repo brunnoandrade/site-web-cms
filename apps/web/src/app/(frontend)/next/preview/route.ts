@@ -1,24 +1,31 @@
+import { verifyPreviewToken } from '@digio/routes/preview-token'
 import { cookies, draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 import type { NextRequest } from 'next/server'
 
-// Only same-site relative paths ("/foo/"), never protocol-relative ("//evil.com") URLs.
-const isSafeRelativePath = (path: string) => path.startsWith('/') && !path.startsWith('//')
+// Only same-site relative paths ("/foo/"). Browsers treat "\" as "/", so "//evil.com" and
+// "/\evil.com" are both protocol-relative URLs; control characters are never valid either.
+const isSafeRelativePath = (path: string) =>
+  path.startsWith('/') && !/^\/[/\\]/.test(path) && !/[\u0000-\u001f\u007f]/.test(path)
 
 /**
  * Entry point for previews opened from the CMS admin (see generatePreviewPath in apps/cms).
  * Enables Next.js draft mode; draft content is then fetched with CMS_API_KEY.
+ *
+ * Authorized by a signed, short-lived token bound to this host and path (never the raw secret,
+ * which would let an editor of one tenant open drafts of another).
  */
 export async function GET(req: NextRequest): Promise<Response> {
   const path = req.nextUrl.searchParams.get('path')
-  const previewSecret = req.nextUrl.searchParams.get('previewSecret')
-
-  if (!process.env.PREVIEW_SECRET || previewSecret !== process.env.PREVIEW_SECRET) {
-    return new Response('You are not allowed to preview this page', { status: 403 })
-  }
+  const token = req.nextUrl.searchParams.get('previewToken')
 
   if (!path || !isSafeRelativePath(path)) {
     return new Response('Invalid preview path', { status: 400 })
+  }
+
+  const host = req.headers.get('x-forwarded-host') ?? req.headers.get('host') ?? ''
+  if (!verifyPreviewToken(process.env.PREVIEW_SECRET, token, { host, path })) {
+    return new Response('You are not allowed to preview this page', { status: 403 })
   }
 
   const draft = await draftMode()

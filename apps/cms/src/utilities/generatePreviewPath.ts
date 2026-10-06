@@ -1,4 +1,5 @@
 import type { RoutableCollection } from '@digio/routes'
+import { createPreviewToken } from '@digio/routes/preview-token'
 import type { PayloadRequest } from 'payload'
 
 import { routablePath } from '../collections/Redirects/hooks'
@@ -15,7 +16,7 @@ type Props = {
 
 /**
  * Builds the preview URL on the document's own website (its tenant's siteUrl). The website
- * validates `previewSecret`, enables Next.js draft mode and redirects to `path`
+ * validates `previewToken` (signed, short-lived, bound to the site host and path), enables Next.js draft mode and redirects to `path`
  * (see apps/web/src/app/(frontend)/next/preview/route.ts).
  */
 export const generatePreviewPath = async ({ collection, slug, category, tenant, req }: Props) => {
@@ -28,12 +29,17 @@ export const generatePreviewPath = async ({ collection, slug, category, tenant, 
   // A post without a category has no URL yet.
   if (!path) return null
 
+  const siteURL = await getTenantSiteURL(req, tenant as Parameters<typeof getTenantSiteURL>[1])
+
+  // The URL is visible to every editor, so it carries a token for this host and path only,
+  // never the shared PREVIEW_SECRET itself.
+  const secret = process.env.PREVIEW_SECRET
+  if (!secret) return null
+
   const encodedParams = new URLSearchParams({
     path,
-    previewSecret: process.env.PREVIEW_SECRET || '',
+    previewToken: createPreviewToken(secret, { host: new URL(siteURL).host, path }),
   })
-
-  const siteURL = await getTenantSiteURL(req, tenant as Parameters<typeof getTenantSiteURL>[1])
 
   return `${siteURL}/next/preview/?${encodedParams.toString()}`
 }
