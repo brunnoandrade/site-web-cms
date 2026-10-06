@@ -37,6 +37,7 @@ export async function GET(request: NextRequest): Promise<Response> {
   const settings = getSsoSettings()
   let claims: client.IDToken
   let idToken: string | undefined
+  let refreshToken: string | undefined
 
   try {
     const oidc = await getOidcConfiguration()
@@ -56,6 +57,7 @@ export async function GET(request: NextRequest): Promise<Response> {
     if (!idTokenClaims) return fail('invalid_claims')
     claims = idTokenClaims
     idToken = tokens.id_token
+    refreshToken = tokens.refresh_token
   } catch (err) {
     console.error('[sso] callback validation failed', err)
     return fail('sso_failed')
@@ -65,6 +67,7 @@ export async function GET(request: NextRequest): Promise<Response> {
     const payload = await getPayload({ config })
     const user = await provisionSsoUser(payload, claims, {
       superAdminRole: settings.superAdminRole,
+      refreshToken,
     })
 
     const response = NextResponse.redirect(`${settings.serverURL}/admin`)

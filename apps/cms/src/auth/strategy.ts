@@ -1,6 +1,7 @@
 import type { AuthStrategy, Payload } from 'payload'
 
 import { isSsoEnabled } from './config'
+import { revalidateSsoUser } from './revalidate'
 import { readCookie, SSO_SESSION_COOKIE, verifySsoSession } from './tokens'
 
 /**
@@ -22,7 +23,8 @@ export const isCookieRequestAllowed = (headers: Headers, payload: Pick<Payload, 
  * Payload auth strategy for SSO sessions. Independent from the local strategy: it only reads
  * the SSO session cookie and only authenticates users whose provider is `sso`.
  *
- * The session is revoked server-side when the user's `ssoSessionVersion` changes (logout).
+ * The session is revoked server-side when the user's `ssoSessionVersion` changes (logout), or
+ * when the IdP no longer accepts the user (see revalidate.ts).
  */
 export const ssoStrategy: AuthStrategy = {
   name: 'sso',
@@ -43,6 +45,15 @@ export const ssoStrategy: AuthStrategy = {
       return { user: null }
     }
 
-    return { user: { ...user, collection: 'users', _strategy: 'sso' } }
+    // Re-check against the IdP now and then; roles and tenants may have changed since login.
+    const status = await revalidateSsoUser(payload, user)
+    if (status === 'revoked') return { user: null }
+
+    const current =
+      status === 'synced'
+        ? await payload.findByID({ collection: 'users', id: user.id, depth: 0 })
+        : user
+
+    return { user: { ...current, collection: 'users', _strategy: 'sso' } }
   },
 }

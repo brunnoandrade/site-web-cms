@@ -1327,6 +1327,8 @@ export interface User {
   authProvider?: ('local' | 'sso') | null;
   ssoSubject?: string | null;
   ssoSessionVersion?: number | null;
+  ssoRefreshToken?: string | null;
+  ssoSyncedAt?: string | null;
   /**
    * Deixe vazio para usuários comuns: o acesso deles vem dos papéis em cada propriedade.
    */
@@ -2354,6 +2356,8 @@ export interface UsersSelect<T extends boolean = true> {
   authProvider?: T;
   ssoSubject?: T;
   ssoSessionVersion?: T;
+  ssoRefreshToken?: T;
+  ssoSyncedAt?: T;
   roles?: T;
   tenants?:
     | T

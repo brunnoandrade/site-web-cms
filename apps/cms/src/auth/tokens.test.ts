@@ -1,7 +1,15 @@
 import { SignJWT } from 'jose'
 import { beforeAll, describe, expect, it } from 'vitest'
 
-import { readCookie, signSsoFlow, signSsoSession, verifySsoFlow, verifySsoSession } from './tokens'
+import {
+  decryptSecret,
+  encryptSecret,
+  readCookie,
+  signSsoFlow,
+  signSsoSession,
+  verifySsoFlow,
+  verifySsoSession,
+} from './tokens'
 
 beforeAll(() => {
   process.env.PAYLOAD_SECRET = 'test-secret-for-sso-tokens'
@@ -87,5 +95,20 @@ describe('readCookie', () => {
     const { readCookie } = await import('./tokens')
     const headers = new Headers({ cookie: 'digio-sso-session=%E0%A4%A' })
     expect(readCookie(headers, 'digio-sso-session')).toBeNull()
+  })
+})
+
+describe('encryptSecret', () => {
+  it('round-trips and is not deterministic', () => {
+    const a = encryptSecret('refresh-token')
+    expect(a).not.toContain('refresh-token')
+    expect(a).not.toBe(encryptSecret('refresh-token'))
+    expect(decryptSecret(a)).toBe('refresh-token')
+  })
+
+  it('rejects tampered or malformed values', () => {
+    const [iv, tag, data] = encryptSecret('refresh-token').split('.')
+    expect(decryptSecret(`${iv}.${tag}.${data!.slice(0, -2)}AA`)).toBeNull()
+    expect(decryptSecret('garbage')).toBeNull()
   })
 })

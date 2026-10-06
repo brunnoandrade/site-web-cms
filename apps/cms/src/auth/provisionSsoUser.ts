@@ -3,6 +3,7 @@ import type { Payload } from 'payload'
 import type { User } from '@digio/payload-types'
 
 import { hasAnyAccess, mapClaimsToAccess, type SsoClaims } from './claims'
+import { encryptSecret } from './tokens'
 
 /** Reasons an SSO login is refused; shown on the login page as `?sso_error=<code>`. */
 export type SsoErrorCode =
@@ -30,7 +31,7 @@ export class SsoLoginError extends Error {
 export async function provisionSsoUser(
   payload: Payload,
   claims: SsoClaims,
-  { superAdminRole }: { superAdminRole: string },
+  { superAdminRole, refreshToken }: { superAdminRole: string; refreshToken?: string },
 ): Promise<User> {
   const email = typeof claims.email === 'string' ? claims.email.trim().toLowerCase() : ''
   if (!claims.sub || !email) throw new SsoLoginError('invalid_claims')
@@ -59,6 +60,45 @@ export async function provisionSsoUser(
     throw new SsoLoginError('local_account')
   }
 
+  const data = await accessDataFor(payload, claims, superAdminRole)
+
+  // Trusted server-side call: the IdP decides roles and tenants.
+  const context = { ssoProvisioning: true }
+
+  // The refresh token lets the strategy re-check the user against the IdP (see strategy.ts).
+  const sync = {
+    ssoRefreshToken: refreshToken ? encryptSecret(refreshToken) : null,
+    ssoSyncedAt: new Date().toISOString(),
+  }
+
+  if (user) {
+    return payload.update({
+      collection: 'users',
+      id: user.id,
+      data: { ...data, ...sync, roles: [...data.roles] },
+      context,
+    })
+  }
+
+  return payload.create({
+    collection: 'users',
+    context,
+    data: {
+      ...data,
+      ...sync,
+      roles: [...data.roles],
+      authProvider: 'sso',
+      ssoSubject: claims.sub,
+      // Never used: SSO users cannot log in with a password (see blockSsoUsersFromLocalLogin).
+      password: crypto.randomUUID() + crypto.randomUUID(),
+    },
+  })
+}
+
+/** CMS name, roles and tenant rows for a user, as decided by the IdP's claims. */
+export async function accessDataFor(payload: Payload, claims: SsoClaims, superAdminRole: string) {
+  const email = typeof claims.email === 'string' ? claims.email.trim().toLowerCase() : ''
+
   const { docs: tenantDocs } = await payload.find({
     collection: 'tenants',
     depth: 0,
@@ -74,7 +114,7 @@ export async function provisionSsoUser(
   })
   if (!hasAnyAccess(access)) throw new SsoLoginError('no_access')
 
-  const data = {
+  return {
     email,
     name: typeof claims.name === 'string' ? claims.name : email,
     roles: access.superAdmin ? (['super-admin'] as const) : [],
@@ -83,29 +123,4 @@ export async function provisionSsoUser(
       roles,
     })),
   }
-
-  // Trusted server-side call: the IdP decides roles and tenants.
-  const context = { ssoProvisioning: true }
-
-  if (user) {
-    return payload.update({
-      collection: 'users',
-      id: user.id,
-      data: { ...data, roles: [...data.roles] },
-      context,
-    })
-  }
-
-  return payload.create({
-    collection: 'users',
-    context,
-    data: {
-      ...data,
-      roles: [...data.roles],
-      authProvider: 'sso',
-      ssoSubject: claims.sub,
-      // Never used: SSO users cannot log in with a password (see blockSsoUsersFromLocalLogin).
-      password: crypto.randomUUID() + crypto.randomUUID(),
-    },
-  })
 }

@@ -116,6 +116,20 @@ export const Users: CollectionConfig = {
       },
     },
     {
+      // IdP refresh token (AES-GCM encrypted): lets the strategy re-check the user against the
+      // IdP, so removing a group or disabling the user there ends the CMS session.
+      name: 'ssoRefreshToken',
+      type: 'text',
+      admin: { hidden: true },
+      access: { read: () => false, create: () => false, update: () => false },
+    },
+    {
+      name: 'ssoSyncedAt',
+      type: 'date',
+      admin: { hidden: true },
+      access: { read: () => false, create: () => false, update: () => false },
+    },
+    {
       name: 'roles',
       label: 'Papéis na plataforma',
       type: 'select',

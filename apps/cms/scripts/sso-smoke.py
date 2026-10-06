@@ -178,6 +178,45 @@ b = Browser()
 status, body = b.post_json(f"{CMS}/api/users/login", {"email": "sso.editor@digio.local", "password": PASSWORD})
 check("conta SSO não entra com e-mail e senha", status == 401, f"{status} {body[:120]}")
 
+print("SSO: revogação no Keycloak (precisa de SSO_REVALIDATE_SECONDS=3 no CMS)")
+KC = "http://localhost:8080"
+KC_ADMIN = (os.environ.get("KEYCLOAK_ADMIN_USER", "admin"), os.environ.get("KEYCLOAK_ADMIN_PASSWORD", "admin"))
+
+
+def kc(method, path, data=None, token=None, form=False):
+    body = urllib.parse.urlencode(data).encode() if form else (json.dumps(data).encode() if data is not None else None)
+    headers = {"Content-Type": "application/x-www-form-urlencoded" if form else "application/json"}
+    if token:
+        headers["Authorization"] = "Bearer " + token
+    with urllib.request.urlopen(urllib.request.Request(KC + path, body, headers, method=method)) as res:
+        text = res.read()
+        return json.loads(text) if text else None
+
+
+if os.environ.get("SSO_REVALIDATE_SECONDS") == "3":
+    import time
+    token = kc("POST", "/realms/master/protocol/openid-connect/token",
+               {"grant_type": "password", "client_id": "admin-cli", "username": KC_ADMIN[0], "password": KC_ADMIN[1]}, form=True)["access_token"]
+    uid = kc("GET", "/admin/realms/digio/users?username=sso.editor&exact=true", token=token)[0]["id"]
+    groups = kc("GET", f"/admin/realms/digio/users/{uid}/groups", token=token)
+    for scenario in ("grupo removido", "usuário desabilitado"):
+        b = Browser()
+        sso_login(b, "sso.editor")
+        time.sleep(4)
+        check("sessão continua válida enquanto o acesso existe", b.me() is not None)
+        if scenario == "grupo removido":
+            for g in groups:
+                kc("DELETE", f"/admin/realms/digio/users/{uid}/groups/{g['id']}", token=token)
+        else:
+            kc("PUT", f"/admin/realms/digio/users/{uid}", {"enabled": False}, token=token)
+        time.sleep(4)
+        check(f"sessão do CMS encerrada: {scenario} no Keycloak", b.me() is None)
+        kc("PUT", f"/admin/realms/digio/users/{uid}", {"enabled": True}, token=token)
+        for g in groups:
+            kc("PUT", f"/admin/realms/digio/users/{uid}/groups/{g['id']}", token=token)
+else:
+    print("  (pulado: suba o CMS com SSO_REVALIDATE_SECONDS=3 para testar)")
+
 print()
 print(f"{sum(results)}/{len(results)} verificações passaram")
 sys.exit(0 if all(results) else 1)

@@ -1,4 +1,4 @@
-import { createHash } from 'crypto'
+import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'crypto'
 import { jwtVerify, SignJWT, type JWTPayload } from 'jose'
 
 /**
@@ -12,7 +12,7 @@ export const SSO_SESSION_COOKIE = 'digio-sso-session'
 export const SSO_FLOW_COOKIE = 'digio-sso-flow'
 export const SSO_ID_TOKEN_COOKIE = 'digio-sso-idt'
 
-type Purpose = 'sso-session' | 'sso-flow'
+type Purpose = 'sso-session' | 'sso-flow' | 'sso-refresh'
 
 const keyFor = (purpose: Purpose): Uint8Array => {
   const secret = process.env.PAYLOAD_SECRET
@@ -91,4 +91,27 @@ export const readCookie = (headers: Headers, name: string): string | null => {
     }
   }
   return null
+}
+
+/**
+ * Encrypts a secret stored in the database (the IdP refresh token) with AES-256-GCM, keyed from
+ * PAYLOAD_SECRET, so a database dump alone does not hand out live IdP sessions.
+ */
+export const encryptSecret = (plain: string): string => {
+  const iv = randomBytes(12)
+  const cipher = createCipheriv('aes-256-gcm', keyFor('sso-refresh'), iv)
+  const data = Buffer.concat([cipher.update(plain, 'utf8'), cipher.final()])
+  return [iv, cipher.getAuthTag(), data].map((part) => part.toString('base64url')).join('.')
+}
+
+export const decryptSecret = (stored: string): string | null => {
+  try {
+    const [iv, tag, data] = stored.split('.').map((part) => Buffer.from(part, 'base64url'))
+    if (!iv || !tag || !data) return null
+    const decipher = createDecipheriv('aes-256-gcm', keyFor('sso-refresh'), iv)
+    decipher.setAuthTag(tag)
+    return Buffer.concat([decipher.update(data), decipher.final()]).toString('utf8')
+  } catch {
+    return null
+  }
 }
