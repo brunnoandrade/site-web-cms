@@ -27,6 +27,10 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL, getWebURL } from './utilities/getURL'
 
+import { assertStrongSecrets } from './utilities/assertSecrets'
+
+assertStrongSecrets()
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
