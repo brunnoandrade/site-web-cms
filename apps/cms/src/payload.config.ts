@@ -139,6 +139,8 @@ export default buildConfig({
       },
     }),
   ],
+  // Upload size cap (busboy): keeps oversized files from exhausting memory or the bucket.
+  upload: { limits: { fileSize: 50 * 1024 * 1024 } },
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {

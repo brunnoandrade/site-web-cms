@@ -61,6 +61,18 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
+    // Allowlist: files are served from the public bucket, so formats that can carry script
+    // (SVG, HTML, XML) are refused. The size limit is set in payload.config.ts.
+    mimeTypes: [
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+      'image/webp',
+      'image/avif',
+      'video/mp4',
+      'video/webm',
+      'application/pdf',
+    ],
     // Local fallback dir; in practice files are stored in S3/MinIO by @payloadcms/storage-s3
     staticDir: path.resolve(dirname, '../../public/media'),
     adminThumbnail: 'thumbnail',
