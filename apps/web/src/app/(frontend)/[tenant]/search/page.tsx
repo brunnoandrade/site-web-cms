@@ -18,7 +18,16 @@ type Args = {
 export default async function Page({ params, searchParams: searchParamsPromise }: Args) {
   const { tenant: tenantSlug } = await params
   const tenant = await requireTenant(tenantSlug)
-  const { q: query } = await searchParamsPromise
+  const { q: rawQuery } = await searchParamsPromise
+  // Only a plain string: control characters (a NUL byte makes Postgres fail) and absurd lengths
+  // never reach the CMS query.
+  const query =
+    typeof rawQuery === 'string'
+      ? rawQuery
+          .replace(/[\u0000-\u001f\u007f]/g, '')
+          .trim()
+          .slice(0, 100)
+      : ''
   const results = await find('search', {
     tenant: tenant.slug,
     depth: 0,

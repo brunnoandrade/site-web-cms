@@ -4,7 +4,12 @@ import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
 import { multiTenantPlugin } from '@payloadcms/plugin-multi-tenant'
-import type { CollectionBeforeValidateHook, Plugin } from 'payload'
+import {
+  ValidationError,
+  type CollectionBeforeChangeHook,
+  type CollectionBeforeValidateHook,
+  type Plugin,
+} from 'payload'
 import {
   anyone,
   getTenantIDsWithRoles,
@@ -41,7 +46,8 @@ const generateURL: GenerateURL<Post | Page> = async ({ doc, collectionConfig, re
 }
 
 // Public form submissions do not send a tenant: inherit it from the submitted form.
-const setSubmissionTenant: CollectionBeforeValidateHook = async ({ data, req }) => {
+// (A tenant sent by the client is refused by the multi-tenant plugin before this runs.)
+const setSubmissionTenant: CollectionBeforeChangeHook = async ({ data, req }) => {
   if (!data?.form) return data
   const formID = typeof data.form === 'object' ? data.form.id : data.form
   const form = await req.payload.findByID({
@@ -53,6 +59,27 @@ const setSubmissionTenant: CollectionBeforeValidateHook = async ({ data, req }) 
     select: { tenant: true },
   })
   return { ...data, tenant: typeof form.tenant === 'object' ? form.tenant?.id : form.tenant }
+}
+
+// Public endpoint: bound what one anonymous submission can store.
+const MAX_SUBMISSION_FIELDS = 50
+const MAX_SUBMISSION_VALUE_LENGTH = 10_000
+
+const limitSubmissionSize: CollectionBeforeValidateHook = ({ data, req }) => {
+  const rows = Array.isArray(data?.submissionData) ? data.submissionData : []
+  const tooLong = rows.some(
+    (row: { value?: unknown }) =>
+      typeof row?.value === 'string' && row.value.length > MAX_SUBMISSION_VALUE_LENGTH,
+  )
+  if (rows.length > MAX_SUBMISSION_FIELDS || tooLong) {
+    throw new ValidationError(
+      {
+        errors: [{ path: 'submissionData', message: 'Envio grande demais.' }],
+      },
+      req.t,
+    )
+  }
+  return data
 }
 
 type TenantScoped = keyof Config['collections']
@@ -205,8 +232,22 @@ export const plugins: Plugin[] = [
         update: () => false,
         delete: tenantRoles(['admin']),
       },
+      fields: ({ defaultFields }) => [
+        ...defaultFields,
+        {
+          name: 'tenant',
+          type: 'relationship',
+          relationTo: 'tenants',
+          required: true,
+          index: true,
+          admin: { position: 'sidebar', readOnly: true },
+        },
+      ],
       hooks: {
-        beforeValidate: [setSubmissionTenant],
+        beforeValidate: [limitSubmissionSize],
+        // Runs after the multi-tenant plugin's own beforeValidate hook (which refuses a tenant
+        // sent by an anonymous client): the tenant is always the one of the submitted form.
+        beforeChange: [setSubmissionTenant],
       },
     },
     formOverrides: {
@@ -259,6 +300,10 @@ export const plugins: Plugin[] = [
   multiTenantPlugin<Config>({
     collections: {
       ...Object.fromEntries(tenantScopedCollections.map((slug) => [slug, {}])),
+      // Submissions come from anonymous visitors, which the plugin's tenant field refuses to
+      // assign (it only lets a logged-in user pick their own tenants). The tenant is always
+      // taken from the submitted form instead (setSubmissionTenant), so the field is custom.
+      'form-submissions': { customTenantField: true },
       header: { isGlobal: true },
       footer: { isGlobal: true },
     },

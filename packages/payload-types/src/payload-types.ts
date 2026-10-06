@@ -1410,7 +1410,6 @@ export interface Redirect {
  */
 export interface FormSubmission {
   id: number;
-  tenant?: (number | null) | Tenant;
   form: number | Form;
   submissionData?:
     | {
@@ -1419,6 +1418,7 @@ export interface FormSubmission {
         id?: string | null;
       }[]
     | null;
+  tenant: number | Tenant;
   updatedAt: string;
   createdAt: string;
 }
@@ -2549,7 +2549,6 @@ export interface FormsSelect<T extends boolean = true> {
  * via the `definition` "form-submissions_select".
  */
 export interface FormSubmissionsSelect<T extends boolean = true> {
-  tenant?: T;
   form?: T;
   submissionData?:
     | T
@@ -2558,6 +2557,7 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
+  tenant?: T;
   updatedAt?: T;
   createdAt?: T;
 }
