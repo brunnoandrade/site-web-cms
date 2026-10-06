@@ -111,6 +111,9 @@ export default buildConfig({
     Tenants,
     Users,
   ],
+  // REST only (the website uses it): GraphQL would expose introspection and let one request
+  // fan out into hundreds of aliased queries.
+  graphQL: { disable: true },
   serverURL: getServerSideURL(),
   // The website (apps/web) runs on another origin: it embeds live preview, reads the REST API
   // and shows the admin bar with the editor's session cookie.

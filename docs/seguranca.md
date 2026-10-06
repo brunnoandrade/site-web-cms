@@ -14,6 +14,7 @@ Revisão estática (white-box) feita em 2026-10-05/06. Os itens marcados como **
 | Sem headers de segurança | `nosniff`, `Referrer-Policy`, `Permissions-Policy`, HSTS; admin com `frame-ancestors 'none'`; site só embutível pelo CMS (live preview) |
 | Segredos comparados com `!==` | `timingSafeEqual` em `/api/revalidate/` e `CRON_SECRET` |
 | `decodeURIComponent` sem proteção em `readCookie` | Cookie malformado é tratado como ausente |
+| GraphQL aberto: introspecção ligada e 200 aliases aceitos numa única query (confirmado ao vivo); o site só usa REST | `graphQL: { disable: true }` em `payload.config.ts` (`/api/graphql` responde 404) |
 | Segredos `change-me` aceitos em ambiente publicado | O CMS não sobe com `https://` + `NODE_ENV=production` e segredo curto/placeholder (`assertSecrets.ts`) |
 
 ## Pendente / decisões
@@ -25,4 +26,13 @@ Revisão estática (white-box) feita em 2026-10-05/06. Os itens marcados como **
 - **`X-Forwarded-Host`**: o proxy do site confia nele. O CDN/ingress precisa sobrescrevê-lo, e o app não deve ficar exposto direto.
 - **`tenants` com leitura pública**: lista todos os domínios, inclusive de campanhas não publicadas. Necessário para o site resolver o host; avaliar um endpoint que devolva só o tenant do host consultado.
 - **Ambiente local**: Postgres, MinIO e Keycloak escutam em `0.0.0.0` com credenciais padrão. Não reutilizar esses arquivos em DEV/HML/PRD.
-- **Teste ao vivo** (cross-tenant draft, upload de SVG, sessão SSO após remoção do grupo, GraphQL e `/versions` anônimos): ver a seção seguinte quando executado.
+
+## Teste ao vivo (2026-10-06)
+
+Stack local (Postgres, MinIO, Keycloak, CMS e site). Testes de integração: 94/94, mais `media-upload.int.spec.ts`.
+
+- Anônimo: `/api/*/versions`, `users`, `form-submissions`, `payload-preferences` respondem 403; `?draft=true` só devolve `published`; `emails` dos formulários vêm vazios.
+- `/api/revalidate/` sem token ou com token errado: 401. Preview com segredo antigo, token inválido, `//evil.com` ou `/\evil.com`: 403/400.
+- Upload: PNG aceito; SVG com script e HTML recusados.
+- Headers de segurança presentes no CMS e no site.
+- Não testado: login SSO ponta a ponta com remoção de grupo no Keycloak (a limitação segue descrita acima).
