@@ -107,7 +107,7 @@ O admin tem dois autenticadores independentes, cada um com a sua sessão e o seu
 | Sessão       | cookie `payload-token` do Payload       | cookie `digio-sso-session`, assinado e revogável                                                         |
 | Logout       | encerra só a sessão do CMS              | encerra a sessão do CMS e a do RH-SSO                                                                    |
 | Papéis       | definidos no admin                      | vêm do SSO a cada login (grupos `/tenants/<propriedade>/<admin\|editor\|seo>` e papel `cms-super-admin`) |
-| Liga/desliga | `AUTH_LOCAL_ENABLED` (desligado em PRD) | `AUTH_SSO_ENABLED`                                                                                       |
+| Liga/desliga | `AUTH_LOCAL_ENABLED` (em produção, sem valor = desligado) | `AUTH_SSO_ENABLED`                                                                                       |
 
 Regras:
 

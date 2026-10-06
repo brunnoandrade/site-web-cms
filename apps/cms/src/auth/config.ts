@@ -2,14 +2,17 @@
  * Admin authentication settings, per environment.
  *
  * Two independent authenticators:
- * - local: Payload's e-mail/password login (AUTH_LOCAL_ENABLED, default on; off in PRD per SoAD);
+ * - local: Payload's e-mail/password login (AUTH_LOCAL_ENABLED, default on outside production and off in production);
  * - sso: OIDC Authorization Code + PKCE against RH-SSO/Keycloak (AUTH_SSO_ENABLED).
  */
 
 const flag = (value: string | undefined, fallback: boolean) =>
   value === undefined || value === '' ? fallback : value === 'true'
 
-export const isLocalAuthEnabled = () => flag(process.env.AUTH_LOCAL_ENABLED, true)
+// Fails closed: in production the local login stays off unless AUTH_LOCAL_ENABLED=true is set
+// explicitly, so a forgotten variable never re-enables it (off in PRD per SoAD).
+export const isLocalAuthEnabled = () =>
+  flag(process.env.AUTH_LOCAL_ENABLED, process.env.NODE_ENV !== 'production')
 
 export const isSsoEnabled = () => flag(process.env.AUTH_SSO_ENABLED, false)
 
