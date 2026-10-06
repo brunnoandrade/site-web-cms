@@ -25,6 +25,9 @@ Revisão estática (white-box) feita em 2026-10-05/06. Os itens marcados como **
 - **CSP completa**: não foi aplicada (GTM, GA4 e o admin do Payload exigem nonces). Fazer junto com o banner de consentimento.
 - **`X-Forwarded-Host`**: o proxy do site confia nele. O CDN/ingress precisa sobrescrevê-lo, e o app não deve ficar exposto direto.
 - **`tenants` com leitura pública**: lista todos os domínios, inclusive de campanhas não publicadas. Necessário para o site resolver o host; avaliar um endpoint que devolva só o tenant do host consultado.
+- **Dependências sem correção**: `pnpm audit --prod` ainda lista `braces` (sem versão corrigida, vem do `next-sitemap`, só em build) e `esbuild` (dev, via `drizzle-kit`). Reavaliar a cada atualização do Payload e do `next-sitemap`; rodar `pnpm audit` no CI.
+- **CSRF "same-site"**: o cookie SSO é aceito quando `Sec-Fetch-Site` é `same-site`. Se o CMS e os sites ficarem em subdomínios do mesmo domínio, um subdomínio comprometido ou com conteúdo de terceiros atingiria o admin sem `Origin`. Manter o CMS em um domínio próprio, fora dos domínios dos sites.
+- **Revalidação do SSO em várias instâncias**: ver a ressalva sobre rotação de refresh token na seção de teste ao vivo. Se o RH-SSO de PRD rotacionar refresh tokens, mover o controle para o banco (lock por usuário).
 - **Ambiente local**: Postgres, MinIO e Keycloak escutam em `0.0.0.0` com credenciais padrão. Não reutilizar esses arquivos em DEV/HML/PRD.
 
 ## Teste ao vivo (2026-10-06)

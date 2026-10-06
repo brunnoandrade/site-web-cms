@@ -8,7 +8,7 @@ Site institucional da Digio. Monorepo pnpm com dois projetos separados:
 | [apps/web](apps/web/)                             | Site público em Next.js. Lê o conteúdo pela API do CMS     | 3000        |
 | [packages/payload-types](packages/payload-types/) | Tipos gerados pelo Payload, usados pelos dois              | –           |
 
-Contexto do projeto: [CLAUDE.md](CLAUDE.md) e [docs/](docs/). Usuários e senhas do ambiente local: [docs/usuarios-locais.md](docs/usuarios-locais.md). Redirects, importação CSV e validação de URLs: [docs/redirects.md](docs/redirects.md). Migração do blog: [docs/migracao-blog.md](docs/migracao-blog.md). Referência do template original: [README.payload-template.md](README.payload-template.md).
+Contexto do projeto: [CLAUDE.md](CLAUDE.md) e [docs/](docs/). Usuários e senhas do ambiente local: [docs/usuarios-locais.md](docs/usuarios-locais.md). Redirects, importação CSV e validação de URLs: [docs/redirects.md](docs/redirects.md). Migração do blog: [docs/migracao-blog.md](docs/migracao-blog.md). Revisão de segurança, correções e pendências: [docs/seguranca.md](docs/seguranca.md). Referência do template original: [README.payload-template.md](README.payload-template.md).
 
 ## Como os dois conversam
 
@@ -25,7 +25,7 @@ navegador ──► web (Next.js) ──REST──► cms (Payload) ──► Po
 - **Se o CMS cair:** o site continua servindo as páginas e os dados em cache.
 - **Build:** o site não precisa do CMS para gerar o build. As páginas são geradas no primeiro acesso (ISR).
 - **Preview:** o admin abre `/next/preview/` no site, que ativa o draft mode. Os rascunhos são lidos com a API key de um usuário de serviço (`CMS_API_KEY`).
-- **Live preview:** o admin mostra o site num iframe e, a cada salvamento automático do rascunho, o site refaz a página (`RefreshRouteOnSave`). Só funciona se o iframe entrar em draft mode, e para isso o cookie `__prerender_bypass` precisa chegar ao site. Em desenvolvimento o Next envia esse cookie como `SameSite=Lax`, e o navegador o descarta quando o admin (`localhost:3001`) e o site da propriedade (`campanha.localhost:3000`) são sites diferentes. Por isso a rota [apps/web/src/app/(frontend)/next/preview/route.ts](apps/web/src/app/(frontend)/next/preview/route.ts) reenvia o cookie como `SameSite=None; Secure` fora de produção (em produção o Next já faz isso). Se o preview continuar sem atualizar: abra o admin exatamente em `http://localhost:3001` (é a origem que o `serverURL` aceita), use um navegador que aceite cookies de terceiros em `*.localhost` (Safari não aceita `Secure` em http) e confira no console se aparece algum erro. O botão **Reverter para publicado** do admin só zera o formulário e não avisa o iframe; por isso [apps/cms/src/components/LivePreviewRevertSync](apps/cms/src/components/LivePreviewRevertSync/index.tsx), ligado em `pages` e `posts`, dispara o evento de atualização quando as versões não publicadas somem. Ao criar outra coleção com `livePreview`, adicione `admin.components.edit.beforeDocumentControls: ['@/components/LivePreviewRevertSync#LivePreviewRevertSync']` e rode `pnpm --filter cms generate:importmap`.
+- **Live preview:** o admin mostra o site num iframe e, a cada salvamento automático do rascunho, o site refaz a página (`RefreshRouteOnSave`). Só funciona se o iframe entrar em draft mode, e para isso o cookie `__prerender_bypass` precisa chegar ao site. Em desenvolvimento o Next envia esse cookie como `SameSite=Lax`, e o navegador o descarta quando o admin (`localhost:3001`) e o site da propriedade (`campanha.localhost:3000`) são sites diferentes. Por isso a rota [apps/web/src/app/(frontend)/next/preview/route.ts](<apps/web/src/app/(frontend)/next/preview/route.ts>) reenvia o cookie como `SameSite=None; Secure` fora de produção (em produção o Next já faz isso). Se o preview continuar sem atualizar: abra o admin exatamente em `http://localhost:3001` (é a origem que o `serverURL` aceita), use um navegador que aceite cookies de terceiros em `*.localhost` (Safari não aceita `Secure` em http) e confira no console se aparece algum erro. O botão **Reverter para publicado** do admin só zera o formulário e não avisa o iframe; por isso [apps/cms/src/components/LivePreviewRevertSync](apps/cms/src/components/LivePreviewRevertSync/index.tsx), ligado em `pages` e `posts`, dispara o evento de atualização quando as versões não publicadas somem. Ao criar outra coleção com `livePreview`, adicione `admin.components.edit.beforeDocumentControls: ['@/components/LivePreviewRevertSync#LivePreviewRevertSync']` e rode `pnpm --filter cms generate:importmap`.
 
 ## Requisitos
 
@@ -101,12 +101,12 @@ Se as portas 5432/9000/9001 já estiverem em uso, troque-as no `.env` da raiz e 
 
 O admin tem dois autenticadores independentes, cada um com a sua sessão e o seu logout:
 
-|              | Login local                             | SSO corporativo (RH-SSO/Keycloak)                                                                        |
-| ------------ | --------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Como entra   | e-mail e senha                          | botão "Entrar com SSO corporativo" (OIDC Authorization Code + PKCE)                                      |
-| Sessão       | cookie `payload-token` do Payload       | cookie `digio-sso-session`, assinado e revogável                                                         |
-| Logout       | encerra só a sessão do CMS              | encerra a sessão do CMS e a do RH-SSO                                                                    |
-| Papéis       | definidos no admin                      | vêm do SSO a cada login (grupos `/tenants/<propriedade>/<admin\|editor\|seo>` e papel `cms-super-admin`) |
+|              | Login local                                               | SSO corporativo (RH-SSO/Keycloak)                                                                        |
+| ------------ | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Como entra   | e-mail e senha                                            | botão "Entrar com SSO corporativo" (OIDC Authorization Code + PKCE)                                      |
+| Sessão       | cookie `payload-token` do Payload                         | cookie `digio-sso-session`, assinado e revogável                                                         |
+| Logout       | encerra só a sessão do CMS                                | encerra a sessão do CMS e a do RH-SSO                                                                    |
+| Papéis       | definidos no admin                                        | vêm do SSO a cada login (grupos `/tenants/<propriedade>/<admin\|editor\|seo>` e papel `cms-super-admin`) |
 | Liga/desliga | `AUTH_LOCAL_ENABLED` (em produção, sem valor = desligado) | `AUTH_SSO_ENABLED`                                                                                       |
 
 Regras:
