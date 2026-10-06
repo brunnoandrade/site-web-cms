@@ -17,7 +17,7 @@ import {
   UploadFeature,
 } from '@payloadcms/richtext-lexical'
 
-import { publishedOrTenantMember, tenantRoles } from '../../access/roles'
+import { publishedOrTenantMember, tenantRoles, tenantRolesForVersions } from '../../access/roles'
 import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
@@ -41,7 +41,7 @@ export const Posts: CollectionConfig<'posts'> = {
     create: tenantRoles(['admin', 'editor']),
     delete: tenantRoles(['admin', 'editor']),
     read: publishedOrTenantMember,
-    readVersions: tenantRoles(['admin', 'editor', 'seo']),
+    readVersions: tenantRolesForVersions(['admin', 'editor', 'seo']),
     // The SEO role edits meta fields of existing documents.
     update: tenantRoles(['admin', 'editor', 'seo']),
   },

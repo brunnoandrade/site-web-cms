@@ -2,7 +2,7 @@ import { t } from '../../utilities/labels'
 import { slug } from '../../fields/slug'
 import type { CollectionConfig } from 'payload'
 
-import { publishedOrTenantMember, tenantRoles } from '../../access/roles'
+import { publishedOrTenantMember, tenantRoles, tenantRolesForVersions } from '../../access/roles'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
@@ -35,7 +35,7 @@ export const Pages: CollectionConfig<'pages'> = {
     create: tenantRoles(['admin', 'editor']),
     delete: tenantRoles(['admin', 'editor']),
     read: publishedOrTenantMember,
-    readVersions: tenantRoles(['admin', 'editor', 'seo']),
+    readVersions: tenantRolesForVersions(['admin', 'editor', 'seo']),
     // The SEO role edits meta fields of existing documents.
     update: tenantRoles(['admin', 'editor', 'seo']),
   },

@@ -1,7 +1,7 @@
 import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 import { ValidationError } from 'payload'
 
-import { publishedOrTenantMember, tenantRoles } from '../../access/roles'
+import { publishedOrTenantMember, tenantRoles, tenantRolesForVersions } from '../../access/roles'
 import { revalidateTenantContent } from '../../hooks/revalidateTenantContent'
 import { t } from '../../utilities/labels'
 import { validateRates, type RatesInput } from './validateRates'
@@ -30,7 +30,7 @@ export const Rates: CollectionConfig = {
     create: tenantRoles(['admin', 'editor']),
     delete: tenantRoles(['admin', 'editor']),
     read: publishedOrTenantMember,
-    readVersions: tenantRoles(['admin', 'editor']),
+    readVersions: tenantRolesForVersions(['admin', 'editor']),
     update: tenantRoles(['admin', 'editor']),
   },
   admin: {

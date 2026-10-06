@@ -2,7 +2,7 @@ import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 import { slug } from '../fields/slug'
 import { ValidationError } from 'payload'
 
-import { publishedOrTenantMember, tenantRoles } from '../access/roles'
+import { publishedOrTenantMember, tenantRoles, tenantRolesForVersions } from '../access/roles'
 import { revalidateTenantContent } from '../hooks/revalidateTenantContent'
 import { t } from '../utilities/labels'
 
@@ -62,7 +62,7 @@ export const HelpTopics: CollectionConfig = {
     create: tenantRoles(['admin', 'editor']),
     delete: tenantRoles(['admin', 'editor']),
     read: publishedOrTenantMember,
-    readVersions: tenantRoles(['admin', 'editor', 'seo']),
+    readVersions: tenantRolesForVersions(['admin', 'editor', 'seo']),
     update: tenantRoles(['admin', 'editor', 'seo']),
   },
   admin: {

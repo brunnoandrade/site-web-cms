@@ -8,6 +8,7 @@ import type { Author, Category, Post, Tenant } from '@digio/payload-types'
 import { applyUrlChange } from '../collections/Redirects/hooks'
 import { countHtml, countLexical, describeLoss, numericUploadIDs } from './contentCheck'
 import { attachMediaToImages, cleanWordPressHtml } from './html'
+import { fetchPublicImage } from './safeFetch'
 import { decodeEntities, parseSeoHead, type SeoHead } from './seo'
 
 /**
@@ -179,9 +180,12 @@ export async function migrateWordPress(
       return null
     }
 
-    const res = await get(url)
-    if (!res.ok) throw new Error(`imagem ${url} respondeu ${res.status}`)
-    const data = Buffer.from(await res.arrayBuffer())
+    // The URL comes from the post content: never fetch internal addresses (see safeFetch.ts).
+    const { data, contentType } = await fetchPublicImage(url, {
+      trustedOrigins: siteOrigins,
+      fetch: http,
+      headers: { 'User-Agent': USER_AGENT },
+    })
     const name = decodeURIComponent(new URL(url).pathname.split('/').pop() || 'imagem')
 
     const media = await payload.create({
@@ -191,7 +195,7 @@ export async function migrateWordPress(
       file: {
         data,
         name,
-        mimetype: res.headers.get('content-type') ?? 'application/octet-stream',
+        mimetype: contentType ?? 'application/octet-stream',
         size: data.byteLength,
       },
     })

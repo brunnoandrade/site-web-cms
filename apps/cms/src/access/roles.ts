@@ -77,6 +77,13 @@ export const publishedOrTenantMember: Access = (args) => {
   return tenantRoles(TENANT_ROLES)(args)
 }
 
+/**
+ * `readVersions` access: the versions table keeps the document's fields under `version.`, so
+ * the tenant filter has to target `version.tenant` (a plain `tenant` filter fails with a 500).
+ */
+export const tenantRolesForVersions = (roles: readonly TenantRole[]): Access =>
+  tenantRoles(roles, 'version.tenant')
+
 export const anyone: Access = () => true
 
 export const superAdminOnly: Access = ({ req: { user } }) => isSuperAdmin(user)

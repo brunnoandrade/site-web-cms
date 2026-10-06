@@ -122,6 +122,22 @@ describe('multi-tenant isolation', () => {
       expect(docs.map((doc) => doc.id)).toContain(pages.draftA.id)
     })
 
+    it('an editor lists the versions of their own tenant only (no 500 on the versions table)', async () => {
+      const { docs } = await payload.findVersions({
+        collection: 'pages',
+        depth: 0,
+        limit: 100,
+        ...as(users.editorA),
+      })
+      const tenantIDs = new Set(
+        docs.map((doc) =>
+          typeof doc.version.tenant === 'object' ? doc.version.tenant?.id : doc.version.tenant,
+        ),
+      )
+      expect(docs.length).toBeGreaterThan(0)
+      expect([...tenantIDs]).toEqual([tenants.a.id])
+    })
+
     it('an editor cannot create a page in another tenant', async () => {
       await expect(
         payload.create({
