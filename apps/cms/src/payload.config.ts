@@ -3,6 +3,7 @@ import { en } from '@payloadcms/translations/languages/en'
 import { pt } from '@payloadcms/translations/languages/pt'
 import { s3Storage } from '@payloadcms/storage-s3'
 import sharp from 'sharp'
+import { createHash, timingSafeEqual } from 'crypto'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
@@ -157,7 +158,9 @@ export default buildConfig({
         // for the cron secret to be present as an
         // Authorization header:
         const authHeader = req.headers.get('authorization')
-        return authHeader === `Bearer ${secret}`
+        if (!authHeader) return false
+        const digest = (value: string) => createHash('sha256').update(value).digest()
+        return timingSafeEqual(digest(authHeader), digest(`Bearer ${secret}`))
       },
     },
     tasks: [],

@@ -81,3 +81,11 @@ describe('readCookie', () => {
     expect(readCookie(headers, 'missing')).toBeNull()
   })
 })
+
+describe('readCookie', () => {
+  it('returns null for a malformed percent-encoding instead of throwing', async () => {
+    const { readCookie } = await import('./tokens')
+    const headers = new Headers({ cookie: 'digio-sso-session=%E0%A4%A' })
+    expect(readCookie(headers, 'digio-sso-session')).toBeNull()
+  })
+})

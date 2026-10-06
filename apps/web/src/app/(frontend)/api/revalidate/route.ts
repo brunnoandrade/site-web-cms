@@ -1,6 +1,7 @@
 import { revalidatePath, revalidateTag } from 'next/cache'
 import type { NextRequest } from 'next/server'
 
+import { isBearer } from '@/lib/bearer'
 import { invalidateRedirects } from '@/lib/redirects'
 
 type Body = {
@@ -16,9 +17,7 @@ const asStrings = (value: unknown): string[] =>
  * (see apps/cms/src/utilities/revalidateWeb.ts). Authenticated with REVALIDATE_SECRET.
  */
 export async function POST(req: NextRequest): Promise<Response> {
-  const secret = process.env.REVALIDATE_SECRET
-
-  if (!secret || req.headers.get('authorization') !== `Bearer ${secret}`) {
+  if (!isBearer(req.headers.get('authorization'), process.env.REVALIDATE_SECRET)) {
     return Response.json({ revalidated: false, message: 'Unauthorized' }, { status: 401 })
   }
 
