@@ -3,14 +3,17 @@
 # Runtime configuration comes from environment variables (see apps/cms/.env.example).
 
 FROM node:24-alpine AS base
-RUN apk add --no-cache libc6-compat && corepack enable
+RUN apk add --no-cache libc6-compat
 WORKDIR /repo
 
 FROM base AS deps
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+COPY package.json package-lock.json .npmrc ./
+# npm ci validates the lockfile against every workspace manifest, so all of them are needed.
 COPY apps/cms/package.json apps/cms/
+COPY apps/web/package.json apps/web/
 COPY packages/payload-types/package.json packages/payload-types/
-RUN pnpm install --frozen-lockfile --filter cms...
+COPY packages/routes/package.json packages/routes/
+RUN npm ci -w cms
 
 FROM base AS builder
 # Inlined into the admin bundle at build time.
@@ -19,7 +22,7 @@ ENV NEXT_PUBLIC_WEB_URL=$NEXT_PUBLIC_WEB_URL
 COPY --from=deps /repo ./
 COPY packages packages
 COPY apps/cms apps/cms
-RUN pnpm --filter cms build
+RUN npm run build -w cms
 
 FROM node:24-alpine AS runner
 WORKDIR /app

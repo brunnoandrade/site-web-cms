@@ -1,6 +1,6 @@
 # Usuários do ambiente local
 
-Contas que existem só no desenvolvimento local (`docker compose` + `pnpm dev`). Nenhuma delas vale para DEV, HML ou PRD.
+Contas que existem só no desenvolvimento local (`docker compose` + `npm run dev`). Nenhuma delas vale para DEV, HML ou PRD.
 
 Admin: http://localhost:3001/admin
 
@@ -8,7 +8,7 @@ Admin: http://localhost:3001/admin
 
 | Conta | Papel | Como é criada |
 |---|---|---|
-| a que você informar no bootstrap | super admin (todas as propriedades) | `pnpm --filter cms bootstrap:dev`, com `BOOTSTRAP_ADMIN_EMAIL` e `BOOTSTRAP_ADMIN_PASSWORD` |
+| a que você informar no bootstrap | super admin (todas as propriedades) | `npm run -w cms bootstrap:dev`, com `BOOTSTRAP_ADMIN_EMAIL` e `BOOTSTRAP_ADMIN_PASSWORD` |
 | `demo-author@example.com` | editor, autor dos posts de exemplo | seed; a senha é aleatória, então não é usada para login |
 
 Cada pessoa do time cria a própria conta local no bootstrap. **Senhas reais não entram no repositório.** Se quiser anotar a sua, use o arquivo `CREDENCIAIS-LOCAIS.md` na raiz, que está no `.gitignore`.
@@ -28,6 +28,14 @@ Botão **"Entrar com SSO corporativo"** na tela de login. Todos os usuários tê
 | `sso.colisao` | recusado: o e-mail pertence a uma conta local |
 
 O logout do SSO também encerra a sessão no Keycloak, então o próximo login pede usuário e senha de novo.
+
+**Erro "Este e-mail já está vinculado a outra identidade do SSO"** (`subject_mismatch`): o usuário SSO guarda o ID (`sub`) que o Keycloak lhe deu, e o CMS recusa que o mesmo e-mail passe a outro ID. Se o volume do Keycloak for recriado e o do Postgres não (ou o contrário), o Keycloak gera IDs novos e todos os logins SSO passam a falhar. Em desenvolvimento, apague os usuários SSO antigos; eles são recriados no próximo login, com os papéis vindos do Keycloak:
+
+```bash
+docker compose exec postgres psql -U digio -d digio -c "delete from users where auth_provider='sso'"
+```
+
+Zerar só a coluna `sso_subject` não resolve: o CMS acha o usuário pelo e-mail e recusa do mesmo jeito. Em HML e PRD isso é proposital; a troca de identidade deve ser tratada por um administrador.
 
 Console de administração do Keycloak: http://localhost:8080/admin (`admin` / `admin`, ou os valores de `KEYCLOAK_ADMIN_USER` e `KEYCLOAK_ADMIN_PASSWORD` no `.env` da raiz).
 

@@ -1,25 +1,26 @@
 {
   "name": "site-web-digio",
   "private": true,
-  "description": "Site V2 Digio: monorepo com o CMS (Payload) e o site p\u00fablico (Next.js)",
+  "description": "Site V2 Digio: monorepo com o CMS (Payload) e o site público (Next.js)",
   "type": "module",
   "scripts": {
-    "build": "pnpm --filter cms build && pnpm --filter web build",
-    "dev": "pnpm --parallel --no-bail --filter cms --filter web dev",
-    "dev:cms": "pnpm --filter cms dev",
-    "dev:web": "pnpm --filter web dev",
+    "build": "npm run build -w cms && npm run build -w web",
+    "dev": "concurrently -n cms,web -c blue,green \"npm run dev -w cms\" \"npm run dev -w web\"",
+    "dev:cms": "npm run dev -w cms",
+    "dev:web": "npm run dev -w web",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "generate:types": "pnpm --filter cms generate:types",
-    "lint": "pnpm -r lint",
-    "test:int": "pnpm --filter cms test:int",
+    "generate:types": "npm run generate:types -w cms",
+    "lint": "npm run lint --workspaces --if-present",
+    "test:int": "npm run test:int -w cms",
     "test:scripts": "vitest run scripts",
-    "test:unit": "pnpm -r test:unit && pnpm test:scripts",
-    "typecheck": "pnpm -r typecheck && tsc -p scripts/tsconfig.json",
+    "test:unit": "npm run test:unit --workspaces --if-present && npm run test:scripts",
+    "typecheck": "npm run typecheck --workspaces --if-present && tsc -p scripts/tsconfig.json",
     "validate-urls": "tsx scripts/validate-urls.ts"
   },
   "devDependencies": {
     "@types/node": "22.19.9",
+    "concurrently": "^9.2.1",
     "prettier": "^3.4.2",
     "tsx": "4.22.4",
     "typescript": "5.7.3",
@@ -27,7 +28,23 @@
   },
   "engines": {
     "node": ">=20.9.0",
-    "pnpm": ">=10"
+    "npm": ">=10"
   },
-  "packageManager": "pnpm@12.6.0"
+  "packageManager": "npm@11.19.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "overrides": {
+    "undici": "^7.29.1",
+    "source-map-js": ">=1.2.2",
+    "dompurify": ">=3.4.16",
+    "sharp": ">=0.35.5"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.18.20": true,
+    "unrs-resolver@1.12.2": true
+  }
 }

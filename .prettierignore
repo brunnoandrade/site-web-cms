@@ -12,7 +12,7 @@
 **/docs/**
 **/tsconfig.json
 
-pnpm-lock.yaml
+package-lock.json
 **/.next
 apps/cms/src/app/(payload)/admin/importMap.js
 CLAUDE.md

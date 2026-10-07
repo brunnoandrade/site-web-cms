@@ -1,5 +1,5 @@
 /**
- * Local development bootstrap. Run with: pnpm --filter cms bootstrap:dev
+ * Local development bootstrap. Run with: npm run -w cms bootstrap:dev
  *
  * Creates (or updates) the demo tenants, a super-admin, the preview service account and seeds
  * demo content into each tenant. Refuses to run with NODE_ENV=production.

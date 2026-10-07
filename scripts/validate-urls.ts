@@ -2,7 +2,7 @@
  * Checks a list of old URLs against any environment: each must answer 200, or 301 to a
  * destination that answers 200 (one hop), keeping the query string.
  *
- *   pnpm validate-urls <lista.csv> [base=https://hml.exemplo.com.br] [paralelo=8] [saida=relatorio.csv]
+ *   npm run validate-urls <lista.csv> [base=https://hml.exemplo.com.br] [paralelo=8] [saida=relatorio.csv]
  *
  * The list may hold full URLs (production URLs are rebased onto `base`) or paths (needs `base`).
  * Exit code 1 when any URL fails, so it can gate a cutover wave (docs/virada.md).
@@ -26,7 +26,7 @@ const file = args.find((arg) => !arg.includes('='))
 
 if (!file) {
   console.error(
-    'Uso: pnpm validate-urls <lista.csv> [base=https://ambiente] [paralelo=8] [saida=relatorio.csv]',
+    'Uso: npm run validate-urls <lista.csv> [base=https://ambiente] [paralelo=8] [saida=relatorio.csv]',
   )
   process.exit(1)
 }

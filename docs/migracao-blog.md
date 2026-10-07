@@ -6,16 +6,16 @@ Script: [apps/cms/scripts/migrate-wordpress.ts](../apps/cms/scripts/migrate-word
 
 ```bash
 # Simulação: lê e converte tudo, não grava nada (recomendado antes de cada execução)
-pnpm --filter cms blog:migrate tenant=digio dry-run
+npm run -w cms blog:migrate tenant=digio dry-run
 
 # Teste com os N posts mais antigos
-pnpm --filter cms blog:migrate tenant=digio limit=20
+npm run -w cms blog:migrate tenant=digio limit=20
 
 # Migração completa
-pnpm --filter cms blog:migrate tenant=digio
+npm run -w cms blog:migrate tenant=digio
 
 # Reprocessar mesmo o que não mudou no WordPress (por exemplo, depois de melhorar o conversor)
-pnpm --filter cms blog:migrate tenant=digio force
+npm run -w cms blog:migrate tenant=digio force
 ```
 
 Opções: `source=<url do blog>` (padrão `https://www.digio.com.br/blog`, ou a variável `WP_BLOG_URL`), `limit=N`, `dry-run` e `force`.

@@ -15,8 +15,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@digio/payload-types": "workspace:*",
-    "@digio/routes": "workspace:*",
+    "@digio/payload-types": "*",
+    "@digio/routes": "*",
     "@payloadcms/admin-bar": "3.90.2",
     "@payloadcms/live-preview-react": "3.90.2",
     "@payloadcms/richtext-lexical": "3.90.2",

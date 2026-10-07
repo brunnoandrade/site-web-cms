@@ -35,7 +35,7 @@ Mudanças em rascunho não criam redirect: só a publicação cria. O redirect a
 ## Importação em massa (CSV)
 
 ```bash
-pnpm --filter cms redirects:import <arquivo.csv> tenant=digio [wave=1] [dry-run]
+npm run -w cms redirects:import <arquivo.csv> tenant=digio [wave=1] [dry-run]
 ```
 
 Formato (vírgula ou ponto e vírgula, UTF-8; exemplo em [exemplos/redirects.csv](exemplos/redirects.csv)):
@@ -64,7 +64,7 @@ Cada redirect pode ter uma **onda** (1 a 4, ver [virada.md](virada.md)) e o camp
 ## Validar URLs em qualquer ambiente
 
 ```bash
-pnpm validate-urls <lista.csv> base=https://hml.exemplo.com.br [paralelo=8] [saida=relatorio.csv]
+npm run validate-urls <lista.csv> base=https://hml.exemplo.com.br [paralelo=8] [saida=relatorio.csv]
 ```
 
 - **Regra:** cada URL precisa responder **200**, ou **301** para um destino que responde **200**, num único salto e preservando a query string.

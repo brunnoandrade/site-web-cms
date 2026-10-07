@@ -1,6 +1,6 @@
 # Site V2 Digio
 
-Site institucional da Digio. Monorepo pnpm com dois projetos separados:
+Site institucional da Digio. Monorepo npm (workspaces) com dois projetos separados:
 
 | Projeto                                           | O que é                                                    | Porta local |
 | ------------------------------------------------- | ---------------------------------------------------------- | ----------- |
@@ -25,12 +25,12 @@ navegador ──► web (Next.js) ──REST──► cms (Payload) ──► Po
 - **Se o CMS cair:** o site continua servindo as páginas e os dados em cache.
 - **Build:** o site não precisa do CMS para gerar o build. As páginas são geradas no primeiro acesso (ISR).
 - **Preview:** o admin abre `/next/preview/` no site, que ativa o draft mode. Os rascunhos são lidos com a API key de um usuário de serviço (`CMS_API_KEY`).
-- **Live preview:** o admin mostra o site num iframe e, a cada salvamento automático do rascunho, o site refaz a página (`RefreshRouteOnSave`). Só funciona se o iframe entrar em draft mode, e para isso o cookie `__prerender_bypass` precisa chegar ao site. Em desenvolvimento o Next envia esse cookie como `SameSite=Lax`, e o navegador o descarta quando o admin (`localhost:3001`) e o site da propriedade (`campanha.localhost:3000`) são sites diferentes. Por isso a rota [apps/web/src/app/(frontend)/next/preview/route.ts](<apps/web/src/app/(frontend)/next/preview/route.ts>) reenvia o cookie como `SameSite=None; Secure` fora de produção (em produção o Next já faz isso). Se o preview continuar sem atualizar: abra o admin exatamente em `http://localhost:3001` (é a origem que o `serverURL` aceita), use um navegador que aceite cookies de terceiros em `*.localhost` (Safari não aceita `Secure` em http) e confira no console se aparece algum erro. O botão **Reverter para publicado** do admin só zera o formulário e não avisa o iframe; por isso [apps/cms/src/components/LivePreviewRevertSync](apps/cms/src/components/LivePreviewRevertSync/index.tsx), ligado em `pages` e `posts`, dispara o evento de atualização quando as versões não publicadas somem. Ao criar outra coleção com `livePreview`, adicione `admin.components.edit.beforeDocumentControls: ['@/components/LivePreviewRevertSync#LivePreviewRevertSync']` e rode `pnpm --filter cms generate:importmap`.
+- **Live preview:** o admin mostra o site num iframe e, a cada salvamento automático do rascunho, o site refaz a página (`RefreshRouteOnSave`). Só funciona se o iframe entrar em draft mode, e para isso o cookie `__prerender_bypass` precisa chegar ao site. Em desenvolvimento o Next envia esse cookie como `SameSite=Lax`, e o navegador o descarta quando o admin (`localhost:3001`) e o site da propriedade (`campanha.localhost:3000`) são sites diferentes. Por isso a rota [apps/web/src/app/(frontend)/next/preview/route.ts](<apps/web/src/app/(frontend)/next/preview/route.ts>) reenvia o cookie como `SameSite=None; Secure` fora de produção (em produção o Next já faz isso). Se o preview continuar sem atualizar: abra o admin exatamente em `http://localhost:3001` (é a origem que o `serverURL` aceita), use um navegador que aceite cookies de terceiros em `*.localhost` (Safari não aceita `Secure` em http) e confira no console se aparece algum erro. O botão **Reverter para publicado** do admin só zera o formulário e não avisa o iframe; por isso [apps/cms/src/components/LivePreviewRevertSync](apps/cms/src/components/LivePreviewRevertSync/index.tsx), ligado em `pages` e `posts`, dispara o evento de atualização quando as versões não publicadas somem. Ao criar outra coleção com `livePreview`, adicione `admin.components.edit.beforeDocumentControls: ['@/components/LivePreviewRevertSync#LivePreviewRevertSync']` e rode `npm run -w cms generate:importmap`.
 
 ## Requisitos
 
 - Node.js 20.9+ (testado com 24)
-- pnpm (`corepack enable pnpm`)
+- npm 10+ (vem com o Node)
 - Docker (ou Podman) com compose
 
 ## Rodando localmente
@@ -40,13 +40,13 @@ cp .env.example .env                    # portas e credenciais do docker compose
 cp apps/cms/.env.example apps/cms/.env  # ajuste PAYLOAD_SECRET e os segredos
 cp apps/web/.env.example apps/web/.env  # PREVIEW_SECRET e REVALIDATE_SECRET iguais aos do CMS
 docker compose up -d                    # Postgres + MinIO (cria o bucket público de mídia)
-pnpm install
-pnpm dev                                # CMS em :3001 e site em :3000
+npm install
+npm run dev                                # CMS em :3001 e site em :3000
 
 # Em outro terminal, na primeira vez: propriedades, usuários e conteúdo de exemplo
 CMS_API_KEY=<mesma chave de apps/web/.env> \
 BOOTSTRAP_ADMIN_EMAIL=voce@digio.com.br BOOTSTRAP_ADMIN_PASSWORD=<senha> \
-pnpm --filter cms bootstrap:dev
+npm run -w cms bootstrap:dev
 ```
 
 O `bootstrap:dev` cria:
@@ -58,11 +58,11 @@ O `bootstrap:dev` cria:
   - **Digio**: demo completo (home, componentes, contato, blog, produtos e taxas, central de ajuda);
   - **Campanha Exemplo**: micro-site "Indique e ganhe" (home, regulamento, contato em português, FAQs, header e footer), sem blog nem central de ajuda. Código em [apps/cms/src/endpoints/seed/campaign.ts](apps/cms/src/endpoints/seed/campaign.ts); qualquer propriedade diferente de `digio` recebe esse conteúdo.
 
-O `bootstrap:dev` **recria todo o conteúdo** das propriedades, inclusive apagando posts migrados do WordPress. Para ter posts reais depois dele: `pnpm --filter cms blog:migrate tenant=digio limit=20`.
+O `bootstrap:dev` **recria todo o conteúdo** das propriedades, inclusive apagando posts migrados do WordPress. Para ter posts reais depois dele: `npm run -w cms blog:migrate tenant=digio limit=20`.
 
 Detalhes que costumam pegar quem roda pela primeira vez:
 
-- **Suba o `pnpm dev` antes do `bootstrap:dev`.** No fim, o script pede ao site para limpar o cache (`/api/revalidate/`). Com o site parado, o cache de dados do `next dev` (`apps/web/.next/cache`) pode continuar servindo o conteúdo antigo. Se isso acontecer, chame o webhook com `REVALIDATE_SECRET`: `curl -X POST http://localhost:3000/api/revalidate/ -H "Authorization: Bearer $REVALIDATE_SECRET" -H 'Content-Type: application/json' -d '{"tags":["cms","tenants"]}'`.
+- **Suba o `npm run dev` antes do `bootstrap:dev`.** No fim, o script pede ao site para limpar o cache (`/api/revalidate/`). Com o site parado, o cache de dados do `next dev` (`apps/web/.next/cache`) pode continuar servindo o conteúdo antigo. Se isso acontecer, chame o webhook com `REVALIDATE_SECRET`: `curl -X POST http://localhost:3000/api/revalidate/ -H "Authorization: Bearer $REVALIDATE_SECRET" -H 'Content-Type: application/json' -d '{"tags":["cms","tenants"]}'`.
 - **Use `docker compose up -d` completo** (e não só `postgres minio`): o serviço `minio-init` cria o bucket de mídia. Sem ele o seed falha com `NoSuchBucket`.
 - **O primeiro acesso a cada rota no `next dev` compila a página** e pode responder 503 por alguns segundos. Repita a requisição.
 - **Renomear a pasta do repositório muda o nome do projeto do compose**, e com ele os volumes (`<pasta>_postgres-data`, `<pasta>_minio-data`). O banco sobe vazio; os dados antigos continuam no volume com o nome anterior. Para voltar a usá-los, defina `COMPOSE_PROJECT_NAME` com o nome antigo, ou rode o `bootstrap:dev` para recriar tudo.
@@ -93,7 +93,7 @@ Links locais:
   - `super-admin`: todas as propriedades;
   - `preview`: conta de serviço, só leitura;
   - `admin`, `editor` e `seo`: por propriedade.
-- **Testes:** as regras de isolamento e de papéis estão em [apps/cms/tests/int/tenant-isolation.int.spec.ts](apps/cms/tests/int/tenant-isolation.int.spec.ts), que roda com `pnpm test:int`.
+- **Testes:** as regras de isolamento e de papéis estão em [apps/cms/tests/int/tenant-isolation.int.spec.ts](apps/cms/tests/int/tenant-isolation.int.spec.ts), que roda com `npm run test:int`.
 
 Se as portas 5432/9000/9001 já estiverem em uso, troque-as no `.env` da raiz e ajuste `DATABASE_URL`, `S3_ENDPOINT`, `MEDIA_PUBLIC_URL` (CMS) e `NEXT_PUBLIC_MEDIA_URL` (site).
 
@@ -127,9 +127,9 @@ No desenvolvimento, o `docker compose up -d` sobe um Keycloak em http://localhos
 
 Testes:
 
-- `pnpm test:int` e `pnpm test:unit`: provisionamento, sessão e tokens, sem precisar do Keycloak;
-- `pnpm --filter cms test:sso`: fluxo completo contra o Keycloak, incluindo ataques (callback forjado, `state` adulterado, cookie de outra origem, sessão revogada);
-- `pnpm --filter cms test:e2e`: o mesmo no navegador.
+- `npm run test:int` e `npm run test:unit`: provisionamento, sessão e tokens, sem precisar do Keycloak;
+- `npm run -w cms test:sso`: fluxo completo contra o Keycloak, incluindo ataques (callback forjado, `state` adulterado, cookie de outra origem, sessão revogada);
+- `npm run -w cms test:e2e`: o mesmo no navegador.
 
 ## Docker (um container por projeto)
 
@@ -152,16 +152,16 @@ As variáveis `NEXT_PUBLIC_*` e o host de imagens do site entram no build (`--bu
 
 | Comando                              | O que faz                                                                          |
 | ------------------------------------ | ---------------------------------------------------------------------------------- |
-| `pnpm dev`                           | CMS e site juntos (`dev:cms` e `dev:web` separados)                                |
-| `pnpm build`                         | build de produção dos dois                                                         |
-| `pnpm lint`                          | ESLint nos dois                                                                    |
-| `pnpm format`                        | formata com Prettier (`format:check` só confere)                                   |
-| `pnpm typecheck`                     | TypeScript (strict) nos dois                                                       |
-| `pnpm test:unit`                     | Vitest, testes unitários (sem banco)                                               |
-| `pnpm test:int`                      | Vitest, integração do CMS (precisa do compose)                                     |
-| `pnpm generate:types`                | regenera `packages/payload-types`                                                  |
-| `pnpm validate-urls`                 | confere URLs antigas em qualquer ambiente ([docs/redirects.md](docs/redirects.md)) |
-| `pnpm --filter cms redirects:import` | importa redirects de um CSV ([docs/redirects.md](docs/redirects.md))               |
-| `pnpm --filter cms blog:migrate`     | migra o blog do WordPress ([docs/migracao-blog.md](docs/migracao-blog.md))         |
+| `npm run dev`                           | CMS e site juntos (`dev:cms` e `dev:web` separados)                                |
+| `npm run build`                         | build de produção dos dois                                                         |
+| `npm run lint`                          | ESLint nos dois                                                                    |
+| `npm run format`                        | formata com Prettier (`format:check` só confere)                                   |
+| `npm run typecheck`                     | TypeScript (strict) nos dois                                                       |
+| `npm run test:unit`                     | Vitest, testes unitários (sem banco)                                               |
+| `npm run test:int`                      | Vitest, integração do CMS (precisa do compose)                                     |
+| `npm run generate:types`                | regenera `packages/payload-types`                                                  |
+| `npm run validate-urls`                 | confere URLs antigas em qualquer ambiente ([docs/redirects.md](docs/redirects.md)) |
+| `npm run -w cms redirects:import` | importa redirects de um CSV ([docs/redirects.md](docs/redirects.md))               |
+| `npm run -w cms blog:migrate`     | migra o blog do WordPress ([docs/migracao-blog.md](docs/migracao-blog.md))         |
 
-Dentro de cada app: `pnpm --filter cms <script>` ou `pnpm --filter web <script>` (por exemplo, `test:e2e` e `generate:importmap`).
+Dentro de cada app: `npm run -w cms <script>` ou `npm run -w web <script>` (por exemplo, `test:e2e` e `generate:importmap`).

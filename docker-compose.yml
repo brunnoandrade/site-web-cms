@@ -1,6 +1,6 @@
 # Local development only. DEV/HML/PRD environments are owned by infra; do not use this file for them.
 #
-#   docker compose up -d                 Postgres + MinIO (run the apps with `pnpm dev`)
+#   docker compose up -d                 Postgres + MinIO (run the apps with `npm run dev`)
 #   docker compose --profile app up -d   also builds and runs the CMS and website containers
 services:
   postgres:
@@ -106,7 +106,7 @@ services:
       WEB_URL: http://localhost:${WEB_PORT:-3000}
       WEB_INTERNAL_URL: http://web:3000
       # SSO needs one issuer URL reachable by both the browser and the CMS; inside this
-      # container localhost:8080 is not Keycloak. Test SSO with `pnpm dev` instead.
+      # container localhost:8080 is not Keycloak. Test SSO with `npm run dev` instead.
       AUTH_SSO_ENABLED: 'false'
 
   web:

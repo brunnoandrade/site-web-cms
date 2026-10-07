@@ -2,7 +2,7 @@
   "name": "@digio/payload-types",
   "version": "0.0.0",
   "private": true,
-  "description": "Tipos gerados pelo Payload (apps/cms), compartilhados com o site (apps/web). Não editar à mão: rode `pnpm generate:types`.",
+  "description": "Tipos gerados pelo Payload (apps/cms), compartilhados com o site (apps/web). Não editar à mão: rode `npm run generate:types`.",
   "type": "module",
   "types": "./src/payload-types.ts",
   "exports": {

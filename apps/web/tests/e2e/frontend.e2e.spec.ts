@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 /**
  * Main routes of the website, per tenant. Requires the CMS with the dev bootstrap content
- * (pnpm --filter cms bootstrap:dev) and the website on :3000.
+ * (npm run -w cms bootstrap:dev) and the website on :3000.
  */
 
 const DIGIO = 'http://localhost:3000'

@@ -8,14 +8,14 @@ Escopo desta entrega: **F0 (fundação) + F1 (evolução do site)**, não transa
 Detalhes em `docs/escopo.md`; virada em ondas em `docs/virada.md`; decisões e aderência ao SoAD em `docs/gaps-soad.md`; revisão de segurança, correções e pendências em `docs/seguranca.md`.
 
 ## Stack
-- **Monorepo pnpm com dois projetos separados**, cada um com seu Dockerfile:
+- **Monorepo npm (workspaces) com dois projetos separados**, cada um com seu Dockerfile:
   - `apps/cms`: **Payload CMS 3** (admin e API REST), em Next.js. Único que acessa o Postgres.
   - `apps/web`: site público em **Next.js (App Router)**. Lê o conteúdo só pela API REST do CMS (`apps/web/src/lib/cms.ts`), nunca pela Local API.
-  - `packages/payload-types`: tipos gerados pelo Payload, usados pelos dois (`pnpm generate:types`).
+  - `packages/payload-types`: tipos gerados pelo Payload, usados pelos dois (`npm run generate:types`).
   - `packages/routes`: URLs públicas (página, post) e normalização de caminhos. Fonte única para o CMS (redirects automáticos, preview, SEO) e o site (links); não montar URL à mão.
 - Integração entre os dois: revalidação por webhook (`POST /api/revalidate/` no site, chamado pelos hooks do CMS), preview por draft mode + API key de usuário de serviço, e mídia servida direto do storage (`MEDIA_PUBLIC_URL`), sem passar pelo CMS.
 - **PostgreSQL** via `@payloadcms/db-postgres` (Payload não suporta MySQL; o SoAD deve ser corrigido para RDS PostgreSQL).
-- **TypeScript** em modo strict; **pnpm**.
+- **TypeScript** em modo strict; **npm**.
 - Editor de texto rico: `@payloadcms/richtext-lexical`.
 - Mídia em storage S3-compatível: `@payloadcms/storage-s3` (MinIO no ambiente local).
 - Plugins: `@payloadcms/plugin-multi-tenant`, `@payloadcms/plugin-redirects`, `@payloadcms/plugin-seo`.
@@ -65,7 +65,7 @@ Blocos (~10): hero (campo da página), `cards`, `ratesTable`, `faq`, `cta`, `con
 - Analytics: mesmo container GTM e mesma propriedade GA4 do site atual; nomes de eventos iguais aos atuais; banner de consentimento (LGPD).
 
 ## Migração do blog
-`apps/cms/scripts/migrate-wordpress.ts` (`pnpm --filter cms blog:migrate tenant=digio [dry-run]`): puxa posts, categorias, autores e imagens pela API REST do WordPress (`/blog/wp-json/wp/v2/...`) e grava pela Local API do Payload. Preserva slug, categoria, datas e SEO, e reescreve links internos. É idempotente (IDs do WordPress, URL das imagens, data de modificação). A API de categorias exige login e o SEO não está na API: categorias vêm embutidas nos posts e o SEO vem do `<head>` de cada página publicada. Cada post é verificado contra perda de conteúdo na conversão. Guia e decisões pendentes: `docs/migracao-blog.md`.
+`apps/cms/scripts/migrate-wordpress.ts` (`npm run -w cms blog:migrate tenant=digio [dry-run]`): puxa posts, categorias, autores e imagens pela API REST do WordPress (`/blog/wp-json/wp/v2/...`) e grava pela Local API do Payload. Preserva slug, categoria, datas e SEO, e reescreve links internos. É idempotente (IDs do WordPress, URL das imagens, data de modificação). A API de categorias exige login e o SEO não está na API: categorias vêm embutidas nos posts e o SEO vem do `<head>` de cada página publicada. Cada post é verificado contra perda de conteúdo na conversão. Guia e decisões pendentes: `docs/migracao-blog.md`.
 
 ## Resiliência
 O site precisa continuar no ar se o Payload cair. Páginas geradas estaticamente (SSG/ISR) com revalidação por webhook do CMS, e uma versão estática de fallback servida pela CDN.

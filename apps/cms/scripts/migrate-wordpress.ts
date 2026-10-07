@@ -1,7 +1,7 @@
 /**
  * Blog migration from the current WordPress. Run from the repository root:
  *
- *   pnpm --filter cms blog:migrate tenant=digio [source=https://www.digio.com.br/blog] [limit=20] [dry-run] [force]
+ *   npm run -w cms blog:migrate tenant=digio [source=https://www.digio.com.br/blog] [limit=20] [dry-run] [force]
  *
  * - dry-run: reads and converts everything, writes nothing;
  * - force:   re-imports posts even when unchanged in WordPress;
@@ -22,7 +22,7 @@ const flag = (name: string) => args.includes(name)
 const tenant = option('tenant')
 if (!tenant) {
   console.error(
-    'Uso: pnpm --filter cms blog:migrate tenant=<slug> [source=<url do blog>] [limit=N] [dry-run] [force]',
+    'Uso: npm run -w cms blog:migrate tenant=<slug> [source=<url do blog>] [limit=N] [dry-run] [force]',
   )
   process.exit(1)
 }

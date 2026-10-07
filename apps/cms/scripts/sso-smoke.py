@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 End-to-end smoke test of the SSO login/logout against the local Keycloak
-(docker compose up -d keycloak) and the CMS (pnpm dev). Acts like a browser.
+(docker compose up -d keycloak) and the CMS (npm run dev). Acts like a browser.
 
 Usage: python3 apps/cms/scripts/sso-smoke.py
 """

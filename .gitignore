@@ -9,10 +9,8 @@ node_modules
 # Logs, caches and coverage
 *.log
 npm-debug.log*
-pnpm-debug.log*
 .eslintcache
 coverage/
-.pnpm-store/
 
 # Editors and OS (the shared .vscode settings are versioned)
 .idea/

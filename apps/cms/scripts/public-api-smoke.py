@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Anonymous (public) attack-surface smoke test against a running CMS + website
-(pnpm dev, or any environment: CMS=https://... WEB=https://... python3 ...).
+(npm run dev, or any environment: CMS=https://... WEB=https://... python3 ...).
 
 Usage: python3 apps/cms/scripts/public-api-smoke.py
 """

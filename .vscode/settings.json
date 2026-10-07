@@ -1,5 +1,5 @@
 {
-  "npm.packageManager": "pnpm",
+  "npm.packageManager": "npm",
   "eslint.workingDirectories": [{ "pattern": "apps/*" }],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[typescript]": {

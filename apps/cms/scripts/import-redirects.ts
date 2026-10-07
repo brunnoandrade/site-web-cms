@@ -1,7 +1,7 @@
 /**
  * Bulk import of redirects from CSV. Run from apps/cms:
  *
- *   pnpm --filter cms redirects:import <arquivo.csv> [tenant=<slug>] [wave=<1-4>] [dry-run]
+ *   npm run -w cms redirects:import <arquivo.csv> [tenant=<slug>] [wave=<1-4>] [dry-run]
  *
  * CSV format: src/redirects-import/parseCsv.ts. Nothing is written when any row has an error;
  * `dry-run` only validates. Safe to run again: existing sources are updated, not duplicated.
@@ -21,7 +21,7 @@ const dryRun = args.includes('dry-run')
 
 if (!file) {
   console.error(
-    'Uso: pnpm --filter cms redirects:import <arquivo.csv> [tenant=<slug>] [wave=<1-4>] [dry-run]',
+    'Uso: npm run -w cms redirects:import <arquivo.csv> [tenant=<slug>] [wave=<1-4>] [dry-run]',
   )
   process.exit(1)
 }
@@ -32,7 +32,7 @@ if (wave && !['1', '2', '3', '4'].includes(wave)) {
   process.exit(1)
 }
 
-// Relative paths are resolved from where the command was typed (pnpm runs it inside apps/cms).
+// Relative paths are resolved from where the command was typed (npm runs it inside apps/cms).
 const csvPath = path.resolve(process.env.INIT_CWD ?? process.cwd(), file)
 const { rows, errors: parseErrors } = parseRedirectCsv(await readFile(csvPath, 'utf8'))
 

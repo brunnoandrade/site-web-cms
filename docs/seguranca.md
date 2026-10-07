@@ -6,7 +6,7 @@ Revisão estática (white-box) feita em 2026-10-05/06. Os itens marcados como **
 
 | Achado | Correção |
 | --- | --- |
-| Next 16.3.3 na faixa vulnerável a RCE em `next/og` (`ImageResponse`); `undici`, `sharp`, `dompurify`, `source-map-js` vulneráveis | Next 16.3.8 e `overrides` em `pnpm-workspace.yaml`. Restam `braces` (sem correção, dependência de build do `next-sitemap`) e `esbuild` (dev) |
+| Next 16.3.3 na faixa vulnerável a RCE em `next/og` (`ImageResponse`); `undici`, `sharp`, `dompurify`, `source-map-js` vulneráveis | Next 16.3.8 e `overrides` no `package.json` raiz. Restam `braces` (sem correção, dependência de build do `next-sitemap`) e `esbuild` (dev) |
 | `PREVIEW_SECRET` aparecia no URL de preview, visível a qualquer editor: um editor do tenant A abria rascunhos do tenant B | O URL leva `previewToken`, HMAC de 30 min preso a host + path (`packages/routes/src/previewToken.ts`). O segredo nunca sai do servidor |
 | Open redirect no preview (`/\evil.com`) | `isSafeRelativePath` rejeita barra invertida e caracteres de controle |
 | Login local ligado quando `AUTH_LOCAL_ENABLED` está vazio | Em produção, vazio = desligado |
@@ -32,7 +32,7 @@ Revisão estática (white-box) feita em 2026-10-05/06. Os itens marcados como **
 - **CSP completa**: não foi aplicada (GTM, GA4 e o admin do Payload exigem nonces). Fazer junto com o banner de consentimento.
 - **`X-Forwarded-Host`**: o proxy do site confia nele. O CDN/ingress precisa sobrescrevê-lo, e o app não deve ficar exposto direto.
 - **`tenants` com leitura pública**: lista todos os domínios, inclusive de campanhas não publicadas. Necessário para o site resolver o host; avaliar um endpoint que devolva só o tenant do host consultado.
-- **Dependências sem correção**: `pnpm audit --prod` ainda lista `braces` (sem versão corrigida, vem do `next-sitemap`, só em build) e `esbuild` (dev, via `drizzle-kit`). Reavaliar a cada atualização do Payload e do `next-sitemap`; rodar `pnpm audit` no CI.
+- **Dependências sem correção**: `npm audit --omit=dev` ainda lista `braces` (sem versão corrigida, vem do `next-sitemap`, só em build) e `esbuild` (dev, via `drizzle-kit`). Reavaliar a cada atualização do Payload e do `next-sitemap`; rodar `pnpm audit` no CI.
 - **CSRF "same-site"**: o cookie SSO é aceito quando `Sec-Fetch-Site` é `same-site`. Se o CMS e os sites ficarem em subdomínios do mesmo domínio, um subdomínio comprometido ou com conteúdo de terceiros atingiria o admin sem `Origin`. Manter o CMS em um domínio próprio, fora dos domínios dos sites.
 - **Revalidação do SSO em várias instâncias**: ver a ressalva sobre rotação de refresh token na seção de teste ao vivo. Se o RH-SSO de PRD rotacionar refresh tokens, mover o controle para o banco (lock por usuário).
 - **Ambiente local**: Postgres, MinIO e Keycloak escutam em `0.0.0.0` com credenciais padrão. Não reutilizar esses arquivos em DEV/HML/PRD.
