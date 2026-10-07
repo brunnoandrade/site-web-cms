@@ -1,3 +1,4 @@
+import type { Post } from '@digio/payload-types'
 import type { Metadata } from 'next'
 
 import { pagePath } from '@digio/routes'
@@ -10,7 +11,9 @@ import { RenderHero } from '@/heros/RenderHero'
 import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
 import { generateMeta } from '@/utilities/generateMeta'
-import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
+import { getArchivePosts, pickedPosts } from '@/blocks/ArchiveBlock/data'
+import { LivePreviewPage } from '@/components/LivePreviewPage'
 
 // Pages are rendered on the first request and cached per tenant (ISR), then refreshed by the
 // CMS revalidation webhook. Nothing is prerendered at build time: the build has no CMS access.
@@ -41,12 +44,28 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const { hero, layout } = page
 
+  if (draft) {
+    const archivePosts: Record<string, Post[]> = {}
+    await Promise.all(
+      layout.map(async (block) => {
+        if (block.blockType !== 'archive' || !block.id) return
+        archivePosts[block.id] = await getArchivePosts({ ...block, tenant: tenant.slug }).catch(() =>
+          pickedPosts(block.selectedDocs),
+        )
+      }),
+    )
+
+    return (
+      <article>
+        <LivePreviewPage initialData={page} tenant={tenant.slug} archivePosts={archivePosts} />
+      </article>
+    )
+  }
+
   return (
     <article>
-      {draft && <LivePreviewListener />}
-
       <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} tenant={tenant.slug} />
+      <RenderBlocks blocks={layout} tenant={tenant.slug} archive={ArchiveBlock} />
     </article>
   )
 }

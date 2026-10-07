@@ -4,7 +4,6 @@ import { Section } from '@/components/Section'
 
 import type { Page } from '@digio/payload-types'
 
-import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { BannerSectionBlock } from '@/blocks/BannerSection/Component'
 import { CardsBlock } from '@/blocks/Cards/Component'
 import { FaqBlock } from '@/blocks/Faq/Component'
@@ -17,7 +16,6 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 
 const blockComponents = {
-  archive: ArchiveBlock,
   bannerSection: BannerSectionBlock,
   cards: CardsBlock,
   faq: FaqBlock,
@@ -34,8 +32,14 @@ export const RenderBlocks: React.FC<{
   blocks: Page['layout'][0][]
   /** Tenant slug: blocks that query the CMS (e.g. archive) are scoped to it. */
   tenant: string
+  /**
+   * The archive block fetches its posts, which only a server component can do. The public page
+   * passes the server one; the live preview (client) passes a view fed with prefetched posts.
+   */
+  archive: React.ComponentType<any>
 }> = (props) => {
-  const { blocks, tenant } = props
+  const { blocks, tenant, archive } = props
+  const components = { ...blockComponents, archive }
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
@@ -45,12 +49,11 @@ export const RenderBlocks: React.FC<{
         {blocks.map((block, index) => {
           const { blockType } = block
 
-          if (blockType && blockType in blockComponents) {
-            const Block = blockComponents[blockType]
+          if (blockType && blockType in components) {
+            const Block = components[blockType]
 
             if (Block) {
               const rendered = (
-                // @ts-expect-error there may be some mismatch between the expected types here
                 <Block {...block} disableInnerContainer tenant={tenant} />
               )
               // Blocks with a "theme" field render their own full-width Section; the others get
