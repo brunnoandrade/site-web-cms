@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import { createPreviewToken, PREVIEW_TOKEN_TTL_SECONDS, verifyPreviewToken } from './previewToken'
+import {
+  createPreviewToken,
+  PREVIEW_TOKEN_TTL_SECONDS,
+  PREVIEW_TOKEN_WINDOW_SECONDS,
+  verifyPreviewToken,
+} from './previewToken'
 
 const secret = 'test-secret'
 const target = { host: 'www.digio.com.br', path: '/blog/' }
@@ -20,9 +25,24 @@ describe('preview token', () => {
     ).toBe(false)
   })
 
+  it('is stable within a window, so the live preview URL does not change on every edit', () => {
+    const aligned =
+      Math.ceil(now / (PREVIEW_TOKEN_WINDOW_SECONDS * 1000)) * PREVIEW_TOKEN_WINDOW_SECONDS * 1000
+    expect(createPreviewToken(secret, target, aligned)).toBe(
+      createPreviewToken(secret, target, aligned + 5000),
+    )
+  })
+
+  it('never lives less than the TTL', () => {
+    const token = createPreviewToken(secret, target, now)
+    expect(
+      verifyPreviewToken(secret, token, target, now + (PREVIEW_TOKEN_TTL_SECONDS - 1) * 1000),
+    ).toBe(true)
+  })
+
   it('rejects an expired token', () => {
     const token = createPreviewToken(secret, target, now)
-    const later = now + (PREVIEW_TOKEN_TTL_SECONDS + 1) * 1000
+    const later = now + (PREVIEW_TOKEN_TTL_SECONDS + PREVIEW_TOKEN_WINDOW_SECONDS + 1) * 1000
     expect(verifyPreviewToken(secret, token, target, later)).toBe(false)
   })
 

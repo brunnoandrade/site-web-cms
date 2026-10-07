@@ -11,6 +11,14 @@ import { createHmac, timingSafeEqual } from 'node:crypto'
 
 export const PREVIEW_TOKEN_TTL_SECONDS = 30 * 60
 
+/**
+ * Expiry is rounded up to a window boundary, so the same host and path get the same token
+ * throughout the window. The admin rebuilds the live preview URL on every edit; a token that
+ * changed each second changed the iframe `src` and reloaded the preview on every keystroke.
+ * A token therefore lives between TTL and TTL + window.
+ */
+export const PREVIEW_TOKEN_WINDOW_SECONDS = 60 * 60
+
 const sign = (secret: string, host: string, path: string, exp: number): string =>
   createHmac('sha256', secret).update(`preview\n${host}\n${path}\n${exp}`).digest('base64url')
 
@@ -20,7 +28,8 @@ export const createPreviewToken = (
   { host, path }: { host: string; path: string },
   now = Date.now(),
 ): string => {
-  const exp = Math.floor(now / 1000) + PREVIEW_TOKEN_TTL_SECONDS
+  const window = PREVIEW_TOKEN_WINDOW_SECONDS
+  const exp = (Math.floor((now / 1000 + PREVIEW_TOKEN_TTL_SECONDS) / window) + 1) * window
   return `${exp}.${sign(secret, host.toLowerCase(), path, exp)}`
 }
 
