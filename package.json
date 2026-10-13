@@ -27,7 +27,7 @@
     "vitest": "4.0.18"
   },
   "engines": {
-    "node": ">=20.9.0",
+    "node": ">=22.0.0",
     "npm": ">=10"
   },
   "packageManager": "npm@11.19.0",

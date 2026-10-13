@@ -4,6 +4,9 @@
   "private": true,
   "description": "Site V2 Digio: Payload CMS (admin e API)",
   "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "blog:migrate": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/migrate-wordpress.ts",
     "bootstrap:dev": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/bootstrap-dev.ts",

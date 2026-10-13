@@ -4,6 +4,9 @@
   "private": true,
   "description": "Site V2 Digio: site público (Next.js), lê o conteúdo do CMS pela API REST",
   "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --port 3000",

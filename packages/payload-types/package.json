@@ -4,6 +4,9 @@
   "private": true,
   "description": "Tipos gerados pelo Payload (apps/cms), compartilhados com o site (apps/web). Não editar à mão: rode `npm run generate:types`.",
   "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "types": "./src/payload-types.ts",
   "exports": {
     ".": "./src/payload-types.ts"

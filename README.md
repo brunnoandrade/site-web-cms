@@ -29,7 +29,7 @@ navegador ──► web (Next.js) ──REST──► cms (Payload) ──► Po
 
 ## Requisitos
 
-- Node.js 20.9+ (testado com 24)
+- Node.js 22+ (versão fixada em `.nvmrc`: 24; rode `nvm use`). O `engine-strict` faz o `npm install` falhar em Node antigo.
 - npm 10+ (vem com o Node)
 - Docker (ou Podman) com compose
 
