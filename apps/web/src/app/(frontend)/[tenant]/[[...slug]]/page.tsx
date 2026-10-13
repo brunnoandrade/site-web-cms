@@ -13,6 +13,7 @@ import { requireTenant } from '@/lib/tenant'
 import { generateMeta } from '@/utilities/generateMeta'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { getArchivePosts, pickedPosts } from '@/blocks/ArchiveBlock/data'
+import { SiteChrome } from '@/components/SiteChrome'
 import { LivePreviewPage } from '@/components/LivePreviewPage'
 
 // Pages are rendered on the first request and cached per tenant (ISR), then refreshed by the
@@ -42,7 +43,11 @@ export default async function Page({ params: paramsPromise }: Args) {
   // Redirects are answered earlier, by the proxy (src/proxy.ts).
   if (!page) notFound()
 
-  const { hero, layout } = page
+  const { hero, layout, template } = page
+  const bare = template === 'landing'
+  // The dark hero pulls itself up under the fixed header (-mt-24); without a header it would be
+  // cut off at the top, so a bare page gives it the space back.
+  const heroOffset = bare && hero?.type === 'brand' ? 'pt-24' : undefined
 
   if (draft) {
     const archivePosts: Record<string, Post[]> = {}
@@ -56,17 +61,21 @@ export default async function Page({ params: paramsPromise }: Args) {
     )
 
     return (
-      <article>
-        <LivePreviewPage initialData={page} tenant={tenant.slug} archivePosts={archivePosts} />
-      </article>
+      <SiteChrome tenant={tenant.slug} bare={bare}>
+        <article className={heroOffset}>
+          <LivePreviewPage initialData={page} tenant={tenant.slug} archivePosts={archivePosts} />
+        </article>
+      </SiteChrome>
     )
   }
 
   return (
-    <article>
-      <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} tenant={tenant.slug} archive={ArchiveBlock} />
-    </article>
+    <SiteChrome tenant={tenant.slug} bare={bare}>
+      <article className={heroOffset}>
+        {template !== 'noHero' && <RenderHero {...hero} />}
+        <RenderBlocks blocks={layout} tenant={tenant.slug} archive={ArchiveBlock} />
+      </article>
+    </SiteChrome>
   )
 }
 

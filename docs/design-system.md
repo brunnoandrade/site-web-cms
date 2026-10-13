@@ -23,6 +23,18 @@ Botões (`components/ui/buttonVariants.ts`): `default` (marinho), `inverse` (bra
 
 Todo bloco com o campo **Fundo da seção** (`theme`) ocupa a largura toda e escolhe entre: branco, lilás claro, azul-marinho e azul. Componente: `components/Section` (`Section` e `SectionHeading`). Em fundo escuro, os botões e links do bloco trocam sozinhos para as variações claras.
 
+## Template da página
+
+Campo `template` em `pages` (barra lateral do admin). Menu e rodapé vêm do layout do site, não da página.
+
+| Template | Menu e rodapé | Hero |
+|---|---|---|
+| Padrão (`default`) | sim | opcional (aba Hero; tipo "None" não renderiza nada) |
+| Sem hero (`noHero`) | sim | aba escondida; o hook `clearHeroWithoutHero` zera o hero ao salvar |
+| Landing (`landing`) | não, só o conteúdo | opcional |
+
+Blog, central de ajuda e busca ficam em `app/(frontend)/[tenant]/(site)/`, cujo layout sempre aplica `SiteChrome`; a rota `[[...slug]]` e o 404 aplicam o `SiteChrome` conforme o template. No live preview, trocar o template esconde o hero na hora, mas menu e rodapé só mudam depois de salvar e recarregar.
+
 ## Blocos
 
 | Bloco | Variações e uso | Referência no Uber Conta |

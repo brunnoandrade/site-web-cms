@@ -17,6 +17,7 @@ import { hero } from '@/heros/config'
 import { createRedirectOnUrlChange, rememberPublishedPath } from '../Redirects/hooks'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { clearHeroWithoutHero } from './hooks/clearHeroWithoutHero'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 
 import {
@@ -79,11 +80,37 @@ export const Pages: CollectionConfig<'pages'> = {
       required: true,
     },
     {
+      name: 'template',
+      type: 'select',
+      defaultValue: 'default',
+      label: t('Template da página', 'Page template'),
+      admin: {
+        position: 'sidebar',
+        description: t(
+          'Define a estrutura da página: com ou sem hero, com ou sem menu e rodapé.',
+          'Defines the page structure: with or without hero, with or without header and footer.',
+        ),
+      },
+      options: [
+        {
+          label: t('Padrão (menu, hero e rodapé)', 'Default (header, hero and footer)'),
+          value: 'default',
+        },
+        { label: t('Sem hero (menu e rodapé)', 'No hero (header and footer)'), value: 'noHero' },
+        {
+          label: t('Landing (sem menu e rodapé)', 'Landing (no header or footer)'),
+          value: 'landing',
+        },
+      ],
+    },
+    {
       type: 'tabs',
       tabs: [
         {
           fields: [hero],
           label: 'Hero',
+          // A page without hero has nothing to configure here.
+          admin: { condition: (data) => data?.template !== 'noHero' },
         },
         {
           fields: [
@@ -150,7 +177,7 @@ export const Pages: CollectionConfig<'pages'> = {
   ],
   hooks: {
     afterChange: [revalidatePage, createRedirectOnUrlChange('pages')],
-    beforeChange: [populatePublishedAt, rememberPublishedPath('pages')],
+    beforeChange: [clearHeroWithoutHero, populatePublishedAt, rememberPublishedPath('pages')],
     afterDelete: [revalidateDelete],
   },
   versions: {

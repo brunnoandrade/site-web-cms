@@ -169,6 +169,10 @@ export interface Page {
   id: number;
   tenant?: (number | null) | Tenant;
   title: string;
+  /**
+   * Defines the page structure: with or without hero, with or without header and footer.
+   */
+  template?: ('default' | 'noHero' | 'landing') | null;
   hero: {
     type: 'none' | 'brand' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
@@ -1480,6 +1484,7 @@ export interface PayloadMigration {
 export interface PagesSelect<T extends boolean = true> {
   tenant?: T;
   title?: T;
+  template?: T;
   hero?:
     | T
     | {

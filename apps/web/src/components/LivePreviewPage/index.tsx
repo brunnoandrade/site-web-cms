@@ -47,7 +47,7 @@ export const LivePreviewPage: React.FC<Props> = ({ initialData, tenant, archiveP
 
   return (
     <>
-      <RenderHero {...data.hero} />
+      {data.template !== 'noHero' && <RenderHero {...data.hero} />}
       <RenderBlocks blocks={data.layout} tenant={tenant} archive={Archive} />
     </>
   )

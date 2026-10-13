@@ -8,6 +8,7 @@ import type { Tenant, User } from '@digio/payload-types'
 import { seedUberConta } from './uber-conta'
 import { seedCatalog } from './catalog'
 import { home } from './home'
+import { landing } from './landing'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
 import { imageHero1 } from './image-hero-1'
@@ -283,6 +284,14 @@ export const seed = async ({
     data: withTenant(
       home({ heroImage: imageHomeDoc, cardImages: [image1Doc, image2Doc, image3Doc], faqs }),
     ),
+  })
+
+  await payload.create({
+    collection: 'pages',
+    depth: 0,
+    req,
+    context,
+    data: withTenant(landing({ heroImage: imageHomeDoc })),
   })
 
   payload.logger.info(`Seeded tenant "${tenant.slug}" successfully!`)
