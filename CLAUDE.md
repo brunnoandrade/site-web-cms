@@ -5,7 +5,7 @@ Contexto para o Claude Code. Leia este arquivo e a pasta `docs/` antes de qualqu
 ## O que é
 Novo site institucional da Digio (substitui o site atual hospedado pela Orbital).
 Escopo desta entrega: **F0 (fundação) + F1 (evolução do site)**, não transacional.
-Detalhes em `docs/escopo.md`; virada em ondas em `docs/virada.md`; decisões e aderência ao SoAD em `docs/gaps-soad.md`; revisão de segurança, correções e pendências em `docs/seguranca.md`.
+Detalhes em `docs/escopo.md`; virada em ondas em `docs/virada.md`; decisões e aderência ao SoAD em `docs/gaps-soad.md`; revisão de segurança, correções e pendências em `docs/seguranca.md`; propriedade Uber Conta em `docs/uber-conta.md`.
 
 ## Stack
 - **Monorepo npm (workspaces) com dois projetos separados**, cada um com seu Dockerfile:

@@ -74,6 +74,20 @@ export const Tenants: CollectionConfig = {
       },
     },
     {
+      // Visual identity of the property. Presets live in apps/web/src/lib/themes.ts.
+      name: 'themePreset',
+      label: 'Tema visual',
+      type: 'select',
+      defaultValue: 'digio',
+      options: [
+        { label: 'Digio (marinho e turquesa)', value: 'digio' },
+        { label: 'Uber Conta (preto e azul)', value: 'uber-conta' },
+      ],
+      admin: {
+        description: 'Paleta aplicada a todo o site da propriedade. Novos temas exigem um deploy.',
+      },
+    },
+    {
       name: 'domains',
       label: 'Domínios',
       type: 'array',

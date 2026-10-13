@@ -35,6 +35,13 @@ const tenants = [
     siteUrl: 'http://campanha.localhost:3000',
     domains: [{ domain: 'campanha.localhost' }],
   },
+  {
+    name: 'Uber Conta',
+    slug: 'uber-conta',
+    themePreset: 'uber-conta',
+    siteUrl: 'http://uberconta.localhost:3000',
+    domains: [{ domain: 'uberconta.localhost' }],
+  },
 ]
 
 const payload = await getPayload({ config })

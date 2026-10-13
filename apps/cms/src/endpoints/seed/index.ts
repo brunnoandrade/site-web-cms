@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url'
 
 import type { Tenant, User } from '@digio/payload-types'
 
+import { seedUberConta } from './uber-conta'
 import { seedCampaign } from './campaign'
 import { seedCatalog } from './catalog'
 import { contactForm as contactFormData } from './contact-form'
@@ -138,6 +139,12 @@ export const seed = async ({
 
   // The main property (digio) gets the full demo: blog, catalog, help center and components page.
   // Any other property is a campaign micro-site with its own, smaller content.
+  if (tenant.slug === 'uber-conta') {
+    await seedUberConta({ payload, req, tenant, images: [imageHomeDoc, image1Doc, image2Doc], context })
+    payload.logger.info(`Seeded tenant "${tenant.slug}" successfully!`)
+    return
+  }
+
   if (tenant.slug !== MAIN_TENANT) {
     await seedCampaign({
       payload,

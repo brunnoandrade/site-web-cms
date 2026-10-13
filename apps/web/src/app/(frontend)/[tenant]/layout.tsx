@@ -5,6 +5,7 @@ import React from 'react'
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
+import { themeStyle } from '@/lib/themes'
 import { requireTenant } from '@/lib/tenant'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 
@@ -24,7 +25,7 @@ export default async function TenantLayout({ children, params }: Args) {
   const { isEnabled } = await draftMode()
 
   return (
-    <>
+    <div style={themeStyle(tenant.themePreset)}>
       <AdminBar
         adminBarProps={{
           preview: isEnabled,
@@ -44,7 +45,7 @@ export default async function TenantLayout({ children, params }: Args) {
         {children}
       </main>
       <Footer tenant={tenant.slug} />
-    </>
+    </div>
   )
 }
 

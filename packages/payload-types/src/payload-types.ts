@@ -264,6 +264,10 @@ export interface Tenant {
    */
   siteUrl: string;
   /**
+   * Paleta aplicada a todo o site da propriedade. Novos temas exigem um deploy.
+   */
+  themePreset?: ('digio' | 'uber-conta') | null;
+  /**
    * Hosts que respondem por esta propriedade (ex.: www.digio.com.br). Sem protocolo, porta ou caminho. Um domínio só pode pertencer a uma propriedade.
    */
   domains?:
@@ -2338,6 +2342,7 @@ export interface TenantsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   siteUrl?: T;
+  themePreset?: T;
   domains?:
     | T
     | {
