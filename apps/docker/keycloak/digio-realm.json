@@ -39,7 +39,7 @@
           ]
         },
         {
-          "name": "campanha-exemplo",
+          "name": "uber-conta",
           "subGroups": [
             {
               "name": "admin"
@@ -144,7 +144,7 @@
     {
       "username": "sso.multi",
       "email": "sso.multi@digio.local",
-      "firstName": "SEO Digio e editor Campanha",
+      "firstName": "SEO Digio e editor Uber Conta",
       "lastName": "Teste",
       "enabled": true,
       "emailVerified": true,
@@ -155,7 +155,7 @@
           "temporary": false
         }
       ],
-      "groups": ["/tenants/digio/seo", "/tenants/campanha-exemplo/editor"],
+      "groups": ["/tenants/digio/seo", "/tenants/uber-conta/editor"],
       "realmRoles": ["default-roles-digio"],
       "requiredActions": []
     },

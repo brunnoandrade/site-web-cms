@@ -4,7 +4,7 @@ import { anyone, getTenantIDsWithRoles, isSuperAdmin, superAdminOnly } from '../
 import { normalizeDomains, validateUniqueDomains } from './hooks/domains'
 
 /**
- * A tenant is one web property (institutional site, campaign, landing page) with its own
+ * A tenant is one web property (institutional site, landing page) with its own
  * domains, content, users and media. New properties are created here, without a deploy.
  */
 export const Tenants: CollectionConfig = {

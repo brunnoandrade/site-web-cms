@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { hasAnyAccess, mapClaimsToAccess } from './claims'
 
-const known = new Set(['digio', 'campanha-exemplo'])
+const known = new Set(['digio', 'uber-conta'])
 const map = (claims: Record<string, unknown>) =>
   mapClaimsToAccess(
     { sub: 'x', ...claims },
@@ -12,11 +12,11 @@ const map = (claims: Record<string, unknown>) =>
 describe('mapClaimsToAccess', () => {
   it('maps tenant groups to per-tenant roles', () => {
     const access = map({
-      groups: ['/tenants/digio/editor', '/tenants/digio/seo', '/tenants/campanha-exemplo/admin'],
+      groups: ['/tenants/digio/editor', '/tenants/digio/seo', '/tenants/uber-conta/admin'],
     })
     expect(Object.fromEntries(access.tenants)).toEqual({
       digio: ['editor', 'seo'],
-      'campanha-exemplo': ['admin'],
+      'uber-conta': ['admin'],
     })
     expect(access.superAdmin).toBe(false)
   })

@@ -8,7 +8,7 @@ describe('normalizeHost', () => {
   })
 
   it('keeps only the first host of a forwarded list', () => {
-    expect(normalizeHost('campanha.localhost:3000, proxy.internal')).toBe('campanha.localhost')
+    expect(normalizeHost('uberconta.localhost:3000, proxy.internal')).toBe('uberconta.localhost')
   })
 })
 

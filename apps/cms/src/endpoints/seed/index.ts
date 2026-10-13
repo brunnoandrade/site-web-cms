@@ -6,7 +6,6 @@ import { fileURLToPath } from 'url'
 import type { Tenant, User } from '@digio/payload-types'
 
 import { seedUberConta } from './uber-conta'
-import { seedCampaign } from './campaign'
 import { seedCatalog } from './catalog'
 import { home } from './home'
 import { image1 } from './image-1'
@@ -48,7 +47,7 @@ const categories = [
   { title: 'Segurança', slug: 'seguranca' },
 ]
 
-/** Property with the full demo content; the others get the campaign content. */
+/** Property with the full demo content (blog, catalog, help center); Uber Conta has its own. */
 const MAIN_TENANT = 'digio'
 
 // Skips the website revalidation webhook: the website may not be running while seeding.
@@ -85,7 +84,7 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding demo author...`)
 
-  // Local account kept for the SSO collision test (docker/keycloak: sso.colisao).
+  // Local account kept for the SSO collision test (apps/docker/keycloak: sso.colisao).
   await upsertDemoUser(payload, req, tenant)
 
   const demoAuthor = await payload.create({
@@ -134,7 +133,6 @@ export const seed = async ({
   })
 
   // The main property (digio) gets the full demo: blog, catalog, help center and components page.
-  // Any other property is a campaign micro-site with its own, smaller content.
   if (tenant.slug === 'uber-conta') {
     await seedUberConta({ payload, req, tenant, images: [imageHomeDoc, image1Doc, image2Doc], context })
     payload.logger.info(`Seeded tenant "${tenant.slug}" successfully!`)
@@ -142,15 +140,7 @@ export const seed = async ({
   }
 
   if (tenant.slug !== MAIN_TENANT) {
-    await seedCampaign({
-      payload,
-      req,
-      tenant,
-      images: [imageHomeDoc, image1Doc, image2Doc],
-      context,
-    })
-    payload.logger.info(`Seeded tenant "${tenant.slug}" successfully!`)
-    return
+    throw new Error(`No seed content for tenant "${tenant.slug}"`)
   }
 
   const categoryDocs = await Promise.all(

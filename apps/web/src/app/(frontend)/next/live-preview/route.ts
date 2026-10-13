@@ -4,7 +4,7 @@ import { getCMSURL } from '@/lib/cms'
 
 /**
  * Same-origin relay for the live preview. The browser cannot call the CMS directly: each
- * tenant's site has its own origin (e.g. campanha.localhost) and the CMS allows CORS only for
+ * tenant's site has its own origin (e.g. uberconta.localhost) and the CMS allows CORS only for
  * a fixed list of origins, so every tenant but the first one was blocked. The relay asks the
  * CMS (server to server, with the preview service key) to merge the unsaved form data into
  * the page, which is what `useLivePreview` needs. It reads only, and only in draft mode.

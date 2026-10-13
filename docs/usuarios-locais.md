@@ -17,13 +17,13 @@ Para trocar a senha: Admin > Usuários > sua conta > "Mudar senha".
 
 ## Login SSO (Keycloak local)
 
-Botão **"Entrar com SSO corporativo"** na tela de login. Todos os usuários têm a senha `Senha-123` (fixture de teste, definida em [docker/keycloak/digio-realm.json](../docker/keycloak/digio-realm.json)).
+Botão **"Entrar com SSO corporativo"** na tela de login. Todos os usuários têm a senha `Senha-123` (fixture de teste, definida em [apps/docker/keycloak/digio-realm.json](../apps/docker/keycloak/digio-realm.json)).
 
 | Usuário | Resultado esperado |
 |---|---|
 | `sso.admin` | entra como super admin (papel `cms-super-admin`) |
 | `sso.editor` | entra como editor da Digio |
-| `sso.multi` | entra como `seo` na Digio e editor na Campanha Exemplo |
+| `sso.multi` | entra como `seo` na Digio e editor na Uber Conta |
 | `sso.semacesso` | recusado: não tem grupos |
 | `sso.colisao` | recusado: o e-mail pertence a uma conta local |
 
@@ -50,7 +50,7 @@ Console de administração do Keycloak: http://localhost:8080/admin (`admin` / `
 | Serviço | Endereço | Credenciais |
 |---|---|---|
 | Site Digio | http://localhost:3000 | – |
-| Site Campanha Exemplo | http://campanha.localhost:3000 (`/regulamento/`, `/contato/`) | – |
+| Site Uber Conta | http://uberconta.localhost:3000 | – |
 | Console do MinIO | http://localhost:9001 | `S3_ACCESS_KEY_ID` / `S3_SECRET_ACCESS_KEY` do `.env` da raiz (padrão `minioadmin` / `minioadmin`) |
 | Postgres | `localhost:5432` | `POSTGRES_USER` / `POSTGRES_PASSWORD` do `.env` da raiz (padrão `digio` / `digio`) |
 
@@ -63,4 +63,4 @@ O `bootstrap:dev` cria conteúdo diferente em cada propriedade:
 | Propriedade | Conteúdo |
 |---|---|
 | Digio (`digio`) | demo completo: home, componentes, 3 posts, produtos, taxas, FAQs e central de ajuda |
-| Campanha Exemplo (`campanha-exemplo`) | micro-site "Indique e ganhe": home, regulamento, 3 FAQs, header e footer. Sem blog e sem central de ajuda. Os textos são fictícios e não trazem valores nem datas |
+| Uber Conta (`uber-conta`) | home, FAQs, header e footer, com os textos do site atual e imagens provisórias. Sem blog e sem central de ajuda |

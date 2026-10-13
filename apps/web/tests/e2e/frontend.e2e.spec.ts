@@ -6,7 +6,7 @@ import { expect, test } from '@playwright/test'
  */
 
 const DIGIO = 'http://localhost:3000'
-const CAMPANHA = 'http://campanha.localhost:3000'
+const UBER_CONTA = 'http://uberconta.localhost:3000'
 
 test.describe('website', () => {
   test('home of each tenant', async ({ page }) => {
@@ -14,8 +14,8 @@ test.describe('website', () => {
     await expect(page).toHaveTitle(/Digio/)
     await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR')
 
-    await page.goto(`${CAMPANHA}/`)
-    await expect(page).toHaveTitle(/Campanha Exemplo/)
+    await page.goto(`${UBER_CONTA}/`)
+    await expect(page).toHaveTitle(/Uber Conta/)
   })
 
   test('pages render the blocks', async ({ page }) => {
@@ -40,8 +40,8 @@ test.describe('website', () => {
   })
 
   test('sitemaps and robots.txt per tenant', async ({ request }) => {
-    const robots = await (await request.get(`${CAMPANHA}/robots.txt`)).text()
-    expect(robots).toContain(`Sitemap: ${CAMPANHA}/pages-sitemap.xml`)
+    const robots = await (await request.get(`${UBER_CONTA}/robots.txt`)).text()
+    expect(robots).toContain(`Sitemap: ${UBER_CONTA}/pages-sitemap.xml`)
     expect(await (await request.get(`${DIGIO}/pages-sitemap.xml`)).text()).toContain(
       `${DIGIO}/componentes/`,
     )

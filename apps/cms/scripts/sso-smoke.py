@@ -138,7 +138,7 @@ b = Browser()
 sso_login(b, "sso.multi")
 user = b.me() or {}
 rows = sorted((r["tenant"]["slug"] if isinstance(r["tenant"], dict) else r["tenant"], tuple(r["roles"])) for r in user.get("tenants", []))
-check("papéis em duas propriedades", rows == [("campanha-exemplo", ("editor",)), ("digio", ("seo",))], str(rows))
+check("papéis em duas propriedades", rows == [("digio", ("seo",)), ("uber-conta", ("editor",))], str(rows))
 
 print("Segurança do callback")
 b = Browser()

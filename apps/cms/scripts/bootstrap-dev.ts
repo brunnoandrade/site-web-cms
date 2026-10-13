@@ -30,12 +30,6 @@ const tenants = [
   },
   {
     // *.localhost resolves to 127.0.0.1 in browsers and curl: no /etc/hosts change needed.
-    name: 'Campanha Exemplo',
-    slug: 'campanha-exemplo',
-    siteUrl: 'http://campanha.localhost:3000',
-    domains: [{ domain: 'campanha.localhost' }],
-  },
-  {
     name: 'Uber Conta',
     slug: 'uber-conta',
     themePreset: 'uber-conta',

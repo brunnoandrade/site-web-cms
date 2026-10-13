@@ -25,7 +25,7 @@ navegador ──► web (Next.js) ──REST──► cms (Payload) ──► Po
 - **Se o CMS cair:** o site continua servindo as páginas e os dados em cache.
 - **Build:** o site não precisa do CMS para gerar o build. As páginas são geradas no primeiro acesso (ISR).
 - **Preview:** o admin abre `/next/preview/` no site, que ativa o draft mode. Os rascunhos são lidos com a API key de um usuário de serviço (`CMS_API_KEY`).
-- **Live preview:** o admin mostra o site num iframe e, a cada salvamento automático do rascunho, o site refaz a página (`RefreshRouteOnSave`). Só funciona se o iframe entrar em draft mode, e para isso o cookie `__prerender_bypass` precisa chegar ao site. Em desenvolvimento o Next envia esse cookie como `SameSite=Lax`, e o navegador o descarta quando o admin (`localhost:3001`) e o site da propriedade (`campanha.localhost:3000`) são sites diferentes. Por isso a rota [apps/web/src/app/(frontend)/next/preview/route.ts](<apps/web/src/app/(frontend)/next/preview/route.ts>) reenvia o cookie como `SameSite=None; Secure` fora de produção (em produção o Next já faz isso). Se o preview continuar sem atualizar: abra o admin exatamente em `http://localhost:3001` (é a origem que o `serverURL` aceita), use um navegador que aceite cookies de terceiros em `*.localhost` (Safari não aceita `Secure` em http) e confira no console se aparece algum erro. O botão **Reverter para publicado** do admin só zera o formulário e não avisa o iframe; por isso [apps/cms/src/components/LivePreviewRevertSync](apps/cms/src/components/LivePreviewRevertSync/index.tsx), ligado em `pages` e `posts`, dispara o evento de atualização quando as versões não publicadas somem. Ao criar outra coleção com `livePreview`, adicione `admin.components.edit.beforeDocumentControls: ['@/components/LivePreviewRevertSync#LivePreviewRevertSync']` e rode `npm run -w cms generate:importmap`.
+- **Live preview:** o admin mostra o site num iframe e, a cada salvamento automático do rascunho, o site refaz a página (`RefreshRouteOnSave`). Só funciona se o iframe entrar em draft mode, e para isso o cookie `__prerender_bypass` precisa chegar ao site. Em desenvolvimento o Next envia esse cookie como `SameSite=Lax`, e o navegador o descarta quando o admin (`localhost:3001`) e o site da propriedade (`uberconta.localhost:3000`) são sites diferentes. Por isso a rota [apps/web/src/app/(frontend)/next/preview/route.ts](<apps/web/src/app/(frontend)/next/preview/route.ts>) reenvia o cookie como `SameSite=None; Secure` fora de produção (em produção o Next já faz isso). Se o preview continuar sem atualizar: abra o admin exatamente em `http://localhost:3001` (é a origem que o `serverURL` aceita), use um navegador que aceite cookies de terceiros em `*.localhost` (Safari não aceita `Secure` em http) e confira no console se aparece algum erro. O botão **Reverter para publicado** do admin só zera o formulário e não avisa o iframe; por isso [apps/cms/src/components/LivePreviewRevertSync](apps/cms/src/components/LivePreviewRevertSync/index.tsx), ligado em `pages` e `posts`, dispara o evento de atualização quando as versões não publicadas somem. Ao criar outra coleção com `livePreview`, adicione `admin.components.edit.beforeDocumentControls: ['@/components/LivePreviewRevertSync#LivePreviewRevertSync']` e rode `npm run -w cms generate:importmap`.
 
 ## Requisitos
 
@@ -52,11 +52,11 @@ npm run -w cms bootstrap:dev
 O `bootstrap:dev` cria:
 
 - a propriedade **Digio**, servida em http://localhost:3000;
-- a propriedade **Campanha Exemplo**, servida em http://campanha.localhost:3000 (`*.localhost` já aponta para a sua máquina, sem mexer no `/etc/hosts`);
+- a propriedade **Uber Conta**, servida em http://uberconta.localhost:3000 (`*.localhost` já aponta para a sua máquina, sem mexer no `/etc/hosts`);
 - o seu usuário super admin e a conta de serviço do preview (`preview@digio.local`);
-- conteúdo de exemplo nas duas propriedades, **diferente em cada uma**:
+- conteúdo de exemplo nas duas propriedades, **diferente em cada uma** (a Uber Conta tem o seed em [apps/cms/src/endpoints/seed/uber-conta.ts](apps/cms/src/endpoints/seed/uber-conta.ts)):
   - **Digio**: demo completo (home, componentes, contato, blog, produtos e taxas, central de ajuda);
-  - **Campanha Exemplo**: micro-site "Indique e ganhe" (home, regulamento, contato em português, FAQs, header e footer), sem blog nem central de ajuda. Código em [apps/cms/src/endpoints/seed/campaign.ts](apps/cms/src/endpoints/seed/campaign.ts); qualquer propriedade diferente de `digio` recebe esse conteúdo.
+  - **Uber Conta**: conteúdo próprio da propriedade, ver `docs/uber-conta.md`.
 
 O `bootstrap:dev` **recria todo o conteúdo** das propriedades, inclusive apagando posts migrados do WordPress. Para ter posts reais depois dele: `npm run -w cms blog:migrate tenant=digio limit=20`.
 
@@ -115,13 +115,13 @@ Regras:
 - **Cookie SSO:** vale a mesma proteção CSRF do cookie local do Payload.
 - **Logout pelo Payload** (por exemplo, por inatividade) também revoga as sessões SSO do usuário.
 
-No desenvolvimento, o `docker compose up -d` sobe um Keycloak em http://localhost:8080 (console: `admin`/`admin`), com o realm de [docker/keycloak/digio-realm.json](docker/keycloak/digio-realm.json). Usuários de teste, todos com a senha `Senha-123`:
+No desenvolvimento, o `docker compose up -d` sobe um Keycloak em http://localhost:8080 (console: `admin`/`admin`), com o realm de [apps/docker/keycloak/digio-realm.json](apps/docker/keycloak/digio-realm.json). Usuários de teste, todos com a senha `Senha-123`:
 
 | Usuário         | Cenário                                         |
 | --------------- | ----------------------------------------------- |
 | `sso.admin`     | super admin (papel `cms-super-admin`)           |
 | `sso.editor`    | editor da Digio                                 |
-| `sso.multi`     | `seo` na Digio e editor na Campanha Exemplo     |
+| `sso.multi`     | `seo` na Digio e editor na Uber Conta            |
 | `sso.semacesso` | sem grupos: login recusado                      |
 | `sso.colisao`   | mesmo e-mail de uma conta local: login recusado |
 

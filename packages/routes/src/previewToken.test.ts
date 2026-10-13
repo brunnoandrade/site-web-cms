@@ -21,7 +21,7 @@ describe('preview token', () => {
     const token = createPreviewToken(secret, target, now)
     expect(verifyPreviewToken(secret, token, { ...target, path: '/outra/' }, now)).toBe(false)
     expect(
-      verifyPreviewToken(secret, token, { ...target, host: 'campanha.digio.com.br' }, now),
+      verifyPreviewToken(secret, token, { ...target, host: 'uberconta.digio.com.br' }, now),
     ).toBe(false)
   })
 
