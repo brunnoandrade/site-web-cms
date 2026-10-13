@@ -57,7 +57,7 @@ services:
       S3_BUCKET: ${S3_BUCKET:-digio-media}
 
   # Local identity provider standing in for the corporate RH-SSO (Red Hat build of Keycloak).
-  # Realm, client and test users: docker/keycloak/digio-realm.json (dev only, test passwords).
+  # Realm, client and test users: apps/docker/keycloak/digio-realm.json (dev only, test passwords).
   keycloak:
     image: quay.io/keycloak/keycloak:26.7.4
     restart: unless-stopped
@@ -71,7 +71,7 @@ services:
       KC_HOSTNAME: http://localhost:${KEYCLOAK_PORT:-8080}
       KC_HEALTH_ENABLED: 'true'
     volumes:
-      - ./docker/keycloak:/opt/keycloak/data/import:ro
+      - ./apps/docker/keycloak:/opt/keycloak/data/import:ro
     healthcheck:
       test:
         [
