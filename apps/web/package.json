@@ -41,7 +41,6 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
-    "@payloadcms/plugin-form-builder": "3.90.2",
     "@playwright/test": "1.58.2",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",

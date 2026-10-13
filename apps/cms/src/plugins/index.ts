@@ -1,15 +1,9 @@
-import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
 import { multiTenantPlugin } from '@payloadcms/plugin-multi-tenant'
-import {
-  ValidationError,
-  type CollectionBeforeChangeHook,
-  type CollectionBeforeValidateHook,
-  type Plugin,
-} from 'payload'
+import type { Plugin } from 'payload'
 import {
   anyone,
   getTenantIDsWithRoles,
@@ -25,7 +19,6 @@ import {
   validateRedirect,
 } from '@/collections/Redirects/hooks'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
-import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
@@ -43,43 +36,6 @@ const generateURL: GenerateURL<Post | Page> = async ({ doc, collectionConfig, re
   if (!doc?.slug) return url
   const path = await routablePath(req, collectionConfig?.slug === 'posts' ? 'posts' : 'pages', doc)
   return path ? `${url}${path}` : url
-}
-
-// Public form submissions do not send a tenant: inherit it from the submitted form.
-// (A tenant sent by the client is refused by the multi-tenant plugin before this runs.)
-const setSubmissionTenant: CollectionBeforeChangeHook = async ({ data, req }) => {
-  if (!data?.form) return data
-  const formID = typeof data.form === 'object' ? data.form.id : data.form
-  const form = await req.payload.findByID({
-    collection: 'forms',
-    id: formID,
-    depth: 0,
-    overrideAccess: true,
-    req,
-    select: { tenant: true },
-  })
-  return { ...data, tenant: typeof form.tenant === 'object' ? form.tenant?.id : form.tenant }
-}
-
-// Public endpoint: bound what one anonymous submission can store.
-const MAX_SUBMISSION_FIELDS = 50
-const MAX_SUBMISSION_VALUE_LENGTH = 10_000
-
-const limitSubmissionSize: CollectionBeforeValidateHook = ({ data, req }) => {
-  const rows = Array.isArray(data?.submissionData) ? data.submissionData : []
-  const tooLong = rows.some(
-    (row: { value?: unknown }) =>
-      typeof row?.value === 'string' && row.value.length > MAX_SUBMISSION_VALUE_LENGTH,
-  )
-  if (rows.length > MAX_SUBMISSION_FIELDS || tooLong) {
-    throw new ValidationError(
-      {
-        errors: [{ path: 'submissionData', message: 'Envio grande demais.' }],
-      },
-      req.t,
-    )
-  }
-  return data
 }
 
 type TenantScoped = keyof Config['collections']
@@ -101,8 +57,6 @@ const tenantScopedCollections: TenantScoped[] = [
   'banners',
   'payload-folders',
   'redirects',
-  'forms',
-  'form-submissions',
   'search',
 ]
 
@@ -215,71 +169,6 @@ export const plugins: Plugin[] = [
     generateTitle,
     generateURL,
   }),
-  formBuilderPlugin({
-    fields: {
-      payment: false,
-    },
-    formSubmissionOverrides: {
-      labels: {
-        singular: t('Envio de formulário', 'Form submission'),
-        plural: t('Envios de formulários', 'Form submissions'),
-      },
-      admin: { group: t('Formulários', 'Forms') },
-      access: {
-        // Visitors submit forms; only the tenant's admins and editors read submissions.
-        create: anyone,
-        read: tenantRoles(['admin', 'editor']),
-        update: () => false,
-        delete: tenantRoles(['admin']),
-      },
-      fields: ({ defaultFields }) => [
-        ...defaultFields,
-        {
-          name: 'tenant',
-          type: 'relationship',
-          relationTo: 'tenants',
-          required: true,
-          index: true,
-          admin: { position: 'sidebar', readOnly: true },
-        },
-      ],
-      hooks: {
-        beforeValidate: [limitSubmissionSize],
-        // Runs after the multi-tenant plugin's own beforeValidate hook (which refuses a tenant
-        // sent by an anonymous client): the tenant is always the one of the submitted form.
-        beforeChange: [setSubmissionTenant],
-      },
-    },
-    formOverrides: {
-      labels: { singular: t('Formulário', 'Form'), plural: t('Formulários', 'Forms') },
-      admin: { group: t('Formulários', 'Forms') },
-      access: {
-        read: anyone,
-        create: tenantRoles(['admin', 'editor']),
-        update: tenantRoles(['admin', 'editor']),
-        delete: tenantRoles(['admin', 'editor']),
-      },
-      fields: ({ defaultFields }) => {
-        return defaultFields.map((field) => {
-          if ('name' in field && field.name === 'confirmationMessage') {
-            return {
-              ...field,
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    FixedToolbarFeature(),
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                  ]
-                },
-              }),
-            }
-          }
-          return field
-        })
-      },
-    },
-  }),
   searchPlugin({
     collections: ['posts'],
     beforeSync: beforeSyncWithSearch,
@@ -300,10 +189,6 @@ export const plugins: Plugin[] = [
   multiTenantPlugin<Config>({
     collections: {
       ...Object.fromEntries(tenantScopedCollections.map((slug) => [slug, {}])),
-      // Submissions come from anonymous visitors, which the plugin's tenant field refuses to
-      // assign (it only lets a logged-in user pick their own tenants). The tenant is always
-      // taken from the submitted form instead (setSubmissionTenant), so the field is custom.
-      'form-submissions': { customTenantField: true },
       header: { isGlobal: true },
       footer: { isGlobal: true },
     },

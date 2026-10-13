@@ -44,7 +44,7 @@ Coleções:
 
 Toda coleção de conteúdo tem o campo `tenant`; slugs e origens de redirect são únicos por tenant. No site, as rotas ficam em `app/(frontend)/[tenant]/...` e o `proxy.ts` reescreve o domínio da requisição para o tenant.
 
-Blocos (~10): hero (campo da página), `cards`, `ratesTable`, `faq`, `cta`, `content` (texto rico), `mediaBlock`, `productHighlight`, `archive` (lista de posts), `bannerSection`, além de `formBlock`. Rótulos do admin em português (padrão) e inglês: `t(pt, en)` de `apps/cms/src/utilities/labels.ts`.
+Blocos (~10): hero (campo da página), `cards`, `ratesTable`, `faq`, `cta`, `content` (texto rico), `mediaBlock`, `productHighlight`, `archive` (lista de posts), `bannerSection`. Formulários (plugin form-builder, `formBlock` e envios) foram removidos por enquanto e voltam em fase posterior. Rótulos do admin em português (padrão) e inglês: `t(pt, en)` de `apps/cms/src/utilities/labels.ts`.
 
 ## Rotas (manter URLs atuais)
 - Páginas: `/[...slug]/`

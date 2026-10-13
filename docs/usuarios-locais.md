@@ -62,7 +62,5 @@ O `bootstrap:dev` cria conteúdo diferente em cada propriedade:
 
 | Propriedade | Conteúdo |
 |---|---|
-| Digio (`digio`) | demo completo: home, componentes, contato, 3 posts, produtos, taxas, FAQs e central de ajuda |
-| Campanha Exemplo (`campanha-exemplo`) | micro-site "Indique e ganhe": home, regulamento, contato (em português), 3 FAQs, header e footer. Sem blog e sem central de ajuda. Os textos são fictícios e não trazem valores nem datas |
-
-O contato da propriedade Digio ainda vem em inglês (formulário do template do Payload).
+| Digio (`digio`) | demo completo: home, componentes, 3 posts, produtos, taxas, FAQs e central de ajuda |
+| Campanha Exemplo (`campanha-exemplo`) | micro-site "Indique e ganhe": home, regulamento, 3 FAQs, header e footer. Sem blog e sem central de ajuda. Os textos são fictícios e não trazem valores nem datas |

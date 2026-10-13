@@ -2,7 +2,6 @@ import type { Payload, PayloadRequest } from 'payload'
 
 import type { Media, Tenant } from '@digio/payload-types'
 
-import { contactForm as contactFormData } from './contact-form'
 import { custom, richText } from './home'
 
 type Args = {
@@ -13,34 +12,6 @@ type Args = {
   context: Record<string, unknown>
 }
 
-const FIELD_LABELS: Record<string, string> = {
-  'full-name': 'Nome completo',
-  email: 'E-mail',
-  phone: 'Telefone',
-  message: 'Mensagem',
-}
-
-/** Contact form of the campaign: the template form translated to Portuguese. */
-const contactFormPt = {
-  ...contactFormData,
-  title: 'Formulário de contato',
-  submitButtonLabel: 'Enviar',
-  confirmationMessage: richText({ tag: 'h2', text: 'Recebemos a sua mensagem. Obrigado!' }),
-  emails: [
-    {
-      emailFrom: 'Digio <no-reply@digio.local>',
-      emailTo: '{{email}}',
-      subject: 'Recebemos a sua mensagem',
-      message: richText(null, 'Recebemos a sua mensagem e retornaremos em breve.'),
-    },
-  ],
-  fields: contactFormData.fields?.map((field) =>
-    'name' in field && field.name in FIELD_LABELS
-      ? { ...field, label: FIELD_LABELS[field.name] }
-      : field,
-  ),
-}
-
 /**
  * Demo content of a campaign property: a small landing page ("indique e ganhe") with its own
  * rules page, FAQs, header and footer. No blog and no help center, unlike the main Digio
@@ -49,35 +20,7 @@ const contactFormPt = {
 export async function seedCampaign({ payload, req, tenant, images, context }: Args) {
   const withTenant = <T extends object>(data: T) => ({ ...data, tenant: tenant.id })
 
-  payload.logger.info(`— Seeding campaign: contact, rules, FAQs, home, header and footer...`)
-
-  const contactForm = await payload.create({
-    collection: 'forms',
-    depth: 0,
-    req,
-    data: withTenant(contactFormPt),
-  })
-  const contactPage = await payload.create({
-    collection: 'pages',
-    depth: 0,
-    req,
-    context,
-    data: withTenant({
-      title: 'Contato',
-      slug: 'contato',
-      _status: 'published' as const,
-      hero: { type: 'none' as const },
-      meta: { title: 'Contato | Campanha Exemplo', description: 'Fale com a gente.' },
-      layout: [
-        {
-          blockType: 'formBlock' as const,
-          enableIntro: true,
-          form: contactForm,
-          introContent: richText({ tag: 'h2', text: 'Fale com a gente' }),
-        },
-      ],
-    }),
-  })
+  payload.logger.info(`— Seeding campaign: rules, FAQs, home, header and footer...`)
 
   await payload.create({
     collection: 'pages',
@@ -226,13 +169,6 @@ export async function seedCampaign({ payload, req, tenant, images, context }: Ar
       cta: custom('Participar', '/'),
       navItems: [
         { link: custom('Regulamento', '/regulamento/') },
-        {
-          link: {
-            type: 'reference' as const,
-            label: 'Contato',
-            reference: { relationTo: 'pages' as const, value: contactPage.id },
-          },
-        },
       ],
     }),
   })
@@ -250,13 +186,6 @@ export async function seedCampaign({ payload, req, tenant, images, context }: Ar
         {
           title: 'Ajuda',
           links: [
-            {
-              link: {
-                type: 'reference' as const,
-                label: 'Fale com a gente',
-                reference: { relationTo: 'pages' as const, value: contactPage.id },
-              },
-            },
           ],
         },
       ],

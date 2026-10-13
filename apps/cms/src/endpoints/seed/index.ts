@@ -8,8 +8,6 @@ import type { Tenant, User } from '@digio/payload-types'
 import { seedUberConta } from './uber-conta'
 import { seedCampaign } from './campaign'
 import { seedCatalog } from './catalog'
-import { contactForm as contactFormData } from './contact-form'
-import { contact as contactPageData } from './contact-page'
 import { home } from './home'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
@@ -29,8 +27,6 @@ const tenantCollections: CollectionSlug[] = [
   'redirects',
   'header',
   'footer',
-  'form-submissions',
-  'forms',
   'banners',
   'help-topics',
   'faqs',
@@ -219,23 +215,6 @@ export const seed = async ({
     await payload.update({ collection: 'posts', id, req, context, data: { relatedPosts } })
   }
 
-  payload.logger.info(`— Seeding contact form and pages...`)
-
-  const contactForm = await payload.create({
-    collection: 'forms',
-    depth: 0,
-    req,
-    data: withTenant(contactFormData),
-  })
-
-  const contactPage = await payload.create({
-    collection: 'pages',
-    depth: 0,
-    req,
-    context,
-    data: withTenant(contactPageData({ contactForm })),
-  })
-
   payload.logger.info(`— Seeding header and footer...`)
 
   await payload.create({
@@ -249,13 +228,6 @@ export const seed = async ({
         { link: { type: 'custom' as const, label: 'Cartão', url: '/componentes/' } },
         { link: { type: 'custom' as const, label: 'Ajuda', url: '/central-de-ajuda/' } },
         { link: { type: 'custom' as const, label: 'Blog', url: '/blog/' } },
-        {
-          link: {
-            type: 'reference' as const,
-            label: 'Contato',
-            reference: { relationTo: 'pages' as const, value: contactPage.id },
-          },
-        },
       ],
     }),
   })
@@ -283,13 +255,6 @@ export const seed = async ({
                 type: 'custom' as const,
                 label: 'Central de ajuda',
                 url: '/central-de-ajuda/',
-              },
-            },
-            {
-              link: {
-                type: 'reference' as const,
-                label: 'Fale com a gente',
-                reference: { relationTo: 'pages' as const, value: contactPage.id },
               },
             },
           ],

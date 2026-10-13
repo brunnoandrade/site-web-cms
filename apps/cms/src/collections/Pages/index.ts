@@ -6,7 +6,6 @@ import { publishedOrTenantMember, tenantRoles, tenantRolesForVersions } from '..
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
-import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { BannerSection } from '../../blocks/BannerSection/config'
 import { Cards } from '../../blocks/Cards/config'
@@ -102,7 +101,6 @@ export const Pages: CollectionConfig<'pages'> = {
                 Testimonials,
                 BannerSection,
                 Archive,
-                FormBlock,
               ],
               required: true,
               admin: {
