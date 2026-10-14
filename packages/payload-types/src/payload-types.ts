@@ -168,7 +168,7 @@ export interface Page {
    */
   template?: ('default' | 'noHero' | 'landing') | null;
   hero: {
-    type: 'none' | 'brand' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    type: 'none' | 'brand' | 'fullscreen' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
       root: {
         type: string;
@@ -209,7 +209,30 @@ export interface Page {
         }[]
       | null;
     media?: (number | null) | Media;
+    /**
+     * Opcional. Com vídeo, a imagem acima não aparece (o fundo fica preto até o vídeo carregar, para não piscar outra imagem). Sem vídeo, ela é o fundo do hero.
+     */
+    video?: (number | null) | Media;
+    /**
+     * Opcional. Usado em telas com menos de 768px (em geral um vídeo vertical). Sem ele, o celular usa o vídeo do computador.
+     */
+    videoMobile?: (number | null) | Media;
     disclaimer?: string | null;
+    disclaimerLink?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
   };
   layout: (
     | ContentBlock
@@ -519,6 +542,10 @@ export interface ContentBlock {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'content';
@@ -528,16 +555,26 @@ export interface ContentBlock {
  * via the `definition` "CardsBlock".
  */
 export interface CardsBlock {
-  variant?: ('simple' | 'feature' | 'product' | 'icon') | null;
+  variant?: ('simple' | 'feature' | 'product' | 'icon' | 'shortcut') | null;
   theme?: ('light' | 'lilac' | 'navy' | 'blue') | null;
   heading?: string | null;
   intro?: string | null;
   columns?: ('2' | '3' | '4') | null;
   items?:
     | {
+        /**
+         * Enter adds a line break (shown from 768px; on phones the text runs on one line).
+         */
         title: string;
+        /**
+         * Enter adds a line break (shown from 992px).
+         */
         text?: string | null;
         image?: (number | null) | Media;
+        /**
+         * Optional. Used under 768px; without it the main image is used.
+         */
+        imageMobile?: (number | null) | Media;
         icon?:
           | (
               | 'credit-card'
@@ -592,6 +629,10 @@ export interface CardsBlock {
     url?: string | null;
     label: string;
   };
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'cards';
@@ -641,6 +682,10 @@ export interface CallToActionBlock {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
@@ -662,6 +707,10 @@ export interface MediaBlock {
 export interface ProductHighlightBlock {
   product: number | Product;
   imagePosition?: ('right' | 'left') | null;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'productHighlight';
@@ -720,6 +769,10 @@ export interface RatesTableBlock {
    * The website shows the published, validated version of the table.
    */
   rates: number | Rate;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'ratesTable';
@@ -780,6 +833,10 @@ export interface FaqBlock {
     url?: string | null;
     label: string;
   };
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'faq';
@@ -855,6 +912,10 @@ export interface TestimonialsBlock {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'testimonials';
@@ -868,6 +929,10 @@ export interface BannerSectionBlock {
    * Only shown on the website when active and within its display period.
    */
   banner: number | Banner;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'bannerSection';
@@ -955,6 +1020,10 @@ export interface ArchiveBlock {
     url?: string | null;
     label: string;
   };
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
@@ -1518,7 +1587,18 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        video?: T;
+        videoMobile?: T;
         disclaimer?: T;
+        disclaimerLink?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
       };
   layout?:
     | T
@@ -1572,6 +1652,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  anchor?: T;
   id?: T;
   blockName?: T;
 }
@@ -1591,6 +1672,7 @@ export interface CardsBlockSelect<T extends boolean = true> {
         title?: T;
         text?: T;
         image?: T;
+        imageMobile?: T;
         icon?: T;
         background?: T;
         enableLink?: T;
@@ -1615,6 +1697,7 @@ export interface CardsBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  anchor?: T;
   id?: T;
   blockName?: T;
 }
@@ -1640,6 +1723,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  anchor?: T;
   id?: T;
   blockName?: T;
 }
@@ -1649,6 +1733,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
+  anchor?: T;
   id?: T;
   blockName?: T;
 }
@@ -1659,6 +1744,7 @@ export interface MediaBlockSelect<T extends boolean = true> {
 export interface ProductHighlightBlockSelect<T extends boolean = true> {
   product?: T;
   imagePosition?: T;
+  anchor?: T;
   id?: T;
   blockName?: T;
 }
@@ -1669,6 +1755,7 @@ export interface ProductHighlightBlockSelect<T extends boolean = true> {
 export interface RatesTableBlockSelect<T extends boolean = true> {
   heading?: T;
   rates?: T;
+  anchor?: T;
   id?: T;
   blockName?: T;
 }
@@ -1690,6 +1777,7 @@ export interface FaqBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  anchor?: T;
   id?: T;
   blockName?: T;
 }
@@ -1708,6 +1796,7 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
         detail?: T;
         id?: T;
       };
+  anchor?: T;
   id?: T;
   blockName?: T;
 }
@@ -1717,6 +1806,7 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
  */
 export interface BannerSectionBlockSelect<T extends boolean = true> {
   banner?: T;
+  anchor?: T;
   id?: T;
   blockName?: T;
 }
@@ -1742,6 +1832,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  anchor?: T;
   id?: T;
   blockName?: T;
 }

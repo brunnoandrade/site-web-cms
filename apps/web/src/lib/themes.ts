@@ -23,9 +23,23 @@ const themes: Record<ThemePreset, Record<string, string>> = {
     '--color-brand-blue': '#2466df',
     '--color-brand-blue-dark': '#1a4fb5',
     '--color-lilac-100': '#e8e8e8',
-    '--color-lilac-50': '#f4f4f4',
+    '--color-lilac-50': '#f3f3f3',
     '--color-ink-700': '#333333',
     '--color-ink-600': '#595959',
+    // Uber Conta buttons: rounded rectangle (.6rem), regular weight, 1.7rem side padding.
+    '--button-radius': '0.6rem',
+    '--button-weight': '400',
+    '--button-px-lg': '1.7rem',
+    // Sections: 2.5rem of vertical padding, 6rem from 992px.
+    '--section-py': '2.5rem',
+    '--section-py-md': '2.5rem',
+    '--section-py-lg': '6rem',
+    // Font weights of the current site (Uber Move Text): light supporting text, regular FAQ
+    // questions and links, medium testimonial quotes. Titles stay at 600.
+    '--weight-support': '300',
+    '--weight-faq': '400',
+    '--weight-link': '400',
+    '--weight-quote': '500',
   },
 }
 

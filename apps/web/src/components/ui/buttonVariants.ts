@@ -1,9 +1,10 @@
 import { cva } from 'class-variance-authority'
 
 // Separate from button.tsx ('use client') so server components can use the classes too.
-// Digio design system: pill buttons (Uber Conta pattern) in Digio colors.
+// Digio design system: pill buttons (Uber Conta pattern) in Digio colors. A theme can reshape them
+// with --button-radius, --button-weight and --button-px-lg (see lib/themes.ts); defaults are the pill.
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[var(--button-radius,9999px)] font-[var(--button-weight,600)] transition-colors disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -24,7 +25,7 @@ export const buttonVariants = cva(
         clear: '',
         default: 'h-11 px-6 text-sm',
         sm: 'h-9 px-4 text-sm',
-        lg: 'h-14 px-8 text-base',
+        lg: 'h-14 px-[var(--button-px-lg,2rem)] text-base',
         icon: 'size-11',
       },
     },

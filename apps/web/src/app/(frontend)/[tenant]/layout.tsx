@@ -23,7 +23,7 @@ export default async function TenantLayout({ children, params }: Args) {
   const { isEnabled } = await draftMode()
 
   return (
-    <div style={themeStyle(tenant.themePreset)}>
+    <div data-theme={tenant.themePreset ?? undefined} style={themeStyle(tenant.themePreset)}>
       <AdminBar
         adminBarProps={{
           preview: isEnabled,

@@ -24,7 +24,7 @@ const APP_URL = 'https://uberconta.onelink.me/asYc/nayzzxcl'
  * Home of the Uber Conta property (ubercontabrasil.com.br), built only with the platform blocks:
  * dark hero, shortcut cards, loan cards, testimonials, solutions grid, blog, FAQ and footer.
  * Texts are those of the current site. Images are placeholders from the template; the real ones
- * are uploaded to the media library. What the blocks cannot do yet (video hero, mega menu, desktop
+ * are uploaded to the media library. The hero has no video here: upload one in the admin (hero > Vídeo de fundo). What the blocks cannot do yet (desktop
  * and mobile image pairs) is listed in docs/uber-conta.md.
  */
 export async function seedUberConta({ payload, req, tenant, images, context }: Args) {
@@ -65,6 +65,29 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
     )
   }
 
+  // Logos and badges from the current site, rasterized (the media library refuses SVG).
+  // The header is dark (white logo); the footer is light, like the current site (black logos).
+  const upload = async (file: string, alt: string) => {
+    const data = await readFile(path.resolve(dirname, 'uber-conta-assets', file))
+    return payload.create({
+      collection: 'media',
+      req,
+      context,
+      data: withTenant({ alt }),
+      file: { name: file, data, mimetype: 'image/png', size: data.byteLength },
+    })
+  }
+  // The shortcut photos (1: square on black, 2 and 3: portrait), already cropped for the cards.
+  const shortcut1 = await upload('shortcut-1.png', 'Notificação "Ganhos Uber" no celular')
+  const shortcut2 = await upload('shortcut-2.png', 'Mão segurando o celular com o app Uber Conta')
+  const shortcut3 = await upload('shortcut-3.png', 'Cartões Uber Conta')
+  // Provisional mobile versions: crops of the photos above (the originals are not available).
+  const shortcutMobile = [
+    await upload('shortcut-1-mobile.png', 'Notificação "Ganhos Uber" no celular'),
+    await upload('shortcut-2-mobile.png', 'Mão segurando o celular com o app Uber Conta'),
+    await upload('shortcut-3-mobile.png', 'Cartões Uber Conta'),
+  ]
+
   await payload.create({
     collection: 'pages',
     depth: 0,
@@ -75,7 +98,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
       slug: 'home',
       _status: 'published' as const,
       hero: {
-        type: 'brand' as const,
+        type: 'fullscreen' as const,
         richText: richText({ tag: 'h1', text: 'Receba seus ganhos na hora com a Uber Conta!' }),
         links: [
           { link: { ...custom('Conhecer mais', '#solucoes'), appearance: 'default' as const } },
@@ -83,36 +106,41 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
         media: images[0].id,
         disclaimer:
           'Este é um produto oferecido pelo Banco Digio e está sujeito à elegibilidade, análise de crédito e condições variáveis.',
+        disclaimerLink: custom('Saber mais.', '#solucoes'),
       },
       layout: [
         {
           blockType: 'cards' as const,
-          variant: 'feature' as const,
+          anchor: 'atalhos',
+          variant: 'shortcut' as const,
           theme: 'light' as const,
           heading: 'Tudo que você precisa, em um só lugar!',
           intro: 'Soluções digitais para simplificar seu dia a dia.',
           columns: '3' as const,
           items: [
             {
-              title: 'Dirigiu, recebeu: simples assim!',
+              title: 'Dirigiu, recebeu:\nSimples assim!',
               text: 'O dinheiro das suas corridas cai na hora.',
-              image: images[0].id,
+              image: shortcut1.id,
+              imageMobile: shortcutMobile[0].id,
               background: 'navy' as const,
               enableLink: true,
               link: custom('Conta', '/conta-digital/'),
             },
             {
-              title: 'Um aplicativo completo',
+              title: 'Um aplicativo\ncompleto',
               text: 'As ferramentas que facilitam a sua rotina.',
-              image: images[1].id,
+              image: shortcut2.id,
+              imageMobile: shortcutMobile[1].id,
               background: 'blue' as const,
               enableLink: true,
               link: custom('Conta', '/conta-digital/'),
             },
             {
-              title: 'Cartão para usar como quiser',
-              text: 'Toda a facilidade que você precisa, na palma da mão.',
-              image: images[2].id,
+              title: 'Cartão para usar\ncomo quiser',
+              text: 'Toda a facilidade que você precisa,\nna palma da mão.',
+              image: shortcut3.id,
+              imageMobile: shortcutMobile[2].id,
               background: 'lilac' as const,
               enableLink: true,
               link: custom('Cartão', '/cartao/'),
@@ -123,6 +151,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           blockType: 'cards' as const,
           variant: 'product' as const,
           theme: 'lilac' as const,
+          anchor: 'emprestimo',
           heading: 'Empréstimos para todos os bolsos',
           columns: '2' as const,
           items: [
@@ -144,6 +173,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           // Quotes taken from the current site (public): confirm authorization before publishing.
           blockType: 'testimonials' as const,
           theme: 'blue' as const,
+          anchor: 'depoimentos',
           heading: 'Os motoristas parceiros recomendam',
           items: [
             {
@@ -166,6 +196,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           blockType: 'cards' as const,
           variant: 'icon' as const,
           theme: 'navy' as const,
+          anchor: 'solucoes',
           heading: 'Soluções focadas nas suas necessidades!',
           columns: '3' as const,
           items: [
@@ -215,6 +246,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
         },
         {
           blockType: 'archive' as const,
+          anchor: 'blog',
           populateBy: 'collection' as const,
           relationTo: 'posts' as const,
           limit: 3,
@@ -228,6 +260,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
         {
           blockType: 'faq' as const,
           theme: 'lilac' as const,
+          anchor: 'ajuda',
           heading: 'Ficou com alguma dúvida?',
           faqs: faqs.map((faq) => faq.id),
           enableMoreLink: true,
@@ -243,22 +276,10 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
     }),
   })
 
-  // Logos and badges from the current site, rasterized (the media library refuses SVG).
-  // Logos are white: the header and footer are dark.
-  const upload = async (file: string, alt: string) => {
-    const data = await readFile(path.resolve(dirname, 'uber-conta-assets', file))
-    return payload.create({
-      collection: 'media',
-      req,
-      context,
-      data: withTenant({ alt }),
-      file: { name: file, data, mimetype: 'image/png', size: data.byteLength },
-    })
-  }
   // One at a time: the seed shares a single transaction (`req`).
   const logoHeader = await upload('logo-header-white.png', 'Uber Conta')
-  const logoHorizontal = await upload('logo-horizontal-white.png', 'Uber Conta by Digio')
-  const logoStacked = await upload('logo-stacked-white.png', 'Uber Conta by Digio')
+  const logoHorizontal = await upload('logo-horizontal-black.png', 'Uber Conta by Digio')
+  const logoStacked = await upload('logo-stacked-black.png', 'Uber Conta by Digio')
   const creditCard = await upload('credit-card.png', 'Cartões Uber Conta')
   const googlePlay = await upload('google-play.png', 'Baixar na Google Play')
   const appStore = await upload('app-store.png', 'Baixar na App Store')
@@ -427,17 +448,6 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
         },
       ],
       legalText: '© 2026 Banco Digio S.A. - Instituição financeira. 27.098.060/0001-45.',
-      navItems: [
-        {
-          link: {
-            ...custom(
-              'Em parceria com a Orbital',
-              'https://orbital.company/?utm_source=reference&utm_medium=footer&utm_campaign=uber-conta',
-            ),
-            newTab: true,
-          },
-        },
-      ],
     }),
   })
 }

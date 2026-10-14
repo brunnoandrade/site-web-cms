@@ -28,6 +28,10 @@ export const Cards: Block = {
         { label: t('Destaque com imagem (cards grandes)', 'Feature with image (large cards)'), value: 'feature' },
         { label: t('Produto (imagem e link "Conhecer")', 'Product (image and "Learn more" link)'), value: 'product' },
         { label: t('Ícone com seta (soluções)', 'Icon with arrow (solutions)'), value: 'icon' },
+        {
+          label: t('Atalhos (imagem de fundo e seta ao passar o mouse)', 'Shortcuts (background image, arrow on hover)'),
+          value: 'shortcut',
+        },
       ],
     },
     sectionTheme(),
@@ -47,9 +51,44 @@ export const Cards: Block = {
       minRows: 1,
       maxRows: 12,
       fields: [
-        { name: 'title', label: t('Título', 'Title'), type: 'text', required: true },
-        { name: 'text', label: t('Texto', 'Text'), type: 'textarea' },
+        {
+          name: 'title',
+          label: t('Título', 'Title'),
+          type: 'textarea',
+          required: true,
+          admin: {
+            rows: 2,
+            description: t(
+              'Enter cria uma quebra de linha (aparece em telas a partir de 768px; no celular o texto corre numa linha só).',
+              'Enter adds a line break (shown from 768px; on phones the text runs on one line).',
+            ),
+          },
+        },
+        {
+          name: 'text',
+          label: t('Texto', 'Text'),
+          type: 'textarea',
+          admin: {
+            description: t(
+              'Enter cria uma quebra de linha (aparece em telas a partir de 992px).',
+              'Enter adds a line break (shown from 992px).',
+            ),
+          },
+        },
         { name: 'image', label: t('Imagem', 'Image'), type: 'upload', relationTo: 'media' },
+        {
+          name: 'imageMobile',
+          label: t('Imagem (celular)', 'Image (mobile)'),
+          type: 'upload',
+          relationTo: 'media',
+          admin: {
+            condition: withVariant('shortcut'),
+            description: t(
+              'Opcional. Usada em telas com menos de 768px; sem ela, vale a imagem principal.',
+              'Optional. Used under 768px; without it the main image is used.',
+            ),
+          },
+        },
         iconField({ admin: { condition: withVariant('icon') } } as never),
         {
           name: 'background',
@@ -62,7 +101,7 @@ export const Cards: Block = {
             { label: t('Lilás claro', 'Light lilac'), value: 'lilac' },
             { label: t('Branco', 'White'), value: 'white' },
           ],
-          admin: { condition: withVariant('feature') },
+          admin: { condition: withVariant('feature', 'shortcut') },
         },
         { name: 'enableLink', label: t('Com link', 'With link'), type: 'checkbox' },
         link({

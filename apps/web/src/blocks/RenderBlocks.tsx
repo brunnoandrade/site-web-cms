@@ -54,12 +54,17 @@ export const RenderBlocks: React.FC<{
               const rendered = (
                 <Block {...block} disableInnerContainer tenant={tenant} />
               )
+              const anchor = 'anchor' in block && block.anchor ? block.anchor : undefined
               // Blocks with a "theme" field render their own full-width Section; the others get
               // the default (white) section around them.
-              return 'theme' in block ? (
-                <Fragment key={index}>{rendered}</Fragment>
+              const content = 'theme' in block ? rendered : <Section>{rendered}</Section>
+              // The anchor id goes on a plain wrapper, so a `#id` link lands on the section.
+              return anchor ? (
+                <div id={anchor} key={index}>
+                  {content}
+                </div>
               ) : (
-                <Section key={index}>{rendered}</Section>
+                <Fragment key={index}>{content}</Fragment>
               )
             }
           }

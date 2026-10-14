@@ -112,6 +112,60 @@
   }
 }
 
+/* Uber Conta: same container as the current site (Bootstrap 5): 12px gutters, 540/720/960/1140/1320. */
+[data-theme='uber-conta'] .container {
+  padding-inline: 0.75rem;
+}
+@media (min-width: 576px) {
+  [data-theme='uber-conta'] .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  [data-theme='uber-conta'] .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  [data-theme='uber-conta'] .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  [data-theme='uber-conta'] .container {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  [data-theme='uber-conta'] .container {
+    max-width: 1320px;
+  }
+}
+
+/* Uber Conta section titles (display-4): fluid up to 3rem at 1200px, 600 weight, tight leading. */
+[data-theme='uber-conta'] [data-slot='section-heading'] {
+  font-size: min(3rem, calc(1.425rem + 2.1vw));
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+/* Uber Conta: in-page links scroll smoothly (unless the visitor asked for less motion). */
+@media (prefers-reduced-motion: no-preference) {
+  html:has([data-theme='uber-conta']) {
+    scroll-behavior: smooth;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 :root {
   /* Semantic colors (shadcn/ui names) mapped to the Digio palette. */
   --background: #ffffff;

@@ -3,12 +3,14 @@ import React from 'react'
 import type { Page } from '@digio/payload-types'
 
 import { BrandHero } from '@/heros/BrandHero'
+import { FullscreenHero } from '@/heros/FullscreenHero'
 import { HighImpactHero } from '@/heros/HighImpact'
 import { LowImpactHero } from '@/heros/LowImpact'
 import { MediumImpactHero } from '@/heros/MediumImpact'
 
 const heroes = {
   brand: BrandHero,
+  fullscreen: FullscreenHero,
   highImpact: HighImpactHero,
   lowImpact: LowImpactHero,
   mediumImpact: MediumImpactHero,

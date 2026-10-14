@@ -1,4 +1,5 @@
 import { t } from '../../utilities/labels'
+import { withAnchor } from '../../fields/anchor'
 import { slug } from '../../fields/slug'
 import type { CollectionConfig } from 'payload'
 
@@ -128,7 +129,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 Testimonials,
                 BannerSection,
                 Archive,
-              ],
+              ].map(withAnchor),
               required: true,
               admin: {
                 initCollapsed: true,

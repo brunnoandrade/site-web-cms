@@ -4,10 +4,9 @@ import React from 'react'
 
 import './globals.css'
 
-// Digio's typeface (same as the current site).
+// Digio's typeface (same as the current site). Variable font: every weight (300 to 700) is available.
 const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
   variable: '--font-montserrat',
   display: 'swap',
 })

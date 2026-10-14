@@ -44,7 +44,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = ({ theme, hea
               )}
               role="group"
             >
-              <blockquote className="text-lg leading-relaxed">
+              <blockquote className="text-lg font-[var(--weight-quote,400)] leading-relaxed">
                 <p>
                   “<Quote dark={dark} text={item.quote} />”
                 </p>

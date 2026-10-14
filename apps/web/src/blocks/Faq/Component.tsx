@@ -29,12 +29,12 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({ theme, heading, faqs, enable
         <div className={cn('divide-y border-y', dark ? 'divide-white/20 border-white/20' : 'divide-[#dde1f3] border-[#dde1f3]')}>
           {items.map((faq) => (
             <details key={faq.id} className="group">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-semibold [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-[var(--weight-faq,600)] [&::-webkit-details-marker]:hidden">
                 {faq.question}
                 <Plus aria-hidden className="size-5 shrink-0 transition-transform group-open:rotate-45" />
               </summary>
               <RichText
-                className={cn('pb-5', dark ? 'text-white/85' : 'text-ink-600')}
+                className={cn('pb-5 font-[var(--weight-support,400)]', dark ? 'text-white/85' : 'text-ink-600')}
                 data={faq.answer}
                 enableGutter={false}
               />
