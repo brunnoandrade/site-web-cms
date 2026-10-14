@@ -19,7 +19,7 @@ const dirname = path.dirname(filename)
 export const Media: CollectionConfig = {
   slug: 'media',
   labels: { singular: t('Mídia', 'Media'), plural: t('Mídias', 'Media') },
-  folders: true,
+  folders: false,
   access: {
     create: tenantRoles(['admin', 'editor', 'seo']),
     delete: tenantRoles(['admin', 'editor']),

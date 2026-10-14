@@ -55,7 +55,6 @@ const tenantScopedCollections: TenantScoped[] = [
   'help-categories',
   'help-topics',
   'banners',
-  'payload-folders',
   'redirects',
   'search',
 ]
