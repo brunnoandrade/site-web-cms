@@ -86,16 +86,11 @@ export interface Config {
     search: Search;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
-    'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {
-    'payload-folders': {
-      documentsAndFolders: 'payload-folders' | 'media';
-    };
-  };
+  collectionsJoins: {};
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
@@ -116,7 +111,6 @@ export interface Config {
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
-    'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -267,6 +261,10 @@ export interface Tenant {
    */
   themePreset?: ('digio' | 'uber-conta') | null;
   /**
+   * Estrutura visual do cabeçalho e do rodapé. Novos layouts exigem um deploy.
+   */
+  layout?: ('digio' | 'uber-conta') | null;
+  /**
    * Hosts que respondem por esta propriedade (ex.: www.digio.com.br). Sem protocolo, porta ou caminho. Um domínio só pode pertencer a uma propriedade.
    */
   domains?:
@@ -355,7 +353,6 @@ export interface Media {
   wpSourceUrl?: string | null;
   prefix?: string | null;
   _objectKey?: string | null;
-  folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -425,33 +422,6 @@ export interface Media {
       filename?: string | null;
     };
   };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-folders".
- */
-export interface FolderInterface {
-  id: number;
-  tenant?: (number | null) | Tenant;
-  name: string;
-  folder?: (number | null) | FolderInterface;
-  documentsAndFolders?: {
-    docs?: (
-      | {
-          relationTo?: 'payload-folders';
-          value: number | FolderInterface;
-        }
-      | {
-          relationTo?: 'media';
-          value: number | Media;
-        }
-    )[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
-  folderType?: 'media'[] | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1048,9 +1018,14 @@ export interface Header {
     url?: string | null;
     label: string;
   };
+  /**
+   * Opcional. Sem logo, o layout usa a marca padrão da propriedade.
+   */
+  logo?: (number | null) | Media;
   navItems?:
     | {
-        link: {
+        kind?: ('link' | 'mega') | null;
+        link?: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?:
@@ -1065,6 +1040,37 @@ export interface Header {
           url?: string | null;
           label: string;
         };
+        mega?: {
+          label: string;
+          title?: string | null;
+          description?: string | null;
+          groups?:
+            | {
+                label: string;
+                links?:
+                  | {
+                      link: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: number | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'posts';
+                              value: number | Post;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
         id?: string | null;
       }[]
     | null;
@@ -1078,6 +1084,12 @@ export interface Header {
 export interface Footer {
   id: number;
   tenant?: (number | null) | Tenant;
+  logo?: (number | null) | Media;
+  /**
+   * Opcional. Sem ela, vale a logo principal em todas as telas.
+   */
+  logoMobile?: (number | null) | Media;
+  highlightImage?: (number | null) | Media;
   columns?:
     | {
         title: string;
@@ -1098,6 +1110,10 @@ export interface Footer {
                 url?: string | null;
                 label: string;
               };
+              /**
+               * Se preenchida, o link aparece como imagem; o rótulo vira o texto alternativo.
+               */
+              image?: (number | null) | Media;
               id?: string | null;
             }[]
           | null;
@@ -1430,10 +1446,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'search';
         value: number | Search;
-      } | null)
-    | ({
-        relationTo: 'payload-folders';
-        value: number | FolderInterface;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1811,7 +1823,6 @@ export interface MediaSelect<T extends boolean = true> {
   wpSourceUrl?: T;
   prefix?: T;
   _objectKey?: T;
-  folder?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -2043,9 +2054,11 @@ export interface HeaderSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  logo?: T;
   navItems?:
     | T
     | {
+        kind?: T;
         link?:
           | T
           | {
@@ -2054,6 +2067,33 @@ export interface HeaderSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+            };
+        mega?:
+          | T
+          | {
+              label?: T;
+              title?: T;
+              description?: T;
+              groups?:
+                | T
+                | {
+                    label?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                              };
+                          id?: T;
+                        };
+                    id?: T;
+                  };
             };
         id?: T;
       };
@@ -2066,6 +2106,9 @@ export interface HeaderSelect<T extends boolean = true> {
  */
 export interface FooterSelect<T extends boolean = true> {
   tenant?: T;
+  logo?: T;
+  logoMobile?: T;
+  highlightImage?: T;
   columns?:
     | T
     | {
@@ -2082,6 +2125,7 @@ export interface FooterSelect<T extends boolean = true> {
                     url?: T;
                     label?: T;
                   };
+              image?: T;
               id?: T;
             };
         id?: T;
@@ -2113,6 +2157,7 @@ export interface TenantsSelect<T extends boolean = true> {
   slug?: T;
   siteUrl?: T;
   themePreset?: T;
+  layout?: T;
   domains?:
     | T
     | {
@@ -2249,19 +2294,6 @@ export interface PayloadJobsSelect<T extends boolean = true> {
   queue?: T;
   waitUntil?: T;
   processing?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-folders_select".
- */
-export interface PayloadFoldersSelect<T extends boolean = true> {
-  tenant?: T;
-  name?: T;
-  folder?: T;
-  documentsAndFolders?: T;
-  folderType?: T;
   updatedAt?: T;
   createdAt?: T;
 }

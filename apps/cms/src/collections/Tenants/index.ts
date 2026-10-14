@@ -88,6 +88,20 @@ export const Tenants: CollectionConfig = {
       },
     },
     {
+      // Structure of the menu and footer. Layouts live in apps/web/src/layouts.
+      name: 'layout',
+      label: 'Layout do menu e rodapé',
+      type: 'select',
+      defaultValue: 'digio',
+      options: [
+        { label: 'Digio', value: 'digio' },
+        { label: 'Uber Conta (mega menu)', value: 'uber-conta' },
+      ],
+      admin: {
+        description: 'Estrutura visual do cabeçalho e do rodapé. Novos layouts exigem um deploy.',
+      },
+    },
+    {
       name: 'domains',
       label: 'Domínios',
       type: 'array',

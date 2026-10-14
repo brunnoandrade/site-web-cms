@@ -22,6 +22,25 @@ export const Footer: CollectionConfig = {
   },
   fields: [
     {
+      name: 'logo',
+      label: 'Logo',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
+      name: 'logoMobile',
+      label: 'Logo (celular)',
+      type: 'upload',
+      relationTo: 'media',
+      admin: { description: 'Opcional. Sem ela, vale a logo principal em todas as telas.' },
+    },
+    {
+      name: 'highlightImage',
+      label: 'Imagem de destaque (ex.: cartão)',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
       // Link columns (e.g. "Conta digital", "Empréstimos", "Institucional").
       name: 'columns',
       label: 'Colunas de links',
@@ -34,7 +53,16 @@ export const Footer: CollectionConfig = {
           label: 'Links',
           type: 'array',
           maxRows: 10,
-          fields: [link({ appearances: false })],
+          fields: [
+            link({ appearances: false }),
+            {
+              name: 'image',
+              label: 'Imagem no lugar do texto (ex.: selo da loja de apps)',
+              type: 'upload',
+              relationTo: 'media',
+              admin: { description: 'Se preenchida, o link aparece como imagem; o rótulo vira o texto alternativo.' },
+            },
+          ],
         },
       ],
     },
@@ -45,6 +73,7 @@ export const Footer: CollectionConfig = {
     },
     {
       name: 'navItems',
+      label: 'Links da base (ex.: parceria, política)',
       type: 'array',
       fields: [
         link({

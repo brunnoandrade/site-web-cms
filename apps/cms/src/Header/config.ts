@@ -34,14 +34,67 @@ export const Header: CollectionConfig = {
       },
     }),
     {
+      name: 'logo',
+      label: 'Logo',
+      type: 'upload',
+      relationTo: 'media',
+      admin: { description: 'Opcional. Sem logo, o layout usa a marca padrão da propriedade.' },
+    },
+    {
+      // A plain link, or a mega menu: a panel with a title, a description and columns of links.
       name: 'navItems',
+      label: 'Itens do menu',
       type: 'array',
+      maxRows: 8,
       fields: [
+        {
+          name: 'kind',
+          label: 'Tipo',
+          type: 'radio',
+          defaultValue: 'link',
+          admin: { layout: 'horizontal' },
+          options: [
+            { label: 'Link simples', value: 'link' },
+            { label: 'Mega menu', value: 'mega' },
+          ],
+        },
         link({
           appearances: false,
+          overrides: {
+            admin: {
+              hideGutter: true,
+              condition: (_: unknown, siblingData: { kind?: string }) => siblingData?.kind !== 'mega',
+            },
+          },
         }),
+        {
+          name: 'mega',
+          label: 'Mega menu',
+          type: 'group',
+          admin: { condition: (_: unknown, siblingData: { kind?: string }) => siblingData?.kind === 'mega' },
+          fields: [
+            { name: 'label', label: 'Rótulo no menu (ex.: Pra você)', type: 'text', required: true },
+            { name: 'title', label: 'Título do painel', type: 'text' },
+            { name: 'description', label: 'Descrição do painel', type: 'textarea' },
+            {
+              name: 'groups',
+              label: 'Colunas',
+              type: 'array',
+              maxRows: 8,
+              fields: [
+                { name: 'label', label: 'Título da coluna (ex.: Conta digital)', type: 'text', required: true },
+                {
+                  name: 'links',
+                  label: 'Links',
+                  type: 'array',
+                  maxRows: 10,
+                  fields: [link({ appearances: false })],
+                },
+              ],
+            },
+          ],
+        },
       ],
-      maxRows: 6,
       admin: {
         initCollapsed: true,
         components: {
