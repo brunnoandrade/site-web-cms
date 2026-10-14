@@ -22,7 +22,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
   const panelId = useId()
-  const navItems = data?.navItems ?? []
+  // Mega menu items are rendered only by layouts that support them (see layouts/).
+  const navItems = (data?.navItems ?? []).filter((item) => item.kind !== 'mega' && item.link)
 
   // Close the mobile menu on navigation and with Escape.
   useEffect(() => setOpen(false), [pathname])

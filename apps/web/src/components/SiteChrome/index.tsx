@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Footer } from '@/Footer/Component'
-import { Header } from '@/Header/Component'
+import { getLayout } from '@/layouts'
+import { requireTenant } from '@/lib/tenant'
 
 type Props = {
   children: React.ReactNode
@@ -11,7 +11,7 @@ type Props = {
 }
 
 /** Menu, footer and main landmark around a page. Pages of the "landing" template go bare. */
-export const SiteChrome: React.FC<Props> = ({ children, tenant, bare = false }) => {
+export const SiteChrome = async ({ children, tenant, bare = false }: Props) => {
   if (bare) {
     return (
       <main id="conteudo" tabIndex={-1}>
@@ -19,6 +19,8 @@ export const SiteChrome: React.FC<Props> = ({ children, tenant, bare = false }) 
       </main>
     )
   }
+
+  const { Header, Footer } = getLayout((await requireTenant(tenant)).layout)
 
   return (
     <>

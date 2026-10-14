@@ -1,4 +1,4 @@
-import { HeaderClient } from './Component.client'
+import { HeaderClient } from './Header.client'
 import { findOne } from '@/lib/cms'
 import React from 'react'
 
