@@ -1,3 +1,7 @@
+import { readFile } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import type { Payload, PayloadRequest } from 'payload'
 
 import type { Media, Tenant } from '@digio/payload-types'
@@ -11,6 +15,8 @@ type Args = {
   images: [Media, Media, Media]
   context: Record<string, unknown>
 }
+
+const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const APP_URL = 'https://uberconta.onelink.me/asYc/nayzzxcl'
 
@@ -71,7 +77,9 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
       hero: {
         type: 'brand' as const,
         richText: richText({ tag: 'h1', text: 'Receba seus ganhos na hora com a Uber Conta!' }),
-        links: [{ link: { ...custom('Conhecer mais', '#solucoes'), appearance: 'default' as const } }],
+        links: [
+          { link: { ...custom('Conhecer mais', '#solucoes'), appearance: 'default' as const } },
+        ],
         media: images[0].id,
         disclaimer:
           'Este é um produto oferecido pelo Banco Digio e está sujeito à elegibilidade, análise de crédito e condições variáveis.',
@@ -139,12 +147,17 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           heading: 'Os motoristas parceiros recomendam',
           items: [
             {
-              quote: '**O app está muito** bem elaborado e informado, **gosto muito de utilizá-lo. É simples de resolver tudo**.',
+              quote:
+                '**O app está muito** bem elaborado e informado, **gosto muito de utilizá-lo. É simples de resolver tudo**.',
               author: 'Ed',
             },
-            { quote: '**O aplicativo é** fácil de usar e prático **no dia a dia...**', author: 'Pe' },
             {
-              quote: '**O aplicativo para o repasse dos ganhos** é bem prático e organizado em geral.',
+              quote: '**O aplicativo é** fácil de usar e prático **no dia a dia...**',
+              author: 'Pe',
+            },
+            {
+              quote:
+                '**O aplicativo para o repasse dos ganhos** é bem prático e organizado em geral.',
               author: 'Sa',
             },
           ],
@@ -230,30 +243,122 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
     }),
   })
 
+  // Logos and badges from the current site, rasterized (the media library refuses SVG).
+  // Logos are white: the header and footer are dark.
+  const upload = async (file: string, alt: string) => {
+    const data = await readFile(path.resolve(dirname, 'uber-conta-assets', file))
+    return payload.create({
+      collection: 'media',
+      req,
+      context,
+      data: withTenant({ alt }),
+      file: { name: file, data, mimetype: 'image/png', size: data.byteLength },
+    })
+  }
+  // One at a time: the seed shares a single transaction (`req`).
+  const logoHeader = await upload('logo-header-white.png', 'Uber Conta')
+  const logoHorizontal = await upload('logo-horizontal-white.png', 'Uber Conta by Digio')
+  const logoStacked = await upload('logo-stacked-white.png', 'Uber Conta by Digio')
+  const creditCard = await upload('credit-card.png', 'Cartões Uber Conta')
+  const googlePlay = await upload('google-play.png', 'Baixar na Google Play')
+  const appStore = await upload('app-store.png', 'Baixar na App Store')
+
+  const links = (...items: [string, string][]) =>
+    items.map(([label, url]) => ({ link: custom(label, url) }))
+
   await payload.create({
     collection: 'header',
     req,
     context,
     data: withTenant({
+      logo: logoHeader.id,
       enableCta: true,
       cta: custom('Abrir conta', APP_URL),
       navItems: [
-        { link: custom('Pra você', '/conta-digital/') },
-        { link: custom('Sobre', '/sobre/') },
-        { link: custom('Blog', '/blog/') },
-        { link: custom('Ajuda', '/central-de-ajuda/') },
+        {
+          kind: 'mega' as const,
+          mega: {
+            label: 'Pra você',
+            title: 'Pra você',
+            description: 'Tudo que você precisa num só lugar!',
+            groups: [
+              {
+                label: 'Conta digital',
+                links: links(
+                  ['Conta', '/conta-digital/'],
+                  ['Pix', '/pix/'],
+                  ['Cartão', '/cartao/'],
+                  ['Investimentos', '/cdb/'],
+                ),
+              },
+              {
+                label: 'Empréstimos',
+                links: links(
+                  ['Crédito Pessoal', '/credito-pessoal/'],
+                  ['Crédito Rápido', '/credito-rapido/'],
+                  ['Antecipação do FGTS', '/antecipacao-do-fgts/'],
+                ),
+              },
+              {
+                label: 'Soluções',
+                links: links(
+                  ['Débitos veiculares', '/debitos-veiculares/'],
+                  ['Seguro Celular', '/seguro-celular/'],
+                  ['Tag Veloe', '/tag-veloe/'],
+                  ['Descontos', '/descontos/'],
+                  ['Cashback', '/cashback/'],
+                ),
+              },
+              {
+                label: 'Benefícios',
+                links: links(
+                  ['Uber Chip', '/uber-chip/'],
+                  ['Cashback no Ipiranga', '/km-de-vantagens/'],
+                ),
+              },
+              {
+                // Destination pages of this column are not mapped yet: placeholders.
+                label: 'Parceria ELO',
+                links: links(
+                  ['Vantagens exclusivas', '/descontos/'],
+                  ['Descontos em compras', '/descontos/'],
+                ),
+              },
+            ],
+          },
+        },
+        { kind: 'link' as const, link: custom('Sobre', '/sobre/') },
+        { kind: 'link' as const, link: custom('Blog', '/blog/') },
+        {
+          // The current site shows a chevron on "Ajuda"; its panel content is a placeholder.
+          kind: 'mega' as const,
+          mega: {
+            label: 'Ajuda',
+            title: 'Ajuda',
+            description: 'Tire suas dúvidas e fale com a gente.',
+            groups: [
+              {
+                label: 'Atendimento',
+                links: links(
+                  ['Central de ajuda', '/central-de-ajuda/'],
+                  ['Informações financeiras', '/informacoes-financeiras/'],
+                ),
+              },
+            ],
+          },
+        },
       ],
     }),
   })
-
-  const links = (...items: [string, string][]) =>
-    items.map(([label, url]) => ({ link: custom(label, url) }))
 
   await payload.create({
     collection: 'footer',
     req,
     context,
     data: withTenant({
+      logo: logoStacked.id,
+      logoMobile: logoHorizontal.id,
+      highlightImage: creditCard.id,
       columns: [
         {
           title: 'Conta digital',
@@ -297,13 +402,42 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
         },
         {
           title: 'Baixe o app',
-          links: links(
-            ['Google Play', 'https://play.google.com/store/apps/details?id=br.com.digio.uber'],
-            ['App Store', 'http://apps.apple.com/us/app/uber-conta/id1550784531'],
-          ),
+          links: [
+            {
+              link: {
+                ...custom(
+                  'Baixar na Google Play',
+                  'https://play.google.com/store/apps/details?id=br.com.digio.uber',
+                ),
+                newTab: true,
+              },
+              image: googlePlay.id,
+            },
+            {
+              link: {
+                ...custom(
+                  'Baixar na App Store',
+                  'http://apps.apple.com/us/app/uber-conta/id1550784531',
+                ),
+                newTab: true,
+              },
+              image: appStore.id,
+            },
+          ],
         },
       ],
       legalText: '© 2026 Banco Digio S.A. - Instituição financeira. 27.098.060/0001-45.',
+      navItems: [
+        {
+          link: {
+            ...custom(
+              'Em parceria com a Orbital',
+              'https://orbital.company/?utm_source=reference&utm_medium=footer&utm_campaign=uber-conta',
+            ),
+            newTab: true,
+          },
+        },
+      ],
     }),
   })
 }

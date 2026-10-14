@@ -33,6 +33,7 @@ const tenants = [
     name: 'Uber Conta',
     slug: 'uber-conta',
     themePreset: 'uber-conta',
+    layout: 'uber-conta',
     siteUrl: 'http://uberconta.localhost:3000',
     domains: [{ domain: 'uberconta.localhost' }],
   },
