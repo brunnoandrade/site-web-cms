@@ -47,5 +47,5 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   // Everything except Next.js internals, the website's own endpoints and static files.
-  matcher: ['/((?!_next/|api/|next/|brand/|favicon\\.ico|favicon\\.svg|website-template-OG\\.webp).*)'],
+  matcher: ['/((?!_next/|api/|next/|brand/|fonts/|favicon\\.ico|favicon\\.svg|website-template-OG\\.webp).*)'],
 }

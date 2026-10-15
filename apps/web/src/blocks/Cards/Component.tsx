@@ -9,11 +9,17 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import { Picture } from '@/components/Picture'
 import { Section, SectionHeading, isDarkTheme } from '@/components/Section'
+import { HeroVideo } from '@/heros/FullscreenHero/HeroVideo'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { cn } from '@/utilities/ui'
 
 type Item = NonNullable<CardsBlockProps['items']>[number]
 
-const gridColumns = { '2': 'md:grid-cols-2', '3': 'md:grid-cols-3', '4': 'md:grid-cols-2 lg:grid-cols-4' }
+const gridColumns = {
+  '2': 'md:grid-cols-2',
+  '3': 'md:grid-cols-3',
+  '4': 'md:grid-cols-2 lg:grid-cols-4',
+}
 
 const featureColors: Record<NonNullable<Item['background']>, string> = {
   navy: 'bg-navy-900 text-white',
@@ -23,7 +29,11 @@ const featureColors: Record<NonNullable<Item['background']>, string> = {
 }
 
 /** Wraps the card in its link (the whole card is clickable, one link per card). */
-const CardLink: React.FC<{ item: Item; className: string; children: React.ReactNode }> = ({ item, className, children }) =>
+const CardLink: React.FC<{ item: Item; className: string; children: React.ReactNode }> = ({
+  item,
+  className,
+  children,
+}) =>
   item.enableLink && item.link ? (
     <CMSLink {...item.link} appearance="inline" className={cn('block', className)} label={null}>
       {children}
@@ -42,7 +52,9 @@ const FeatureCard: React.FC<{ item: Item }> = ({ item }) => (
   >
     <div className="p-6 md:p-8">
       <h3 className="text-2xl font-semibold leading-tight">{item.title}</h3>
-      {item.text && <p className="mt-2 text-sm font-[var(--weight-support,400)] opacity-85">{item.text}</p>}
+      {item.text && (
+        <p className="mt-2 text-sm font-[var(--weight-support,400)] opacity-85">{item.text}</p>
+      )}
     </div>
     {item.image && typeof item.image === 'object' && (
       <div className="relative mt-auto aspect-[4/3]">
@@ -52,48 +64,91 @@ const FeatureCard: React.FC<{ item: Item }> = ({ item }) => (
   </CardLink>
 )
 
+/**
+ * Uber Conta lending card, like the current site: white card (350px tall from 768px) with title,
+ * text and a blue "Conhecer" link at the bottom. The image sits small above the title on mobile and
+ * at the bottom-right corner from 768px, where it grows on hover. The whole card is the link.
+ */
 const ProductCard: React.FC<{ item: Item }> = ({ item }) => (
-  <div className="relative flex h-full min-h-[16rem] flex-col overflow-hidden rounded-card bg-white p-6 text-navy-900 md:p-8">
-    <h3 className="text-2xl font-semibold">{item.title}</h3>
-    {item.text && <p className="mt-2 max-w-xs text-sm font-[var(--weight-support,400)] text-ink-600">{item.text}</p>}
-    {item.image && typeof item.image === 'object' && (
-      <div className="absolute bottom-4 right-4 size-28 overflow-hidden rounded-card md:size-36">
-        <Media fill imgClassName="object-cover" resource={item.image} />
-      </div>
+  <CardLink
+    className="group relative flex h-full flex-col items-start rounded-2xl bg-white p-6 font-light text-black md:h-[350px]"
+    item={item}
+  >
+    <Picture
+      alt=""
+      className="-ml-2 mb-4 block max-w-20 transition-transform duration-200 motion-reduce:transition-none md:absolute md:bottom-9 md:right-9 md:mb-0 md:ml-0 md:w-auto md:max-w-none md:group-hover:scale-[1.16]"
+      image={item.image}
+    />
+    <h3 className="relative z-[5] text-[min(2rem,calc(1.325rem+0.9vw))] font-semibold leading-none max-md:text-[1.35rem]">
+      {item.title}
+    </h3>
+    {item.text && (
+      <p className="relative z-[5] mb-0 mt-2 text-base font-light text-[#4b4b4b]">
+        <Lines hideBelow="max-[991px]:hidden" text={item.text} />
+      </p>
     )}
     {item.enableLink && item.link && (
-      <CMSLink
-        {...item.link}
-        appearance="inline"
-        className="mt-auto inline-flex items-center gap-1 pt-8 text-sm font-[var(--weight-link,600)] text-brand-blue after:absolute after:inset-0 hover:underline"
-        label={null}
-      >
-        {item.link.label || 'Conhecer'} <ArrowRight aria-hidden className="size-4" />
-      </CMSLink>
+      <span className="relative z-[5] mt-4 inline-flex items-center font-normal text-brand-blue md:mt-auto">
+        <span className="relative">
+          {item.link.label || 'Conhecer'}
+          <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-current transition-all duration-200 group-hover:w-full motion-reduce:transition-none" />
+        </span>
+        <ArrowRightIcon className="-mt-0.5 ml-2 w-[18px] transition-all duration-200" />
+      </span>
     )}
-  </div>
+  </CardLink>
 )
 
 const IconCard: React.FC<{ item: Item; dark: boolean }> = ({ item, dark }) => (
   <CardLink
     className={cn(
-      'flex h-full flex-col rounded-card p-4 transition-colors md:p-6',
+      'flex h-full flex-col p-4 transition-colors md:p-6',
+      dark && item.image ? 'rounded-[0.5rem]' : 'rounded-card',
       dark ? 'bg-navy-800 hover:bg-navy-700' : 'bg-lilac-50 hover:bg-lilac-100',
+      dark &&
+        item.image &&
+        'bg-[rgba(94,94,94,0.2)] text-white hover:bg-white hover:text-black motion-reduce:transition-none',
     )}
     item={item}
   >
     <div className="mb-6 flex items-start justify-between md:mb-8">
-      <Icon className={cn('size-7', dark ? 'text-turquoise-400' : 'text-brand-blue')} name={item.icon ?? undefined} />
-      {item.enableLink && <ArrowUpRight aria-hidden className="size-5 opacity-80" />}
+      {item.image ? (
+        <Picture alt="" className="size-10" image={item.image} />
+      ) : (
+        <Icon
+          className={cn('size-7', dark ? 'text-turquoise-400' : 'text-brand-blue')}
+          name={item.icon ?? undefined}
+        />
+      )}
+      {item.enableLink &&
+        (item.image ? (
+          <ArrowRightIcon className="w-5" />
+        ) : (
+          <ArrowUpRight aria-hidden className="size-5 opacity-80" />
+        ))}
     </div>
-    <h3 className="font-semibold md:text-lg">{item.title}</h3>
-    {item.text && <p className="mt-1 text-sm font-[var(--weight-support,400)] opacity-80">{item.text}</p>}
+    <h3 className="font-semibold md:text-lg" data-slot="icon-card-title">
+      {item.title}
+    </h3>
+    {item.text && (
+      <p
+        className="mt-1 text-sm font-[var(--weight-support,400)] opacity-80"
+        data-slot="icon-card-text"
+      >
+        {item.text}
+      </p>
+    )}
   </CardLink>
 )
 
 const SimpleCard: React.FC<{ item: Item }> = ({ item }) => (
-  <CardLink className="flex h-full flex-col gap-3 rounded-card border border-[#dde1f3] bg-white p-6 text-navy-900" item={item}>
-    {item.image && typeof item.image === 'object' && <Media imgClassName="rounded-card" resource={item.image} />}
+  <CardLink
+    className="flex h-full flex-col gap-3 rounded-card border border-[#dde1f3] bg-white p-6 text-navy-900"
+    item={item}
+  >
+    {item.image && typeof item.image === 'object' && (
+      <Media imgClassName="rounded-card" resource={item.image} />
+    )}
     <h3 className="text-xl font-semibold">{item.title}</h3>
     {item.text && <p className="font-[var(--weight-support,400)] text-ink-600">{item.text}</p>}
   </CardLink>
@@ -144,7 +199,12 @@ const ShortcutCard: React.FC<{ item: Item }> = ({ item }) => {
         <Lines hideBelow="max-md:hidden" text={item.title} />
       </h3>
       {item.text && (
-        <p className={cn('relative z-[5] mb-0 mt-2 text-base font-light', light ? 'text-white' : 'text-[#4b4b4b]')}>
+        <p
+          className={cn(
+            'relative z-[5] mb-0 mt-2 text-base font-light',
+            light ? 'text-white' : 'text-[#4b4b4b]',
+          )}
+        >
           <Lines hideBelow="max-[991px]:hidden" text={item.text} />
         </p>
       )}
@@ -171,13 +231,18 @@ const ShortcutCard: React.FC<{ item: Item }> = ({ item }) => {
   )
 }
 
-const shortcutColumns = { '2': 'min-[992px]:grid-cols-2', '3': 'min-[992px]:grid-cols-3', '4': 'min-[992px]:grid-cols-4' }
+const shortcutColumns = {
+  '2': 'min-[992px]:grid-cols-2',
+  '3': 'min-[992px]:grid-cols-3',
+  '4': 'min-[992px]:grid-cols-4',
+}
 
 export const CardsBlock: React.FC<CardsBlockProps> = ({
   variant,
   theme,
   heading,
   intro,
+  video,
   columns,
   items,
   enableSectionLink,
@@ -194,7 +259,12 @@ export const CardsBlock: React.FC<CardsBlockProps> = ({
             <div className="text-left min-[992px]:text-center">
               {heading && <SectionHeading>{heading}</SectionHeading>}
               {intro && (
-                <p className={cn('mb-0 mt-4 text-base font-light', dark ? 'text-white/80' : 'text-[#4b4b4b]')}>
+                <p
+                  className={cn(
+                    'mb-0 mt-4 text-base font-light',
+                    dark ? 'text-white/80' : 'text-[#4b4b4b]',
+                  )}
+                >
                   {intro}
                 </p>
               )}
@@ -218,23 +288,63 @@ export const CardsBlock: React.FC<CardsBlockProps> = ({
   }
   // Solutions (icon cards) put the heading on the left, like the reference layout.
   const headingLeft = variant === 'icon'
+  // Lending cards: heading left on mobile and centered from 992px, extra vertical room, 24px x 12px gaps.
+  const product = variant === 'product'
+
+  const videoSrc =
+    variant === 'icon' && typeof video === 'object' && video?.url
+      ? getMediaUrl(video.url, video.updatedAt)
+      : null
 
   return (
-    <Section theme={theme}>
-      <div className="container">
+    <Section className={cn(videoSrc && 'overflow-hidden')} theme={theme}>
+      <div className={cn('container', product && 'min-[992px]:py-8')}>
         {(heading || intro) && (
-          <div className={cn('mb-10 md:mb-12', headingLeft ? 'max-w-xl' : 'mx-auto max-w-3xl text-center')}>
-            {heading && <SectionHeading>{heading}</SectionHeading>}
-            {intro && <p className={cn('mt-3 text-lg font-[var(--weight-support,400)]', dark ? 'text-white/80' : 'text-ink-600')}>{intro}</p>}
-            {enableSectionLink && sectionLink && (
-              <CMSLink {...sectionLink} appearance={dark ? 'inverse' : 'default'} className="mt-6" />
+          <div
+            className={cn(
+              videoSrc && 'relative flex min-h-[22rem] items-center md:min-h-[26rem]',
+              product
+                ? 'mb-8 text-left min-[992px]:mb-16 min-[992px]:text-center'
+                : 'mb-10 md:mb-12',
+              !product && !videoSrc && (headingLeft ? 'max-w-xl' : 'mx-auto max-w-3xl text-center'),
             )}
+          >
+            {videoSrc && (
+              <HeroVideo
+                className="absolute inset-y-0 right-0 z-0 h-full w-auto max-w-none object-contain object-right max-md:-right-16 md:right-0"
+                src={videoSrc}
+              />
+            )}
+            <div className={cn(videoSrc && 'relative z-[1] max-w-xl')}>
+              {heading && <SectionHeading>{heading}</SectionHeading>}
+              {intro && (
+                <p
+                  className={cn(
+                    'mt-3 text-lg font-[var(--weight-support,400)]',
+                    dark ? 'text-white/80' : 'text-ink-600',
+                  )}
+                >
+                  {intro}
+                </p>
+              )}
+              {enableSectionLink && sectionLink && (
+                <CMSLink
+                  {...sectionLink}
+                  appearance={dark ? 'inverse' : 'default'}
+                  className="mt-6"
+                >
+                  <ArrowRightIcon className="size-[15px]" />
+                </CMSLink>
+              )}
+            </div>
           </div>
         )}
 
         <ul
+          id={videoSrc ? 'solucoes-lista' : undefined}
           className={cn(
-            'grid gap-4 md:gap-6',
+            'grid',
+            product ? 'gap-x-6 gap-y-3' : 'gap-4 md:gap-6',
             variant === 'icon' ? 'grid-cols-2' : 'grid-cols-1',
             gridColumns[columns ?? '3'],
           )}

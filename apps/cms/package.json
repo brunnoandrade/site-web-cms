@@ -8,6 +8,7 @@
     "node": ">=22.0.0"
   },
   "scripts": {
+    "uber:home": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/update-uber-home.ts",
     "blog:migrate": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/migrate-wordpress.ts",
     "bootstrap:dev": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/bootstrap-dev.ts",
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",

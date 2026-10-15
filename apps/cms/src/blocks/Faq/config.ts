@@ -10,6 +10,19 @@ export const Faq: Block = {
   labels: { singular: t('Perguntas frequentes', 'FAQ'), plural: t('Perguntas frequentes', 'FAQs') },
   fields: [
     sectionTheme(),
+    {
+      name: 'variant',
+      label: t('Estilo', 'Style'),
+      type: 'select',
+      defaultValue: 'list',
+      options: [
+        { label: t('Lista com divisórias', 'List with dividers'), value: 'list' },
+        {
+          label: t('Cards (uma aberta por vez, a primeira aberta)', 'Cards (one open at a time, first open)'),
+          value: 'cards',
+        },
+      ],
+    },
     { name: 'heading', label: t('Título da seção', 'Section heading'), type: 'text' },
     {
       name: 'faqs',

@@ -112,6 +112,27 @@
   }
 }
 
+/*
+ * Vertical padding of sections. A theme can set --section-py (mobile), --section-py-md (768px) and
+ * --section-py-lg (992px). Plain CSS on purpose: as Tailwind utilities, the 768px rule came after the
+ * 992px one in the output and overrode it.
+ */
+@layer components {
+  .section-spacing {
+    padding-block: var(--section-py, 4rem);
+  }
+  @media (min-width: 768px) {
+    .section-spacing {
+      padding-block: var(--section-py-md, 6rem);
+    }
+  }
+  @media (min-width: 992px) {
+    .section-spacing {
+      padding-block: var(--section-py-lg, var(--section-py-md, 6rem));
+    }
+  }
+}
+
 /* Uber Conta: same container as the current site (Bootstrap 5): 12px gutters, 540/720/960/1140/1320. */
 [data-theme='uber-conta'] .container {
   padding-inline: 0.75rem;
@@ -142,12 +163,195 @@
   }
 }
 
+/*
+ * Uber Conta typefaces (files in public/fonts/uber-conta). Declared globally but only downloaded
+ * by pages that use them, i.e. the uber-conta theme; Digio keeps Montserrat.
+ */
+@font-face {
+  font-family: 'Uber Move';
+  src:
+    url('/fonts/uber-conta/UberMove-Light.woff2') format('woff2'),
+    url('/fonts/uber-conta/UberMove-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Uber Move';
+  src:
+    url('/fonts/uber-conta/UberMove-Regular.woff2') format('woff2'),
+    url('/fonts/uber-conta/UberMove-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Uber Move';
+  src:
+    url('/fonts/uber-conta/UberMove-Medium.woff2') format('woff2'),
+    url('/fonts/uber-conta/UberMove-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Uber Move';
+  src:
+    url('/fonts/uber-conta/UberMove-Bold.woff2') format('woff2'),
+    url('/fonts/uber-conta/UberMove-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Uber Move Text';
+  src:
+    url('/fonts/uber-conta/UberMoveText-Light.woff2') format('woff2'),
+    url('/fonts/uber-conta/UberMoveText-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Uber Move Text';
+  src:
+    url('/fonts/uber-conta/UberMoveText-Regular.woff2') format('woff2'),
+    url('/fonts/uber-conta/UberMoveText-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Uber Move Text';
+  src:
+    url('/fonts/uber-conta/UberMoveText-Medium.woff2') format('woff2'),
+    url('/fonts/uber-conta/UberMoveText-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Uber Move Text';
+  src:
+    url('/fonts/uber-conta/UberMoveText-Bold.woff2') format('woff2'),
+    url('/fonts/uber-conta/UberMoveText-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Uber Conta: Uber Move Text for body copy, Uber Move for every heading the CMS blocks render. */
+[data-theme='uber-conta'] {
+  font-family: var(--font-sans);
+  /* The current site keeps the browser default; Tailwind's `antialiased` (on body) thins light text on dark. */
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+}
+
+/* Uber Conta: every clickable element shows the pointer (Tailwind 4 resets buttons to default). */
+[data-theme='uber-conta'] :is(a[href], button:not(:disabled), summary, [role='button']:not([aria-disabled='true'])) {
+  cursor: pointer;
+}
+
+[data-theme='uber-conta'] :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading);
+}
+
+/* Uber Conta: footer column titles are Uber Move Text, not the heading face. */
+[data-theme='uber-conta'] footer :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-sans);
+}
+
+/* Uber Conta solution cards: 16px medium title under 768px; from 768px Uber Move, semibold, fluid up to 24px. */
+[data-theme='uber-conta'] [data-slot='icon-card-title'] {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  [data-theme='uber-conta'] [data-slot='icon-card-title'] {
+    font-family: var(--font-heading);
+    font-size: min(1.5rem, calc(1.275rem + 0.3vw));
+    font-weight: 600;
+  }
+}
+
+[data-theme='uber-conta'] [data-slot='icon-card-text'] {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Uber Conta FAQ: 16px questions (1.3 leading), 24px leading in the answers, 16px "more" link. */
+[data-theme='uber-conta'] [data-slot='faq-item'] summary {
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+[data-theme='uber-conta'] [data-slot='faq-item'] :is(p, li) {
+  line-height: 1.5;
+}
+
+/*
+ * Uber Conta FAQ: the answer slides open and closed (height + content-visibility on ::details-content).
+ * Browsers without ::details-content or interpolate-size just open instantly, as before.
+ */
+[data-theme='uber-conta'] [data-slot='faq-item'] {
+  interpolate-size: allow-keywords;
+}
+
+[data-theme='uber-conta'] [data-slot='faq-item']::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.3s ease,
+    content-visibility 0.3s allow-discrete;
+}
+
+[data-theme='uber-conta'] [data-slot='faq-item'][open]::details-content {
+  block-size: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme='uber-conta'] [data-slot='faq-item']::details-content {
+    transition: none;
+  }
+}
+
+[data-theme='uber-conta'] [data-slot='faq-more'] a {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Uber Conta testimonials: from 768px the quote is Uber Move, fluid up to 24px; the avatar is 12.8px, semibold. */
+@media (min-width: 768px) {
+  [data-theme='uber-conta'] [data-slot='testimonial-quote'] {
+    font-family: var(--font-heading);
+    font-size: min(1.5rem, calc(1.275rem + 0.3vw));
+  }
+}
+
+[data-theme='uber-conta'] [data-slot='testimonial-avatar'] {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
 /* Uber Conta section titles (display-4): fluid up to 3rem at 1200px, 600 weight, tight leading. */
 [data-theme='uber-conta'] [data-slot='section-heading'] {
   font-size: min(3rem, calc(1.425rem + 2.1vw));
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0;
+}
+
+/* Uber Conta testimonials: the marked part of the quote is faded instead of highlighted. */
+[data-theme='uber-conta'] [data-slot='quote-highlight'] {
+  color: inherit;
+  font-weight: inherit;
+  opacity: 0.5;
 }
 
 /* Uber Conta: in-page links scroll smoothly (unless the visitor asked for less motion). */

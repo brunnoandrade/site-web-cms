@@ -38,6 +38,20 @@ export const Cards: Block = {
     { name: 'heading', label: t('Título da seção', 'Section heading'), type: 'text' },
     { name: 'intro', label: t('Texto de apoio', 'Intro text'), type: 'textarea' },
     {
+      name: 'video',
+      label: t('Vídeo de fundo', 'Background video'),
+      type: 'upload',
+      relationTo: 'media',
+      filterOptions: { mimeType: { in: ['video/mp4', 'video/webm'] } },
+      admin: {
+        condition: withVariant('icon'),
+        description: t(
+          'Opcional. Toca em loop, sem som, atrás do título e dos cards da seção de soluções.',
+          'Optional. Loops silently behind the heading and cards of the solutions section.',
+        ),
+      },
+    },
+    {
       name: 'columns',
       label: t('Colunas', 'Columns'),
       type: 'select',

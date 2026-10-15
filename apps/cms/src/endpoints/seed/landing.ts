@@ -25,6 +25,7 @@ export const landing = ({
     links: [{ link: { ...custom('Quero meu cartão', '/'), appearance: 'default' } }],
     media: heroImage.id,
     disclaimer: 'Página de exemplo de campanha. Sujeito a análise de crédito.',
+    disclaimerLink: custom('Saber mais.', '/'),
   },
   layout: [
     {

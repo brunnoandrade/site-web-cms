@@ -84,6 +84,7 @@ export const home = ({
     media: heroImage.id,
     disclaimer:
       'Cartão sujeito a análise de crédito. Conta de pagamento. Consulte condições no app.',
+    disclaimerLink: custom('Saber mais.', '/componentes/'),
   },
   layout: [
     {

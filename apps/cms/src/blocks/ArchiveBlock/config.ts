@@ -16,6 +16,45 @@ export const Archive: Block = {
   fields: [
     sectionTheme(),
     {
+      name: 'variant',
+      label: 'Estilo',
+      type: 'select',
+      defaultValue: 'grid',
+      options: [
+        { label: 'Grade de cards', value: 'grid' },
+        { label: 'Carrossel (título à esquerda)', value: 'carousel' },
+      ],
+    },
+    {
+      name: 'eyebrow',
+      label: 'Texto acima do título',
+      type: 'text',
+      admin: { condition: (_, siblingData) => siblingData.variant === 'carousel' },
+    },
+    {
+      name: 'feedUrl',
+      label: 'Feed do Medium',
+      type: 'text',
+      admin: {
+        condition: (_, siblingData) => siblingData.variant === 'carousel',
+        description:
+          'Opcional. Ex.: https://medium.com/feed/@ubercontabrasil. Com o feed preenchido, os cards mostram os posts mais recentes do Medium (e abrem lá) em vez dos posts do CMS.',
+      },
+      validate: (value: unknown) => {
+        if (!value) return true
+        try {
+          const url = new URL(String(value))
+          return (
+            (url.protocol === 'https:' &&
+              (url.hostname === 'medium.com' || url.hostname.endsWith('.medium.com'))) ||
+            'Use um endereço https do medium.com.'
+          )
+        } catch {
+          return 'URL inválida.'
+        }
+      },
+    },
+    {
       name: 'introContent',
       type: 'richText',
       editor: lexicalEditor({
@@ -97,7 +136,8 @@ export const Archive: Block = {
       overrides: {
         name: 'moreLink',
         admin: {
-          condition: (_: unknown, siblingData: { enableMoreLink?: boolean }) => Boolean(siblingData?.enableMoreLink),
+          condition: (_: unknown, siblingData: { enableMoreLink?: boolean }) =>
+            Boolean(siblingData?.enableMoreLink),
         },
       },
     }),

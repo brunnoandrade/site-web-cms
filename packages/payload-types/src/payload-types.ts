@@ -559,6 +559,10 @@ export interface CardsBlock {
   theme?: ('light' | 'lilac' | 'navy' | 'blue') | null;
   heading?: string | null;
   intro?: string | null;
+  /**
+   * Optional. Loops silently behind the heading and cards of the solutions section.
+   */
+  video?: (number | null) | Media;
   columns?: ('2' | '3' | '4') | null;
   items?:
     | {
@@ -696,6 +700,10 @@ export interface CallToActionBlock {
  */
 export interface MediaBlock {
   media: number | Media;
+  /**
+   * Opcional. Usada em telas com menos de 992px; a imagem ocupa a largura do conteúdo.
+   */
+  mediaMobile?: (number | null) | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -815,6 +823,7 @@ export interface Rate {
  */
 export interface FaqBlock {
   theme?: ('light' | 'lilac' | 'navy' | 'blue') | null;
+  variant?: ('list' | 'cards') | null;
   heading?: string | null;
   faqs: (number | Faq)[];
   enableMoreLink?: boolean | null;
@@ -979,6 +988,12 @@ export interface Banner {
  */
 export interface ArchiveBlock {
   theme?: ('light' | 'lilac' | 'navy' | 'blue') | null;
+  variant?: ('grid' | 'carousel') | null;
+  eyebrow?: string | null;
+  /**
+   * Opcional. Ex.: https://medium.com/feed/@ubercontabrasil. Com o feed preenchido, os cards mostram os posts mais recentes do Medium (e abrem lá) em vez dos posts do CMS.
+   */
+  feedUrl?: string | null;
   introContent?: {
     root: {
       type: string;
@@ -1665,6 +1680,7 @@ export interface CardsBlockSelect<T extends boolean = true> {
   theme?: T;
   heading?: T;
   intro?: T;
+  video?: T;
   columns?: T;
   items?:
     | T
@@ -1733,6 +1749,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
+  mediaMobile?: T;
   anchor?: T;
   id?: T;
   blockName?: T;
@@ -1765,6 +1782,7 @@ export interface RatesTableBlockSelect<T extends boolean = true> {
  */
 export interface FaqBlockSelect<T extends boolean = true> {
   theme?: T;
+  variant?: T;
   heading?: T;
   faqs?: T;
   enableMoreLink?: T;
@@ -1816,6 +1834,9 @@ export interface BannerSectionBlockSelect<T extends boolean = true> {
  */
 export interface ArchiveBlockSelect<T extends boolean = true> {
   theme?: T;
+  variant?: T;
+  eyebrow?: T;
+  feedUrl?: T;
   introContent?: T;
   populateBy?: T;
   relationTo?: T;

@@ -53,7 +53,7 @@ export const FullscreenHero: React.FC<Page['hero']> = ({ links, media, video, vi
         <div className="flex w-full max-w-[570px] flex-col max-md:h-screen max-md:pt-[15vh] md:block">
           {richText && (
             <RichText
-              className="[&_h1]:mb-2 [&_h1]:text-[calc(1.525rem+3.3vw)] [&_h1]:font-semibold [&_h1]:leading-none [&_h1]:tracking-[-0.03em] min-[1200px]:[&_h1]:text-[4rem]"
+              className="[&_h1]:mb-2 [&_h1]:text-[calc(1.525rem+3.3vw)] [&_h1]:font-semibold [&_h1]:leading-none min-[1200px]:[&_h1]:text-[4rem]"
               data={richText}
               enableGutter={false}
             />

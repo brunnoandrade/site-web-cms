@@ -10,5 +10,12 @@ export const MediaBlock: Block = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'mediaMobile',
+      label: 'Imagem (celular)',
+      type: 'upload',
+      relationTo: 'media',
+      admin: { description: 'Opcional. Usada em telas com menos de 992px; a imagem ocupa a largura do conteúdo.' },
+    },
   ],
 }

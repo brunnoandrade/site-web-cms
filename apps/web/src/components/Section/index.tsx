@@ -22,9 +22,7 @@ type Props = React.HTMLAttributes<HTMLElement> & {
 
 export const Section: React.FC<Props> = ({ theme, spacing = 'default', className, children, ...rest }) => (
   <section
-    className={cn(themes[theme ?? 'light'], spacing === 'default' &&
-        // A theme can set --section-py (mobile), --section-py-md (768px) and --section-py-lg (992px).
-        'py-[var(--section-py,4rem)] md:py-[var(--section-py-md,6rem)] min-[992px]:py-[var(--section-py-lg,var(--section-py-md,6rem))]', className)}
+    className={cn(themes[theme ?? 'light'], spacing === 'default' && 'section-spacing', className)}
     data-section-theme={theme ?? 'light'}
     {...rest}
   >

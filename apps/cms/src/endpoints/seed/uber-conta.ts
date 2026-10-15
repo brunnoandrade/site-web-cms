@@ -24,7 +24,7 @@ const APP_URL = 'https://uberconta.onelink.me/asYc/nayzzxcl'
  * Home of the Uber Conta property (ubercontabrasil.com.br), built only with the platform blocks:
  * dark hero, shortcut cards, loan cards, testimonials, solutions grid, blog, FAQ and footer.
  * Texts are those of the current site. Images are placeholders from the template; the real ones
- * are uploaded to the media library. The hero has no video here: upload one in the admin (hero > Vídeo de fundo). What the blocks cannot do yet (desktop
+ * are uploaded to the media library. The hero videos, like every other asset of the home, are in uber-conta-assets/. What the blocks cannot do yet (desktop
  * and mobile image pairs) is listed in docs/uber-conta.md.
  */
 export async function seedUberConta({ payload, req, tenant, images, context }: Args) {
@@ -67,14 +67,14 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
 
   // Logos and badges from the current site, rasterized (the media library refuses SVG).
   // The header is dark (white logo); the footer is light, like the current site (black logos).
-  const upload = async (file: string, alt: string) => {
+  const upload = async (file: string, alt: string, mimetype = 'image/png') => {
     const data = await readFile(path.resolve(dirname, 'uber-conta-assets', file))
     return payload.create({
       collection: 'media',
       req,
       context,
       data: withTenant({ alt }),
-      file: { name: file, data, mimetype: 'image/png', size: data.byteLength },
+      file: { name: file, data, mimetype, size: data.byteLength },
     })
   }
   // The shortcut photos (1: square on black, 2 and 3: portrait), already cropped for the cards.
@@ -87,6 +87,30 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
     await upload('shortcut-2-mobile.png', 'Mão segurando o celular com o app Uber Conta'),
     await upload('shortcut-3-mobile.png', 'Cartões Uber Conta'),
   ]
+
+  const loanPersonal = await upload('loan-personal.png', 'Cartão em perspectiva sobre fundo azul')
+  const loanFast = await upload('loan-fast.png', 'Relógio inteligente com ícone de tempo')
+
+  // Hero videos of the current site (desktop and mobile).
+  const heroVideo = await upload('hero.mp4', 'Celular com o app Uber Conta', 'video/mp4')
+  const heroVideoMobile = await upload(
+    'hero-mobile.mp4',
+    'Celular com o app Uber Conta',
+    'video/mp4',
+  )
+
+  // Solutions: the video behind the heading and the icons (SVGs of the current site, rasterized).
+  const solutionsVideo = await upload(
+    'solutions.mp4',
+    'Celulares com o app Uber Conta',
+    'video/mp4',
+  )
+  const solutionIcon = async (name: string, alt: string) =>
+    (await upload(`solution-${name}.png`, alt)).id
+
+  // Divider between the blog and the FAQ (desktop and mobile versions).
+  const dividerDesktop = await upload('divider.jpg', 'Uber Conta', 'image/jpeg')
+  const dividerMobile = await upload('divider-mobile.jpg', 'Uber Conta', 'image/jpeg')
 
   await payload.create({
     collection: 'pages',
@@ -104,6 +128,8 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           { link: { ...custom('Conhecer mais', '#solucoes'), appearance: 'default' as const } },
         ],
         media: images[0].id,
+        video: heroVideo.id,
+        videoMobile: heroVideoMobile.id,
         disclaimer:
           'Este é um produto oferecido pelo Banco Digio e está sujeito à elegibilidade, análise de crédito e condições variáveis.',
         disclaimerLink: custom('Saber mais.', '#solucoes'),
@@ -157,13 +183,15 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           items: [
             {
               title: 'Crédito Pessoal',
-              text: 'Até R$ 10.000 na conta em minutos, com pagamento em até 18x.',
+              text: 'Até R$ 10.000 na conta em minutos,\ncom pagamento em até 18x.',
+              image: loanPersonal.id,
               enableLink: true,
               link: custom('Conhecer', '/credito-pessoal/'),
             },
             {
               title: 'Crédito Rápido',
-              text: 'Empréstimos emergenciais de até R$ 300 com possibilidade de recontratação.',
+              text: 'Empréstimos emergenciais de até R$ 300\ncom possibilidade de recontratação.',
+              image: loanFast.id,
               enableLink: true,
               link: custom('Conhecer', '/credito-rapido/'),
             },
@@ -198,47 +226,50 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           theme: 'navy' as const,
           anchor: 'solucoes',
           heading: 'Soluções focadas nas suas necessidades!',
+          video: solutionsVideo.id,
+          enableSectionLink: true,
+          sectionLink: custom('Aproveitar soluções', '#solucoes-lista'),
           columns: '3' as const,
           items: [
             {
               title: 'Débitos Veiculares',
               text: 'Parcele IPVA, licenciamento e multas em até 12x.',
-              icon: 'car' as const,
+              image: await solutionIcon('vehicle', 'Débitos Veiculares'),
               enableLink: true,
               link: custom('Débitos Veiculares', '/debitos-veiculares/'),
             },
             {
               title: 'Uber Conta Desconto',
               text: 'Compre com descontos em grandes marcas.',
-              icon: 'percent' as const,
+              image: await solutionIcon('discount', 'Uber Conta Desconto'),
               enableLink: true,
               link: custom('Descontos', '/descontos/'),
             },
             {
               title: 'Uber Chip',
               text: 'Planos de 14GB a 55GB a partir de R$ 20, com apps liberados e bônus exclusivos.',
-              icon: 'smartphone' as const,
+              image: await solutionIcon('chip', 'Uber Chip'),
               enableLink: true,
               link: custom('Uber Chip', '/uber-chip/'),
             },
             {
               title: 'Seguro Celular',
               text: 'Proteja seu aparelho de imprevistos por apenas R$ 29,90 ao mês.',
-              icon: 'shield-check' as const,
+              image: await solutionIcon('security', 'Seguro Celular'),
               enableLink: true,
               link: custom('Seguro Celular', '/seguro-celular/'),
             },
             {
               title: 'Tag Veloe',
               text: 'Adquira sua tag de pedágio por apenas R$ 8,90 ao mês.',
-              icon: 'receipt' as const,
+              image: await solutionIcon('tag', 'Tag Veloe'),
               enableLink: true,
               link: custom('Tag Veloe', '/tag-veloe/'),
             },
             {
               title: 'Atendimento 24h',
               text: 'Conte com suporte via aplicativo ou telefone.',
-              icon: 'clock' as const,
+              image: await solutionIcon('support', 'Atendimento 24h'),
               enableLink: true,
               link: custom('Central de ajuda', '/central-de-ajuda/'),
             },
@@ -249,17 +280,26 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           anchor: 'blog',
           populateBy: 'collection' as const,
           relationTo: 'posts' as const,
-          limit: 3,
-          introContent: richText(
-            { tag: 'h2', text: 'Conteúdo relevante para seu dia a dia' },
-            'Uber Blog',
-          ),
+          limit: 6,
+          variant: 'carousel' as const,
+          eyebrow: 'Uber Blog',
+          feedUrl: 'https://medium.com/feed/@ubercontabrasil',
+          introContent: richText({ tag: 'h2', text: 'Conteúdo relevante para seu dia a dia' }),
           enableMoreLink: true,
-          moreLink: custom('Ir para o Blog', '/blog/'),
+          moreLink: {
+            ...custom('Ir para o Blog', 'https://medium.com/@ubercontabrasil'),
+            newTab: true,
+          },
+        },
+        {
+          blockType: 'mediaBlock' as const,
+          media: dividerDesktop.id,
+          mediaMobile: dividerMobile.id,
         },
         {
           blockType: 'faq' as const,
-          theme: 'lilac' as const,
+          variant: 'cards' as const,
+          theme: 'light' as const,
           anchor: 'ajuda',
           heading: 'Ficou com alguma dúvida?',
           faqs: faqs.map((faq) => faq.id),

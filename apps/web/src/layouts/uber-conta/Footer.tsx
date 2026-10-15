@@ -51,7 +51,7 @@ export async function Footer({ tenant }: { tenant: string }) {
           <div className="mt-8 grid grid-cols-2 gap-x-6 min-[992px]:col-span-3 min-[992px]:mt-0 min-[992px]:grid-cols-3 min-[992px]:pl-12">
             {columns.map((column, i) => (
               <nav aria-label={column.title} key={column.id ?? i}>
-                <h2 className="mb-2 text-base font-medium text-black">{column.title}</h2>
+                <h2 className="mb-2 text-base font-medium leading-[1.3] text-black">{column.title}</h2>
                 <ul className="mb-8 flex flex-col">
                   {(column.links ?? []).map(({ link, image, id }, j) => (
                     <li key={id ?? j}>
@@ -68,7 +68,7 @@ export async function Footer({ tenant }: { tenant: string }) {
                         <CMSLink
                           {...link}
                           appearance="inline"
-                          className={cn(underline, 'text-sm font-light hover:text-black md:mt-2 md:text-base')}
+                          className={cn(underline, 'text-sm font-light leading-normal hover:text-black md:mt-2 md:text-base')}
                         />
                       )}
                     </li>
@@ -80,7 +80,7 @@ export async function Footer({ tenant }: { tenant: string }) {
         </div>
       </div>
 
-      <div className="border-t border-lilac-100 py-8 text-xs font-light">
+      <div className="border-t border-lilac-100 py-8 text-xs font-light leading-normal">
         <div className="container flex flex-wrap items-center justify-center gap-y-2 text-center md:justify-between md:text-left">
           <p className="m-0">{footerData?.legalText}</p>
           {bottomLinks.map(({ link, id }, i) => (

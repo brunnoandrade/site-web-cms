@@ -34,6 +34,9 @@ const themes: Record<ThemePreset, Record<string, string>> = {
     '--section-py': '2.5rem',
     '--section-py-md': '2.5rem',
     '--section-py-lg': '6rem',
+    // Typefaces of the current site: Uber Move Text for body copy, Uber Move for headings.
+    '--font-sans': "'Uber Move Text', ui-sans-serif, system-ui, sans-serif",
+    '--font-heading': "'Uber Move', ui-sans-serif, system-ui, sans-serif",
     // Font weights of the current site (Uber Move Text): light supporting text, regular FAQ
     // questions and links, medium testimonial quotes. Titles stay at 600.
     '--weight-support': '300',
