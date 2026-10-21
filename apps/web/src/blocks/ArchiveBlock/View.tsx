@@ -23,7 +23,7 @@ export type ArchiveBlockViewProps = ArchiveBlockProps & {
 
 /**
  * Uber Conta blog slide: photo on top (zooms on hover), grey area with a 2-line title and a blue
- * "Ler mais" link. The whole card is the link.
+ * "Leia no Blog" link. The whole card is the link.
  */
 const BlogSlide: React.FC<{
   title: string
@@ -62,7 +62,7 @@ const BlogSlide: React.FC<{
         {title}
       </h4>
       <span className="mt-4 inline-flex items-center text-sm text-[#276ef1] group-hover:text-black">
-        Ler mais
+        Leia no Blog
         <ArrowRightIcon className="-mt-0.5 ml-2 w-[15px]" />
       </span>
     </span>
@@ -103,7 +103,7 @@ export const ArchiveBlockView: React.FC<ArchiveBlockViewProps> = (props) => {
               <CMSLink
                 {...moreLink}
                 appearance="secondary"
-                className="mt-8 h-auto rounded-[0.6rem] bg-[#e8e8e8] px-[1.7rem] py-4 font-normal text-black hover:bg-black/[0.08] min-[992px]:[&_svg]:hidden"
+                className="mt-8 h-auto rounded-[0.6rem] bg-[#e8e8e8] px-[1.7rem] py-4 text-base font-normal text-black hover:bg-black/[0.08] min-[992px]:[&_svg]:hidden"
               >
                 <ArrowRightIcon className="size-[15px]" />
               </CMSLink>

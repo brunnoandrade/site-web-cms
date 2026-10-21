@@ -38,11 +38,11 @@ export const StepsList: React.FC<{ items: Items }> = ({ items }) => {
         )}
       </div>
 
-      <ul className="m-0 list-none p-0 [counter-reset:step] max-[991px]:-mt-6 min-[992px]:col-span-7 min-[1200px]:col-span-4">
+      <ul className="m-0 list-none p-0 [counter-reset:step] max-[991px]:grid max-[991px]:-mt-6 min-[992px]:col-span-7 min-[1200px]:col-span-4">
         {items.map((item, i) => {
           const open = i === active
           return (
-            <li className={cn(!open && 'max-[991px]:hidden')} key={item.id ?? i}>
+            <li className={cn('max-[991px]:[grid-area:1/1]', !open && 'max-[991px]:invisible')} key={item.id ?? i}>
               <div
                 className={cn(
                   'p-4 text-white transition-all duration-200 motion-reduce:transition-none min-[992px]:cursor-pointer min-[992px]:border-b min-[992px]:border-white/20 min-[992px]:px-0 max-[991px]:px-1',
@@ -72,7 +72,7 @@ export const StepsList: React.FC<{ items: Items }> = ({ items }) => {
                   {item.title}
                 </h4>
                 {item.text && (
-                  <p className={cn('mb-0 mt-2 text-white', !open && 'min-[992px]:hidden')}>
+                  <p className={cn('mb-0 mt-2 font-light text-white', !open && 'min-[992px]:hidden')}>
                     {item.text}
                   </p>
                 )}
@@ -82,7 +82,7 @@ export const StepsList: React.FC<{ items: Items }> = ({ items }) => {
         })}
       </ul>
 
-      <div className="mb-8 mt-6 flex justify-center gap-2 min-[992px]:hidden">
+      <div className="mb-12 mt-4 flex justify-center gap-2 min-[992px]:hidden">
         {items.map((item, i) => (
           <button
             key={item.id ?? i}
