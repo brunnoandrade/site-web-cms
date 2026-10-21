@@ -84,7 +84,8 @@
   },
   "band": {
     "image": "debitos_veiculares_2a50e0b9e2.jpg",
-    "imageMobile": "debitos_veiculares_mobile_923858cc93.jpg"
+    "imageMobile": "debitos_veiculares_mobile_923858cc93.jpg",
+    "style": "light"
   },
   "faqs": [
     {

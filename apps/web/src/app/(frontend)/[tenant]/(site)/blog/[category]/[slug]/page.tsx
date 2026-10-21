@@ -12,6 +12,8 @@ import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
 import { generateMeta } from '@/utilities/generateMeta'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { UberPost } from '@/components/UberPost'
+import { isUberConta } from '@/lib/uber-help'
 
 // Rendered on the first request and cached per tenant (ISR); see [[...slug]]/page.tsx.
 // URL: /blog/<categoria>/<slug>/, the same as WordPress.
@@ -43,6 +45,15 @@ export default async function Post({ params: paramsPromise }: Args) {
   if (!postCategory) notFound()
   if (postCategory !== decodeURIComponent(category))
     permanentRedirect(postPath(postCategory, post.slug!))
+
+  if (isUberConta(tenant)) {
+    return (
+      <>
+        {draft && <LivePreviewListener />}
+        <UberPost post={post} tenant={tenant.slug} />
+      </>
+    )
+  }
 
   return (
     <article className="pt-16 pb-16">

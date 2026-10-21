@@ -101,7 +101,8 @@
   },
   "band": {
     "image": "credito_pessoal_mobile_72d7b0579e.jpg",
-    "imageMobile": "credito_pessoal_2703c9f8c5.jpg"
+    "imageMobile": "credito_pessoal_2703c9f8c5.jpg",
+    "style": null
   },
   "faqs": [
     {

@@ -586,6 +586,10 @@ export interface CardsBlock {
    * Optional. Image behind the heading (a video, when set, takes precedence).
    */
   backgroundImage?: (number | null) | Media;
+  /**
+   * Optional. Used under 992px (usually portrait); without it the main image is used.
+   */
+  backgroundImageMobile?: (number | null) | Media;
   legend?: string | null;
   listHeading?: string | null;
   columns?: ('2' | '3' | '4') | null;
@@ -729,6 +733,10 @@ export interface MediaBlock {
    * Opcional. Usada em telas com menos de 992px; a imagem ocupa a largura do conteúdo.
    */
   mediaMobile?: (number | null) | Media;
+  /**
+   * Só para a faixa com imagem de celular (Uber Conta).
+   */
+  background?: ('white' | 'grey') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -2033,6 +2041,7 @@ export interface CardsBlockSelect<T extends boolean = true> {
   video?: T;
   image?: T;
   backgroundImage?: T;
+  backgroundImageMobile?: T;
   legend?: T;
   listHeading?: T;
   columns?: T;
@@ -2104,6 +2113,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
   mediaMobile?: T;
+  background?: T;
   anchor?: T;
   id?: T;
   blockName?: T;

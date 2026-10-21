@@ -83,7 +83,8 @@
   },
   "band": {
     "image": "cartao_ebfc91d369.jpg",
-    "imageMobile": "cartao_mobile_2ef3c9aa24.jpg"
+    "imageMobile": "cartao_mobile_2ef3c9aa24.jpg",
+    "style": "light"
   },
   "faqs": [
     {

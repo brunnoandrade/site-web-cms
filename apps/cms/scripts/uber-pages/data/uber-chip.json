@@ -83,7 +83,8 @@
   },
   "band": {
     "image": "uber_chip_79220e4d92.jpg",
-    "imageMobile": "uber_chip_mobile_ef9d23b1e2.jpg"
+    "imageMobile": "uber_chip_mobile_ef9d23b1e2.jpg",
+    "style": "light"
   },
   "faqs": [
     {

@@ -53,7 +53,7 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({
                     </span>
                   </summary>
                   <RichText
-                    className="px-5 pb-4 font-light text-[#4b4b4b] [&_li]:m-0 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_p]:mt-0 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5"
+                    className="px-5 pb-4 font-light text-[#4b4b4b] [&_li]:m-0 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_p]:mt-0 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5 [&_strong]:font-semibold [&_strong]:text-black"
                     data={faq.answer}
                     enableGutter={false}
                   />

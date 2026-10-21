@@ -4,7 +4,7 @@ import React from 'react'
 import type { ContactsBlock as Props } from '@digio/payload-types'
 
 import { ArrowRightIcon } from '@/components/ArrowRightIcon'
-import { Paragraphs } from '@/components/Lines'
+import { Lines, Paragraphs } from '@/components/Lines'
 import { CMSLink } from '@/components/Link'
 import { Picture } from '@/components/Picture'
 import { Section, SectionHeading } from '@/components/Section'
@@ -18,7 +18,11 @@ const EntryRow: React.FC<{ entry: Entry }> = ({ entry }) => {
         {entry.icon && <Picture alt="" className="size-6 shrink-0" image={entry.icon} />}
         <div>
           <p className="m-0 text-sm text-black">{entry.title}</p>
-          {entry.description && <p className="mb-0 mt-1 text-sm font-light text-[#4b4b4b]">{entry.description}</p>}
+          {entry.description && (
+            <p className="mb-0 mt-1 text-sm font-light text-[#4b4b4b]">
+              <Lines text={entry.description} />
+            </p>
+          )}
         </div>
       </div>
       {entry.phone && <p className="m-0 whitespace-nowrap text-sm text-black">{entry.phone}</p>}
@@ -37,7 +41,14 @@ const EntryRow: React.FC<{ entry: Entry }> = ({ entry }) => {
 }
 
 /** Heading and text on the left, the contact groups as grey cards on the right. */
-export const ContactsBlock: React.FC<Props> = ({ eyebrow, heading, text, enableLink, link, groups }) => (
+export const ContactsBlock: React.FC<Props> = ({
+  eyebrow,
+  heading,
+  text,
+  enableLink,
+  link,
+  groups,
+}) => (
   <Section theme="light">
     <div className="container grid gap-8 min-[992px]:grid-cols-2 min-[992px]:gap-6">
       <div className="min-[992px]:pr-24">

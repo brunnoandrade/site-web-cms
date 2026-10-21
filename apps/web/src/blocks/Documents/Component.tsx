@@ -17,19 +17,19 @@ export const DocumentsBlock: React.FC<Props> = ({ groups }) => (
   <div className="container max-md:px-0 min-[992px]:mb-24 min-[992px]:pt-8">
     {(groups ?? []).map((group, i) => (
       <div key={group.id ?? i}>
-        <h2 className="mb-0 mt-12 text-base font-medium max-md:pl-4">{group.title}</h2>
+        <h2 className="mb-0 mt-12 text-base font-medium text-black max-md:pl-4">{group.title}</h2>
         <ul className="m-0 list-none p-0">
           {(group.items ?? []).map((item, j) => {
             const links = item.links ?? []
             return (
               <li
                 key={item.id ?? j}
-                className="flex items-center border-b border-[#f3f3f3] px-4 py-8 transition-colors hover:bg-[#f3f3f3] max-md:py-4"
+                className="flex items-center border-b border-[#f3f3f3] px-4 py-6 transition-colors hover:bg-[#f3f3f3] max-md:py-4"
               >
                 <span className="mr-4 flex size-12 shrink-0 items-center justify-center rounded-full bg-[#e8e8e8]">
                   {item.icon && <Picture alt="" className="size-6" image={item.icon} />}
                 </span>
-                <h3 className="m-0 max-w-[215px] text-sm font-medium md:max-w-none md:text-xl">{item.title}</h3>
+                <h3 className="m-0 max-w-[215px] text-sm font-medium text-black md:max-w-none md:text-base">{item.title}</h3>
                 <div className="ml-auto">
                   {links.length === 1 ? (
                     <CMSLink {...links[0].link} appearance="inline" className={action} label="Acessar" newTab />

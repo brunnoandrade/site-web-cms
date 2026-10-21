@@ -127,7 +127,7 @@ def build_about(slug):
             out['imageContent'] = {'heading': text_of(c['title']), 'text': text_of(c.get('description')), 'logo': asset(c.get('logo')), 'button': c.get('button_text'), 'buttonUrl': c.get('button_url'), 'newTab': c.get('button_target') == '_blank', 'image': img, 'imageMobile': mob}
         elif kind == 'talk':
             out['contacts'] = {'eyebrow': c.get('label'), 'heading': c['title'], 'text': text_of(c.get('description')), 'button': c.get('button_text'), 'buttonUrl': c.get('button_url'),
-                               'groups': [{'title': g.get('title'), 'entries': [{'title': b['title'], 'description': b.get('description'), 'phone': b.get('phone'), 'url': b.get('link'), 'icon': asset(b.get('icon'))} for b in g['blocks']]} for g in c['contacts']]}
+                               'groups': [{'title': g.get('title'), 'entries': [{'title': b['title'], 'description': text_of(b.get('description')), 'phone': b.get('phone'), 'url': b.get('link'), 'icon': asset(b.get('icon'))} for b in g['blocks']]} for g in c['contacts']]}
         else:
             print('  unknown component', kind, file=sys.stderr)
     return out
@@ -204,7 +204,7 @@ def build(slug):
             out['posts'] = {'eyebrow': c.get('description'), 'heading': c['title'], 'button': c.get('button_text'), 'buttonUrl': c.get('button_url')}
         elif kind == 'image-divider':
             img, mob = pair(c.get('image_desktop'), c.get('image_mobile'))
-            out['band'] = {'image': img, 'imageMobile': mob}
+            out['band'] = {'image': img, 'imageMobile': mob, 'style': c.get('style')}
         elif kind == 'faq':
             out['faqs'] = [{'question': f['question'], 'answer': clean_html(f['answer']), 'slug': f.get('slug'), 'category': (f.get('faq_category') or {}).get('slug')} for f in c['faqs']]
             out['faqSection'] = {'heading': c['title'], 'button': c.get('button_text'), 'buttonUrl': c.get('button_url')}

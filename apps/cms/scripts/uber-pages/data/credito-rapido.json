@@ -81,7 +81,8 @@
   },
   "band": {
     "image": "credito_rapido_430554a44a.jpg",
-    "imageMobile": "credito_rapido_mobile_6bdf953318.jpg"
+    "imageMobile": "credito_rapido_mobile_6bdf953318.jpg",
+    "style": null
   },
   "faqs": [
     {

@@ -27,6 +27,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
     imgClassName,
     media,
     mediaMobile,
+    background,
     staticImage,
     disableInnerContainer,
   } = props
@@ -37,13 +38,15 @@ export const MediaBlock: React.FC<Props> = (props) => {
   // Desktop and mobile images: a full-width <picture> with rounded corners (Uber Conta divider).
   if (mediaMobile) {
     return (
-      <div className={cn('container py-6 min-[992px]:py-12', className)}>
-        <Picture
-          alt={(typeof media === 'object' && media?.alt) || ''}
-          className="w-full overflow-hidden rounded-2xl min-[992px]:rounded-[2rem]"
-          image={media}
-          mobile={mediaMobile}
-        />
+      <div className={cn(background === 'grey' && 'min-[992px]:bg-[#f3f3f3]')}>
+        <div className={cn('container max-[991px]:px-0 min-[992px]:py-12', className)}>
+          <Picture
+            alt={(typeof media === 'object' && media?.alt) || ''}
+            className="w-full overflow-hidden min-[992px]:rounded-[2rem]"
+            image={media}
+            mobile={mediaMobile}
+          />
+        </div>
       </div>
     )
   }

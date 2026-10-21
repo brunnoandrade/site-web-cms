@@ -77,7 +77,8 @@
   },
   "band": {
     "image": "conta_digital_de53ffc25f.jpg",
-    "imageMobile": "conta_digital_mobile_597ac6e57c.jpg"
+    "imageMobile": "conta_digital_mobile_597ac6e57c.jpg",
+    "style": "light"
   },
   "faqs": [
     {

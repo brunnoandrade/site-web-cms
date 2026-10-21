@@ -73,7 +73,8 @@
   },
   "band": {
     "image": "desconto_8e08306be5.jpg",
-    "imageMobile": "desconto_mobile_b4d4487fd1.jpg"
+    "imageMobile": "desconto_mobile_b4d4487fd1.jpg",
+    "style": "light"
   },
   "faqs": [
     {

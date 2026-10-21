@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/utilities/ui'
 
@@ -30,6 +30,15 @@ export const Strip: React.FC<Props> = ({
 }) => {
   const ref = useRef<HTMLUListElement>(null)
   const items = React.Children.toArray(children)
+  const [overflow, setOverflow] = useState(true)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const check = () => setOverflow(el.scrollWidth > el.clientWidth + 2)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [items.length])
   const scroll = (direction: 1 | -1) =>
     ref.current?.scrollBy({ left: direction * ref.current.clientWidth, behavior: 'smooth' })
 
@@ -62,7 +71,12 @@ export const Strip: React.FC<Props> = ({
           </li>
         ))}
       </ul>
-      <div className="mt-12 flex justify-center gap-2 max-[991px]:hidden">
+      <div
+        className={cn(
+          'mt-12 flex justify-center gap-2 max-[991px]:hidden',
+          !overflow && 'min-[992px]:hidden',
+        )}
+      >
         <button aria-label="Anterior" className={button} onClick={() => scroll(-1)} type="button">
           <ArrowLeft aria-hidden className="size-5" />
         </button>

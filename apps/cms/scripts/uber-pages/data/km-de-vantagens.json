@@ -78,7 +78,8 @@
   },
   "band": {
     "image": "kmv_24453d462f.jpg",
-    "imageMobile": "kmv_mobile_ab59da1d5b.jpg"
+    "imageMobile": "kmv_mobile_ab59da1d5b.jpg",
+    "style": "light"
   },
   "faqs": [
     {

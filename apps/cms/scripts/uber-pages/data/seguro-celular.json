@@ -83,7 +83,8 @@
   },
   "band": {
     "image": "seguro_celular_c1c3154dd4.jpg",
-    "imageMobile": "seguro_celular_mobile_341bc88c82.jpg"
+    "imageMobile": "seguro_celular_mobile_341bc88c82.jpg",
+    "style": "light"
   },
   "faqs": [
     {

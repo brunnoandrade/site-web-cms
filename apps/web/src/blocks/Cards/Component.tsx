@@ -260,7 +260,7 @@ const BenefitsSection: React.FC<CardsBlockProps> = ({
           <div className="relative w-full shrink-0 overflow-hidden rounded-2xl min-[992px]:w-[370px]">
             <video
               autoPlay
-              className="block size-full object-cover"
+              className="block h-auto w-full"
               loop
               muted
               playsInline
@@ -347,6 +347,7 @@ const CardsBlockView: React.FC<CardsBlockProps> = ({
   sectionLink,
   image,
   backgroundImage,
+  backgroundImageMobile,
   legend,
   listHeading,
   ...rest
@@ -417,18 +418,32 @@ const CardsBlockView: React.FC<CardsBlockProps> = ({
     const bg = backgroundImage.url
       ? getMediaUrl(backgroundImage.url, backgroundImage.updatedAt)
       : null
+    const bgMobile =
+      typeof backgroundImageMobile === 'object' && backgroundImageMobile?.url
+        ? getMediaUrl(backgroundImageMobile.url, backgroundImageMobile.updatedAt)
+        : null
     return (
       <Section
         className="pt-0 min-[992px]:bg-[image:var(--bg)] min-[992px]:bg-top min-[992px]:bg-no-repeat min-[992px]:[background-size:auto]"
-        style={{ '--bg': bg ? `url(${bg})` : 'none' } as React.CSSProperties}
+        style={
+          {
+            '--bg': bg ? `url(${bg})` : 'none',
+            '--bg-m': bgMobile ? `url(${bgMobile})` : bg ? `url(${bg})` : 'none',
+          } as React.CSSProperties
+        }
         theme={theme}
       >
-        <div className="max-[991px]:bg-[image:var(--bg)] max-[991px]:bg-cover max-[991px]:bg-top">
-          <div className="container flex min-h-[35rem] flex-col pb-10 pt-16 min-[992px]:items-center min-[992px]:text-center">
+        <div className="max-[991px]:bg-[image:var(--bg-m)] max-[991px]:bg-no-repeat max-[991px]:[background-position:calc(50%+69px)_-363px] max-[991px]:[background-size:874px_auto]">
+          <div className="container flex min-h-[42rem] flex-col pb-10 pt-16 min-[992px]:min-h-[35rem] min-[992px]:items-center min-[992px]:text-center">
             {heading && <SectionHeading className="text-white">{heading}</SectionHeading>}
             {intro && <p className="mb-0 mt-4 font-light text-white">{intro}</p>}
             {enableSectionLink && sectionLink && (
-              <CMSLink {...sectionLink} appearance="inverse" className="mt-auto w-fit" size="lg">
+              <CMSLink
+                {...sectionLink}
+                appearance="inverse"
+                className="mt-auto w-full min-[992px]:w-fit"
+                size="lg"
+              >
                 <ArrowRightIcon className="size-[15px]" />
               </CMSLink>
             )}

@@ -91,7 +91,10 @@ export const CoverHero: React.FC<Page['hero']> = ({
             <CMSLink
               {...cta}
               appearance={onLight ? 'default' : 'inverse'}
-              className="my-8 max-md:mb-4 max-md:mt-auto md:w-fit"
+              className={cn(
+                'my-8 max-md:mb-4 max-md:mt-auto md:w-fit',
+                onLight && 'max-md:!bg-white max-md:!text-black',
+              )}
               size="lg"
             >
               <ArrowRightIcon className={cn('size-[15px]', isAnchor && 'rotate-90')} />
@@ -130,7 +133,7 @@ export const CoverHero: React.FC<Page['hero']> = ({
       {hero}
       <form
         action="/central-de-ajuda/busca/"
-        className="absolute inset-x-0 bottom-0 z-[3] mx-auto w-[min(92%,36rem)] translate-y-1/2"
+        className="absolute inset-x-0 bottom-0 z-[3] mx-auto w-[min(92%,46rem)] translate-y-1/2"
         role="search"
       >
         <label className="sr-only" htmlFor="help-search">

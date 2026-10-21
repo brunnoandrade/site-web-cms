@@ -84,7 +84,8 @@
   },
   "band": {
     "image": "tag_veloe_f9f2e4c831.jpg",
-    "imageMobile": "tag_veloe_mobile_d225e196be.jpg"
+    "imageMobile": "tag_veloe_mobile_d225e196be.jpg",
+    "style": "light"
   },
   "faqs": [
     {

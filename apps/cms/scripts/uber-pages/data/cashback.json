@@ -73,7 +73,8 @@
   },
   "band": {
     "image": "cashback_68bd63f2f9.jpg",
-    "imageMobile": "cashback_mobile_2b31835f23.jpg"
+    "imageMobile": "cashback_mobile_2b31835f23.jpg",
+    "style": "light"
   },
   "faqs": [
     {

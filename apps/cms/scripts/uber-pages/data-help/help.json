@@ -70,14 +70,14 @@
         "entries": [
           {
             "title": "Central de negociação de empréstimos",
-            "description": "9h às 20h - Segunda a sexta, exceto feriados <br>\n9h às 14h - Sábado ",
+            "description": "9h às 20h - Segunda a sexta, exceto feriados \n\n9h às 14h - Sábado",
             "phone": "0800 941 9829",
             "url": null,
             "icon": null
           },
           {
             "title": "Negocie via WhatsApp",
-            "description": "9h às 20h - Segunda a sexta, exceto feriados <br>\n9h às 14h - Sábado",
+            "description": "9h às 20h - Segunda a sexta, exceto feriados \n\n9h às 14h - Sábado",
             "phone": null,
             "url": "https://api.whatsapp.com/message/ZL7SN7ZSRLBKD1?autoload=1&app_absent=0",
             "icon": null

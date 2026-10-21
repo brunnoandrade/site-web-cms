@@ -45,7 +45,7 @@ export async function Footer({ tenant }: { tenant: string }) {
                 mobile={footerData?.logoMobile}
               />
             </Link>
-            <Picture alt="" className="block h-auto max-w-[14rem]" image={footerData?.highlightImage} />
+            <Picture alt="" className="block h-auto max-w-[14rem] max-[991px]:hidden" image={footerData?.highlightImage} />
           </div>
 
           <div className="mt-8 grid grid-cols-2 gap-x-6 min-[992px]:col-span-3 min-[992px]:mt-0 min-[992px]:grid-cols-3 min-[992px]:pl-12">

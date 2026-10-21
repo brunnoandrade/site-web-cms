@@ -1,3 +1,4 @@
+import React from 'react'
 import { documentPath } from '@digio/routes'
 
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
@@ -64,15 +65,34 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
 
 type Props = {
   data: DefaultTypedEditorState
+  /** Gives each heading an id (slug of its text), so a summary can link to it. */
+  headingIds?: boolean
   enableGutter?: boolean
   enableProse?: boolean
 } & React.HTMLAttributes<HTMLDivElement>
 
 export default function RichText(props: Props) {
-  const { className, enableProse = true, enableGutter = true, ...rest } = props
+  const { className, enableProse = true, enableGutter = true, headingIds, ...rest } = props
+  const converters: JSXConvertersFunction<NodeTypes> = headingIds
+    ? (args) => ({
+        ...jsxConverters(args),
+        heading: ({ node, nodesToJSX }) => {
+          const text = (node.children as { text?: string }[])
+            .map((child) => child.text ?? '')
+            .join('')
+          const id = text
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-|-$/g, '')
+          return React.createElement(node.tag, { id }, nodesToJSX({ nodes: node.children }))
+        },
+      })
+    : jsxConverters
   return (
     <ConvertRichText
-      converters={jsxConverters}
+      converters={converters}
       className={cn(
         'payload-richtext',
         {

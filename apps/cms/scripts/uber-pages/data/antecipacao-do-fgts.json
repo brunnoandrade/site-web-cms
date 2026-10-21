@@ -86,7 +86,8 @@
   },
   "band": {
     "image": "fgts_8eaf601c5e.jpg",
-    "imageMobile": "fgts_mobile_830f853568.jpg"
+    "imageMobile": "fgts_mobile_830f853568.jpg",
+    "style": null
   },
   "faqs": [
     {

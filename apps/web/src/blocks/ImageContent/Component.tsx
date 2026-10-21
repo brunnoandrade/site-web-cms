@@ -8,14 +8,28 @@ import { CMSLink } from '@/components/Link'
 import { Picture } from '@/components/Picture'
 import { Section, SectionHeading } from '@/components/Section'
 
-const Content: React.FC<Props> = ({ logo, eyebrow, heading, text, items, enableLink, link, legend }) => (
+const Content: React.FC<Props & { logoClass?: string }> = ({
+  logoClass,
+  logo,
+  eyebrow,
+  heading,
+  text,
+  items,
+  enableLink,
+  link,
+  legend,
+}) => (
   <>
     {logo && typeof logo === 'object' && (
-      <Picture alt={logo.alt ?? ''} className="mb-6 h-8 w-auto max-[991px]:hidden" image={logo} />
+      <Picture
+        alt={logo.alt ?? ''}
+        className={`mb-6 w-auto max-[991px]:hidden ${logoClass ?? 'h-8'}`}
+        image={logo}
+      />
     )}
     {eyebrow && <p className="mb-2 mt-0 text-white">{eyebrow}</p>}
     <SectionHeading className="text-white">
-      <Lines text={heading} />
+      <Lines breakClassName="max-[991px]:hidden" text={heading} />
     </SectionHeading>
     {text && <p className="mb-0 mt-4 font-light text-[#ddd]">{text}</p>}
     {items && items.length > 0 && (
@@ -47,21 +61,24 @@ export const ImageContentBlock: React.FC<Props> = (props) => {
 
   if (variant === 'section') {
     return (
-      <Section className="relative overflow-hidden" theme={theme ?? 'navy'}>
-        <div className="container grid items-center gap-8 min-[992px]:grid-cols-2 min-[992px]:gap-0">
+      <Section className="relative overflow-hidden max-[991px]:pt-0" theme={theme ?? 'navy'}>
+        <div className="container grid items-center gap-8 max-[991px]:px-0 min-[992px]:grid-cols-2 min-[992px]:gap-0">
           <div className="min-[992px]:order-1">
             <Picture
               alt=""
-              className="block h-auto w-full rounded-2xl min-[992px]:hidden"
+              className="block h-auto w-full min-[992px]:hidden"
               image={imageMobile ?? image}
             />
           </div>
-          <div className="min-[992px]:order-2 min-[992px]:col-start-2">
-            <Content {...props} />
+          <div className="max-[991px]:px-3 min-[992px]:order-2 min-[992px]:col-start-2">
+            <Content {...props} logoClass="h-24" />
           </div>
         </div>
         {/* Desktop: the image fills the left half as the section background. */}
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-1/2 max-[991px]:hidden">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 w-1/2 max-[991px]:hidden"
+        >
           <Picture alt="" className="size-full object-cover object-left" image={image} />
         </div>
       </Section>

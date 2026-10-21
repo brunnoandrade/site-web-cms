@@ -78,7 +78,8 @@
   },
   "band": {
     "image": "pix_8bfc054a68.jpg",
-    "imageMobile": "pix_mobile_b76c6ce80b.jpg"
+    "imageMobile": "pix_mobile_b76c6ce80b.jpg",
+    "style": null
   },
   "faqs": [
     {

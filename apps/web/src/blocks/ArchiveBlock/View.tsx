@@ -91,7 +91,7 @@ export const ArchiveBlockView: React.FC<ArchiveBlockViewProps> = (props) => {
       <Section id={`block-${id}`} theme={theme}>
         <div className="container grid gap-10 min-[992px]:grid-cols-3 min-[992px]:gap-6">
           <div>
-            {eyebrow && <p className="mb-0 mt-0 font-normal text-[#4b4b4b]">{eyebrow}</p>}
+            {eyebrow && <p className="mb-4 mt-0 font-normal text-[#4b4b4b]">{eyebrow}</p>}
             {introContent && (
               <RichText
                 className="[&_h2]:text-[min(2.5rem,calc(1.375rem+1.5vw))] [&_h2]:font-semibold [&_h2]:leading-none"

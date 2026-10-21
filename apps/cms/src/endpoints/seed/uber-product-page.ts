@@ -59,7 +59,7 @@ export type ProductPage = {
     button?: string | null
     buttonUrl?: string | null
   }
-  band?: { image: string; imageMobile?: string | null }
+  band?: { image: string; imageMobile?: string | null; style?: string | null }
   /** Answers are HTML snippets (<p>, <ol>, <ul>, <li>, <strong>, <a>) as in the current site. */
   faqs?: { question: string; answer: string; slug?: string | null; category?: string | null }[]
   faqSection?: { heading: string; button?: string | null; buttonUrl?: string | null }
@@ -113,7 +113,7 @@ const inline = (html: string): unknown[] => {
   for (const part of html.split(/(<[^>]+>)/g)) {
     if (!part) continue
     if (part.startsWith('<')) {
-      const tag = part
+      const tag = (/^<\/?\s*([a-z0-9]+)/i.exec(part)?.[1] ?? '').toLowerCase()
         .replace(/[<>/\s].*$/s, '')
         .replace('<', '')
         .toLowerCase()
@@ -300,6 +300,7 @@ export const buildProductPage = (page: ProductPage, ids: Ids) => {
       blockType: 'mediaBlock',
       media: ids.media(band.image),
       mediaMobile: band.imageMobile ? ids.media(band.imageMobile) : undefined,
+      background: band.style === 'light' ? 'grey' : 'white',
     })
   }
 
@@ -329,6 +330,7 @@ export const buildProductPage = (page: ProductPage, ids: Ids) => {
       intro: related.text ?? undefined,
       legend: related.legend ?? undefined,
       backgroundImage: related.image ? ids.media(related.image) : undefined,
+      backgroundImageMobile: related.imageMobile ? ids.media(related.imageMobile) : undefined,
       listHeading: 'Mais soluções pra você',
       enableSectionLink: Boolean(related.button && related.buttonUrl),
       sectionLink:

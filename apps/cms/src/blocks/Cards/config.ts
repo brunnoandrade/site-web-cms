@@ -88,6 +88,19 @@ export const Cards: Block = {
       },
     },
     {
+      name: 'backgroundImageMobile',
+      label: t('Imagem de fundo do topo (celular)', 'Top background image (mobile)'),
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        condition: withVariant('icon'),
+        description: t(
+          'Opcional. Usada em telas com menos de 992px (em geral vertical); sem ela vale a imagem principal.',
+          'Optional. Used under 992px (usually portrait); without it the main image is used.',
+        ),
+      },
+    },
+    {
       name: 'legend',
       label: t('Aviso legal', 'Legal note'),
       type: 'text',

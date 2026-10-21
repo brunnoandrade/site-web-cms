@@ -11,6 +11,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import extract as ex  # noqa: E402
 
 
+def ex_t(v):
+    return ex.text_of(v)
+
+
 def requests(d):
     out = {}
     for v in d[:20]:
@@ -55,7 +59,7 @@ def main():
             out['imageContent'] = {'eyebrow': c.get('tagline'), 'heading': ex.text_of(c['title']), 'text': ex.text_of(c.get('description')), 'button': c.get('button_text'), 'buttonUrl': c.get('button_url'), 'newTab': c.get('button_target') == '_blank', 'logo': ex.asset(c.get('logo')), 'image': img, 'imageMobile': mob}
         elif kind == 'talk':
             out['contacts'] = {'eyebrow': c.get('label'), 'heading': c['title'], 'text': ex.text_of(c.get('description')), 'button': c.get('button_text'), 'buttonUrl': c.get('button_url'),
-                               'groups': [{'title': g.get('title'), 'entries': [{'title': b['title'], 'description': b.get('description'), 'phone': b.get('phone'), 'url': b.get('link'), 'icon': ex.asset(b.get('icon'))} for b in g['blocks']]} for g in c['contacts']]}
+                               'groups': [{'title': g.get('title'), 'entries': [{'title': b['title'], 'description': ex_t(b.get('description')), 'phone': b.get('phone'), 'url': b.get('link'), 'icon': ex.asset(b.get('icon'))} for b in g['blocks']]} for g in c['contacts']]}
         else:
             print('unknown component', kind, file=sys.stderr)
     out['categories'] = categories
