@@ -10,7 +10,6 @@ import type { Header } from '@digio/payload-types'
 import { CMSLink } from '@/components/Link'
 import { cn } from '@/utilities/ui'
 
-
 type NavItem = NonNullable<Header['navItems']>[number]
 
 type Props = {
@@ -91,7 +90,9 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
 
     const onTab = (event: KeyboardEvent) => {
       if (event.key !== 'Tab' || !drawerRef.current) return
-      const focusable = drawerRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+      const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])',
+      )
       if (!focusable.length) return
       const first = focusable[0]
       const last = focusable[focusable.length - 1]
@@ -123,7 +124,8 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
     )
   }
 
-  const activeMega = mobileMega !== null && items[mobileMega]?.kind === 'mega' ? items[mobileMega].mega : null
+  const activeMega =
+    mobileMega !== null && items[mobileMega]?.kind === 'mega' ? items[mobileMega].mega : null
 
   const cta = data.enableCta && data.cta?.label ? data.cta : null
   const panelId = (index: number) => `${rootId}-mega-${index}`
@@ -169,8 +171,16 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
                     type="button"
                   >
                     {item.mega?.label}
-                    <svg aria-hidden className="ml-2 h-2 w-[11px]" preserveAspectRatio="xMidYMid meet" viewBox="0 0 11 7">
-                      <path d="M5.417 6.833 0 2.917V0l4.167 3.083 1.25.875 1.25-.875L10.833 0v2.917z" fill="currentColor" />
+                    <svg
+                      aria-hidden
+                      className="ml-2 h-2 w-[11px]"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 11 7"
+                    >
+                      <path
+                        d="M5.417 6.833 0 2.917V0l4.167 3.083 1.25.875 1.25-.875L10.833 0v2.917z"
+                        fill="currentColor"
+                      />
                     </svg>
                   </button>
                 ) : (
@@ -185,7 +195,13 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
             </nav>
           </div>
 
-          {cta && <CMSLink {...cta} appearance="inline" className={cn(ctaClass, 'ml-auto min-[992px]:ml-0')} />}
+          {cta && (
+            <CMSLink
+              {...cta}
+              appearance="inline"
+              className={cn(ctaClass, 'ml-auto min-[992px]:ml-0')}
+            />
+          )}
 
           <button
             aria-controls={`${rootId}-drawer`}
@@ -196,8 +212,13 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
             ref={togglerRef}
             type="button"
           >
-            <svg aria-hidden fill="none" height="30" viewBox="0 0 30 30" width="30">
-              <path d="M4 7h22M4 15h22M4 23h22" stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="2" />
+            <svg aria-hidden fill="none" height="26" viewBox="0 0 24 24" width="26">
+              <path
+                clipRule="evenodd"
+                d="M21.333 5H3v2.5h18.333zm0 5.833H3v2.5h18.333zM3 16.667h18.333v2.5H3z"
+                fill="currentColor"
+                fillRule="evenodd"
+              />
             </svg>
           </button>
         </div>
@@ -264,14 +285,22 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
         {activeMega ? (
           <nav aria-label={activeMega.label ?? undefined} className="pb-8 pt-8">
             <div className="mb-10 px-4">
-              <p className="text-[35px] font-semibold leading-[1.3]">{activeMega.title || activeMega.label}</p>
+              <p className="text-[35px] font-semibold leading-[1.3]">
+                {activeMega.title || activeMega.label}
+              </p>
               {activeMega.description && (
-                <p className="mb-4 max-w-[12.5rem] whitespace-pre-line text-xl font-light leading-[1.5]">{activeMega.description}</p>
+                <p className="mb-4 max-w-[12.5rem] whitespace-pre-line text-xl font-light leading-[1.5]">
+                  {activeMega.description}
+                </p>
               )}
             </div>
             {(activeMega.groups ?? []).map((group, g) => (
               <div className="mx-4 mb-4 rounded-lg bg-white/[0.08]" key={group.id ?? g}>
-                {group.label && <p className="px-4 pt-4 text-sm leading-[1.3] text-white/50 mb-2">{group.label}</p>}
+                {group.label && (
+                  <p className="px-4 pt-4 text-sm leading-[1.3] text-white/50 mb-2">
+                    {group.label}
+                  </p>
+                )}
                 <ul>
                   {(group.links ?? []).map(({ link, id }, j) => (
                     <li className="border-b border-white/[0.08] last:border-b-0" key={id ?? j}>
@@ -304,7 +333,11 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
                       <ChevronRight aria-hidden className="size-6" />
                     </button>
                   ) : (
-                    <CMSLink {...item.link} appearance="inline" className="font-[family-name:var(--font-heading)] block py-4 text-2xl font-medium leading-9" />
+                    <CMSLink
+                      {...item.link}
+                      appearance="inline"
+                      className="font-[family-name:var(--font-heading)] block py-4 text-2xl font-medium leading-9"
+                    />
                   )}
                 </li>
               ))}
@@ -322,7 +355,14 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
  */
 const BrandLogo = ({ alt }: { alt: string }) => (
   /* eslint-disable-next-line @next/next/no-img-element */
-  <img alt={alt} className="h-[17px] w-auto" decoding="async" height={14} src="/brand/uber-conta-logo.svg" width={96} />
+  <img
+    alt={alt}
+    className="h-[17px] w-auto"
+    decoding="async"
+    height={14}
+    src="/brand/uber-conta-logo.svg"
+    width={96}
+  />
 )
 
 const MegaPanel = ({ id, item }: { id: string; item: NavItem }) => {
@@ -337,8 +377,16 @@ const MegaPanel = ({ id, item }: { id: string; item: NavItem }) => {
       role="region"
     >
       <div>
-        {mega.title && <p className="font-[family-name:var(--font-heading)] mb-2 text-[2rem] font-semibold leading-none">{mega.title}</p>}
-        {mega.description && <p className="font-[family-name:var(--font-heading)] max-w-[10.5rem] text-base font-light">{mega.description}</p>}
+        {mega.title && (
+          <p className="font-[family-name:var(--font-heading)] mb-2 text-[2rem] font-semibold leading-none">
+            {mega.title}
+          </p>
+        )}
+        {mega.description && (
+          <p className="font-[family-name:var(--font-heading)] max-w-[10.5rem] text-base font-light">
+            {mega.description}
+          </p>
+        )}
       </div>
 
       <div className="grid grid-cols-3 gap-x-6 gap-y-6">
