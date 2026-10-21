@@ -4,23 +4,23 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { ArrowRightIcon } from '@/components/ArrowRightIcon'
 import { cn } from '@/utilities/ui'
 
-/** Gap between slides (px). */
-const GAP = 20
-
 /**
  * Scroll-snap carousel of post cards (Uber Conta blog): native scrolling for touch, trackpad and
  * keyboard, plus round buttons (from 992px) and a dot indicator under it. No autoplay (WCAG 2.2.2).
  */
-export const BlogCarousel: React.FC<{ label: string; children: React.ReactNode[] }> = ({
-  label,
-  children,
-}) => {
+export const BlogCarousel: React.FC<{
+  label: string
+  /** Left column (eyebrow, title, button); the posts take the other two thirds from 992px. */
+  aside?: React.ReactNode
+  children: React.ReactNode[]
+}> = ({ label, aside, children }) => {
   const track = useRef<HTMLUListElement>(null)
   const [state, setState] = useState({ index: 0, pages: 1, start: true, end: false })
 
   const step = useCallback(() => {
     const slide = track.current?.firstElementChild as HTMLElement | null
-    return slide ? slide.offsetWidth + GAP : 1
+    const gap = track.current ? parseFloat(getComputedStyle(track.current).columnGap) || 0 : 0
+    return slide ? slide.offsetWidth + gap : 1
   }, [])
 
   const update = useCallback(() => {
@@ -48,33 +48,34 @@ export const BlogCarousel: React.FC<{ label: string; children: React.ReactNode[]
   const button =
     'hidden size-[45px] items-center justify-center rounded-full bg-[#e8e8e8] text-black transition-all duration-200 hover:enabled:bg-black hover:enabled:text-white disabled:cursor-not-allowed disabled:text-black/40 min-[992px]:flex'
 
+  const few = children.length <= 3
+
   return (
-    <div className="min-w-0">
-      <ul
-        aria-label={label}
-        className="-mr-3 flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] min-[992px]:mr-0"
-        onScroll={update}
-        ref={track}
-        style={{ gap: GAP }}
-        tabIndex={0}
-      >
-        {children.map((child, i) => (
-          <li
-            key={i}
-            className={cn(
-              'w-[280px] shrink-0 snap-start',
-              // Up to three posts share the row (no scrolling), like the current site.
-              children.length <= 3 && 'min-[992px]:w-[calc((100%-40px)/3)]',
-            )}
-          >
-            {child}
-          </li>
-        ))}
-      </ul>
+    <div className="container grid gap-10 min-[992px]:grid-cols-3 min-[992px]:gap-x-6 min-[992px]:gap-y-0">
+      {aside}
+      <div className="min-w-0 min-[992px]:col-span-2">
+        <ul
+          aria-label={label}
+          className="-mr-3 flex snap-x snap-mandatory gap-[15px] overflow-x-auto [scrollbar-width:none] min-[768px]:gap-5 min-[992px]:mr-0"
+          onScroll={update}
+          ref={track}
+          tabIndex={0}
+        >
+          {children.map((child, i) => (
+            <li
+              key={i}
+              className="w-[calc((100%-15px)/1.5)] shrink-0 snap-start min-[768px]:w-[calc((100%-20px)/2)] min-[992px]:w-[calc((100%-40px)/3)]"
+            >
+              {child}
+            </li>
+          ))}
+        </ul>
+      </div>
+      {/* Controls centered under the whole block (title and posts), like the current site. */}
       <div
         className={cn(
-          'mt-4 flex items-center justify-center gap-4 min-[992px]:mt-16',
-          children.length <= 3 && 'min-[992px]:hidden',
+          'flex items-center justify-center gap-4 max-[991px]:-mt-6 min-[992px]:col-span-3 min-[992px]:mt-16',
+          few && 'min-[992px]:hidden',
         )}
       >
         <button

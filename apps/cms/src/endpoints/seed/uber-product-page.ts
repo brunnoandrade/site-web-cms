@@ -113,7 +113,8 @@ const inline = (html: string): unknown[] => {
   for (const part of html.split(/(<[^>]+>)/g)) {
     if (!part) continue
     if (part.startsWith('<')) {
-      const tag = (/^<\/?\s*([a-z0-9]+)/i.exec(part)?.[1] ?? '').toLowerCase()
+      const tag = (/^<\/?\s*([a-z0-9]+)/i.exec(part)?.[1] ?? '')
+        .toLowerCase()
         .replace(/[<>/\s].*$/s, '')
         .replace('<', '')
         .toLowerCase()
@@ -170,9 +171,6 @@ export const htmlToLexical = (html: string) => {
   return { root: node('root', children) } as never
 }
 
-export const richHeading = (tag: 'h1' | 'h2', value: string) =>
-  ({ root: node('root', [node('heading', [text(value)], { tag })]) }) as never
-
 /** Title with `\n` becomes a heading with line breaks. */
 const titleNodes = (title: string) =>
   title
@@ -180,6 +178,10 @@ const titleNodes = (title: string) =>
     .flatMap((line, i) =>
       i ? [{ type: 'linebreak', version: 1 }, text(line.trim())] : [text(line.trim())],
     )
+
+/** Heading with `\n` line breaks. */
+export const richHeading = (tag: 'h1' | 'h2', value: string) =>
+  ({ root: node('root', [node('heading', titleNodes(value), { tag })]) }) as never
 
 export const heroRichText = (
   tagline: string | null | undefined,

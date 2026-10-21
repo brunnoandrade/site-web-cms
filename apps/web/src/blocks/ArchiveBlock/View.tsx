@@ -61,9 +61,9 @@ const BlogSlide: React.FC<{
       <h4 className="line-clamp-2 min-h-10 text-[1.3em] font-semibold leading-tight text-black">
         {title}
       </h4>
-      <span className="mt-4 inline-flex items-center text-sm text-[#276ef1] group-hover:text-black">
+      <span className="link-underline mt-4 text-sm text-[#276ef1]">
         Leia no Blog
-        <ArrowRightIcon className="-mt-0.5 ml-2 w-[15px]" />
+        <ArrowRightIcon className="-mt-0.5 ml-2 inline w-[15px]" />
       </span>
     </span>
   </Link>
@@ -89,49 +89,49 @@ export const ArchiveBlockView: React.FC<ArchiveBlockViewProps> = (props) => {
   if (variant === 'carousel') {
     return (
       <Section id={`block-${id}`} theme={theme}>
-        <div className="container grid gap-10 min-[992px]:grid-cols-3 min-[992px]:gap-6">
-          <div>
-            {eyebrow && <p className="mb-4 mt-0 font-normal text-[#4b4b4b]">{eyebrow}</p>}
-            {introContent && (
-              <RichText
-                className="[&_h2]:text-[min(2.5rem,calc(1.375rem+1.5vw))] [&_h2]:font-semibold [&_h2]:leading-none"
-                data={introContent}
-                enableGutter={false}
-              />
-            )}
-            {enableMoreLink && moreLink && (
-              <CMSLink
-                {...moreLink}
-                appearance="secondary"
-                className="mt-8 h-auto rounded-[0.6rem] bg-[#e8e8e8] px-[1.7rem] py-4 text-base font-normal text-black hover:bg-black/[0.08] min-[992px]:[&_svg]:hidden"
-              >
-                <ArrowRightIcon className="size-[15px]" />
-              </CMSLink>
-            )}
-          </div>
-          <div className="min-w-0 min-[992px]:col-span-2">
-            <BlogCarousel label="Posts do blog">
-              {feed.length > 0
-                ? feed.map((item) => (
-                    <BlogSlide
-                      key={item.href}
-                      external
-                      href={item.href}
-                      image={item.image}
-                      title={item.title}
-                    />
-                  ))
-                : posts.map((post) => (
-                    <BlogSlide
-                      key={post.id}
-                      href={documentPath('posts', post) ?? '#'}
-                      image={post.meta?.image}
-                      title={post.title}
-                    />
-                  ))}
-            </BlogCarousel>
-          </div>
-        </div>
+        <BlogCarousel
+          aside={
+            <div>
+              {eyebrow && <p className="mb-4 mt-0 font-normal text-[#4b4b4b]">{eyebrow}</p>}
+              {introContent && (
+                <RichText
+                  className="[&_h2]:mb-0 [&_h2]:text-[min(3rem,calc(1.425rem+2.1vw))] [&_h2]:font-semibold [&_h2]:leading-none"
+                  data={introContent}
+                  enableGutter={false}
+                />
+              )}
+              {enableMoreLink && moreLink && (
+                <CMSLink
+                  {...moreLink}
+                  appearance="secondary"
+                  className="mt-8 h-auto rounded-[0.6rem] bg-[#e8e8e8] px-[1.7rem] py-4 text-base font-normal text-black hover:bg-black/[0.08] min-[992px]:[&_svg]:hidden"
+                >
+                  <ArrowRightIcon className="size-[15px]" />
+                </CMSLink>
+              )}
+            </div>
+          }
+          label="Posts do blog"
+        >
+          {feed.length > 0
+            ? feed.map((item) => (
+                <BlogSlide
+                  key={item.href}
+                  external
+                  href={item.href}
+                  image={item.image}
+                  title={item.title}
+                />
+              ))
+            : posts.map((post) => (
+                <BlogSlide
+                  key={post.id}
+                  href={documentPath('posts', post) ?? '#'}
+                  image={post.meta?.image}
+                  title={post.title}
+                />
+              ))}
+        </BlogCarousel>
       </Section>
     )
   }
