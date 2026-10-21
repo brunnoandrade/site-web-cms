@@ -11,7 +11,7 @@ const dirname = path.dirname(__filename)
 const cmsURL = new URL(process.env.NEXT_PUBLIC_CMS_URL || 'http://localhost:3001')
 
 // Public media storage (MinIO locally, CDN in higher environments).
-const mediaURL = new URL(process.env.NEXT_PUBLIC_MEDIA_URL || 'http://localhost:9000')
+const mediaURL = new URL(process.env.NEXT_PUBLIC_MEDIA_URL || 'http://localhost:9200')
 
 const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },

@@ -82,7 +82,7 @@ Os caminhos do SVG são os de `apps/web/public/brand/logo-digio.svg`; se o logo 
 Links locais:
 
 - Admin: http://localhost:3001/admin. O seletor "Propriedade" no menu filtra o conteúdo.
-- Console do MinIO: http://localhost:9001 (usuário e senha em `S3_ACCESS_KEY_ID` e `S3_SECRET_ACCESS_KEY`).
+- Console do MinIO: http://localhost:9201 (usuário e senha em `S3_ACCESS_KEY_ID` e `S3_SECRET_ACCESS_KEY`).
 
 ## Multi-tenant (propriedades)
 
@@ -95,7 +95,7 @@ Links locais:
   - `admin`, `editor` e `seo`: por propriedade.
 - **Testes:** as regras de isolamento e de papéis estão em [apps/cms/tests/int/tenant-isolation.int.spec.ts](apps/cms/tests/int/tenant-isolation.int.spec.ts), que roda com `npm run test:int`.
 
-Se as portas 5432/9000/9001 já estiverem em uso, troque-as no `.env` da raiz e ajuste `DATABASE_URL`, `S3_ENDPOINT`, `MEDIA_PUBLIC_URL` (CMS) e `NEXT_PUBLIC_MEDIA_URL` (site).
+Se as portas 5432/9200/9201 já estiverem em uso, troque-as no `.env` da raiz e ajuste `DATABASE_URL`, `S3_ENDPOINT`, `MEDIA_PUBLIC_URL` (CMS) e `NEXT_PUBLIC_MEDIA_URL` (site).
 
 ## Autenticação do admin (login local + SSO)
 

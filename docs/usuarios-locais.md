@@ -51,7 +51,7 @@ Console de administração do Keycloak: http://localhost:8080/admin (`admin` / `
 |---|---|---|
 | Site Digio | http://localhost:3000 | – |
 | Site Uber Conta | http://uberconta.localhost:3000 | – |
-| Console do MinIO | http://localhost:9001 | `S3_ACCESS_KEY_ID` / `S3_SECRET_ACCESS_KEY` do `.env` da raiz (padrão `minioadmin` / `minioadmin`) |
+| Console do MinIO | http://localhost:9201 | `S3_ACCESS_KEY_ID` / `S3_SECRET_ACCESS_KEY` do `.env` da raiz (padrão `minioadmin` / `minioadmin`) |
 | Postgres | `localhost:5432` | `POSTGRES_USER` / `POSTGRES_PASSWORD` do `.env` da raiz (padrão `digio` / `digio`) |
 
 As portas podem ser diferentes na sua máquina: veja o `.env` da raiz.
