@@ -3,6 +3,7 @@ import { draftMode } from 'next/headers'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
+import { AnchorScroll } from '@/components/AnchorScroll'
 import { themeStyle } from '@/lib/themes'
 import { requireTenant } from '@/lib/tenant'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
@@ -30,6 +31,7 @@ export default async function TenantLayout({ children, params }: Args) {
         }}
       />
 
+      <AnchorScroll />
       {children}
     </div>
   )

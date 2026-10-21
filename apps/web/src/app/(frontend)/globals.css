@@ -354,12 +354,8 @@
   opacity: 0.5;
 }
 
-/* Uber Conta: in-page links scroll smoothly (unless the visitor asked for less motion). */
-@media (prefers-reduced-motion: no-preference) {
-  html:has([data-theme='uber-conta']) {
-    scroll-behavior: smooth;
-  }
-}
+/* In-page links scroll smoothly through components/AnchorScroll (a global scroll-behavior would
+   also animate the scroll reset on every page change). */
 
 @keyframes fadeIn {
   from {
