@@ -10,7 +10,7 @@ import { Picture } from '@/components/Picture'
 
 /** Link with the underline that grows from the left on hover (`.link` of the current site). */
 const underline =
-  "relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-200 after:content-[''] hover:after:w-full motion-reduce:after:transition-none"
+  "relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-200 after:ease-[ease-in-out] after:content-[''] hover:after:w-full motion-reduce:after:transition-none"
 
 /**
  * Uber Conta footer, measured on the current site (light, 992px / 768px breakpoints).
@@ -45,13 +45,19 @@ export async function Footer({ tenant }: { tenant: string }) {
                 mobile={footerData?.logoMobile}
               />
             </Link>
-            <Picture alt="" className="block h-auto max-w-[14rem] max-[991px]:hidden" image={footerData?.highlightImage} />
+            <Picture
+              alt=""
+              className="block h-auto max-w-[14rem] max-[991px]:hidden"
+              image={footerData?.highlightImage}
+            />
           </div>
 
           <div className="mt-8 grid grid-cols-2 gap-x-6 min-[992px]:col-span-3 min-[992px]:mt-0 min-[992px]:grid-cols-3 min-[992px]:pl-12">
             {columns.map((column, i) => (
               <nav aria-label={column.title} key={column.id ?? i}>
-                <h2 className="mb-2 text-base font-medium leading-[1.3] text-black">{column.title}</h2>
+                <h2 className="mb-2 text-base font-medium leading-[1.3] text-black">
+                  {column.title}
+                </h2>
                 <ul className="mb-8 flex flex-col">
                   {(column.links ?? []).map(({ link, image, id }, j) => (
                     <li key={id ?? j}>
@@ -68,7 +74,10 @@ export async function Footer({ tenant }: { tenant: string }) {
                         <CMSLink
                           {...link}
                           appearance="inline"
-                          className={cn(underline, 'text-sm font-light leading-normal hover:text-black md:mt-2 md:text-base')}
+                          className={cn(
+                            underline,
+                            'text-sm font-light leading-normal hover:text-black md:mt-2 md:text-base',
+                          )}
                         />
                       )}
                     </li>

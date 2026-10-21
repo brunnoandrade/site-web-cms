@@ -1,8 +1,9 @@
-import { ArrowUpRight, Plus } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import React from 'react'
 
 import type { FaqBlock as FaqBlockProps } from '@digio/payload-types'
 
+import { ArrowUpRightIcon } from '@/components/ArrowUpRightIcon'
 import { CMSLink } from '@/components/Link'
 import RichText from '@/components/RichText'
 import { Section, SectionHeading, isDarkTheme } from '@/components/Section'
@@ -65,9 +66,9 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({
                 <CMSLink
                   {...moreLink}
                   appearance="inline"
-                  className="inline-flex items-center text-[#276ef1] hover:text-black"
+                  className="link-underline text-[#276ef1]"
                 >
-                  <ArrowUpRight aria-hidden className="ml-2 size-[14px]" />
+                  <ArrowUpRightIcon className="-mt-[3px] ml-2 inline align-middle" />
                 </CMSLink>
               </div>
             )}

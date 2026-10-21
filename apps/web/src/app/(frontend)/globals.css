@@ -243,6 +243,8 @@
 /* Uber Conta: Uber Move Text for body copy, Uber Move for every heading the CMS blocks render. */
 [data-theme='uber-conta'] {
   font-family: var(--font-sans);
+  /* Base text of the current site (--bs-body-color): pure black, not the Digio navy of <body>. */
+  color: #000;
   /* The current site keeps the browser default; Tailwind's `antialiased` (on body) thins light text on dark. */
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
@@ -356,6 +358,35 @@
 
 /* In-page links scroll smoothly through components/AnchorScroll (a global scroll-behavior would
    also animate the scroll reset on every page change). */
+
+/* Link of the current site (`.link`): the underline grows from the left on hover or keyboard focus. */
+.link-underline {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.2s ease-in-out;
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  width: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .link-underline,
+  .link-underline::after {
+    transition: none;
+  }
+}
 
 @keyframes fadeIn {
   from {

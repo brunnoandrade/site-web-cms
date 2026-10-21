@@ -100,11 +100,11 @@ export const UberBlog: React.FC<Props> = ({
                       </p>
                     )}
                     <Link
-                      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-black"
+                      className="link-underline mt-4 self-start text-sm font-medium text-black"
                       href={href}
                       tabIndex={-1}
                     >
-                      Ler artigo <ArrowRight aria-hidden className="size-4" />
+                      Ler artigo <ArrowRight aria-hidden className="ml-2 inline size-4" />
                     </Link>
                   </article>
                 </li>
