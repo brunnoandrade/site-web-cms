@@ -207,12 +207,12 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
             aria-controls={`${rootId}-drawer`}
             aria-expanded={mobileOpen}
             aria-label="Abrir menu"
-            className="mx-4 inline-flex size-[30px] shrink-0 items-center justify-center rounded-md min-[992px]:hidden"
+            className="mx-4 inline-flex size-[27px] shrink-0 items-center justify-center rounded-md min-[992px]:hidden"
             onClick={() => setMobileOpen(true)}
             ref={togglerRef}
             type="button"
           >
-            <svg aria-hidden fill="none" height="26" viewBox="0 0 24 24" width="26">
+            <svg aria-hidden fill="none" height="27" viewBox="0 0 24 24" width="27">
               <path
                 clipRule="evenodd"
                 d="M21.333 5H3v2.5h18.333zm0 5.833H3v2.5h18.333zM3 16.667h18.333v2.5H3z"
