@@ -12,7 +12,7 @@ import { cn } from '@/utilities/ui'
 /**
  * Uber Conta inner-page hero (current site: `.hero.cover`). One screen tall, the cover image (own
  * file for mobile, under 992px) behind a 570px column vertically centered: optional logo,
- * tagline (h6), title (h1), text, one call to action and an optional legal note. White text on
+ * tagline (h6, the site's .display-7: 600 and calc(1.275rem + 0.3vw), on mobile 500 and 1rem), title (h1), text, one call to action and an optional legal note. White text on
  * dark images (default) or black text on light ones. An anchor link ("#id") gets a down arrow.
  */
 export const CoverHero: React.FC<Page['hero']> = ({
@@ -78,7 +78,7 @@ export const CoverHero: React.FC<Page['hero']> = ({
                 half
                   ? '!mx-auto [&_h1]:text-[calc(1.375rem+1.5vw)] min-[1200px]:[&_h1]:!text-[3rem]'
                   : '!mx-0',
-                'w-full [&_h1]:mb-2 [&_h1]:text-[calc(1.525rem+3.3vw)] [&_h1]:font-semibold [&_h1]:leading-none min-[1200px]:[&_h1]:text-[4rem] [&_h6]:mb-2 [&_h6]:text-[1.25rem] [&_h6]:font-medium [&_p]:m-0 [&_p]:mt-4 [&_p]:font-light',
+                'w-full [&_h1]:mb-2 [&_h1]:text-[calc(1.525rem+3.3vw)] [&_h1]:font-semibold [&_h1]:leading-none min-[1200px]:[&_h1]:text-[4rem] [&_h6]:mb-2 [&_h6]:text-[calc(1.275rem+0.3vw)] [&_h6]:font-semibold min-[1200px]:[&_h6]:text-2xl [&_h6]:leading-none max-md:[&_h6]:text-base max-md:[&_h6]:font-medium [&_p]:m-0 [&_p]:mt-4 [&_p]:font-light',
                 onLight
                   ? '[&_h1]:text-black [&_h6]:text-black [&_p]:text-[#4b4b4b]'
                   : '[&_h1]:text-white [&_h6]:text-white [&_p]:text-[#ddd]',
