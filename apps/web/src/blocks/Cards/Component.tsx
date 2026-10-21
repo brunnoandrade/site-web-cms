@@ -90,11 +90,10 @@ const ProductCard: React.FC<{ item: Item }> = ({ item }) => (
     )}
     {item.enableLink && item.link && (
       <span className="group/link relative z-[5] mt-4 inline-flex items-center font-normal text-brand-blue md:mt-auto">
-        <span className="relative">
-          {item.link.label || 'Conhecer'}
-          <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-current transition-all duration-200 group-hover/link:w-full motion-reduce:transition-none" />
-        </span>
+        {item.link.label || 'Conhecer'}
         <ArrowRightIcon className="-mt-0.5 ml-2 w-[18px] transition-all duration-200" />
+        {/* Underline under text and arrow: drawn only while the link itself is hovered. */}
+        <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-current transition-all duration-200 group-hover/link:w-full motion-reduce:transition-none" />
       </span>
     )}
   </CardLink>
