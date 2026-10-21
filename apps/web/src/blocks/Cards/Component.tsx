@@ -80,7 +80,7 @@ const ProductCard: React.FC<{ item: Item }> = ({ item }) => (
       className="-ml-2 mb-4 block max-w-20 transition-transform duration-200 motion-reduce:transition-none md:absolute md:bottom-9 md:right-9 md:mb-0 md:ml-0 md:w-auto md:max-w-none md:group-hover:scale-[1.16]"
       image={item.image}
     />
-    <h3 className="relative z-[5] text-[min(2rem,calc(1.325rem+0.9vw))] font-semibold leading-none max-md:text-[1.35rem]">
+    <h3 className="relative z-[5] mb-2 text-[min(2rem,calc(1.325rem+0.9vw))] font-semibold leading-none max-md:text-[1.35rem]">
       {item.title}
     </h3>
     {item.text && (
@@ -89,57 +89,81 @@ const ProductCard: React.FC<{ item: Item }> = ({ item }) => (
       </p>
     )}
     {item.enableLink && item.link && (
-      <span className="group/link relative z-[5] mt-4 inline-flex items-center font-normal text-brand-blue md:mt-auto">
+      <span className="group/link relative z-[5] mt-4 inline-flex items-center font-normal text-[#276ef1] transition-all duration-200 ease-[ease-in-out] md:mt-auto">
         {item.link.label || 'Conhecer'}
-        <ArrowRightIcon className="-mt-0.5 ml-2 w-[18px] transition-all duration-200" />
+        <ArrowRightIcon className="-mt-0.5 ml-2 w-[18px] transition-all duration-200 ease-[ease-in-out]" />
         {/* Underline under text and arrow: drawn only while the link itself is hovered. */}
-        <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-current transition-all duration-200 group-hover/link:w-full motion-reduce:transition-none" />
+        <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-current transition-all duration-200 ease-[ease-in-out] group-hover/link:w-full motion-reduce:transition-none" />
       </span>
     )}
   </CardLink>
 )
 
-const IconCard: React.FC<{ item: Item; dark: boolean }> = ({ item, dark }) => (
-  <CardLink
-    className={cn(
-      'flex h-full flex-col p-4 transition-colors md:p-6',
-      dark && item.image ? 'rounded-[0.5rem]' : 'rounded-card',
-      dark ? 'bg-navy-800 hover:bg-navy-700' : 'bg-lilac-50 hover:bg-lilac-100',
-      dark &&
-        item.image &&
-        'bg-[rgba(94,94,94,0.2)] text-white hover:bg-white hover:text-black motion-reduce:transition-none',
-    )}
-    item={item}
-  >
-    <div className="mb-6 flex items-start justify-between md:mb-8">
-      {item.image ? (
-        <Picture alt="" className="size-10" image={item.image} />
-      ) : (
-        <Icon
-          className={cn('size-7', dark ? 'text-turquoise-400' : 'text-brand-blue')}
-          name={item.icon ?? undefined}
-        />
+const IconCard: React.FC<{ item: Item; dark: boolean }> = ({ item, dark }) => {
+  // Solutions on black (Uber Conta): translucent grey card, white on hover; spacing of the current site.
+  const solution = dark && Boolean(item.image)
+  return (
+    <CardLink
+      className={cn(
+        'flex h-full flex-col transition-colors',
+        solution ? 'p-6' : 'p-4 md:p-6',
+        solution ? 'rounded-[0.5rem]' : 'rounded-card',
+        dark ? 'bg-navy-800 hover:bg-navy-700' : 'bg-lilac-50 hover:bg-lilac-100',
+        solution &&
+          'bg-[rgba(94,94,94,0.2)] text-white ease-[ease-in-out] hover:bg-white hover:text-black motion-reduce:transition-none',
       )}
-      {item.enableLink &&
-        (item.image ? (
-          <ArrowRightIcon className="w-5" />
-        ) : (
-          <ArrowUpRight aria-hidden className="size-5 opacity-80" />
-        ))}
-    </div>
-    <h3 className="font-semibold md:text-lg" data-slot="icon-card-title">
-      {item.title}
-    </h3>
-    {item.text && (
-      <p
-        className="mt-1 text-sm font-[var(--weight-support,400)] opacity-80"
-        data-slot="icon-card-text"
+      item={item}
+    >
+      <div
+        className={cn(
+          'flex items-start justify-between',
+          solution ? 'mb-4 min-[992px]:mb-8 min-[992px]:mt-4' : 'mb-6 md:mb-8',
+        )}
       >
-        {item.text}
-      </p>
-    )}
-  </CardLink>
-)
+        {item.image ? (
+          <Picture
+            alt=""
+            className={solution ? 'size-7 md:size-10' : 'size-10'}
+            image={item.image}
+          />
+        ) : (
+          <Icon
+            className={cn('size-7', dark ? 'text-turquoise-400' : 'text-brand-blue')}
+            name={item.icon ?? undefined}
+          />
+        )}
+        {item.enableLink &&
+          (item.image ? (
+            <ArrowRightIcon className={solution ? 'mt-[11px] w-[21px] max-md:mt-[5px]' : 'w-5'} />
+          ) : (
+            <ArrowUpRight aria-hidden className="size-5 opacity-80" />
+          ))}
+      </div>
+      <h3
+        className={cn(
+          'font-semibold',
+          solution
+            ? 'mb-2 text-[calc(1.275rem+0.3vw)] leading-none max-md:text-base max-md:font-medium min-[1200px]:text-2xl'
+            : 'md:text-lg',
+        )}
+        data-slot="icon-card-title"
+      >
+        {item.title}
+      </h3>
+      {item.text && (
+        <p
+          className={cn(
+            'font-[var(--weight-support,400)]',
+            solution ? 'm-0 text-base min-[992px]:min-h-[50px]' : 'mt-1 text-sm opacity-80',
+          )}
+          data-slot="icon-card-text"
+        >
+          {item.text}
+        </p>
+      )}
+    </CardLink>
+  )
+}
 
 const SimpleCard: React.FC<{ item: Item }> = ({ item }) => (
   <CardLink
@@ -340,6 +364,7 @@ const CardsBlockView: React.FC<CardsBlockProps> = ({
   heading,
   intro,
   video,
+  videoMobile,
   columns,
   items,
   enableSectionLink,
@@ -471,27 +496,27 @@ const CardsBlockView: React.FC<CardsBlockProps> = ({
     variant === 'icon' && typeof video === 'object' && video?.url
       ? getMediaUrl(video.url, video.updatedAt)
       : null
+  const videoMobileSrc =
+    variant === 'icon' && typeof videoMobile === 'object' && videoMobile?.url
+      ? getMediaUrl(videoMobile.url, videoMobile.updatedAt)
+      : null
 
   return (
-    <Section className={cn(videoSrc && 'overflow-hidden')} theme={theme}>
+    <Section className={cn(videoSrc && 'overflow-hidden min-[992px]:!pt-0')} theme={theme}>
       <div className={cn('container', product && 'min-[992px]:py-8')}>
         {(heading || intro) && (
           <div
             className={cn(
-              videoSrc && 'relative flex min-h-[22rem] items-center md:min-h-[26rem]',
+              videoSrc && 'relative flex flex-col items-start justify-center min-[992px]:h-[580px]',
               product
                 ? 'mb-8 text-left min-[992px]:mb-16 min-[992px]:text-center'
-                : 'mb-10 md:mb-12',
+                : videoSrc
+                  ? 'mb-0'
+                  : 'mb-10 md:mb-12',
               !product && !videoSrc && (headingLeft ? 'max-w-xl' : 'mx-auto max-w-3xl text-center'),
             )}
           >
-            {videoSrc && (
-              <HeroVideo
-                className="absolute inset-y-0 right-0 z-0 h-full w-auto max-w-none object-contain object-right max-md:-right-16 md:right-0"
-                src={videoSrc}
-              />
-            )}
-            <div className={cn(videoSrc && 'relative z-[1] max-w-xl')}>
+            <div className={cn(videoSrc && 'relative z-[5] max-w-xl')}>
               {heading && <SectionHeading>{heading}</SectionHeading>}
               {intro && (
                 <p
@@ -507,12 +532,28 @@ const CardsBlockView: React.FC<CardsBlockProps> = ({
                 <CMSLink
                   {...sectionLink}
                   appearance={dark ? 'inverse' : 'default'}
-                  className="mt-6"
+                  className="mt-8"
+                  size="lg"
                 >
                   <ArrowRightIcon className="size-[15px]" />
                 </CMSLink>
               )}
             </div>
+            {videoSrc && (
+              <>
+                {/* Under 992px the (square) video follows the button; from 992px it fills the right side of the 580px band, fading to black at the edge. */}
+                <HeroVideo
+                  breakpoint={992}
+                  className="relative z-[1] mt-4 block h-auto w-full max-w-full object-cover min-[992px]:absolute min-[992px]:right-0 min-[992px]:top-0 min-[992px]:mt-0 min-[992px]:h-full min-[992px]:w-auto min-[992px]:object-cover"
+                  src={videoSrc}
+                  srcMobile={videoMobileSrc}
+                />
+                <div
+                  aria-hidden
+                  className="absolute right-0 top-0 z-[2] h-full w-[100px] bg-gradient-to-l from-black to-transparent max-[991px]:hidden"
+                />
+              </>
+            )}
           </div>
         )}
 
@@ -520,9 +561,10 @@ const CardsBlockView: React.FC<CardsBlockProps> = ({
           id={videoSrc ? 'solucoes-lista' : undefined}
           className={cn(
             'grid',
-            product ? 'gap-x-6 gap-y-3' : 'gap-4 md:gap-6',
-            variant === 'icon' ? 'grid-cols-2' : 'grid-cols-1',
-            gridColumns[columns ?? '3'],
+            product ? 'gap-x-6 gap-y-3' : !videoSrc && 'gap-4 md:gap-6',
+            videoSrc
+              ? 'mb-3 grid-cols-1 gap-3 min-[768px]:mb-6 min-[768px]:grid-cols-2 min-[768px]:gap-6 min-[992px]:grid-cols-3'
+              : cn(variant === 'icon' ? 'grid-cols-2' : 'grid-cols-1', gridColumns[columns ?? '3']),
           )}
         >
           {items.map((item, i) => (

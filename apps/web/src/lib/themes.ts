@@ -30,6 +30,9 @@ const themes: Record<ThemePreset, Record<string, string>> = {
     '--button-radius': '0.6rem',
     '--button-weight': '400',
     '--button-px-lg': '1.7rem',
+    // Light button: #ebebeb on hover, #d6d6d6 while pressed (current site).
+    '--button-inverse-hover': '#ebebeb',
+    '--button-inverse-active': '#d6d6d6',
     // Sections: 2.5rem of vertical padding, 6rem from 992px.
     '--section-py': '2.5rem',
     '--section-py-md': '2.5rem',

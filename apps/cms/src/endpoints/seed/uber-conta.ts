@@ -7,6 +7,7 @@ import type { Payload, PayloadRequest } from 'payload'
 import type { Media, Tenant } from '@digio/payload-types'
 
 import { custom, richText } from './home'
+import { richHeading } from './uber-product-page'
 
 type Args = {
   payload: Payload
@@ -102,6 +103,11 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
   // Solutions: the video behind the heading and the icons (SVGs of the current site, rasterized).
   const solutionsVideo = await upload(
     'solutions.mp4',
+    'Celulares com o app Uber Conta',
+    'video/mp4',
+  )
+  const solutionsVideoMobile = await upload(
+    'solutions-mobile.mp4',
     'Celulares com o app Uber Conta',
     'video/mp4',
   )
@@ -227,6 +233,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           anchor: 'solucoes',
           heading: 'Soluções focadas nas suas necessidades!',
           video: solutionsVideo.id,
+          videoMobile: solutionsVideoMobile.id,
           enableSectionLink: true,
           sectionLink: custom('Aproveitar soluções', '#solucoes-lista'),
           columns: '3' as const,
@@ -284,7 +291,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           variant: 'carousel' as const,
           eyebrow: 'Uber Blog',
           feedUrl: 'https://medium.com/feed/@ubercontabrasil',
-          introContent: richText({ tag: 'h2', text: 'Conteúdo relevante para seu dia a dia' }),
+          introContent: richHeading('h2', 'Conteúdo\nrelevante\npara seu dia a dia'),
           enableMoreLink: true,
           moreLink: {
             ...custom('Ir para o Blog', 'https://medium.com/@ubercontabrasil'),

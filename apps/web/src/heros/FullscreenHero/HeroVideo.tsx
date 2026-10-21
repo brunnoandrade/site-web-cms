@@ -9,6 +9,8 @@ type Props = {
   src: string
   /** Video for screens under 768px; falls back to `src`. */
   srcMobile?: string | null
+  /** Width (px) from which `src` is used; below it `srcMobile` (default 768). */
+  breakpoint?: number
   className?: string
 }
 
@@ -19,13 +21,13 @@ type Props = {
  * changes, so the black hero shows until the first frame. With reduced motion it does not play
  * (it shows the first frame of the video). There is no pause button, like the current site.
  */
-export const HeroVideo: React.FC<Props> = ({ src, srcMobile, className }) => {
+export const HeroVideo: React.FC<Props> = ({ src, srcMobile, breakpoint = 768, className }) => {
   const ref = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const video = ref.current
     if (!video) return
-    const wide = window.matchMedia('(min-width: 768px)')
+    const wide = window.matchMedia(`(min-width: ${breakpoint}px)`)
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     const load = () => {
@@ -40,7 +42,7 @@ export const HeroVideo: React.FC<Props> = ({ src, srcMobile, className }) => {
     wide.addEventListener('change', load)
     load()
     return () => wide.removeEventListener('change', load)
-  }, [src, srcMobile])
+  }, [src, srcMobile, breakpoint])
 
   return (
     <video

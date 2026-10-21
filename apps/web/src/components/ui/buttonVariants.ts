@@ -4,14 +4,15 @@ import { cva } from 'class-variance-authority'
 // Digio design system: pill buttons (Uber Conta pattern) in Digio colors. A theme can reshape them
 // with --button-radius, --button-weight and --button-px-lg (see lib/themes.ts); defaults are the pill.
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[var(--button-radius,9999px)] font-[var(--button-weight,600)] transition-colors disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[var(--button-radius,9999px)] font-[var(--button-weight,600)] transition-colors ease-[ease-in-out] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         /** Navy on light backgrounds. */
         default: 'bg-navy-900 text-white hover:bg-navy-700',
         /** White on dark backgrounds (navy, blue). */
-        inverse: 'bg-white text-navy-900 hover:bg-lilac-100',
+        inverse:
+          'bg-white text-navy-900 hover:bg-[var(--button-inverse-hover,var(--color-lilac-100))] active:bg-[var(--button-inverse-active,var(--color-lilac-100))]',
         /** Turquoise highlight (e.g. "Abrir conta" on the navy header). */
         accent: 'bg-turquoise-400 text-navy-900 hover:bg-turquoise-300',
         secondary: 'bg-lilac-100 text-navy-900 hover:bg-[#dde1f3]',

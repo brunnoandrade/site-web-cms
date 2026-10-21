@@ -8,6 +8,8 @@ import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { getPayload } from 'payload'
 
+import { richHeading } from '../src/endpoints/seed/uber-product-page'
+
 const dir = path.resolve(process.cwd(), 'src/endpoints/seed/uber-conta-assets')
 const payload = await getPayload({ config })
 
@@ -77,6 +79,14 @@ if (!block.video) {
   }
 }
 
+if (!block.videoMobile) {
+  block.videoMobile = await upload(
+    'solutions-mobile.mp4',
+    'Celulares com o app Uber Conta',
+    'video/mp4',
+  )
+}
+
 const blog = layout.find(
   (b: { blockType: string; anchor?: string }) => b.blockType === 'archive' && b.anchor === 'blog',
 )
@@ -91,10 +101,7 @@ if (blog) {
     newTab: true,
   }
   blog.limit = 6
-  const heading = blog.introContent?.root?.children?.find(
-    (c: { type: string }) => c.type === 'heading',
-  )
-  if (heading) blog.introContent.root.children = [heading]
+  blog.introContent = richHeading('h2', 'Conteúdo\nrelevante\npara seu dia a dia')
 }
 
 const faqIndex = layout.findIndex(

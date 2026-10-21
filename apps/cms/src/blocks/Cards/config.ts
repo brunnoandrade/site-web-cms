@@ -68,6 +68,20 @@ export const Cards: Block = {
       },
     },
     {
+      name: 'videoMobile',
+      label: t('Vídeo de fundo (celular e tablet)', 'Background video (mobile and tablet)'),
+      type: 'upload',
+      relationTo: 'media',
+      filterOptions: { mimeType: { in: ['video/mp4', 'video/webm'] } },
+      admin: {
+        condition: withVariant('icon'),
+        description: t(
+          'Opcional. Usado abaixo de 992px, em geral quadrado e depois do botão. Sem ele vale o vídeo principal.',
+          'Optional. Used under 992px, usually square and shown after the button. Without it the main video is used.',
+        ),
+      },
+    },
+    {
       name: 'image',
       label: t('Imagem ao lado', 'Side image'),
       type: 'upload',

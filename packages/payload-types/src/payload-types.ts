@@ -581,6 +581,10 @@ export interface CardsBlock {
    * Optional. Loops silently: behind the heading (solutions) or instead of the side image (benefits).
    */
   video?: (number | null) | Media;
+  /**
+   * Optional. Used under 992px, usually square and shown after the button. Without it the main video is used.
+   */
+  videoMobile?: (number | null) | Media;
   image?: (number | null) | Media;
   /**
    * Optional. Image behind the heading (a video, when set, takes precedence).
@@ -2039,6 +2043,7 @@ export interface CardsBlockSelect<T extends boolean = true> {
   heading?: T;
   intro?: T;
   video?: T;
+  videoMobile?: T;
   image?: T;
   backgroundImage?: T;
   backgroundImageMobile?: T;
