@@ -24,10 +24,13 @@ type Props = {
 
 /** Blog index and category pages, with the WordPress pagination URLs. */
 export async function BlogListing({ tenant, category, page }: Props) {
+  const uber = isUberConta(await requireTenant(tenant))
+  // The Uber Conta blog lists 6 per page, like the current site.
+  const perPage = uber ? 6 : POSTS_PER_PAGE
   const posts = await find('posts', {
     tenant,
     depth: 1,
-    limit: POSTS_PER_PAGE,
+    limit: perPage,
     page,
     sort: '-publishedAt',
     ...(category ? { where: { category: { equals: category.id } } } : {}),
@@ -44,7 +47,7 @@ export async function BlogListing({ tenant, category, page }: Props) {
         : blogIndexPath
       : blogPagePath(n, category?.slug)
 
-  if (isUberConta(await requireTenant(tenant))) {
+  if (uber) {
     const [categories, blogPage] = await Promise.all([
       find('categories', { tenant, limit: 50, sort: 'title', tags: ['posts'] }),
       findOne('pages', { tenant, tags: ['pages_blog'], where: { slug: { equals: 'blog' } } }),
@@ -75,7 +78,7 @@ export async function BlogListing({ tenant, category, page }: Props) {
         <PageRange
           collection="posts"
           currentPage={posts.page}
-          limit={POSTS_PER_PAGE}
+          limit={perPage}
           totalDocs={posts.totalDocs}
         />
       </div>

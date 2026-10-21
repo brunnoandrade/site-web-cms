@@ -56,9 +56,17 @@ export async function UberPost({ post, tenant }: { post: Post; tenant: string })
 
   return (
     <article>
-      <header className="-mt-24 bg-black pb-12 pt-40 text-white">
-        <div className="container">
-          <h1 className="m-0 max-w-[900px] text-[calc(1.375rem+1.5vw)] font-semibold leading-none min-[1200px]:text-[2.5rem]">
+      <header className="relative -mt-24 overflow-hidden bg-black pb-16 pt-56 text-white min-[992px]:pt-64">
+        {typeof post.heroImage === 'object' && post.heroImage && (
+          <Picture
+            alt=""
+            className="absolute inset-0 size-full object-cover object-center opacity-50"
+            image={post.heroImage}
+            loading="eager"
+          />
+        )}
+        <div className="container relative">
+          <h1 className="m-0 max-w-[1000px] text-[calc(1.375rem+1.5vw)] font-semibold leading-none min-[1200px]:text-[4rem]">
             {post.title}
           </h1>
           <p className="mb-0 mt-4 text-sm font-light text-[#ddd]">
