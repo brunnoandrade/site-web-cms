@@ -1,0 +1,166 @@
+{
+  "slug": "uber-chip",
+  "title": "Uber Chip",
+  "metaDescription": "Chip móvel com planos exclusivos para motoristas, mais internet e navegação gratuita no app Uber.\n",
+  "keywords": "uber chip, plano motorista, chip uber, internet motorista, dados móveis uber, chip 4g 5g uber\n",
+  "hero": {
+    "tagline": "Mantenha-se conectado durante suas viagens.",
+    "title": "Uber Chip",
+    "text": "Planos de 14GB a 55GB a partir de R$ 20, com apps liberados* e bônus exclusivos.",
+    "legend": "*Whatsapp, Waze e Uber Driver.",
+    "legendLink": null,
+    "cta": "Saber mais",
+    "ctaUrl": "#contratar",
+    "image": "chip_desktop_75fbd2b20a.jpg",
+    "imageMobile": "chip_mobile_37583410b6.jpg"
+  },
+  "features": {
+    "heading": "O único chip feito para motoristas",
+    "description": null,
+    "button": "Quero contratar",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/xfd9xoui",
+    "image": "uber_chip_863404a3c8_e5034650ad.jpg",
+    "video": null,
+    "items": [
+      {
+        "icon": "wifi_0490af51ba_004b607b8a.png",
+        "title": "Você sempre conectado",
+        "text": "Escolha seu plano de 14GB a 55GB e receba o chip com frete grátis."
+      },
+      {
+        "icon": "plus_a1dd60e7ea_1b6bf53db7.png",
+        "title": "2GB extras com a Uber Conta",
+        "text": "Recarregue pelo app e ganhe mais bônus no seu Uber Chip."
+      },
+      {
+        "icon": "chip_5f373817b1_72f317acc1.png",
+        "title": "Seus apps essenciais sem gastar internet",
+        "text": "Uber Driver, Waze e WhatsApp liberados, sem descontar do seu plano."
+      },
+      {
+        "icon": "trending_c03f820bd8_8a1846f45d.png",
+        "title": "Bônus de acordo com a categoria",
+        "text": "Quanto maior a categoria na Uber Pro, maior o bônus na recarga."
+      },
+      {
+        "icon": "phone_1ab7c90f76_311e56cc76.png",
+        "title": "Ligações ilimitadas para todo o Brasil",
+        "text": "Use o código 41 e fale à vontade com cobertura nacional."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "Veja como contratar",
+    "text": "Confira o passo a passo e contrate!",
+    "button": "Quero contratar",
+    "buttonUrl": "https://uberchip.com.br/Uberconta/",
+    "items": [
+      {
+        "title": "Selecione o plano ideal e toque em “Comprar Uber Chip",
+        "text": "Confira os detalhes do plano antes de continuar.",
+        "image": "uber_chip_1_mobile_ea9dbd69e1.png",
+        "imageMobile": "uber_chip_1_bfb3fe2d9e.png"
+      },
+      {
+        "title": "Em “Identificação”, informe seus dados pessoais e endereço",
+        "text": "Depois é só tocar em \"Continuar\".",
+        "image": "uber_chip_2_mobile_d4d346ba72.png",
+        "imageMobile": "uber_chip_2_1e3e06d445.png"
+      },
+      {
+        "title": "Escolha como quer pagar, e vá em \"Finalizar”",
+        "text": "Pronto! Seu Uber Chip foi solicitado com sucesso.",
+        "image": "uber_chip_3_mobile_c94c16f2c0.png",
+        "imageMobile": "uber_chip_3_373bb565a9.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre a Uber Conta",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "uber_chip_79220e4d92.jpg",
+    "imageMobile": "uber_chip_mobile_ef9d23b1e2.jpg"
+  },
+  "faqs": [
+    {
+      "question": "Como faço para contratar o Uber Chip?",
+      "answer": "<p>Para contratar o Uber Chip basta acessar https://uberchip.com.br/ e seguir o passo a passo:</p>\n<ol>\n<li>Escolha seu tipo de plano e quantidade de GBs, depois vá em \"Comprar Uber Chip\".</li>\n<li>Em “Identificação”, informe seus dados pessoais e endereço e em seguida vá em \"Continuar.\n</li>\n<li>Escolha o método de pagamento (Cartão ou Pix) e vá em finalizar.</li>\n</ol>",
+      "slug": "como-faco-para-contratar-o-uber-chip",
+      "category": "solucoes"
+    },
+    {
+      "question": "Como fazer a recarga pela Uber Conta?",
+      "answer": "<p>Você consegue fazer a recarga do seu Chip em poucos passos:</p>\n<ol>\n<li>Abra o app da Uber Conta.</li>\n<li>Na página inicial vá em \"Recarga”.</li>\n<li>Digite o número que quer recarregar e vá em continuar.</li>\n<li>Selecione a operadora, no caso do Uber Chip é Tim.</li>\n<li>Selecione o valor da recarga e vá em “Efetuar recarga”.</li>\n<li>Digite a senha do seu cartão, vá em ”continuar\".</li>\n<li>Pronto, recarga solicitada.</li>\n</ol>",
+      "slug": "como-fazer-a-recarga-pela-uber-conta",
+      "category": "solucoes"
+    },
+    {
+      "question": "O que acontece se eu parar de recarregar meu Uber Chip?",
+      "answer": "<p>Se não houver recarga do Uber Chip e o prazo de renovação expirar você continuará recebendo chamadas e SMS, mas não terá acesso a internet e dados até que uma nova recarga seja feita.</p>\n\n<p>Caso o número não for recarregado em até 75 dias, será expirado e será necessário fazer um novo plano.</p>",
+      "slug": "o-que-acontece-se-eu-parar-de-recarregar-meu-uber-chip",
+      "category": "solucoes"
+    },
+    {
+      "question": "O Uber Chip é confiável?",
+      "answer": "<p>Sim! O Uber Chip é uma parceria oficial entre a Surf e a Uber Conta, feito para os motoristas e entregadores da Uber.</p>\n\n<p>Além disso, o Uber Chip usa a infraestrutura da TIM, que garante sinal em todo país pra não te deixar na mão.</p>",
+      "slug": "o-uber-chip-e-confiavel",
+      "category": "solucoes"
+    },
+    {
+      "question": "O que é eSIM?",
+      "answer": "<p>O eSIM é um chip virtual, que permite com que você instale um chip novo no celular sem precisar esperar pelo chip físico e sem precisar para de usar seu chip atual caso seu celular só tenha uma entrada para chip.</p>",
+      "slug": "o-que-e-e-sim",
+      "category": "solucoes"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Fique conectado!",
+    "text": "Planos de internet que duram, apps liberados e bônus exclusivo pra quem dirige com a Uber.",
+    "legend": null,
+    "button": "Contratar agora",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/xfd9xoui",
+    "image": "aproveite_desktop_ee8e381a08.jpg",
+    "imageMobile": "aproveite_mobile_d955bfa5cd.jpg",
+    "items": [
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}

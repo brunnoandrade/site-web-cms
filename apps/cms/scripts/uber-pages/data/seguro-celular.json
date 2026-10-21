@@ -1,0 +1,166 @@
+{
+  "slug": "seguro-celular",
+  "title": "Seguro Celular",
+  "metaDescription": "Proteção completa para seu celular contra roubo, furto e danos, com contratação rápida pelo app.",
+  "keywords": "seguro celular, proteção smartphone, seguro uber, furto celular, roubo celular, cobertura celular",
+  "hero": {
+    "tagline": "Proteja sua ferramenta indispensável",
+    "title": "Seguro Celular",
+    "text": "Sem fidelidade, com cobertura completa e por menos de R$1 por dia.",
+    "legend": null,
+    "legendLink": null,
+    "cta": "Saber mais",
+    "ctaUrl": "#caracteristicas",
+    "image": "seguro_celular_7273f1d99d.jpg",
+    "imageMobile": "seguro_celular_mobile_512960dbea.jpg"
+  },
+  "features": {
+    "heading": "A agilidade que o seu dia a dia precisa",
+    "description": null,
+    "button": "Quero contratar",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "image": "seguro_celular_f525b49786.jpg",
+    "video": null,
+    "items": [
+      {
+        "icon": "security_b53ce7b336_410c0fa777.png",
+        "title": "Proteção completa",
+        "text": "Seu celular protegido contra roubo, furto e quebra total oferecido pelo banco Digio."
+      },
+      {
+        "icon": "flow_744e44b727_7ba1cc97ee.png",
+        "title": "Reposição rápida",
+        "text": "Em caso de roubo ou furto, você recebe outro celular em até 7 dias."
+      },
+      {
+        "icon": "dolar_aa7963394f_58353fea48.png",
+        "title": "Por só R$29,90 ao mês",
+        "text": "Debitados direto da sua Uber Conta, sem boletos, sem complicação."
+      },
+      {
+        "icon": "phone_1ab7c90f76_311e56cc76.png",
+        "title": "Suporte 24 horas",
+        "text": "Conte com atendimento rápido, com a confiança da seguradora Chubb."
+      },
+      {
+        "icon": "airplane_7275da03bb_c4e3316ce9.png",
+        "title": "Cobertura global",
+        "text": "Viaje tranquilo: seu seguro continua valendo mesmo em outros países."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "É rápido e fácil contratar",
+    "text": "Acesse seu aplicativo da Uber Conta e siga o passo a passo.",
+    "button": "Quero contratar",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "items": [
+      {
+        "title": "Na página inicial toque em \"Seguro Celular”",
+        "text": "Confira os benefícios e vá em \"Simular contratação”",
+        "image": "seguro_celular_1_a1170928e5.png",
+        "imageMobile": "seguro_celular_1_a1170928e5.png"
+      },
+      {
+        "title": "Digite o IMEI do seu celular e toque em \"Continuar”",
+        "text": "O IMEI é um código de identificação do celular, que pode ser conferido nos ajustes do celular.",
+        "image": "seguro_celular_2_c586e168bf.png",
+        "imageMobile": "seguro_celular_2_mobile_679229d89d.png"
+      },
+      {
+        "title": "Revise sua contratação e vá em ”Contratar”",
+        "text": "Depois é só digitar a senha do cartão e pronto. Lembre-se de manter sua conta com saldo para garantir o pagamento de R$ 29,90 ao mês.",
+        "image": "seguro_celular_3_ff6e1f4bf5.png",
+        "imageMobile": "seguro_celular_3_mobile_efffb61b11.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre Seguros",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "seguro_celular_c1c3154dd4.jpg",
+    "imageMobile": "seguro_celular_mobile_341bc88c82.jpg"
+  },
+  "faqs": [
+    {
+      "question": "O que é o Seguro Celular?",
+      "answer": "<p>O Seguro celular é uma proteção para seu smartphone. Ele cobre situações chatas como roubo, furto e até mesmo quebra total. Você conta com a cobertura mesmo se estiver fora do Brasil.</p>\n\n<p>Além disso, contamos com o suporte da seguradora Chubb, empresa líder mundial em seguros com operações em mais de 50 países.</p>",
+      "slug": "o-que-e-o-seguro-celular",
+      "category": "solucoes"
+    },
+    {
+      "question": "Como faço para contratar o Seguro Celular?",
+      "answer": "<p>Pra contratar o Seguro Celular é simples, na página “Início” do seu app:</p>\n<ol>\n<li>Toque em “Seguro Celular”;</li>\n<li>Toque em “Simular contratação”;</li>\n<li>Digite o IMEI do seu celular;</li>\n<li>Revise as condições do seu plano;</li>\n<li>Por fim, digite a senha de 4 dígitos da sua conta.</li>\n</ol>\n\n<p>Pronto, você contratou seu Seguro Celular!</p>",
+      "slug": "como-faco-para-contratar-o-seguro-celular",
+      "category": "solucoes"
+    },
+    {
+      "question": "Como funciona a cobertura do Seguro Celular?",
+      "answer": "<p>A cobertura do Seguro Celular atende os seguintes casos:</p>\n\n<p><strong>Roubo:</strong> Em situações de ameaça ou violência sem chance de defesa.</p>\n\n<p><strong>Furto qualificado:</strong> Quando há evidências de dano ou quebra para levar o celular.</p>\n\n<p><strong>Quebra com perda total:</strong> Se seu celular acidentalmente quebrar e o custo de reparo for mais de 80% do valor do aparelho, você está coberto.</p>\n\n<p>Ainda tem dúvidas? Entre em contato com a Central de relacionamento Chubb, ligando para 0800 000 6816.</p>",
+      "slug": "como-funciona-a-cobertura-do-seguro-celular",
+      "category": "solucoes"
+    },
+    {
+      "question": "O que é IMEI e onde encontrá-lo?",
+      "answer": "<p>O IMEI é o código de identificação do seu celular.</p>\n<p>Para encontrar, disque *#06# no teclado do seu celular, o código IMEI vai aparecer na tela.</p>\n<p>Alguns aparelhos possuem 2 códigos IMEI, se for o seu caso, selecione o IMEI 1.</p>",
+      "slug": "o-que-e-imei-e-onde-encontra-lo",
+      "category": "solucoes"
+    },
+    {
+      "question": "Quais modelos de celulares possuem cobertura?",
+      "answer": "<p>As marcas que possuem cobertura do seguro são Apple, Asus, Huawei, LG, Motorola, Samsung ou Xiaomi.</p>\n\n<p>Além disso, o celular deve ter no máximo 4 anos de fabricação.</p>",
+      "slug": "quais-modelos-de-celulares-possuem-cobertura",
+      "category": "solucoes"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Contrate agora seu Seguro Celular!",
+    "text": "Sem fidelidade, com cobertura completa e por menos de R$1 por dia.",
+    "legend": null,
+    "button": "Contratar agora",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "image": "aproveite_desktop_ee8e381a08.jpg",
+    "imageMobile": "aproveite_mobile_d955bfa5cd.jpg",
+    "items": [
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}

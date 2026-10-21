@@ -1,0 +1,161 @@
+{
+  "slug": "debitos-veiculares",
+  "title": "Débitos Veiculares",
+  "metaDescription": "Consulte e pague débitos veiculares como multas e IPVA direto pela Uber Conta, com rapidez e praticidade.",
+  "keywords": "débitos veiculares, pagar ipva, multas de trânsito, serviços veiculares, uber motorista, consulta veículo",
+  "hero": {
+    "tagline": "Parcele seus débitos em até 12x",
+    "title": "Débitos Veiculares",
+    "text": "IPVA, Multas e Licenciamento em até 12x no cartão de crédito.",
+    "legend": "Sujeito a elegibilidade, análise de crédito e condições variáveis do Digio.",
+    "legendLink": null,
+    "cta": "Saber mais",
+    "ctaUrl": "#caracteristicas",
+    "image": "debitos_veiculares_4c7a44875b.jpg",
+    "imageMobile": "debitos_veiculares_mobile_2cbd531b30.jpg"
+  },
+  "features": {
+    "heading": "Parcele seu IPVA, Multas e Licenciamento",
+    "description": null,
+    "button": "Consultar débitos",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "image": "video_aa33166061.jpg",
+    "video": "site_uber_conta_beneficios_desktop_mobile_2cebe56b95.mp4",
+    "items": [
+      {
+        "icon": "invoice_2f104ce95d_922807efea.png",
+        "title": "Consulte suas pendências",
+        "text": "Evite filas de pedágios e estacionamentos em todo Brasil.Você consulta todos os débitos do seu veículo num só lugar."
+      },
+      {
+        "icon": "card_check_d3e2a72253_2467854476.png",
+        "title": "Pague de tudo",
+        "text": "Parcele IPVA, multas ou licenciamentos um de cada vez ou todos juntos."
+      },
+      {
+        "icon": "card_extra_a79c929dbe_47c4e4d825.png",
+        "title": "Em até 12x",
+        "text": "Parcele em um cartão de crédito ou pague à vista no cartão Uber Conta."
+      },
+      {
+        "icon": "chip_5f373817b1_72f317acc1.png",
+        "title": "Parceria com a Zapay",
+        "text": "Você paga pela plataforma da Zapay, referência no segmento."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "Veja como consultar débitos",
+    "text": "Confira o passo a passo:",
+    "button": "Consultar débitos",
+    "buttonUrl": "https://uberconta.usezapay.com.br/ ",
+    "items": [
+      {
+        "title": "No app, vá em \"Débitos veiculares\", depois em \"Consultar\" e informe seus dados.",
+        "text": "Em alguns casos pode ser solicitado o número do RENAVAM.",
+        "image": "debitos_veiculares_1_64b617cf4b.png",
+        "imageMobile": "debitos_veiculares_1_mobile_591b9c3ef6.png"
+      },
+      {
+        "title": "Confira seus débitos e selecione os que quer pagar",
+        "text": "Depois vá em \"Continuar”.",
+        "image": "debitos_veiculares_2_46c07fd851.png",
+        "imageMobile": "debitos_veiculares_2_mobile_6886489f5f.png"
+      },
+      {
+        "title": "Selecione e preencha a forma de pagamento",
+        "text": "Depois disso, vá em “Continuar”.",
+        "image": "debitos_veiculares_3_dba5e8264e.png",
+        "imageMobile": "debitos_veiculares_3_mobile_422aa0679a.png"
+      },
+      {
+        "title": "Revise seu pedido e toque em \"Concluir pagamento”",
+        "text": "Pronto, você já pagou seus Débitos Veiculares.",
+        "image": "debitos_veiculares_4_c8e38ce1b8.png",
+        "imageMobile": "debitos_veiculares_4_mobile_1aaa892ce2.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre a Uber Conta",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "debitos_veiculares_2a50e0b9e2.jpg",
+    "imageMobile": "debitos_veiculares_mobile_923858cc93.jpg"
+  },
+  "faqs": [
+    {
+      "question": "O que são débitos veiculares?",
+      "answer": "<p>São valores pendentes do seu veículo, como IPVA, licenciamento e multas que você pode consultar e pagar pelo app da Uber Conta, a conta digital feita pelo Digio. Tudo em um só lugar, sem precisar enfrentar filas ou acessar vários sites.</p>",
+      "slug": "o-que-sao-debitos-veiculares",
+      "category": "solucoes"
+    },
+    {
+      "question": "Como faço para parcelar os débitos?",
+      "answer": "<p>Para parcelar os débitos você precisa entrar no app e ir em \"Débitos Veiculares\", depois é só ir em \"Consultar\".</p>\n\n<p>Preenchendo seus dados você consegue visualizar quais débitos estão em aberto.</p>\n\n<p>Depois disso é só cadastrar um cartão de crédito e escolher em quantas vezes quer parcelar seu débito.</p>\n\n<p>Caso você não tenha um cartão de crédito, também é possível pagar via Pix ou com seu cartão Uber Conta.</p>",
+      "slug": "como-faco-para-parcelar-os-debitos",
+      "category": "solucoes"
+    },
+    {
+      "question": "Posso parcelar os Débitos Veiculares com o cartão da Uber Conta?",
+      "answer": "<p>Não, o cartão da Uber Conta funciona na função crédito à vista, por isso, só é possível usar ele pagar seus débitos à vista.</p>",
+      "slug": "posso-parcelar-os-debitos-veiculares-com-o-cartao-da-uber-conta",
+      "category": "solucoes"
+    },
+    {
+      "question": "Quais métodos de pagamento posso usar para pagar?",
+      "answer": "<p>Você pode pagar seus débitos veiculares de várias formas:</p>\n<ul>\n<li>Usando seu Cartão Uber Conta;</li>\n<li>Com um cartão de crédito;</li>\n<li>Usando 2 cartões de crédito;</li>\n<li>Via Pix</li>\n<li>Usando Pix + cartão de crédito;</li>\n</ul>\n<p>É só escolher no site da Zapay e seguir os passos.</p>",
+      "slug": "quais-metodos-de-pagamento-posso-usar-para-pagar",
+      "category": "solucoes"
+    },
+    {
+      "question": "Consigo parcelar débitos em atraso?",
+      "answer": "<p>Sim! Você pode parcelar IPVA, Multas e Licenciamento com atraso em até 12x no cartão de crédito ou à vista com seu Cartão Uber Conta ou via Pix.</p>",
+      "slug": "consigo-parcelar-debitos-em-atraso",
+      "category": "solucoes"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Consulte IPVA, multas e licenciamentos e parcele agora!",
+    "text": "Todas as contas do seu carro em até 12x no cartão de crédito.",
+    "legend": null,
+    "button": "Consultar débitos",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "image": "aproveite_desktop_ee8e381a08.jpg",
+    "imageMobile": "aproveite_mobile_d955bfa5cd.jpg",
+    "items": [
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}

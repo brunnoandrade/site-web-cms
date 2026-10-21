@@ -1,0 +1,161 @@
+{
+  "slug": "pix",
+  "title": "Pix",
+  "metaDescription": "Faça e receba Pix ilimitados, gratuitos e instantâneos direto pela Uber Conta.\n\n",
+  "keywords": "pix uber, transferência instantânea, pix gratuito, pagar com pix, receber pix, conta digital",
+  "hero": {
+    "tagline": "Transferências ilimitadas!",
+    "title": "Pix",
+    "text": "Transfira, receba e pague com segurança.",
+    "legend": null,
+    "legendLink": null,
+    "cta": "Saiba mais",
+    "ctaUrl": "#caracteristicas",
+    "image": "pix_e7b925aec3.jpg",
+    "imageMobile": "pix_mobile_8c9c47eb9d.jpg"
+  },
+  "features": {
+    "heading": "Use quantas vezes quiser!",
+    "description": null,
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "image": "pix_c8a0d30265.jpg",
+    "video": null,
+    "items": [
+      {
+        "icon": "flow_744e44b727_7ba1cc97ee.png",
+        "title": "100% gratuito",
+        "text": "Você transfere para qualquer banco, não paga nada e usa sempre que quiser."
+      },
+      {
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "title": "Receba a qualquer hora",
+        "text": "Pix cai na conta 24h por dia, até nos fins de semana."
+      },
+      {
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "title": "Pague contas e compras",
+        "text": "QRCode ou Copia e Cola para pagar o que você precisar."
+      },
+      {
+        "icon": "security_b53ce7b336_410c0fa777.png",
+        "title": "Seguro e confiável",
+        "text": "Autorizado pelo Banco Central e protegido pela Uber Conta."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "Transfira em segundos",
+    "text": "É só seguir o passo a passo e transferir!",
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "items": [
+      {
+        "title": "Vá em \"Pix” e escolha “Transferir”",
+        "text": "Selecione qual tipo de chave quer usar ou se quer transferir para um contato salvo.",
+        "image": "pix_1_d2051f6078.png",
+        "imageMobile": "pix_1_mobile_dba22b9702.png"
+      },
+      {
+        "title": "Digite a chave, clique em “Continuar” e escolha o valor",
+        "text": "Você também pode agendar, escrever uma mensagem e decidir se quer salvar o contato. Depois disso, é só clicar em “Continuar”.",
+        "image": "pix_2_8a9c8f542c.png",
+        "imageMobile": "pix_2_mobile_f4134dfdbb.png"
+      },
+      {
+        "title": "Revise sua transferência e clique em “Transferir”",
+        "text": "Pronto! Agora é só confirmar com sua senha e finalizar a transferência.",
+        "image": "pix_3_d4a7e00ceb.png",
+        "imageMobile": "pix_3_mobile_f833996b9c.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre a Uber Conta",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "pix_8bfc054a68.jpg",
+    "imageMobile": "pix_mobile_b76c6ce80b.jpg"
+  },
+  "faqs": [
+    {
+      "question": "Como cadastrar uma chave Pix?",
+      "answer": "<p> Cadastrar uma chave Pix na sua é simples: </p>\n\n<ol>\n<li>Na página inicial, toque em “Pix”. </li>\n<li>Em seguida, vá em “Minhas chaves”.</li>\n<li>Toque em “Cadastrar nova chave”.</li>\n<li> Escolha o tipo de chave que deseja cadastrar e confirme.</li>\n</ol>",
+      "slug": "como-cadastrar-uma-chave-pix",
+      "category": "pix"
+    },
+    {
+      "question": "Como faço uma transferência Pix na Uber Conta?",
+      "answer": "<p>Pra fazer uma transferência usando o Pix é simples, basta seguir o passo a passo:</p>\n<ol>\n<li>Na página inicial vá em \"Pix\".</li>\n<li>Depois, toque em ”Transferir”</li>\n<li>Escolha o tipo da chave que você quer transferir</li>\n<li>Digite a chave e vá em \"Continuar\".</li>\n<li>Digite o valor da transferência e toque em \"Continuar\".</li>\n<li>Revise os dados e toque em \"Transferir”.</li>\n<li>Pronto! Pix feito com sucesso.</li>\n</ol>",
+      "slug": "como-faco-uma-transferencia-pix-na-uber-conta",
+      "category": "pix"
+    },
+    {
+      "question": "Posso agendar um Pix?",
+      "answer": "<p>Sim, pra isso é só selecionar ”Agendar”na tela de digitação do valor e escolher a data que deseja que o Pix seja feito.</p>\n\n<p>Ah! Lembre-se de deixar sempre saldo suficiente na conta para não ter nenhum erro no momento da transferência.</p>",
+      "slug": "posso-agendar-um-pix",
+      "category": "pix"
+    },
+    {
+      "question": "O que é Pix Automático?",
+      "answer": "<p>É uma funcionalidade que permite pagar contas recorrentes como água, luz, escola e muito mais. Tudo de forma automática com o Pix.</p>\n\n<p>Ao autorizar os pagamentos de uma conta, as cobranças são agendadas pra você de 10 a 2 dias antes de cada vencimento. O pagamento é feito no próprio dia do vencimento, desde que haja saldo suficiente na conta.</p> \n\n<p>Com o Pix Automático, você não precisa mais se preocupar em lembrar de datas, gerar boletos ou fazer pagamentos de forma manual. Tudo acontece de forma segura, e você pode acompanhar cada transação direto no app.</p>",
+      "slug": "o-que-e-pix-automatico",
+      "category": "pix"
+    },
+    {
+      "question": "Como receber com Pix na Uber Conta?",
+      "answer": "<p>Você consegue receber Pix na Uber Conta compartilhando sua chave Pix.</p>\n\n<p>Mas, se quiser gerar um QRCode para pagamento, é só seguir o passo a passo:</p>\n<ol>\n<li>Na tela inicial, toque em Pix.</li>\n<li>Depois vá em Receber.</li>\n<li>Digite o valor que quer receber e uma mensagem.</li>\n<li>Vá em \"Confirmar\".</li>\n<li>Pronto! QRCode gerado.</li>\n</ol>",
+      "slug": "como-receber-com-pix-na-uber-conta",
+      "category": "pix"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Conheça o Pix da Uber Conta",
+    "text": "É rápido, fácil e ilimitado!",
+    "legend": null,
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "image": "aproveite_desktop_ee8e381a08.jpg",
+    "imageMobile": "aproveite_mobile_d955bfa5cd.jpg",
+    "items": [
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "kind": "documents",
+  "slug": "informacoes-financeiras",
+  "title": "Informações Financeiras",
+  "metaDescription": "Encontre todas as informações financeiras da Uber Conta em um só lugar, com documentos, termos e detalhes dos serviços disponíveis.",
+  "keywords": "informações financeiras uber, documentos uber conta, termos e condições, contratos financeiros, transparência uber, serviços uber conta",
+  "hero": {
+    "title": "Informações \nFinanceiras",
+    "text": "Acesse os termos e informações legais que garantem transparência nas suas operações. Tudo em um só lugar.",
+    "cta": "Saber Mais",
+    "ctaUrl": "#documentos",
+    "tone": "onDark",
+    "image": "informacoes_financeiras_desktop_ec06af9f65.jpg",
+    "imageMobile": "informacoes_financeiras_mobile_f694d12027.jpg"
+  },
+  "groups": [
+    {
+      "title": "Termos e condições",
+      "items": [
+        {
+          "title": "Conta",
+          "icon": "download_562c6ee43e_3c758dc6d9.png",
+          "links": [
+            {
+              "label": "Documento",
+              "file": "contrato_conta_09_01_2026_206f64dd03.pdf",
+              "url": null
+            }
+          ]
+        },
+        {
+          "title": "Empréstimo Pessoal",
+          "icon": "banknotes_70709be7fe_eaad9fe1e1.png",
+          "links": [
+            {
+              "label": "Documento",
+              "file": "termos_e_condicoes_ep_uber_26_06_c71423bb5b.pdf",
+              "url": null
+            }
+          ]
+        },
+        {
+          "title": "Recontratação Empréstimo Pessoal",
+          "icon": "banknotes_70709be7fe_eaad9fe1e1.png",
+          "links": [
+            {
+              "label": "Documento",
+              "file": "termos_e_condicoes_ep_uber_26_06_c71423bb5b.pdf",
+              "url": null
+            }
+          ]
+        },
+        {
+          "title": "Refinanciamento Empréstimo Pessoal",
+          "icon": "banknotes_70709be7fe_eaad9fe1e1.png",
+          "links": [
+            {
+              "label": "Documento",
+              "file": "termos_e_condicoes_ep_uber_26_06_c71423bb5b.pdf",
+              "url": null
+            }
+          ]
+        },
+        {
+          "title": "Crédito Rápido",
+          "icon": "money_5649ce7dee_93589dbbcb.png",
+          "links": [
+            {
+              "label": "Documento",
+              "file": "termos_e_condicoes_credito_rapido_06_26_d8fe428b9b.pdf",
+              "url": null
+            }
+          ]
+        },
+        {
+          "title": "Seguro Celular",
+          "icon": "shield_d7cac64ac3_4771fe57d2.png",
+          "links": [
+            {
+              "label": "Documento",
+              "file": "termos_e_condicoes_seguro_celular_e75e2f96b1.pdf",
+              "url": null
+            }
+          ]
+        },
+        {
+          "title": "Veloe",
+          "icon": "veloe_8324098c01_9155707950.png",
+          "links": [
+            {
+              "label": "Documento",
+              "file": "termos_e_condicoes_uber_veloe_64ca6c5979.pdf",
+              "url": null
+            }
+          ]
+        },
+        {
+          "title": "Carteiras Digitais",
+          "icon": "wallet_f4fa5a0cbb_cf4fbcf2d9.png",
+          "links": [
+            {
+              "label": "Google Play",
+              "file": null,
+              "url": "https://play.google.com/store/apps/details?id=br.com.digio.uber"
+            },
+            {
+              "label": "App Store",
+              "file": null,
+              "url": "http://apps.apple.com/us/app/uber-conta/id1550784531"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Demais documentos",
+      "items": [
+        {
+          "title": "Tarifas Praticadas",
+          "icon": "tax_edfcac5a41_40af5ac08e.png",
+          "links": [
+            {
+              "label": "Documento",
+              "file": "tabela_de_tarifas_92905ef4f0.pdf",
+              "url": null
+            }
+          ]
+        },
+        {
+          "title": "Termo de Adesão ao CDB (Certificado de Depósito Bancário)",
+          "icon": "chart_b183d6d0ac_8ec4973933.png",
+          "links": [
+            {
+              "label": "Documento",
+              "file": "termo_adesao_cdb_a16353dcd1.pdf",
+              "url": null
+            }
+          ]
+        },
+        {
+          "title": "Aviso de Privacidade",
+          "icon": "document_afa0dd7a2c_ef35e4cffe.png",
+          "links": [
+            {
+              "label": "Documento",
+              "file": "politica_de_privacidade_72b4fbbbbc.pdf",
+              "url": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

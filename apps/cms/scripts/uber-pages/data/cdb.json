@@ -1,0 +1,161 @@
+{
+  "slug": "cdb",
+  "title": "CDB Uber Conta",
+  "metaDescription": "Invista no CDB Uber Conta com rendimento de até 102% do CDI, resgate diário e proteção do FGC.",
+  "keywords": "cdb uber conta, investir uber, rendimento diário, 102% cdi, investimento seguro, fgc protegido",
+  "hero": {
+    "tagline": "Você dirige, seus ganhos rendem",
+    "title": "CDB Uber Conta",
+    "text": "Rendimento de até 102% do CDI com liquidez diária.",
+    "legend": null,
+    "legendLink": null,
+    "cta": "Saiba mais",
+    "ctaUrl": "#caracteristicas",
+    "image": "cdb_9cf0cff1c3.jpg",
+    "imageMobile": "cdb_mobile_14ece42c3f.jpg"
+  },
+  "features": {
+    "heading": "A agilidade que o seu dia a dia precisa",
+    "description": null,
+    "button": "Quero investir",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "image": "cdb_f739f2885d.jpg",
+    "video": null,
+    "items": [
+      {
+        "icon": "trending_c03f820bd8_8a1846f45d.png",
+        "title": "Até 102% do CDI",
+        "text": "Seu dinheiro rende todo dia útil."
+      },
+      {
+        "icon": "atm_f6ed517c85_154a320aef.png",
+        "title": "Resgate diário",
+        "text": "Você não precisa esperar o vencimento para resgatar seu dinheiro."
+      },
+      {
+        "icon": "dolar_aa7963394f_58353fea48.png",
+        "title": "Comece com R$ 20",
+        "text": "A partir deste valor, você já pode fazer seu dinheiro render."
+      },
+      {
+        "icon": "security_b53ce7b336_410c0fa777.png",
+        "title": "Seguro e confiável",
+        "text": "O CDB tem a garantia do FGC de até R$ 250.000."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "Confira como investir pelo app.",
+    "text": "É só seguir o passo a passo e pronto!",
+    "button": "Quero investir",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "items": [
+      {
+        "title": "Toque em “Investimentos”",
+        "text": "Você encontra o atalho na tela inicial do app, próximo ao “Saldo disponível”.",
+        "image": "cdb_1_d6de9457d1.png",
+        "imageMobile": "cdb_1_mobile_19d9271861.png"
+      },
+      {
+        "title": "Toque em “Quero investir\" e confira suas condições",
+        "text": "Depois de conferir, é só ir em “Investir”.",
+        "image": "cdb_2_599e6942ac.png",
+        "imageMobile": "cdb_2_mobile_c688ee44bc.png"
+      },
+      {
+        "title": "Insira o valor que deseja investir e toque em “Continuar”",
+        "text": "Depois, confirme seu investimento, digite sua senha e pronto: investimento realizado!",
+        "image": "cdb_3_54374e78ca.png",
+        "imageMobile": "cdb_3_mobile_1a7c5b8f1c.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre Investimentos",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "cdb_24125100c6.jpg",
+    "imageMobile": "cdb_mobile_a87e6c59ef.jpg"
+  },
+  "faqs": [
+    {
+      "question": "O que é o CDB?",
+      "answer": "<p>O CDB é o Certificado de Depósito Bancário. Com ele, você tem a mesma segurança de colocar seu dinheiro na poupança. O FGC (Fundo Garantidor de Créditos) garante a cobertura de até 250 mil reais investidos e ainda oferece um rendimento maior.</p>\n\n<p>Além disso, você pode resgatar seu investimento sem precisar esperar pelo vencimento, seguindo as regras de resgate estabelecidas pelo Digio.</p>\n\n<p>Os juros do CDB podem ser pré-fixados, ou seja, definidos no momento da aplicação, ou pós-fixados, atrelados a um índice como o CDI, que é o caso do CDB da Uber Conta.</p>",
+      "slug": "o-que-e-o-cdb",
+      "category": "conta-digital"
+    },
+    {
+      "question": "Quanto rende o CDB da Uber Conta?",
+      "answer": "<p>O CDB da Uber Conta é um título pós-fixado e utiliza o CDI como referência. Ou seja, o valor de rendimento varia de acordo com as variações da Selic, que ocorrem por decisões do Banco Central.</p>\n\n<p>Para os parceiros Uber Conta da categoria Diamante, o rendimento do CDB é de 102% do CDI. Para os usuários das demais categorias, o rendimento é de 100%.</p>\n\n<p>Para ambos, o CDB Uber Conta tem um prazo de 3 anos, mas você pode resgatar seu dinheiro a qualquer momento. Após o vencimento, o valor investido retorna para sua conta, e você pode utilizá-lo para realizar um sonho ou investir novamente e fazer seu dinheiro render ainda mais.</p>",
+      "slug": "quanto-rende-o-cdb-da-uber-conta",
+      "category": "conta-digital"
+    },
+    {
+      "question": "Preciso esperar pra resgatar o valor investido?",
+      "answer": "<p>Não, você não precisa esperar para resgatar o valor investido. Caso você precise do valor investido para lidar com uma emergência, seu dinheiro estará disponível a qualquer momento — desde que esteja dentro do horário comercial previsto: de segunda a sexta, das 08h às 18h.</p>",
+      "slug": "preciso-esperar-pra-resgatar-o-valor-investido",
+      "category": "conta-digital"
+    },
+    {
+      "question": "O CDB da Uber Conta tem impostos?",
+      "answer": "<p>Sim! Como quase todo CDB, o CDB da Uber Conta tem incidência de IR e IOF, apenas sobre o valor do rendimento que diminui conforme o tempo de investimento de forma automática.</p>\n\n<p>Confira as alíquotas de imposto de renda:</p>\n<ul>\n<li>Até 180 dias: 22,5%</li>\n<li>de 181 a 360 dias: 20%</li>\n<li>de 361 a 720 dias: 17,5%</li>\n<li>A partir de 721 dias: 15%</li>\n</ul>\n<p>Já o IOF só é descontado sobre os rendimentos caso o resgate do CDB seja feito antes de 30 dias de investimento.</p>",
+      "slug": "o-cdb-da-uber-conta-tem-impostos",
+      "category": "conta-digital"
+    },
+    {
+      "question": "O CDB da Uber Conta é seguro?",
+      "answer": "<p>Sim! O CDB da Uber Conta é 100% seguro.</p>\n\n<p>Além de ter a proteção do FGC (Fundo Garantidor de Crédito) de até R$ 250 mil, o CDB da Uber Conta é emitido pelo Digio, banco digital com a solidez do Bradesco.</p>",
+      "slug": "o-cdb-da-uber-conta-e-seguro",
+      "category": "conta-digital"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Comece a investir agora!",
+    "text": "Seu dinheiro começa render mais que a poupança em poucos cliques. ",
+    "legend": null,
+    "button": "Começar a investir",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "image": "aproveite_desktop_ee8e381a08.jpg",
+    "imageMobile": "aproveite_mobile_d955bfa5cd.jpg",
+    "items": [
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "kind": "about",
+  "slug": "sobre",
+  "title": "Sobre",
+  "metaDescription": "Plataforma financeira integrada para motoristas e usuários, com soluções de conta digital, cartão, empréstimos, benefícios e serviços inteligentes.",
+  "keywords": "uber conta, fintech uber, conta digital uber, serviços financeiros uber, benefícios uber, app uber conta",
+  "hero": {
+    "title": "Um app pensado para o motorista parceiro",
+    "text": "Conheça nossa história e a parceria do Digio com a Uber.",
+    "cta": "Conhecer mais",
+    "ctaUrl": "#parceria",
+    "logo": "uber_conta_mobile_5ee03d56d6_bb0b30bafd.png",
+    "tone": "onLight",
+    "image": "about_010718a838_f7cb6ea984.jpg",
+    "imageMobile": "about_mobile_3465765ec4_4aa3b862f0.jpg"
+  },
+  "partner": {
+    "heading": "Feito pelo **Banco Digio** \npara quem é parceiro da Uber",
+    "text": "A Uber Conta é uma conta digital, criada pelo Digio, banco digital do Bradesco, que visa facilitar o recebimento e gerenciamento dos ganhos de motoristas e entregadores parceiros da Uber. \n\nCom a Uber Conta os parceiros recebem seus pagamentos de forma imediata e podem realizar transferências, pagamentos de contas e empréstimos.",
+    "button": "Abrir conta",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/nayzzxcl",
+    "video": "uber_partner_ac7b731e21_5a02a7a2cb.mp4",
+    "videoMobile": "uber_partner_mobile_ca53d7566e_646ed950ab.mp4"
+  },
+  "story": {
+    "heading": "Feita por pessoas \npara pessoas",
+    "text": "Por trás de cada viagem, há histórias que movem o Brasil. E é pensando nisso que cada decisão e melhoria na Uber Conta acontece.",
+    "image": "person_d8bcafb496_1573bf8f1d.jpg",
+    "imageMobile": "person_mobile_ea42e53151_14ff1dfe15.jpg",
+    "items": [
+      {
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "title": "+ de 1 milhão",
+        "text": "de motoristas parceiros usando a Uber Conta."
+      },
+      {
+        "icon": "calendar_00bbed35bb_6d68126505.png",
+        "title": "Desde 2021",
+        "text": null
+      }
+    ]
+  },
+  "timeline": {
+    "heading": "Conheça nossa \ntrajetória até aqui!",
+    "text": "A parceria iniciada em 2021 resultou numa conta completa, com centenas de milhares de usuários que recebem seus ganhos de forma instantânea. \n\nHoje continuamos crescendo, oferecendo excelência aos clientes em todos os produtos da Uber Conta.",
+    "items": [
+      {
+        "icon": "celphone_a0cf8e490b_cf932091a9.png",
+        "period": "2021",
+        "title": "Início de tudo",
+        "text": "Começamos a parceria com a Uber com conta e cartão para os motoristas parceiros."
+      },
+      {
+        "icon": "identity_f2d16fc7f4_4f77abaac1.png",
+        "period": "2023",
+        "title": "Crédito Pessoal",
+        "text": "Lançamos o empréstimo com pagamento via débitos nas viagens com a Uber."
+      },
+      {
+        "icon": "charts_138fd74578_ac0b96bcf4.png",
+        "period": "Começo de 2024",
+        "title": "Evolução da conta",
+        "text": "Disponibilizamos no app o pagamento de débitos veiculares via Zapay, seguro celular e CDB."
+      },
+      {
+        "icon": "clock_5d4dc141ac_e961f049eb.png",
+        "period": "Final de 2024",
+        "title": "Crédito Rápido",
+        "text": "Lançamos um produto de crédito com valores de R$ 100, R$ 200 e R$ 300 e pagamento rápido."
+      }
+    ]
+  },
+  "imageContent": {
+    "heading": "Tudo com a solidez de um \nbanco digital completo!",
+    "text": "Criado em 2016, o Digio é o banco digital do Bradesco, que oferece serviços como cartão, consignado e a própria Uber Conta.",
+    "logo": "digio_d1885f4aaf_70c0086d40.png",
+    "button": "Conhecer o Digio",
+    "buttonUrl": "https://digio.com.br",
+    "newTab": true,
+    "image": "cta_digio_a3b85800cb_899045cfa0.jpg",
+    "imageMobile": "cta_digio_mobile_e053247c94_8b8a22855b.jpg"
+  },
+  "contacts": {
+    "eyebrow": "Não encontrou o que procurava?",
+    "heading": "Fale com a gente!",
+    "text": "Estamos disponíveis 24 horas por dia para te ajudar via chat no aplicativo ou por telefone. \n\nVale também consultar nossa página de ajuda, onde você encontra respostas para dúvidas frequentes.",
+    "button": "Ir para Ajuda",
+    "buttonUrl": "/central-de-ajuda",
+    "groups": [
+      {
+        "title": "Central Uber Conta",
+        "entries": [
+          {
+            "title": "Capitais e regiões metropolitanas",
+            "description": "24 horas",
+            "phone": "3004 9907",
+            "url": null,
+            "icon": null
+          },
+          {
+            "title": "Demais regiões",
+            "description": "24 horas",
+            "phone": "0800 721 9907",
+            "url": null,
+            "icon": null
+          }
+        ]
+      },
+      {
+        "title": null,
+        "entries": [
+          {
+            "title": "SAC Digio",
+            "description": "24 horas",
+            "phone": "0800 333 8735",
+            "url": null,
+            "icon": null
+          },
+          {
+            "title": "Ouvidoria Digio",
+            "description": "10h às 16h - Segunda a sexta, exceto feriados",
+            "phone": "0800 333 1474",
+            "url": null,
+            "icon": null
+          }
+        ]
+      },
+      {
+        "title": "Atendimento em libras",
+        "entries": [
+          {
+            "title": "Chamada de Vídeo",
+            "description": "8h às 20h - Segunda a sexta",
+            "phone": null,
+            "url": "https://digio.plusoftomni.com.br/api/chatsite/site/-sS6GVED4PqimMTg0ieywf0jspVpt8upzw5hKV3FDvWWJKPQOUeVhQ==/client",
+            "icon": "screen_14f862fbec_963b5b4cac.png"
+          }
+        ]
+      }
+    ]
+  }
+}

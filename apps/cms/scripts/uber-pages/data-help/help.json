@@ -1,0 +1,692 @@
+{
+  "title": "Central de Ajuda",
+  "metaDescription": "Encontre suporte para dúvidas, serviços e funcionalidades da Uber Conta de forma rápida e simples.",
+  "hero": {
+    "tagline": "Olá!",
+    "title": "Qual sua dúvida?",
+    "text": "Pesquise sua dúvida ou escolha uma das categorias",
+    "image": "hero_ajuda_new_8c85bfd0f6.jpg",
+    "imageMobile": "hero_ajuda_new_mobile_efdfa7242f.jpg"
+  },
+  "searchPlaceholder": "Buscar perguntas, palavras-chave, tópicos",
+  "imageContent": {
+    "eyebrow": "Tem mais dúvidas?",
+    "heading": "Consulte a ajuda no app!",
+    "text": "Lá você esclarece as principais dúvidas e conta com chat 24 horas se precisar de ajuda com qualquer tema!",
+    "button": "Ir para o app",
+    "buttonUrl": "#",
+    "newTab": true,
+    "logo": null,
+    "image": "divider_ajuda_desktop_0c7262297a_0163248e08.jpg",
+    "imageMobile": "divider_ajuda_mobile_e8843d3ef9_3e130214b0.jpg"
+  },
+  "contacts": {
+    "eyebrow": "Não tirou sua dúvida?",
+    "heading": "Fale com a gente!",
+    "text": "Estamos disponíveis 24 horas por dia para te ajudar via chat no aplicativo ou por telefone.",
+    "button": null,
+    "buttonUrl": null,
+    "groups": [
+      {
+        "title": "Central Uber Conta",
+        "entries": [
+          {
+            "title": "Capitais e regiões metropolitanas",
+            "description": "24 horas",
+            "phone": "3004 9907",
+            "url": null,
+            "icon": null
+          },
+          {
+            "title": "Demais regiões",
+            "description": "24 horas",
+            "phone": "0800 721 9907",
+            "url": null,
+            "icon": null
+          }
+        ]
+      },
+      {
+        "title": null,
+        "entries": [
+          {
+            "title": "SAC Digio",
+            "description": "24 horas",
+            "phone": "0800 333 8735",
+            "url": null,
+            "icon": null
+          },
+          {
+            "title": "Ouvidoria Digio",
+            "description": "10h às 16h - Segunda a sexta, exceto feriados",
+            "phone": "0800 333 1474",
+            "url": null,
+            "icon": null
+          }
+        ]
+      },
+      {
+        "title": null,
+        "entries": [
+          {
+            "title": "Central de negociação de empréstimos",
+            "description": "9h às 20h - Segunda a sexta, exceto feriados <br>\n9h às 14h - Sábado ",
+            "phone": "0800 941 9829",
+            "url": null,
+            "icon": null
+          },
+          {
+            "title": "Negocie via WhatsApp",
+            "description": "9h às 20h - Segunda a sexta, exceto feriados <br>\n9h às 14h - Sábado",
+            "phone": null,
+            "url": "https://api.whatsapp.com/message/ZL7SN7ZSRLBKD1?autoload=1&app_absent=0",
+            "icon": null
+          }
+        ]
+      },
+      {
+        "title": "Atendimento em libras",
+        "entries": [
+          {
+            "title": "Chamada de Vídeo",
+            "description": "8h às 20h - Segunda a sexta",
+            "phone": null,
+            "url": "https://digio.plusoftomni.com.br/api/chatsite/site/-sS6GVED4PqimMTg0ieywf0jspVpt8upzw5hKV3FDvWWJKPQOUeVhQ==/client",
+            "icon": "screen_14f862fbec_963b5b4cac.png"
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    {
+      "title": "Uber Conta",
+      "slug": "uber-conta",
+      "description": "Abertura de conta, tarifas e taxas, documentos, aplicativo, segurança.",
+      "icon": "phone_download_1c281d0150_937e0abece.png",
+      "groups": [
+        {
+          "title": null,
+          "faqs": [
+            "o-que-e-a-uber-conta",
+            "quem-pode-ter-a-uber-conta",
+            "como-abro-uma-uber-conta",
+            "a-uber-conta-e-segura",
+            "posso-abrir-uma-uber-conta-sem-ser-parceiro-da-uber"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Conta digital",
+      "slug": "conta-digital",
+      "description": "Recebimento dos ganhos de viagem, extrato e investimentos.",
+      "icon": "chip_5f373817b1_72f317acc1.png",
+      "groups": [
+        {
+          "title": "Gerais",
+          "faqs": [
+            "como-funciona-o-repasse-de-ganhos",
+            "como-confiro-meu-repasse-de-ganhos",
+            "como-faco-para-rastrear-a-entrega-do-meu-cartao",
+            "como-troco-a-senha-do-meu-app-uber-conta",
+            "como-faco-pra-pagar-boletos-com-a-uber-conta"
+          ]
+        },
+        {
+          "title": "Investimentos",
+          "faqs": [
+            "o-que-e-o-cdb",
+            "quanto-rende-o-cdb-da-uber-conta",
+            "preciso-esperar-pra-resgatar-o-valor-investido",
+            "o-cdb-da-uber-conta-tem-impostos",
+            "o-cdb-da-uber-conta-e-seguro"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Pix",
+      "slug": "pix",
+      "description": "Transferências via Pix, modalidades, chaves e limites.",
+      "icon": "pix_3091b20840_e8e4790c00.png",
+      "groups": [
+        {
+          "title": null,
+          "faqs": [
+            "como-cadastrar-uma-chave-pix",
+            "como-faco-uma-transferencia-pix-na-uber-conta",
+            "posso-agendar-um-pix",
+            "o-que-e-pix-automatico",
+            "como-receber-com-pix-na-uber-conta"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Empréstimos",
+      "slug": "emprestimos",
+      "description": "Crédito Pessoal, Crédito Rápido e Antecipação do FGTS.",
+      "icon": "money_9aba18197b_9c900faffc.png",
+      "groups": [
+        {
+          "title": "Gerais",
+          "faqs": [
+            "quais-sao-os-emprestimos-da-uber-conta",
+            "quem-pode-ter-emprestimos-na-uber-conta",
+            "porque-fui-negado-no-emprestimo",
+            "qual-a-diferenca-do-credito-pessoal-para-o-credito-rapido"
+          ]
+        },
+        {
+          "title": "Crédito Rápido",
+          "faqs": [
+            "o-que-e-credito-rapido",
+            "quando-posso-contratar-o-credito-rapido-novamente"
+          ]
+        },
+        {
+          "title": "Antecipação do FGTS",
+          "faqs": [
+            "o-que-e-o-saque-aniversario-fgts",
+            "o-que-e-a-antecipacao-do-saque-aniversario-do-fgts",
+            "como-faco-para-contratar-a-antecipacao-do-saque-aniversario-do-fgts",
+            "em-quanto-tempo-eu-recebo-o-valor-da-antecipacao",
+            "quais-sao-os-pre-requisitos-para-antecipar-o-fgts"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cartão",
+      "slug": "cartao",
+      "description": "Entrega, ativação, cartão físico e virtual, bloqueio e desbloqueio, perda e roubo.",
+      "icon": "card_pre_dad1b95b05_83baccccc4.png",
+      "groups": [
+        {
+          "title": null,
+          "faqs": [
+            "como-faco-para-rastrear-a-entrega-do-meu-cartao",
+            "como-faco-para-ativar-meu-cartao",
+            "e-possivel-desativar-o-pagamento-por-aproximacao",
+            "o-que-acontece-se-eu-perder-meu-cartao",
+            "como-vejo-a-senha-do-meu-cartao"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Soluções",
+      "slug": "solucoes",
+      "description": "Seguro Celular, Tag Veloe, Débitos Veiculares e Uber Chip.",
+      "icon": "bulb_69b2808e2f_eecae7b25d.png",
+      "groups": [
+        {
+          "title": "Seguro Celular",
+          "faqs": [
+            "o-que-e-o-seguro-celular",
+            "como-faco-para-contratar-o-seguro-celular",
+            "como-funciona-a-cobertura-do-seguro-celular",
+            "o-que-e-imei-e-onde-encontra-lo",
+            "quais-modelos-de-celulares-possuem-cobertura"
+          ]
+        },
+        {
+          "title": "Tag Veloe",
+          "faqs": [
+            "o-que-e-tag-veloe",
+            "como-faco-para-contratar-a-tag-veloe",
+            "quanto-custa-a-tag-veloe",
+            "como-faco-para-recarregar-minha-tag-veloe",
+            "quanto-tempo-leva-pra-chegar-minha-tag-veloe"
+          ]
+        },
+        {
+          "title": "Débitos Veiculares",
+          "faqs": [
+            "o-que-sao-debitos-veiculares",
+            "como-faco-para-parcelar-os-debitos",
+            "posso-parcelar-os-debitos-veiculares-com-o-cartao-da-uber-conta",
+            "quais-metodos-de-pagamento-posso-usar-para-pagar",
+            "consigo-parcelar-debitos-em-atraso"
+          ]
+        },
+        {
+          "title": "Uber Chip",
+          "faqs": [
+            "como-faco-para-contratar-o-uber-chip",
+            "como-fazer-a-recarga-pela-uber-conta",
+            "o-que-acontece-se-eu-parar-de-recarregar-meu-uber-chip",
+            "o-uber-chip-e-confiavel",
+            "o-que-e-e-sim"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Benefícios",
+      "slug": "beneficios",
+      "description": "Cashback, Uber Conta Desconto e KM de vantagens.",
+      "icon": "gift_6ec6860d8d_e75cbb03ac.png",
+      "groups": [
+        {
+          "title": "Cashback",
+          "faqs": [
+            "o-que-e-cashback",
+            "que-vantagens-ou-opcoes-de-cashback-estao-disponiveis",
+            "como-faco-para-ver-as-lojas-parceiras-da-uber-conta-1",
+            "qual-a-diferenca-entre-cashback-e-uber-conta-desconto"
+          ]
+        },
+        {
+          "title": "Uber Conta Desconto",
+          "faqs": [
+            "o-que-e-uber-conta-desconto",
+            "quais-as-vantagens-do-uber-conta-desconto",
+            "como-faco-para-ver-as-lojas-parceiras-da-uber-conta-1"
+          ]
+        },
+        {
+          "title": "KM de Vantagens",
+          "faqs": [
+            "o-que-e-o-km-de-vantagens",
+            "como-faco-para-usar-o-app-kmv",
+            "quanto-de-cashback-posso-receber-com-o-kmv"
+          ]
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "O que é a Uber Conta?",
+      "slug": "o-que-e-a-uber-conta",
+      "category": "uber-conta",
+      "answer": "<p>A Uber Conta é uma conta digital criada para motoristas e entregadores da Uber em parceria com o Digio. Com ela você recebe seus ganhos na hora, tem Pix ilimitados, empréstimos e desconto em diversos parceiros.</>"
+    },
+    {
+      "question": "Quem pode ter a Uber Conta?",
+      "slug": "quem-pode-ter-a-uber-conta",
+      "category": "uber-conta",
+      "answer": "<p>Para abrir uma Uber Conta você precisa seguir os seguintes critérios:</p>\n\n<ul>\n<li>Ser um motorista ativo na Uber.</li>\n<li>Ter pelo menos 25 viagens ou entregas com a Uber.</li>\n<li>Não possuir restrições legais no CPF.</li>\n</ul>\n\n<p>Além disso, é feita uma análise de crédito para aprovação da conta.</p>"
+    },
+    {
+      "question": "Como abro uma Uber Conta?",
+      "slug": "como-abro-uma-uber-conta",
+      "category": "uber-conta",
+      "answer": "<p>Abrir sua Uber Conta é simples:</p>\n\n<ol>\n<li>No app “Uber Driver”, vá até o menu “Carteira” para iniciar o processo.</li>\n<li>Preencha seus dados pessoais, endereço residencial e informe onde deseja receber seu cartão Uber.</li>\n<li>Após finalizar o cadastro, baixe o app da Uber Conta e faça seu primeiro acesso usando o mesmo e-mail e número de celular cadastrados no Uber Driver.</li>\n<li>Por fim, crie uma senha para o aplicativo e pronto! Você já começa a receber seus repasses diretamente na Uber Conta.</li>\n<ol>"
+    },
+    {
+      "question": "A Uber Conta é segura?",
+      "slug": "a-uber-conta-e-segura",
+      "category": "uber-conta",
+      "answer": "<p>Sim, a Uber Conta é 100% segura.</p>\n\n<p>Para acessar seu saldo, cartão ou fazer qualquer movimentação, você sempre precisa de senha ou biometria. Também é possível configurar limites para transferências, como no Pix, dando mais controle sobre sua conta.</p>\n\n<p>Além disso, a Uber Conta é operada pelo Digio, que faz parte do grupo Bradesco, garantindo ainda mais segurança e confiança.</p>"
+    },
+    {
+      "question": "Posso abrir uma Uber Conta sem ser parceiro da Uber?",
+      "slug": "posso-abrir-uma-uber-conta-sem-ser-parceiro-da-uber",
+      "category": "uber-conta",
+      "answer": "<p>A Uber Conta foi criada especialmente para oferecer vantagens exclusivas a motoristas e entregadores parceiros da Uber. Por isso, só é possível abrir uma Uber Conta se você for um parceiro ativo na plataforma.</p>"
+    },
+    {
+      "question": "Como funciona o repasse de ganhos?",
+      "slug": "como-funciona-o-repasse-de-ganhos",
+      "category": "conta-digital",
+      "answer": "<p>O repasse de ganhos começa a funcionar assim que você realiza o primeiro acesso à Uber Conta.</p>\n\n<p>O prazo para recebimento na sua Uber Conta é de até 1 hora após a finalização da viagem ou entrega. </p>\n\n<p>Vale lembrar: o valor de uma viagem ou entrega só será repassado quando houver saldo positivo. A taxa de serviço relacionada às viagens e entregas feitas em dinheiro, por exemplo, será descontada do seu saldo, como ocorre normalmente no processo de repasse semanal.</p>"
+    },
+    {
+      "question": "Como confiro meu repasse de ganhos?",
+      "slug": "como-confiro-meu-repasse-de-ganhos",
+      "category": "conta-digital",
+      "answer": "<p>Você consegue conferir seus repasses pelo app, seguindo o passo a passo:</p>\n\n\n<p>Abra o app da Uber Conta.</p>\n<p>Vá em \"Ganhos Uber”</p>\n<p>Pronto, agora é só conferir seus repasses!</p>"
+    },
+    {
+      "question": "Como faço para rastrear a entrega do meu cartão?",
+      "slug": "como-faco-para-rastrear-a-entrega-do-meu-cartao",
+      "category": "cartao",
+      "answer": "<p>Você pode acompanhar a entrega do seu cartão pelo app da Uber Conta. É simples:</p>\n\n<ul>\n<li>Na página inicial do app, toque em “Meus Cartões”.</li>\n<li>Em seguida, selecione “Rastrear entrega”.</li>\n</ul>\n<p>Pronto! Agora você consegue acompanhar o status da entrega.</p>\n<p> Vale lembrar que a entrega pode levar até 12 dias úteis para capitais e regiões metropolitanas. Para demais regiões, o prazo é de até 30 dias corridos. </p>"
+    },
+    {
+      "question": "Como troco a senha do meu app Uber Conta?",
+      "slug": "como-troco-a-senha-do-meu-app-uber-conta",
+      "category": "conta-digital",
+      "answer": "<p>Para alterar a senha do seu aplicativo, basta seguir o passo a passo:</p>\n\n\n<p>No menu, vá em “Segurança”.</p>\n<p>Depois vá em ”Alterar senha do aplicativo\".</p>\n<p>Confirme sua senha atual e depois crie uma nova senha seguindo os critérios informados e toque em \"Criar senha”</p>\n<p>Pronto, senha alterada!</p>"
+    },
+    {
+      "question": "Como faço pra pagar boletos com a Uber Conta?",
+      "slug": "como-faco-pra-pagar-boletos-com-a-uber-conta",
+      "category": "conta-digital",
+      "answer": "<p>Para pagar boletos na Uber Conta, basta seguir o passo a passo:</p>\n\n<p>Na página inicial vá em \"Pagar.</p>\n<p>Escolha o item \"Pagar contas\".</p>\n<p>Escaneie ou digite o código de barras do boleto que quer pagar.</p>\n<p>Revise as informações do seu boleto e vá em \"Confirmar”</p>\n<p>Digite a senha do seu cartão e vá em ”Continuar”</p>\n<p>Pronto, boleto pago!</p>"
+    },
+    {
+      "question": "O que é o CDB?",
+      "slug": "o-que-e-o-cdb",
+      "category": "conta-digital",
+      "answer": "<p>O CDB é o Certificado de Depósito Bancário. Com ele, você tem a mesma segurança de colocar seu dinheiro na poupança. O FGC (Fundo Garantidor de Créditos) garante a cobertura de até 250 mil reais investidos e ainda oferece um rendimento maior.</p>\n\n<p>Além disso, você pode resgatar seu investimento sem precisar esperar pelo vencimento, seguindo as regras de resgate estabelecidas pelo Digio.</p>\n\n<p>Os juros do CDB podem ser pré-fixados, ou seja, definidos no momento da aplicação, ou pós-fixados, atrelados a um índice como o CDI, que é o caso do CDB da Uber Conta.</p>"
+    },
+    {
+      "question": "Quanto rende o CDB da Uber Conta?",
+      "slug": "quanto-rende-o-cdb-da-uber-conta",
+      "category": "conta-digital",
+      "answer": "<p>O CDB da Uber Conta é um título pós-fixado e utiliza o CDI como referência. Ou seja, o valor de rendimento varia de acordo com as variações da Selic, que ocorrem por decisões do Banco Central.</p>\n\n<p>Para os parceiros Uber Conta da categoria Diamante, o rendimento do CDB é de 102% do CDI. Para os usuários das demais categorias, o rendimento é de 100%.</p>\n\n<p>Para ambos, o CDB Uber Conta tem um prazo de 3 anos, mas você pode resgatar seu dinheiro a qualquer momento. Após o vencimento, o valor investido retorna para sua conta, e você pode utilizá-lo para realizar um sonho ou investir novamente e fazer seu dinheiro render ainda mais.</p>"
+    },
+    {
+      "question": "Preciso esperar pra resgatar o valor investido?",
+      "slug": "preciso-esperar-pra-resgatar-o-valor-investido",
+      "category": "conta-digital",
+      "answer": "<p>Não, você não precisa esperar para resgatar o valor investido. Caso você precise do valor investido para lidar com uma emergência, seu dinheiro estará disponível a qualquer momento — desde que esteja dentro do horário comercial previsto: de segunda a sexta, das 08h às 18h.</p>"
+    },
+    {
+      "question": "O CDB da Uber Conta tem impostos?",
+      "slug": "o-cdb-da-uber-conta-tem-impostos",
+      "category": "conta-digital",
+      "answer": "<p>Sim! Como quase todo CDB, o CDB da Uber Conta tem incidência de IR e IOF, apenas sobre o valor do rendimento que diminui conforme o tempo de investimento de forma automática.</p>\n\n<p>Confira as alíquotas de imposto de renda:</p>\n<ul>\n<li>Até 180 dias: 22,5%</li>\n<li>de 181 a 360 dias: 20%</li>\n<li>de 361 a 720 dias: 17,5%</li>\n<li>A partir de 721 dias: 15%</li>\n</ul>\n<p>Já o IOF só é descontado sobre os rendimentos caso o resgate do CDB seja feito antes de 30 dias de investimento.</p>"
+    },
+    {
+      "question": "O CDB da Uber Conta é seguro?",
+      "slug": "o-cdb-da-uber-conta-e-seguro",
+      "category": "conta-digital",
+      "answer": "<p>Sim! O CDB da Uber Conta é 100% seguro.</p>\n\n<p>Além de ter a proteção do FGC (Fundo Garantidor de Crédito) de até R$ 250 mil, o CDB da Uber Conta é emitido pelo Digio, banco digital com a solidez do Bradesco.</p>"
+    },
+    {
+      "question": "Como cadastrar uma chave Pix?",
+      "slug": "como-cadastrar-uma-chave-pix",
+      "category": "pix",
+      "answer": "<p> Cadastrar uma chave Pix na sua é simples: </p>\n\n<ol>\n<li>Na página inicial, toque em “Pix”. </li>\n<li>Em seguida, vá em “Minhas chaves”.</li>\n<li>Toque em “Cadastrar nova chave”.</li>\n<li> Escolha o tipo de chave que deseja cadastrar e confirme.</li>\n</ol>"
+    },
+    {
+      "question": "Como faço uma transferência Pix na Uber Conta?",
+      "slug": "como-faco-uma-transferencia-pix-na-uber-conta",
+      "category": "pix",
+      "answer": "<p>Pra fazer uma transferência usando o Pix é simples, basta seguir o passo a passo:</p>\n<ol>\n<li>Na página inicial vá em \"Pix\".</li>\n<li>Depois, toque em ”Transferir”</li>\n<li>Escolha o tipo da chave que você quer transferir</li>\n<li>Digite a chave e vá em \"Continuar\".</li>\n<li>Digite o valor da transferência e toque em \"Continuar\".</li>\n<li>Revise os dados e toque em \"Transferir”.</li>\n<li>Pronto! Pix feito com sucesso.</li>\n</ol>"
+    },
+    {
+      "question": "Posso agendar um Pix?",
+      "slug": "posso-agendar-um-pix",
+      "category": "pix",
+      "answer": "<p>Sim, pra isso é só selecionar ”Agendar”na tela de digitação do valor e escolher a data que deseja que o Pix seja feito.</p>\n\n<p>Ah! Lembre-se de deixar sempre saldo suficiente na conta para não ter nenhum erro no momento da transferência.</p>"
+    },
+    {
+      "question": "O que é Pix Automático?",
+      "slug": "o-que-e-pix-automatico",
+      "category": "pix",
+      "answer": "<p>É uma funcionalidade que permite pagar contas recorrentes como água, luz, escola e muito mais. Tudo de forma automática com o Pix.</p>\n\n<p>Ao autorizar os pagamentos de uma conta, as cobranças são agendadas pra você de 10 a 2 dias antes de cada vencimento. O pagamento é feito no próprio dia do vencimento, desde que haja saldo suficiente na conta.</p> \n\n<p>Com o Pix Automático, você não precisa mais se preocupar em lembrar de datas, gerar boletos ou fazer pagamentos de forma manual. Tudo acontece de forma segura, e você pode acompanhar cada transação direto no app.</p>"
+    },
+    {
+      "question": "Como receber com Pix na Uber Conta?",
+      "slug": "como-receber-com-pix-na-uber-conta",
+      "category": "pix",
+      "answer": "<p>Você consegue receber Pix na Uber Conta compartilhando sua chave Pix.</p>\n\n<p>Mas, se quiser gerar um QRCode para pagamento, é só seguir o passo a passo:</p>\n<ol>\n<li>Na tela inicial, toque em Pix.</li>\n<li>Depois vá em Receber.</li>\n<li>Digite o valor que quer receber e uma mensagem.</li>\n<li>Vá em \"Confirmar\".</li>\n<li>Pronto! QRCode gerado.</li>\n</ol>"
+    },
+    {
+      "question": "Quais são os empréstimos da Uber Conta?",
+      "slug": "quais-sao-os-emprestimos-da-uber-conta",
+      "category": "emprestimos",
+      "answer": "<p>Hoje a Uber Conta tem 2 tipos de empréstimos.</p>\n<p>O Crédito Pessoal é ideal pra quem precisa de valores maiores:</p>\n<ul>\n<li>Valores até R$ 10.000,00;</li>\n<li>Parcelas de 6 a 18 vezes;</li>\n<li>Juros a partir de 2,99% ao mês;</li>\n<li>Após aprovado, o dinheiro cai em minutos, direto na sua Uber Conta;</li>\n</ul>\n<p>E o Crédito Rápido é focado em ser uma ajuda no seu dia a dia:</p>\n<ul>\n<li>Valores entre R$ 100,00 e R$ 300,00;</li>\n<li>Até 10 dias pra pagar;</li>\n<li>Tarifa de 8,85% com valor máximo de R$ 17,75;</li>\n<li>O dinheiro cai em poucos minutos em sua Uber Conta;</li>\n</ul>"
+    },
+    {
+      "question": "Quem pode ter empréstimos na Uber Conta?",
+      "slug": "quem-pode-ter-emprestimos-na-uber-conta",
+      "category": "emprestimos",
+      "answer": "<p>Pra contratar os empréstimos não existem requisitos como categoria, nota ou tempo na Uber pra aprovação.</p>\n\n<p>O que acontece é que fazemos uma análise de crédito pra poder liberar os valores.\nCom ela entendemos o seu score de crédito, comportamento, quitação de contas e se o cliente está negativado ou não.</p>"
+    },
+    {
+      "question": "Porque fui negado no empréstimo?",
+      "slug": "porque-fui-negado-no-emprestimo",
+      "category": "emprestimos",
+      "answer": "<p>Mesmo com uma oferta pré-aprovada, pode acontecer do seu pedido de empréstimo não ser aprovado.</p>\n\n<p>Isso porque, no momento da solicitação, a gente faz uma nova análise de crédito e, dependendo do resultado, o empréstimo pode ser recusado.</p>"
+    },
+    {
+      "question": "Qual a diferença do Crédito Pessoal para o Crédito Rápido?",
+      "slug": "qual-a-diferenca-do-credito-pessoal-para-o-credito-rapido",
+      "category": "emprestimos",
+      "answer": "<p>O Crédito Pessoal é pensado pra quem precisa de um valor mais alto e mais tempo pra pagar, com parcelas que podem ir até 12 meses, por isso ele precisa de uma análise de crédito e leva alguns minutos pra cair na conta.</p>\n\n<p>Já o Crédito Rápido é voltado pra ser uma ajuda imediata, ele tem valores menores, não tem taxa de juros, é mais rápido de pagar, e o dinheiro cai na sua conta na hora.</p>"
+    },
+    {
+      "question": "O que é Crédito Rápido?",
+      "slug": "o-que-e-credito-rapido",
+      "category": "emprestimos",
+      "answer": "<p>O Crédito Rápido é voltado para quem precisa de uma ajuda imediata, oferecendo valores menores e rapidez no pagamento. Após a contratação, o dinheiro fica disponível em poucos minutos na conta.</p>"
+    },
+    {
+      "question": "O que é o Saque-Aniversário FGTS?",
+      "slug": "o-que-e-o-saque-aniversario-fgts",
+      "category": "emprestimos",
+      "answer": "<p>É uma forma de receber,  anualmente, uma parte do benefício que você tem guardado no FGTS - sempre na data do seu aniversário. </P>"
+    },
+    {
+      "question": "O que é a antecipação do Saque-Aniversário do FGTS?",
+      "slug": "o-que-e-a-antecipacao-do-saque-aniversario-do-fgts",
+      "category": "emprestimos",
+      "answer": "<p>É uma forma prática e segura de receber (de uma vez só) todo este valor que você receberia em diversas parcelas de saque-aniversário</p>"
+    },
+    {
+      "question": "Como faço para contratar a antecipação do Saque-Aniversário do FGTS?",
+      "slug": "como-faco-para-contratar-a-antecipacao-do-saque-aniversario-do-fgts",
+      "category": "emprestimos",
+      "answer": "<p>É só clicar em contratar, fazer os passos do WhatsApp, e receber seu dinheiro em até 1 dia útil.</p>"
+    },
+    {
+      "question": "Em quanto tempo eu recebo o valor da antecipação?",
+      "slug": "em-quanto-tempo-eu-recebo-o-valor-da-antecipacao",
+      "category": "emprestimos",
+      "answer": "<p>O dinheiro da Antecipação do Saque-Aniversário FGTS fica disponível para você em até 1 dia útil.</p>"
+    },
+    {
+      "question": "Quais são os pré-requisitos para antecipar o FGTS?",
+      "slug": "quais-sao-os-pre-requisitos-para-antecipar-o-fgts",
+      "category": "emprestimos",
+      "answer": "<p>Qualquer pessoa com mais de 18 anos e com uma conta do FGTS ativa, com R$ 206,00 ou mais de saldo pode realizar a Antecipação do Saque-Aniversário.</p>\n\n<p>Além disso, é necessário acessar o aplicativo do FGTS da Caixa, ativar o saque-aniversário como forma de recebimento do FGTS e autorizar que o Digio visualize seu saldo.</p>"
+    },
+    {
+      "question": "Como faço para ativar meu cartão?",
+      "slug": "como-faco-para-ativar-meu-cartao",
+      "category": "cartao",
+      "answer": "<p> Se você já recebeu seu cartão físico e quer ativá-lo, siga este passo a passo:</p>\n<ol>\n<li>Na página inicial da Uber Conta, toque em “Meus cartões”.</li>\n<li> Em seguida, selecione “Recebi meu cartão”.</li>\n<li> Toque em “Ativar cartão”.</li>\n<li> Digite os 4 últimos dígitos do seu cartão e toque em “Continuar”.</li>\n<li>Digite o CVV do seu cartão e toque novamente em “Continuar”.</li>\n</ol>\n<p>Pronto! Seu cartão está ativado. Agora é só usar na função Crédito à vista onde quiser.</p>"
+    },
+    {
+      "question": "É possível desativar o pagamento por aproximação?",
+      "slug": "e-possivel-desativar-o-pagamento-por-aproximacao",
+      "category": "cartao",
+      "answer": "<p>Sim! Para desativar o pagamento pro aproximação é só seguir o passo a passo:</p>\n\n<ol>\n<li>Vá em \"Meus cartões”.</li>\n<li>Desative a opção \"Pagamento por aproximação”.</li>\n</ol>\n<p>Pronto, caso queira voltar a ter pagamento por aproximação no seu cartão é só reativar a opção em \"Meus cartões”</p>"
+    },
+    {
+      "question": "O que acontece se eu perder meu cartão?",
+      "slug": "o-que-acontece-se-eu-perder-meu-cartao",
+      "category": "cartao",
+      "answer": "<p>Em caso de perda ou roubo, você pode solicitar a segunda via do seu cartão diretamente pelo app, na opção “Meus cartões”. </p>\n\n<p>Assim que você solicita a segunda via, o cartão atual é bloqueado automaticamente e um novo é emitido.</p>\n\n<p>Importante: mesmo sem o cartão físico, você pode continuar fazendo compras usando o cartão virtual.</p>"
+    },
+    {
+      "question": "Como vejo a senha do meu cartão?",
+      "slug": "como-vejo-a-senha-do-meu-cartao",
+      "category": "cartao",
+      "answer": "<p>Para consultar a senha do seu cartão, siga este passo a passo:</p>\n<ol>\n<li>No menu da Uber Conta, toque em “Ver senha do cartão”.</li>\n<li> Digite a senha que você utiliza para acessar o app e toque em “Continuar”.</li>\n<li>Em seguida, informe sua data de nascimento e toque novamente em “Continuar”.</li>\n</ol>\n<p>Pronto! Você poderá visualizar a sua senha.</p>\n<p>Importante: A Uber Conta nunca solicita sua senha por e-mail, SMS ou telefone. Não compartilhe sua senha com ninguém.</p>"
+    },
+    {
+      "question": "O que é o Seguro Celular?",
+      "slug": "o-que-e-o-seguro-celular",
+      "category": "solucoes",
+      "answer": "<p>O Seguro celular é uma proteção para seu smartphone. Ele cobre situações chatas como roubo, furto e até mesmo quebra total. Você conta com a cobertura mesmo se estiver fora do Brasil.</p>\n\n<p>Além disso, contamos com o suporte da seguradora Chubb, empresa líder mundial em seguros com operações em mais de 50 países.</p>"
+    },
+    {
+      "question": "Como faço para contratar o Seguro Celular?",
+      "slug": "como-faco-para-contratar-o-seguro-celular",
+      "category": "solucoes",
+      "answer": "<p>Pra contratar o Seguro Celular é simples, na página “Início” do seu app:</p>\n<ol>\n<li>Toque em “Seguro Celular”;</li>\n<li>Toque em “Simular contratação”;</li>\n<li>Digite o IMEI do seu celular;</li>\n<li>Revise as condições do seu plano;</li>\n<li>Por fim, digite a senha de 4 dígitos da sua conta.</li>\n</ol>\n\n<p>Pronto, você contratou seu Seguro Celular!</p>"
+    },
+    {
+      "question": "Como funciona a cobertura do Seguro Celular?",
+      "slug": "como-funciona-a-cobertura-do-seguro-celular",
+      "category": "solucoes",
+      "answer": "<p>A cobertura do Seguro Celular atende os seguintes casos:</p>\n\n<p><strong>Roubo:</strong> Em situações de ameaça ou violência sem chance de defesa.</p>\n\n<p><strong>Furto qualificado:</strong> Quando há evidências de dano ou quebra para levar o celular.</p>\n\n<p><strong>Quebra com perda total:</strong> Se seu celular acidentalmente quebrar e o custo de reparo for mais de 80% do valor do aparelho, você está coberto.</p>\n\n<p>Ainda tem dúvidas? Entre em contato com a Central de relacionamento Chubb, ligando para 0800 000 6816.</p>"
+    },
+    {
+      "question": "O que é IMEI e onde encontrá-lo?",
+      "slug": "o-que-e-imei-e-onde-encontra-lo",
+      "category": "solucoes",
+      "answer": "<p>O IMEI é o código de identificação do seu celular.</p>\n<p>Para encontrar, disque *#06# no teclado do seu celular, o código IMEI vai aparecer na tela.</p>\n<p>Alguns aparelhos possuem 2 códigos IMEI, se for o seu caso, selecione o IMEI 1.</p>"
+    },
+    {
+      "question": "Quais modelos de celulares possuem cobertura?",
+      "slug": "quais-modelos-de-celulares-possuem-cobertura",
+      "category": "solucoes",
+      "answer": "<p>As marcas que possuem cobertura do seguro são Apple, Asus, Huawei, LG, Motorola, Samsung ou Xiaomi.</p>\n\n<p>Além disso, o celular deve ter no máximo 4 anos de fabricação.</p>"
+    },
+    {
+      "question": "O que é Tag Veloe?",
+      "slug": "o-que-e-tag-veloe",
+      "category": "solucoes",
+      "answer": "<p>É uma tag de pedágio e estacionamento oferecida pelo Veloe para quem tem Uber Conta.</p>\n\n<p>Com ela você passa direto em cancelas, sem precisar parar ou pegar filas.\nFunciona em todas as rodovias pedagiadas e em mais de 2.300 estabelecimentos no Brasil, como shoppings, aeroportos e estacionamentos.</p>"
+    },
+    {
+      "question": "Como faço para contratar a Tag Veloe?",
+      "slug": "como-faco-para-contratar-a-tag-veloe",
+      "category": "solucoes",
+      "answer": "<p>A contratação é feita direto no app da Uber Conta, vá até a Uber Loja e siga o passo a passo:</p>\n<ol>\n<li>Toque em “Veloe”.</li>\n<li>Vá em \"Pedir meu adesivo”.</li>\n<li>Cadastre sua placa e vá em \"Continuar”.</li>\n<li>Confirme sua placa e vá em \"Confirmar cadastro.”.</li>\n<li>Escolha o valor da recarga.</li>\n<li>Confirme o endereço de entrega, aceite os termos e toque em \"Confirmar endereço.”\n<li>Revise seu plano e vá em ”Confirmar plano”.</li>\n<li>Digite a senha do cartão e pronto, tag solicitada.</li>\n</ol>"
+    },
+    {
+      "question": "Quanto custa a Tag Veloe?",
+      "slug": "quanto-custa-a-tag-veloe",
+      "category": "solucoes",
+      "answer": "<p>A tag Veloe não tem tarifa de adesão nem frete, só é cobrada a mensalidade de R$ 8,90, direto na sua Uber Conta.</p>"
+    },
+    {
+      "question": "Como faço para recarregar minha Tag Veloe?",
+      "slug": "como-faco-para-recarregar-minha-tag-veloe",
+      "category": "solucoes",
+      "answer": "<p>A recarga da tag Veloe é feita de maneira automática sempre que seu saldo está baixo, mas, se quiser, você pode recarregar sua tag manulamente pelo aplicativo da Veloe.</p>"
+    },
+    {
+      "question": "Quanto tempo leva pra chegar minha Tag Veloe?",
+      "slug": "quanto-tempo-leva-pra-chegar-minha-tag-veloe",
+      "category": "solucoes",
+      "answer": "<p>Na maioria das vezes, a tag Veloe chega até você em até 5 dias úteis.</p>"
+    },
+    {
+      "question": "O que são débitos veiculares?",
+      "slug": "o-que-sao-debitos-veiculares",
+      "category": "solucoes",
+      "answer": "<p>São valores pendentes do seu veículo, como IPVA, licenciamento e multas que você pode consultar e pagar pelo app da Uber Conta, a conta digital feita pelo Digio. Tudo em um só lugar, sem precisar enfrentar filas ou acessar vários sites.</p>"
+    },
+    {
+      "question": "Como faço para parcelar os débitos?",
+      "slug": "como-faco-para-parcelar-os-debitos",
+      "category": "solucoes",
+      "answer": "<p>Para parcelar os débitos você precisa entrar no app e ir em \"Débitos Veiculares\", depois é só ir em \"Consultar\".</p>\n\n<p>Preenchendo seus dados você consegue visualizar quais débitos estão em aberto.</p>\n\n<p>Depois disso é só cadastrar um cartão de crédito e escolher em quantas vezes quer parcelar seu débito.</p>\n\n<p>Caso você não tenha um cartão de crédito, também é possível pagar via Pix ou com seu cartão Uber Conta.</p>"
+    },
+    {
+      "question": "Posso parcelar os Débitos Veiculares com o cartão da Uber Conta?",
+      "slug": "posso-parcelar-os-debitos-veiculares-com-o-cartao-da-uber-conta",
+      "category": "solucoes",
+      "answer": "<p>Não, o cartão da Uber Conta funciona na função crédito à vista, por isso, só é possível usar ele pagar seus débitos à vista.</p>"
+    },
+    {
+      "question": "Quais métodos de pagamento posso usar para pagar?",
+      "slug": "quais-metodos-de-pagamento-posso-usar-para-pagar",
+      "category": "solucoes",
+      "answer": "<p>Você pode pagar seus débitos veiculares de várias formas:</p>\n<ul>\n<li>Usando seu Cartão Uber Conta;</li>\n<li>Com um cartão de crédito;</li>\n<li>Usando 2 cartões de crédito;</li>\n<li>Via Pix</li>\n<li>Usando Pix + cartão de crédito;</li>\n</ul>\n<p>É só escolher no site da Zapay e seguir os passos.</p>"
+    },
+    {
+      "question": "Consigo parcelar débitos em atraso?",
+      "slug": "consigo-parcelar-debitos-em-atraso",
+      "category": "solucoes",
+      "answer": "<p>Sim! Você pode parcelar IPVA, Multas e Licenciamento com atraso em até 12x no cartão de crédito ou à vista com seu Cartão Uber Conta ou via Pix.</p>"
+    },
+    {
+      "question": "Como faço para contratar o Uber Chip?",
+      "slug": "como-faco-para-contratar-o-uber-chip",
+      "category": "solucoes",
+      "answer": "<p>Para contratar o Uber Chip basta acessar https://uberchip.com.br/ e seguir o passo a passo:</p>\n<ol>\n<li>Escolha seu tipo de plano e quantidade de GBs, depois vá em \"Comprar Uber Chip\".</li>\n<li>Em “Identificação”, informe seus dados pessoais e endereço e em seguida vá em \"Continuar.\n</li>\n<li>Escolha o método de pagamento (Cartão ou Pix) e vá em finalizar.</li>\n</ol>"
+    },
+    {
+      "question": "Como fazer a recarga pela Uber Conta?",
+      "slug": "como-fazer-a-recarga-pela-uber-conta",
+      "category": "solucoes",
+      "answer": "<p>Você consegue fazer a recarga do seu Chip em poucos passos:</p>\n<ol>\n<li>Abra o app da Uber Conta.</li>\n<li>Na página inicial vá em \"Recarga”.</li>\n<li>Digite o número que quer recarregar e vá em continuar.</li>\n<li>Selecione a operadora, no caso do Uber Chip é Tim.</li>\n<li>Selecione o valor da recarga e vá em “Efetuar recarga”.</li>\n<li>Digite a senha do seu cartão, vá em ”continuar\".</li>\n<li>Pronto, recarga solicitada.</li>\n</ol>"
+    },
+    {
+      "question": "O que acontece se eu parar de recarregar meu Uber Chip?",
+      "slug": "o-que-acontece-se-eu-parar-de-recarregar-meu-uber-chip",
+      "category": "solucoes",
+      "answer": "<p>Se não houver recarga do Uber Chip e o prazo de renovação expirar você continuará recebendo chamadas e SMS, mas não terá acesso a internet e dados até que uma nova recarga seja feita.</p>\n\n<p>Caso o número não for recarregado em até 75 dias, será expirado e será necessário fazer um novo plano.</p>"
+    },
+    {
+      "question": "O Uber Chip é confiável?",
+      "slug": "o-uber-chip-e-confiavel",
+      "category": "solucoes",
+      "answer": "<p>Sim! O Uber Chip é uma parceria oficial entre a Surf e a Uber Conta, feito para os motoristas e entregadores da Uber.</p>\n\n<p>Além disso, o Uber Chip usa a infraestrutura da TIM, que garante sinal em todo país pra não te deixar na mão.</p>"
+    },
+    {
+      "question": "O que é eSIM?",
+      "slug": "o-que-e-e-sim",
+      "category": "solucoes",
+      "answer": "<p>O eSIM é um chip virtual, que permite com que você instale um chip novo no celular sem precisar esperar pelo chip físico e sem precisar para de usar seu chip atual caso seu celular só tenha uma entrada para chip.</p>"
+    },
+    {
+      "question": "O que é Cashback?",
+      "slug": "o-que-e-cashback",
+      "category": "beneficios",
+      "answer": "<p>Na tradução literal, cashback significa \"Dinheiro de volta”.</p>\n\n<p><strong>Na prática, funciona assim:</strong> Você paga o valor total de uma compra e recebe uma parte desse dinheiro de volta na sua conta. É como um desconto que vem depois, simples, prático e vantajoso.</p>"
+    },
+    {
+      "question": "Que vantagens ou opções de cashback estão disponíveis?",
+      "slug": "que-vantagens-ou-opcoes-de-cashback-estao-disponiveis",
+      "category": "beneficios",
+      "answer": "<p>Com a Uber Conta você tem acesso a diversas promoções de cashback em compras feitas pela Uber Loja.</p>\n\n<p>As promoções mudam de acordo com sua categoria no Uber Pro, quanto maior a sua categoria mais cashback você recebe na hora de comprar com parceiros Uber Conta.</p>\n\n<p>Pra ver quanto de cashback você tem disponível em cada categoria, basta tocar em uma loja parceira e ver as condições e regras dela.</p>"
+    },
+    {
+      "question": "Qual a diferença entre Cashback e Uber Conta Desconto?",
+      "slug": "qual-a-diferenca-entre-cashback-e-uber-conta-desconto",
+      "category": "beneficios",
+      "answer": "<p>A principal diferença é que o cashback te dá dinheiro de volta após uma compra em alguma das lojas parceiras, enquanto o Uber Conta Desconto é aplicado no momento em que você está pagando.</p>"
+    },
+    {
+      "question": "O que é Uber Conta Desconto?",
+      "slug": "o-que-e-uber-conta-desconto",
+      "category": "beneficios",
+      "answer": "<p>É uma loja dentro da Uber Conta onde você garante descontos em mais de 1000 marcas parceiras de todos os segmentos.</p>"
+    },
+    {
+      "question": "Quais as vantagens do Uber Conta Desconto?",
+      "slug": "quais-as-vantagens-do-uber-conta-desconto",
+      "category": "beneficios",
+      "answer": "<p>Com o Uber Conta Desconto, você garante descontos exclusivos nas suas compras nas lojas parceiras.</p>\n\n<p>Por lá, tem mais de 1000 lojas parceiras de todos os segmentos com até 90% de desconto pra você comprar o que quiser.</p>"
+    },
+    {
+      "question": "Como faço para ver as lojas parceiras da Uber Conta?",
+      "slug": "como-faco-para-ver-as-lojas-parceiras-da-uber-conta-1",
+      "category": "beneficios",
+      "answer": "<p>Pra conferir as lojas parceiras é simples:</p>\n<ol>\n<li>Vá na aba \"Loja” no seu aplicativo.</li>\n<li>Depois, vá em \"Lojas parceiras” e toque em \"Ver todas as lojas\".</li>\n<li>Pronto! Agora é só conferir as mais de 100 lojas parceiras da Uber Conta.</li>\n</ol>"
+    },
+    {
+      "question": "O que é o KM de Vantagens?",
+      "slug": "o-que-e-o-km-de-vantagens",
+      "category": "beneficios",
+      "answer": "<p> É o aplicativo da Ipiranga que transforma cada abastecimento em cashback para você economizar enquanto abastece.</p>"
+    },
+    {
+      "question": "Como faço para usar o app KMV?",
+      "slug": "como-faco-para-usar-o-app-kmv",
+      "category": "beneficios",
+      "answer": "<p>Basta baixar o KMV na Google Play ou App Store e cadastar seu cartão Uber, </p><p>depois disso, é só usar seu app com o Cartão Uber sempre que for abastecer.</p>"
+    },
+    {
+      "question": "Quanto de cashback posso receber com o KMV?",
+      "slug": "quanto-de-cashback-posso-receber-com-o-kmv",
+      "category": "beneficios",
+      "answer": "<p>A porcentagem de cashback varia de acordo com a sua categoria no Uber Pro:</p>\n\n<p>Azul: 4% de cashback.</p>\n<p>Ouro: 4% de cashback.</p>\n<p>Platina: 6% de cashback.</p>\n<p>Diamante: 10% de cashback.</p>\n\n<p>Lembrando que pra usar o cashback você precisa abastecer pelo KM de Vantagens usando o seu cartão Uber.</p>"
+    },
+    {
+      "question": "Como faço para usar o KMV?",
+      "slug": "como-faco-para-usar-o-kmv",
+      "category": null,
+      "answer": "<p>Basta baixar o KMV na Google Play ou App Store e cadastar seu cartão Uber, depois disso, é só usar seu app com o Cartão Uber sempre que for abastecer.</p>"
+    },
+    {
+      "question": "Quando posso contratar o Crédito Rápido novamente?",
+      "slug": "quando-posso-contratar-o-credito-rapido-novamente",
+      "category": "emprestimos",
+      "answer": "<p>Depois de quitar o seu Crédito Rápido, você pode solicitar um novo assim que uma nova oferta estiver disponível no app (sujeito a elegibilidade, análise de crédito e condições variáveis).</p>\n<p>Para conferir e contratar:</p>\n<ol>\n<li>Acesse a seção <strong>Empréstimos</strong> no app.</li>\n<li>Toque em <strong>Crédito Rápido</strong>.</li>\n<li>Revise sua oferta, aceite os termos e confirme a contratação.</li>\n</ol>\n<p>Se a oferta não aparecer, não se preocupe: no momento não há uma nova oferta disponível no app.</p>\n<p>Verifique novamente em outro momento.</p>"
+    }
+  ]
+}

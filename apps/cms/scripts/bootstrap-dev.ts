@@ -12,6 +12,7 @@ import config from '@payload-config'
 import { createLocalReq, getPayload } from 'payload'
 
 import { seed } from '../src/endpoints/seed'
+import { seedUberContent } from '../src/endpoints/seed/uber-content'
 import { revalidateAllWeb } from '../src/utilities/revalidateWeb'
 
 if (process.env.NODE_ENV === 'production') {
@@ -99,6 +100,8 @@ if (process.env.CMS_API_KEY) {
 
 for (const tenant of tenantDocs) {
   await seed({ payload, req, tenant: tenant as never })
+  // Uber Conta: inner pages, help center and blog (files go to the storage and the database).
+  if (tenant.slug === 'uber-conta') await seedUberContent(payload)
 }
 
 // The seed skips per-document revalidation: refresh the website cache once at the end.

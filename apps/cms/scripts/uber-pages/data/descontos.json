@@ -1,0 +1,144 @@
+{
+  "slug": "descontos",
+  "title": "Uber Conta Desconto",
+  "metaDescription": "Economize em viagens e serviços usando o Uber Conta Desconto, exclusivo para quem mantém saldo na conta.",
+  "keywords": "uber conta desconto, descontos uber, economia uber, benefícios motorista, vantagens uber, saldo uber",
+  "hero": {
+    "tagline": "Desconto em + de 1.000 lojas parceiras",
+    "title": "Uber Conta Desconto",
+    "text": "Até 90% de desconto pra você em lojas de vários segmentos.",
+    "legend": null,
+    "legendLink": null,
+    "cta": "Saber mais",
+    "ctaUrl": "#caracteristicas",
+    "image": "uber_conta_desconto_0de34e1f76.jpg",
+    "imageMobile": "uber_conta_desconto_mobile_61acd21bb8.jpg"
+  },
+  "features": {
+    "heading": "Compre mais pagando menos!",
+    "description": null,
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "image": "desconto_8b1393c32d.jpg",
+    "video": null,
+    "items": [
+      {
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "title": "+ de 1.000 lojas",
+        "text": "Você escolhe as que mais fazem sentido pra você."
+      },
+      {
+        "icon": "refresh_23253d57c2_98588d3d05.png",
+        "title": "Até 90% de desconto",
+        "text": "Benefícios exclusivos nas melhores lojas."
+      },
+      {
+        "icon": "sale_2612a8a2c9_1dd2f2d1d5.png",
+        "title": "Diversos segmentos",
+        "text": "Descontos em itens para o carro, roupas, eletrônicos e muito mais."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "Veja como acessar o cashback",
+    "text": "Confira o passo a passo:",
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "items": [
+      {
+        "title": "No app vá na aba \"Loja”",
+        "text": "Lá você encontra vários benefícios além do Uber Conta desconto.",
+        "image": "uber_conta_desconto_1_fb06bc5bb7.png",
+        "imageMobile": "uber_conta_desconto_1_mobile_7969af0468.png"
+      },
+      {
+        "title": "Depois, toque em “Uber Conta Desconto”",
+        "text": "Acesse com sua conta e senha.",
+        "image": "uber_conta_desconto_2_faccfb2f7d.png",
+        "imageMobile": "uber_conta_desconto_2_mobile_7f11165d86.png"
+      },
+      {
+        "title": "Confira todas as lojas!",
+        "text": "Agora é só conferir as lojas parceiras e começar a aproveitar seu benefício!",
+        "image": "uber_conta_desconto_3_d99972fc51.png",
+        "imageMobile": "uber_conta_desconto_3_mobile_48c45e4657.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre a Uber Conta",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "desconto_8e08306be5.jpg",
+    "imageMobile": "desconto_mobile_b4d4487fd1.jpg"
+  },
+  "faqs": [
+    {
+      "question": "O que é Uber Conta Desconto?",
+      "answer": "<p>É uma loja dentro da Uber Conta onde você garante descontos em mais de 1000 marcas parceiras de todos os segmentos.</p>",
+      "slug": "o-que-e-uber-conta-desconto",
+      "category": "beneficios"
+    },
+    {
+      "question": "Quais as vantagens do Uber Conta Desconto?",
+      "answer": "<p>Com o Uber Conta Desconto, você garante descontos exclusivos nas suas compras nas lojas parceiras.</p>\n\n<p>Por lá, tem mais de 1000 lojas parceiras de todos os segmentos com até 90% de desconto pra você comprar o que quiser.</p>",
+      "slug": "quais-as-vantagens-do-uber-conta-desconto",
+      "category": "beneficios"
+    },
+    {
+      "question": "Como faço para ver as lojas parceiras da Uber Conta?",
+      "answer": "<p>Pra conferir as lojas parceiras é simples:</p>\n<ol>\n<li>Vá na aba \"Loja” no seu aplicativo.</li>\n<li>Depois, vá em \"Lojas parceiras” e toque em \"Ver todas as lojas\".</li>\n<li>Pronto! Agora é só conferir as mais de 100 lojas parceiras da Uber Conta.</li>\n</ol>",
+      "slug": "como-faco-para-ver-as-lojas-parceiras-da-uber-conta-1",
+      "category": "beneficios"
+    },
+    {
+      "question": "Qual a diferença entre Cashback e Uber Conta Desconto?",
+      "answer": "<p>A principal diferença é que o cashback te dá dinheiro de volta após uma compra em alguma das lojas parceiras, enquanto o Uber Conta Desconto é aplicado no momento em que você está pagando.</p>",
+      "slug": "qual-a-diferenca-entre-cashback-e-uber-conta-desconto",
+      "category": "beneficios"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Compre com descontos agora!",
+    "text": "Até 90% de descontos pra você aproveitar.",
+    "legend": null,
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "image": "aproveite_desktop_ee8e381a08.jpg",
+    "imageMobile": "aproveite_mobile_d955bfa5cd.jpg",
+    "items": [
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}

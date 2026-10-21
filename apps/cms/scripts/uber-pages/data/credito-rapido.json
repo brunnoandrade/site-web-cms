@@ -1,0 +1,158 @@
+{
+  "slug": "credito-rapido",
+  "title": "Crédito Rápido",
+  "metaDescription": "Empréstimo rápido com análise imediata e liberação simplificada, ideal para quem precisa de dinheiro no mesmo dia.",
+  "keywords": "crédito rápido, empréstimo imediato, liberação rápida, dinheiro urgente, crédito fácil, empréstimo digital\n",
+  "hero": {
+    "tagline": "Dinheiro na Uber Conta em minutos",
+    "title": "Crédito Rápido",
+    "text": "Empréstimos de R$ 100, R$ 200 e R$ 300 pra usar como quiser.",
+    "legend": "Sujeito a elegibilidade, análise de crédito e condições variáveis do Digio.",
+    "legendLink": {
+      "label": "Saber mais.",
+      "url": "/sobre"
+    },
+    "cta": "Saber mais",
+    "ctaUrl": "#caracteristicas",
+    "image": "credito_rapido_27b7119041.jpg",
+    "imageMobile": "credito_rapido_mobile_e94489da61.jpg"
+  },
+  "features": {
+    "heading": "A mão na roda que você precisava no dia a dia",
+    "description": null,
+    "button": "Quero contratar",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/otioz4u0",
+    "image": "credito_rapido_acfe46f5a1.jpg",
+    "video": null,
+    "items": [
+      {
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "title": "Peça quando quiser!",
+        "text": "Após quitar, se elegível, você pode pedir outro Crédito Rápido."
+      },
+      {
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "title": "Receba em minutos!",
+        "text": "Dinheiro direto na sua conta em pouco tempo após a aprovação."
+      },
+      {
+        "icon": "porcentage_5f8ba74350.png",
+        "title": "Contrate sem juros",
+        "text": "Tarifa de 8,85%, limitada a R$ 17,70 por contratação."
+      },
+      {
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "title": "Sem boletos mensais",
+        "text": "O valor é pago a partir do repasse dos ganhos de cada viagem."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "É rápido e fácil contratar",
+    "text": "Acesse seu aplicativo da Uber Conta e siga o passo a passo.",
+    "button": "Quero contratar",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/otioz4u0",
+    "items": [
+      {
+        "title": "Vá até a seção de Empréstimos e toque em Crédito Rápido",
+        "text": "Você encontra o atalho de Empréstimos na tela inicial do seu app.",
+        "image": "credito_rapido_1_8ae7dfef50.png",
+        "imageMobile": "credito_rapido_1_mobile_bea5c39539.png"
+      },
+      {
+        "title": "Revise sua oferta",
+        "text": "Depois aceite os termos e confirme sua contratação.",
+        "image": "credito_rapido_2_f487888b1f.png",
+        "imageMobile": "credito_rapido_2_mobile_e738f3223f.png"
+      },
+      {
+        "title": "Leia o aviso",
+        "text": "Digite a senha do seu cartão e pronto! Em poucos minutos você recebe seu crédito na sua conta pra usar como quiser!",
+        "image": "credito_rapido_3_4eafb8a22f.png",
+        "imageMobile": "credito_rapido_3_mobile_e0abf4b07a.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre empréstimos",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "credito_rapido_430554a44a.jpg",
+    "imageMobile": "credito_rapido_mobile_6bdf953318.jpg"
+  },
+  "faqs": [
+    {
+      "question": "Quais são os empréstimos da Uber Conta?",
+      "answer": "<p>Hoje a Uber Conta tem 2 tipos de empréstimos.</p>\n<p>O Crédito Pessoal é ideal pra quem precisa de valores maiores:</p>\n<ul>\n<li>Valores até R$ 10.000,00;</li>\n<li>Parcelas de 6 a 18 vezes;</li>\n<li>Juros a partir de 2,99% ao mês;</li>\n<li>Após aprovado, o dinheiro cai em minutos, direto na sua Uber Conta;</li>\n</ul>\n<p>E o Crédito Rápido é focado em ser uma ajuda no seu dia a dia:</p>\n<ul>\n<li>Valores entre R$ 100,00 e R$ 300,00;</li>\n<li>Até 10 dias pra pagar;</li>\n<li>Tarifa de 8,85% com valor máximo de R$ 17,75;</li>\n<li>O dinheiro cai em poucos minutos em sua Uber Conta;</li>\n</ul>",
+      "slug": "quais-sao-os-emprestimos-da-uber-conta",
+      "category": "emprestimos"
+    },
+    {
+      "question": "Qual a diferença do Crédito Pessoal para o Crédito Rápido?",
+      "answer": "<p>O Crédito Pessoal é pensado pra quem precisa de um valor mais alto e mais tempo pra pagar, com parcelas que podem ir até 12 meses, por isso ele precisa de uma análise de crédito e leva alguns minutos pra cair na conta.</p>\n\n<p>Já o Crédito Rápido é voltado pra ser uma ajuda imediata, ele tem valores menores, não tem taxa de juros, é mais rápido de pagar, e o dinheiro cai na sua conta na hora.</p>",
+      "slug": "qual-a-diferenca-do-credito-pessoal-para-o-credito-rapido",
+      "category": "emprestimos"
+    },
+    {
+      "question": "Quem pode ter empréstimos na Uber Conta?",
+      "answer": "<p>Pra contratar os empréstimos não existem requisitos como categoria, nota ou tempo na Uber pra aprovação.</p>\n\n<p>O que acontece é que fazemos uma análise de crédito pra poder liberar os valores.\nCom ela entendemos o seu score de crédito, comportamento, quitação de contas e se o cliente está negativado ou não.</p>",
+      "slug": "quem-pode-ter-emprestimos-na-uber-conta",
+      "category": "emprestimos"
+    },
+    {
+      "question": "Porque fui negado no empréstimo?",
+      "answer": "<p>Mesmo com uma oferta pré-aprovada, pode acontecer do seu pedido de empréstimo não ser aprovado.</p>\n\n<p>Isso porque, no momento da solicitação, a gente faz uma nova análise de crédito e, dependendo do resultado, o empréstimo pode ser recusado.</p>",
+      "slug": "porque-fui-negado-no-emprestimo",
+      "category": "emprestimos"
+    },
+    {
+      "question": "Quando posso contratar o Crédito Rápido novamente?",
+      "answer": "<p>Depois de quitar o seu Crédito Rápido, você pode solicitar um novo assim que uma nova oferta estiver disponível no app (sujeito a elegibilidade, análise de crédito e condições variáveis).</p>\n<p>Para conferir e contratar:</p>\n<ol>\n<li>Acesse a seção <strong>Empréstimos</strong> no app.</li>\n<li>Toque em <strong>Crédito Rápido</strong>.</li>\n<li>Revise sua oferta, aceite os termos e confirme a contratação.</li>\n</ol>\n<p>Se a oferta não aparecer, não se preocupe: no momento não há uma nova oferta disponível no app.</p>\n<p>Verifique novamente em outro momento.</p>",
+      "slug": "quando-posso-contratar-o-credito-rapido-novamente",
+      "category": "emprestimos"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Contrate agora!",
+    "text": "O Crédito Rápido fica disponível em poucos minutos, e você pode usar pra começar o dia, abastecer o carro e o que mais quiser!",
+    "legend": null,
+    "button": "Contratar agora",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/otioz4u0",
+    "image": "solucoes_rapido_e4907385f2.jpg",
+    "imageMobile": "solucoes_rapido_mobile_5cbc638246.jpg",
+    "items": [
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      }
+    ]
+  }
+}

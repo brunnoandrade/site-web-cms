@@ -1,0 +1,160 @@
+{
+  "slug": "conta-digital",
+  "title": "Conta Digital",
+  "metaDescription": "Receba ganhos, faça pagamentos, transfira e movimente seu dinheiro com segurança na Uber Conta.\n",
+  "keywords": "conta digital uber, pagamentos, transferências, saldo uber, fintech uber, conta motorista",
+  "hero": {
+    "tagline": "Receba seus ganhos após cada viagem!",
+    "title": "Conta digital",
+    "text": "Tudo o que você precisa na palma da sua mão.",
+    "legend": null,
+    "legendLink": null,
+    "cta": "Saiba mais",
+    "ctaUrl": "#caracteristicas",
+    "image": "conta_digital_fd20dcbc01.jpg",
+    "imageMobile": "conta_digital_mobile_6bc17028f5.jpg"
+  },
+  "features": {
+    "heading": "Pronta para facilitar sua rotina",
+    "description": null,
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "image": "video_aa33166061.jpg",
+    "video": "site_uber_conta_beneficios_desktop_mobile_2cebe56b95.mp4",
+    "items": [
+      {
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "title": "Receba seus repasses na hora",
+        "text": "Seus ganhos com a Uber caem direto na conta após cada viagem, sem precisar esperar."
+      },
+      {
+        "icon": "flow_744e44b727_7ba1cc97ee.png",
+        "title": "Transfira quando quiser",
+        "text": "Envie dinheiro pra qualquer banco, sem pagar nada."
+      },
+      {
+        "icon": "invoice_2f104ce95d_922807efea.png",
+        "title": "Pague suas contas",
+        "text": "Boletos, contas de luz, água e aluguel, tudo pela Uber Conta."
+      },
+      {
+        "icon": "atm_f6ed517c85_154a320aef.png",
+        "title": "Saque quando precisar",
+        "text": "Dinheiro em mãos nos caixas do Banco24Horas de todo Brasil."
+      },
+      {
+        "icon": "chip_5f373817b1_72f317acc1.png",
+        "title": "Recarregue seu celular",
+        "text": "Use o código 41 e fale à vontade com cobertura nacional."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "Veja como acompanhar seus ganhos",
+    "text": "Acesse seu aplicativo da Uber Conta e siga o passo a passo.",
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "items": [
+      {
+        "title": "Na página inicial toque em \"Ganhos Uber”",
+        "text": "Ele fica pertinho do saldo disponível.",
+        "image": "conta_digital_1_08a61ba620.png",
+        "imageMobile": "conta_digital_1_mobile_786d73bd2e.png"
+      },
+      {
+        "title": "Confira seu extrato com todos os repasses de ganhos",
+        "text": "No extrato, você pode conferir a data, horário e valor de cada repasse.",
+        "image": "conta_digital_2_908a22d71a.png",
+        "imageMobile": "conta_digital_2_mobile_d244fd6c11.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre a Uber Conta",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "conta_digital_de53ffc25f.jpg",
+    "imageMobile": "conta_digital_mobile_597ac6e57c.jpg"
+  },
+  "faqs": [
+    {
+      "question": "Como funciona o repasse de ganhos?",
+      "answer": "<p>O repasse de ganhos começa a funcionar assim que você realiza o primeiro acesso à Uber Conta.</p>\n\n<p>O prazo para recebimento na sua Uber Conta é de até 1 hora após a finalização da viagem ou entrega. </p>\n\n<p>Vale lembrar: o valor de uma viagem ou entrega só será repassado quando houver saldo positivo. A taxa de serviço relacionada às viagens e entregas feitas em dinheiro, por exemplo, será descontada do seu saldo, como ocorre normalmente no processo de repasse semanal.</p>",
+      "slug": "como-funciona-o-repasse-de-ganhos",
+      "category": "conta-digital"
+    },
+    {
+      "question": "Como confiro meu repasse de ganhos?",
+      "answer": "<p>Você consegue conferir seus repasses pelo app, seguindo o passo a passo:</p>\n\n\n<p>Abra o app da Uber Conta.</p>\n<p>Vá em \"Ganhos Uber”</p>\n<p>Pronto, agora é só conferir seus repasses!</p>",
+      "slug": "como-confiro-meu-repasse-de-ganhos",
+      "category": "conta-digital"
+    },
+    {
+      "question": "Como faço para rastrear a entrega do meu cartão?",
+      "answer": "<p>Você pode acompanhar a entrega do seu cartão pelo app da Uber Conta. É simples:</p>\n\n<ul>\n<li>Na página inicial do app, toque em “Meus Cartões”.</li>\n<li>Em seguida, selecione “Rastrear entrega”.</li>\n</ul>\n<p>Pronto! Agora você consegue acompanhar o status da entrega.</p>\n<p> Vale lembrar que a entrega pode levar até 12 dias úteis para capitais e regiões metropolitanas. Para demais regiões, o prazo é de até 30 dias corridos. </p>",
+      "slug": "como-faco-para-rastrear-a-entrega-do-meu-cartao",
+      "category": "cartao"
+    },
+    {
+      "question": "Como troco a senha do meu app Uber Conta?",
+      "answer": "<p>Para alterar a senha do seu aplicativo, basta seguir o passo a passo:</p>\n\n\n<p>No menu, vá em “Segurança”.</p>\n<p>Depois vá em ”Alterar senha do aplicativo\".</p>\n<p>Confirme sua senha atual e depois crie uma nova senha seguindo os critérios informados e toque em \"Criar senha”</p>\n<p>Pronto, senha alterada!</p>",
+      "slug": "como-troco-a-senha-do-meu-app-uber-conta",
+      "category": "conta-digital"
+    },
+    {
+      "question": "Como faço pra pagar boletos com a Uber Conta?",
+      "answer": "<p>Para pagar boletos na Uber Conta, basta seguir o passo a passo:</p>\n\n<p>Na página inicial vá em \"Pagar.</p>\n<p>Escolha o item \"Pagar contas\".</p>\n<p>Escaneie ou digite o código de barras do boleto que quer pagar.</p>\n<p>Revise as informações do seu boleto e vá em \"Confirmar”</p>\n<p>Digite a senha do seu cartão e vá em ”Continuar”</p>\n<p>Pronto, boleto pago!</p>",
+      "slug": "como-faco-pra-pagar-boletos-com-a-uber-conta",
+      "category": "conta-digital"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Ainda não tem sua Uber Conta?",
+    "text": "Abra sua conta agora mesmo e acesse todos esses benefícios!",
+    "legend": null,
+    "button": "Abrir conta",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "image": "aproveite_desktop_ee8e381a08.jpg",
+    "imageMobile": "aproveite_mobile_d955bfa5cd.jpg",
+    "items": [
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}

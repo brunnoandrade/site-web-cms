@@ -1,0 +1,150 @@
+{
+  "slug": "cashback",
+  "title": "Cashback",
+  "metaDescription": "Receba cashback em compras e serviços parceiros e acumule benefícios direto na Uber Conta.",
+  "keywords": "cashback uber, benefícios uber, ganhar dinheiro de volta, recompensas, economia motorista, promoções uber",
+  "hero": {
+    "tagline": "Dinheiro de volta em centenas de lojas",
+    "title": "Cashback",
+    "text": "Você compra e uma parte do dinheiro volta pro seu bolso.",
+    "legend": null,
+    "legendLink": null,
+    "cta": "Saber mais",
+    "ctaUrl": "#caracteristicas",
+    "image": "cashback_bc3a5b26fc.jpg",
+    "imageMobile": "cashback_mobile_8ae4809a99.jpg"
+  },
+  "features": {
+    "heading": "Você compra e uma parte volta pra você",
+    "description": null,
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "image": "cashback_e508dbe20b.jpg",
+    "video": null,
+    "items": [
+      {
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "title": "Dezenas de lojas",
+        "text": "A Uber Conta tem parcerias que fazem sentido pra você."
+      },
+      {
+        "icon": "refresh_23253d57c2_98588d3d05.png",
+        "title": "Dinheiro de volta",
+        "text": "Você compra online e recebe seu cashback direto na Uber Conta."
+      },
+      {
+        "icon": "sale_2612a8a2c9_1dd2f2d1d5.png",
+        "title": "Mais cashback",
+        "text": "Quanto maior sua categoria na Uber Pro, maior o cashback."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "Veja como acessar o cashback",
+    "text": "Confira o passo a passo:",
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "items": [
+      {
+        "title": "No app vá na aba \"Loja”",
+        "text": "Lá você encontra vários benefícios além do cashback.",
+        "image": "cashback_1_3705747d4f.png",
+        "imageMobile": "cashback_1_mobile_440211e397.png"
+      },
+      {
+        "title": "Depois, toque em “Cashback”",
+        "text": "Confira os benefícios e vá em “Ir para Cashback”.",
+        "image": "cashback_2_f99c4e8863.png",
+        "imageMobile": "cashback_2_mobile_80b6503b28.png"
+      },
+      {
+        "title": "Concorde com os termos e pronto!",
+        "text": "Agora é só conferir as lojas parceiras, seu cashback e usar pra comprar o que quiser.",
+        "image": "cashback_3_80139f070f.png",
+        "imageMobile": "cashback_3_mobile_6aedf9a27c.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre a Uber Conta",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "cashback_68bd63f2f9.jpg",
+    "imageMobile": "cashback_mobile_2b31835f23.jpg"
+  },
+  "faqs": [
+    {
+      "question": "O que é Cashback?",
+      "answer": "<p>Na tradução literal, cashback significa \"Dinheiro de volta”.</p>\n\n<p><strong>Na prática, funciona assim:</strong> Você paga o valor total de uma compra e recebe uma parte desse dinheiro de volta na sua conta. É como um desconto que vem depois, simples, prático e vantajoso.</p>",
+      "slug": "o-que-e-cashback",
+      "category": "beneficios"
+    },
+    {
+      "question": "Que vantagens ou opções de cashback estão disponíveis?",
+      "answer": "<p>Com a Uber Conta você tem acesso a diversas promoções de cashback em compras feitas pela Uber Loja.</p>\n\n<p>As promoções mudam de acordo com sua categoria no Uber Pro, quanto maior a sua categoria mais cashback você recebe na hora de comprar com parceiros Uber Conta.</p>\n\n<p>Pra ver quanto de cashback você tem disponível em cada categoria, basta tocar em uma loja parceira e ver as condições e regras dela.</p>",
+      "slug": "que-vantagens-ou-opcoes-de-cashback-estao-disponiveis",
+      "category": "beneficios"
+    },
+    {
+      "question": "Como faço para ver as lojas parceiras da Uber Conta?",
+      "answer": "<p>Pra conferir as lojas parceiras é simples:</p>\n<ol>\n<li>Vá na aba \"Loja” no seu aplicativo.</li>\n<li>Depois, vá em \"Lojas parceiras” e toque em \"Ver todas as lojas\".</li>\n<li>Pronto! Agora é só conferir as mais de 100 lojas parceiras da Uber Conta.</li>\n</ol>",
+      "slug": "como-faco-para-ver-as-lojas-parceiras-da-uber-conta-1",
+      "category": "beneficios"
+    },
+    {
+      "question": "Qual a diferença entre Cashback e Uber Conta Desconto?",
+      "answer": "<p>A principal diferença é que o cashback te dá dinheiro de volta após uma compra em alguma das lojas parceiras, enquanto o Uber Conta Desconto é aplicado no momento em que você está pagando.</p>",
+      "slug": "qual-a-diferenca-entre-cashback-e-uber-conta-desconto",
+      "category": "beneficios"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Conheça as lojas parceiras agora!",
+    "text": "São mais de 100 lojas pra comprar e receber parte do dinheiro de volta!",
+    "legend": null,
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "image": "aproveite_desktop_ee8e381a08.jpg",
+    "imageMobile": "aproveite_mobile_d955bfa5cd.jpg",
+    "items": [
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}

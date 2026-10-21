@@ -1,0 +1,167 @@
+{
+  "slug": "tag-veloe",
+  "title": "Tag Veloe",
+  "metaDescription": "Passe em pedágios e estacionamentos com mais rapidez usando a Tag Veloe integrada à Uber Conta.",
+  "keywords": "tag veloe, pedágio automático, estacionamento veloe, serviços uber, mobilidade prática, tag carro",
+  "hero": {
+    "tagline": "Passe direto em pedágios e estacionamentos",
+    "title": "Tag Veloe",
+    "text": "Receba seu adesivo em até 5 dias úteis, sem tarifa de adesão.",
+    "legend": null,
+    "legendLink": null,
+    "cta": "Saber mais",
+    "ctaUrl": "#caracteristicas",
+    "image": "tag_veloe_7883852957.jpg",
+    "imageMobile": "tag_veloe_mobile_0544a083ad.jpg"
+  },
+  "features": {
+    "heading": "Facilite suas viagens e passe direto!",
+    "description": null,
+    "button": "Pedir Tag",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "image": "tag_veloe_45f09d869c.jpg",
+    "video": null,
+    "items": [
+      {
+        "icon": "long_up_8577b1d8af_859cb23848.png",
+        "title": "Passe direto!",
+        "text": "Evite filas de pedágios e estacionamentos em todo Brasil."
+      },
+      {
+        "icon": "tag_85b086eea1_42fe91e278.png",
+        "title": "Zero adesão!",
+        "text": "Sua tag chega em até 5 dias úteis e você não paga nada por isso."
+      },
+      {
+        "icon": "payment_16fecb72cc_ebf52de673.png",
+        "title": "Pagamento facilitado",
+        "text": "A mensalidade é de só R$ 8,90, e o valor é debitado direto da sua Uber Conta."
+      },
+      {
+        "icon": "security_b53ce7b336_410c0fa777.png",
+        "title": "Sem surpresas",
+        "text": "Tag pré-paga com recargas a partir de R$ 30."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "Veja como pedir sua tag",
+    "text": "Confira a oferta e vá em \"Pedir meu adesivo”",
+    "button": "Pedir Tag",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "items": [
+      {
+        "title": "Na loja toque em \"Adesivo Veloe”",
+        "text": "Confira os benefícios e vá em \"Simular contratação”",
+        "image": "tag_veloe_1_e5786226f6.png",
+        "imageMobile": "tag_veloe_1_mobile_6c79536f4c.png"
+      },
+      {
+        "title": "Cadastre a placa do veículo e vá em “Continuar”",
+        "text": "Depois, é só verificar a placa e ir em \"Confirmar cadastro\".",
+        "image": "tag_veloe_2_94d8c4ab63.png",
+        "imageMobile": "tag_veloe_2_mobile_dcc1851243.png"
+      },
+      {
+        "title": "Escolha o valor que quer recarregar",
+        "text": "Depois disso, confirme seu endereço, aceite os termos e condições e vá em “Confirmar endereço”",
+        "image": "tag_veloe_3_2a055ed100.png",
+        "imageMobile": "tag_veloe_3_mobile_68778da8df.png"
+      },
+      {
+        "title": "Confirme seu endereço e revise seu plano, depois vá em \"Confirmar plano”",
+        "text": "Depois é só digitar sua senha do cartão e pronto, tag solicitada!",
+        "image": "tag_veloe_4_5132885783.png",
+        "imageMobile": "tag_veloe_4_mobile_e475a7749c.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre a Uber Conta",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "tag_veloe_f9f2e4c831.jpg",
+    "imageMobile": "tag_veloe_mobile_d225e196be.jpg"
+  },
+  "faqs": [
+    {
+      "question": "O que é Tag Veloe?",
+      "answer": "<p>É uma tag de pedágio e estacionamento oferecida pelo Veloe para quem tem Uber Conta.</p>\n\n<p>Com ela você passa direto em cancelas, sem precisar parar ou pegar filas.\nFunciona em todas as rodovias pedagiadas e em mais de 2.300 estabelecimentos no Brasil, como shoppings, aeroportos e estacionamentos.</p>",
+      "slug": "o-que-e-tag-veloe",
+      "category": "solucoes"
+    },
+    {
+      "question": "Como faço para contratar a Tag Veloe?",
+      "answer": "<p>A contratação é feita direto no app da Uber Conta, vá até a Uber Loja e siga o passo a passo:</p>\n<ol>\n<li>Toque em “Veloe”.</li>\n<li>Vá em \"Pedir meu adesivo”.</li>\n<li>Cadastre sua placa e vá em \"Continuar”.</li>\n<li>Confirme sua placa e vá em \"Confirmar cadastro.”.</li>\n<li>Escolha o valor da recarga.</li>\n<li>Confirme o endereço de entrega, aceite os termos e toque em \"Confirmar endereço.”\n<li>Revise seu plano e vá em ”Confirmar plano”.</li>\n<li>Digite a senha do cartão e pronto, tag solicitada.</li>\n</ol>",
+      "slug": "como-faco-para-contratar-a-tag-veloe",
+      "category": "solucoes"
+    },
+    {
+      "question": "Quanto custa a Tag Veloe?",
+      "answer": "<p>A tag Veloe não tem tarifa de adesão nem frete, só é cobrada a mensalidade de R$ 8,90, direto na sua Uber Conta.</p>",
+      "slug": "quanto-custa-a-tag-veloe",
+      "category": "solucoes"
+    },
+    {
+      "question": "Como faço para recarregar minha Tag Veloe?",
+      "answer": "<p>A recarga da tag Veloe é feita de maneira automática sempre que seu saldo está baixo, mas, se quiser, você pode recarregar sua tag manulamente pelo aplicativo da Veloe.</p>",
+      "slug": "como-faco-para-recarregar-minha-tag-veloe",
+      "category": "solucoes"
+    },
+    {
+      "question": "Quanto tempo leva pra chegar minha Tag Veloe?",
+      "answer": "<p>Na maioria das vezes, a tag Veloe chega até você em até 5 dias úteis.</p>",
+      "slug": "quanto-tempo-leva-pra-chegar-minha-tag-veloe",
+      "category": "solucoes"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Peça agora sua Tag Veloe",
+    "text": "Mais comodidade por só R$ 8,90 ao mês, debitado direto pela Uber Conta.",
+    "legend": null,
+    "button": "Pedir Tag",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
+    "image": "aproveite_desktop_ee8e381a08.jpg",
+    "imageMobile": "aproveite_mobile_d955bfa5cd.jpg",
+    "items": [
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}

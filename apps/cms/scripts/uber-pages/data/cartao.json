@@ -1,0 +1,166 @@
+{
+  "slug": "cartao",
+  "title": "Cartão Uber Conta",
+  "metaDescription": "Cartão Uber Conta para compras, assinaturas e pagamentos por aproximação, com cartão virtual e segurança em tempo real.",
+  "keywords": "cartão uber conta, cartão pré-pago uber, pagamento por aproximação, cartão virtual, google pay uber, segurança cartão",
+  "hero": {
+    "tagline": "Mais facilidade para o seu dia a dia.",
+    "title": "Cartão Uber Conta",
+    "text": "Para usar quando e como quiser.",
+    "legend": null,
+    "legendLink": null,
+    "cta": "Saiba mais",
+    "ctaUrl": "#caracteristicas",
+    "image": "cartao_dbb3b6702b.jpg",
+    "imageMobile": "cartao_mobile_cc8a845cbe.jpg"
+  },
+  "features": {
+    "heading": "A agilidade que o seu dia a dia precisa",
+    "description": null,
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "image": "video_aa33166061.jpg",
+    "video": "site_uber_cartao_beneficios_desktop_mobile_234a9af2d0.mp4",
+    "items": [
+      {
+        "icon": "nfs_d1b887cf61_9b92c10cf3.png",
+        "title": "Aproximou, pagou!",
+        "text": "Aproxime para pagar suas compras de maneira 100% segura."
+      },
+      {
+        "icon": "chip_5f373817b1_72f317acc1.png",
+        "title": "Google Pay",
+        "text": "É só cadastrar seu cartão e usar com sua carteira digital."
+      },
+      {
+        "icon": "card_2926d51137_f413329498.png",
+        "title": "Cartão virtual",
+        "text": "Precisou comprar online? Use seu cartão virtual e tenha mais segurança durante o pagamento."
+      },
+      {
+        "icon": "card_pre_dad1b95b05_83baccccc4.png",
+        "title": "Cartão pré-pago",
+        "text": "Faça assinatura de serviços como streaming, igual ao cartão de crédito."
+      },
+      {
+        "icon": "security_b53ce7b336_410c0fa777.png",
+        "title": "Segurança na palma da mão",
+        "text": "Notificações de compras em tempo real, e alerta de transações suspeitas."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "Confira como ativar seu cartão",
+    "text": "É só seguir o passo a passo e começar a usar.",
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "items": [
+      {
+        "title": "Na página inicial, toque em “Meus cartões”",
+        "text": "Dentro de “Meus cartões”, selecione “Recebi meu cartão”.",
+        "image": "cartao_1_541bc22f11.png",
+        "imageMobile": "cartao_1_mobile_1df821878f.png"
+      },
+      {
+        "title": "Depois, toque em “Ativar cartão”",
+        "text": "Digite os 4 últimos dígitos do cartão que você recebeu e selecione “Continuar”.",
+        "image": "cartao_2_684b9f9776.png",
+        "imageMobile": "cartao_2_mobile_70e8f70d8b.png"
+      },
+      {
+        "title": "Por último, digite o CVV do seu cartão",
+        "text": "Depois disso é só clicar em \"Continuar” e pronto, seu cartão já pode ser usado! Lembre que é preciso selecionar a opção de crédito à vista ao pagar.",
+        "image": "cartao_3_dddaa609c7.png",
+        "imageMobile": "cartao_3_mobile_ca4cd569bc.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre a Uber Conta",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "cartao_ebfc91d369.jpg",
+    "imageMobile": "cartao_mobile_2ef3c9aa24.jpg"
+  },
+  "faqs": [
+    {
+      "question": "Como faço para rastrear a entrega do meu cartão?",
+      "answer": "<p>Você pode acompanhar a entrega do seu cartão pelo app da Uber Conta. É simples:</p>\n\n<ul>\n<li>Na página inicial do app, toque em “Meus Cartões”.</li>\n<li>Em seguida, selecione “Rastrear entrega”.</li>\n</ul>\n<p>Pronto! Agora você consegue acompanhar o status da entrega.</p>\n<p> Vale lembrar que a entrega pode levar até 12 dias úteis para capitais e regiões metropolitanas. Para demais regiões, o prazo é de até 30 dias corridos. </p>",
+      "slug": "como-faco-para-rastrear-a-entrega-do-meu-cartao",
+      "category": "cartao"
+    },
+    {
+      "question": "Como faço para ativar meu cartão?",
+      "answer": "<p> Se você já recebeu seu cartão físico e quer ativá-lo, siga este passo a passo:</p>\n<ol>\n<li>Na página inicial da Uber Conta, toque em “Meus cartões”.</li>\n<li> Em seguida, selecione “Recebi meu cartão”.</li>\n<li> Toque em “Ativar cartão”.</li>\n<li> Digite os 4 últimos dígitos do seu cartão e toque em “Continuar”.</li>\n<li>Digite o CVV do seu cartão e toque novamente em “Continuar”.</li>\n</ol>\n<p>Pronto! Seu cartão está ativado. Agora é só usar na função Crédito à vista onde quiser.</p>",
+      "slug": "como-faco-para-ativar-meu-cartao",
+      "category": "cartao"
+    },
+    {
+      "question": "É possível desativar o pagamento por aproximação?",
+      "answer": "<p>Sim! Para desativar o pagamento pro aproximação é só seguir o passo a passo:</p>\n\n<ol>\n<li>Vá em \"Meus cartões”.</li>\n<li>Desative a opção \"Pagamento por aproximação”.</li>\n</ol>\n<p>Pronto, caso queira voltar a ter pagamento por aproximação no seu cartão é só reativar a opção em \"Meus cartões”</p>",
+      "slug": "e-possivel-desativar-o-pagamento-por-aproximacao",
+      "category": "cartao"
+    },
+    {
+      "question": "O que acontece se eu perder meu cartão?",
+      "answer": "<p>Em caso de perda ou roubo, você pode solicitar a segunda via do seu cartão diretamente pelo app, na opção “Meus cartões”. </p>\n\n<p>Assim que você solicita a segunda via, o cartão atual é bloqueado automaticamente e um novo é emitido.</p>\n\n<p>Importante: mesmo sem o cartão físico, você pode continuar fazendo compras usando o cartão virtual.</p>",
+      "slug": "o-que-acontece-se-eu-perder-meu-cartao",
+      "category": "cartao"
+    },
+    {
+      "question": "Como vejo a senha do meu cartão?",
+      "answer": "<p>Para consultar a senha do seu cartão, siga este passo a passo:</p>\n<ol>\n<li>No menu da Uber Conta, toque em “Ver senha do cartão”.</li>\n<li> Digite a senha que você utiliza para acessar o app e toque em “Continuar”.</li>\n<li>Em seguida, informe sua data de nascimento e toque novamente em “Continuar”.</li>\n</ol>\n<p>Pronto! Você poderá visualizar a sua senha.</p>\n<p>Importante: A Uber Conta nunca solicita sua senha por e-mail, SMS ou telefone. Não compartilhe sua senha com ninguém.</p>",
+      "slug": "como-vejo-a-senha-do-meu-cartao",
+      "category": "cartao"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Ainda não tem seu cartão?",
+    "text": "Abra agora sua Uber Conta e tenha um cartão pra facilitar as suas compras.",
+    "legend": null,
+    "button": "Abrir conta",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/e6ph21pp",
+    "image": "aproveite_desktop_ee8e381a08.jpg",
+    "imageMobile": "aproveite_mobile_d955bfa5cd.jpg",
+    "items": [
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}

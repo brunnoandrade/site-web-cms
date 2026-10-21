@@ -1,0 +1,149 @@
+{
+  "slug": "km-de-vantagens",
+  "title": "KM de Vantagens",
+  "metaDescription": "Ganhe até 20% de volta ao abastecer em postos parceiros e receba cashback direto na Uber Conta.",
+  "keywords": "km de vantagens, cashback combustível, abastecimento, benefícios uber, economia motorista, postos parceiros",
+  "hero": {
+    "tagline": "Você abastece, seu dinheiro volta.",
+    "title": "KM de Vantagens",
+    "text": "Até 10% de cashback* em postos Ipiranga de todo Brasil, com o app KMV.",
+    "legend": "Sujeito à elegibilidade",
+    "legendLink": null,
+    "cta": "Saiba mais",
+    "ctaUrl": "#sobre",
+    "image": "kmv_808a3a33da.jpg",
+    "imageMobile": "kmv_mobile_f0f2fcfedd.jpg"
+  },
+  "features": {
+    "heading": "Abasteceu? Receba dinheiro de volta",
+    "description": null,
+    "button": "Quero contratar",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/xfd9xoui",
+    "image": "kmv_387b278970.jpg",
+    "video": null,
+    "items": [
+      {
+        "icon": "refresh_23253d57c2_98588d3d05.png",
+        "title": "Ganhe até 10% de cashback",
+        "text": "Use o cartão Uber Conta no app KMV e receba parte do valor de volta."
+      },
+      {
+        "icon": "gas_b8b09f6866_f09d58a464.png",
+        "title": "Postos participantes em todo o Brasil",
+        "text": "Baixe o app KMV e veja onde garantir seu cashback."
+      },
+      {
+        "icon": "chip_5f373817b1_72f317acc1.png",
+        "title": "Tudo pelo KMV!",
+        "text": "No app do KMV você confere os postos, paga ao abastecer e recebe seu cashback."
+      },
+      {
+        "icon": "security_b53ce7b336_410c0fa777.png",
+        "title": "A segurança que você já conhece!",
+        "text": "Abasteça com tranquilidade usando seu cartão virtual."
+      }
+    ]
+  },
+  "steps": {
+    "heading": "Veja onde encontrar seu cartão virtual",
+    "text": "É só seguir o passo a passo e adicionar na sua carteira do KMV!",
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/xfd9xoui",
+    "items": [
+      {
+        "title": "Na página inicial toque em “Meus cartões”",
+        "text": null,
+        "image": "kmv_1_b084a943d2.png",
+        "imageMobile": "kmv_1_mobile_0891ff4665.png"
+      },
+      {
+        "title": "Toque em cartão virtual e copie os dados",
+        "text": null,
+        "image": "kmv_2_b5ebaa3999.png",
+        "imageMobile": "kmv_2_mobile_d1e44c507c.png"
+      },
+      {
+        "title": "Cadastre seu cartão virtual no app da KMV",
+        "text": null,
+        "image": "kmv_3_d1f3ba80b2.png",
+        "imageMobile": "kmv_3_mobile_65443fb951.png"
+      }
+    ]
+  },
+  "posts": {
+    "eyebrow": "Uber Blog",
+    "heading": "Confira mais sobre a Uber Conta",
+    "button": "Ir para o Blog",
+    "buttonUrl": "https://medium.com/@ubercontabrasil"
+  },
+  "band": {
+    "image": "kmv_24453d462f.jpg",
+    "imageMobile": "kmv_mobile_ab59da1d5b.jpg"
+  },
+  "faqs": [
+    {
+      "question": "Quanto de cashback posso receber com o KMV?",
+      "answer": "<p>A porcentagem de cashback varia de acordo com a sua categoria no Uber Pro:</p>\n\n<p>Azul: 4% de cashback.</p>\n<p>Ouro: 4% de cashback.</p>\n<p>Platina: 6% de cashback.</p>\n<p>Diamante: 10% de cashback.</p>\n\n<p>Lembrando que pra usar o cashback você precisa abastecer pelo KM de Vantagens usando o seu cartão Uber.</p>",
+      "slug": "quanto-de-cashback-posso-receber-com-o-kmv",
+      "category": "beneficios"
+    },
+    {
+      "question": "O que é o KM de Vantagens?",
+      "answer": "<p> É o aplicativo da Ipiranga que transforma cada abastecimento em cashback para você economizar enquanto abastece.</p>",
+      "slug": "o-que-e-o-km-de-vantagens",
+      "category": "beneficios"
+    },
+    {
+      "question": "Como faço para usar o KMV?",
+      "answer": "<p>Basta baixar o KMV na Google Play ou App Store e cadastar seu cartão Uber, depois disso, é só usar seu app com o Cartão Uber sempre que for abastecer.</p>",
+      "slug": "como-faco-para-usar-o-kmv",
+      "category": "beneficios"
+    }
+  ],
+  "faqSection": {
+    "heading": "Ficou com alguma dúvida?",
+    "button": "Outras dúvidas",
+    "buttonUrl": "/central-de-ajuda"
+  },
+  "related": {
+    "heading": "Comece a abastecer com cashback",
+    "text": "Baixe o app KMV, cadastre seu cartão e aproveite agora mesmo!",
+    "legend": null,
+    "button": "Quero conhecer",
+    "buttonUrl": "https://uberconta.onelink.me/asYc/xfd9xoui",
+    "image": "solucoes_kmv_a78681bf4e.jpg",
+    "imageMobile": "solucoes_kmv_mobile_f3b2603bf1.jpg",
+    "items": [
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
+      }
+    ]
+  }
+}
