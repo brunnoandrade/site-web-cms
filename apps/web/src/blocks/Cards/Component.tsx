@@ -89,10 +89,10 @@ const ProductCard: React.FC<{ item: Item }> = ({ item }) => (
       </p>
     )}
     {item.enableLink && item.link && (
-      <span className="relative z-[5] mt-4 inline-flex items-center font-normal text-brand-blue md:mt-auto">
+      <span className="group/link relative z-[5] mt-4 inline-flex items-center font-normal text-brand-blue md:mt-auto">
         <span className="relative">
           {item.link.label || 'Conhecer'}
-          <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-current transition-all duration-200 group-hover:w-full motion-reduce:transition-none" />
+          <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-current transition-all duration-200 group-hover/link:w-full motion-reduce:transition-none" />
         </span>
         <ArrowRightIcon className="-mt-0.5 ml-2 w-[18px] transition-all duration-200" />
       </span>
