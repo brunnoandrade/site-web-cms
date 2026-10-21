@@ -3,14 +3,34 @@ import { helpIndexPath, helpTopicPath } from '@digio/routes'
 import Link from 'next/link'
 import React from 'react'
 
+import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
+import { RenderBlocks } from '@/blocks/RenderBlocks'
+import { CategoryCards } from '@/components/UberHelp'
+import { RenderHero } from '@/heros/RenderHero'
 import { find } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
+import { getHelpCategories, getHelpPage, isUberHelp } from '@/lib/uber-help'
 
 type Args = { params: Promise<{ tenant: string }> }
 
 // Rendered on the first request and cached per tenant (ISR), refreshed by the 'help' tag.
 export default async function HelpCenter({ params }: Args) {
   const tenant = await requireTenant((await params).tenant)
+
+  // Uber Conta: hero with search, category cards and the blocks of the CMS page.
+  if (isUberHelp(tenant)) {
+    const [page, categories] = await Promise.all([
+      getHelpPage(tenant.slug),
+      getHelpCategories(tenant.slug),
+    ])
+    return (
+      <>
+        {page && <RenderHero {...page.hero} />}
+        <CategoryCards categories={categories} />
+        {page && <RenderBlocks archive={ArchiveBlock} blocks={page.layout} tenant={tenant.slug} />}
+      </>
+    )
+  }
 
   const [categories, topics] = await Promise.all([
     find('help-categories', { tenant: tenant.slug, limit: 100, sort: 'order', tags: ['help'] }),

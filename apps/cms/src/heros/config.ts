@@ -35,6 +35,11 @@ export const hero: Field = {
           value: 'fullscreen',
         },
         {
+          // Uber Conta product pages: full-bleed cover image (desktop and mobile), tagline, title, text and one CTA.
+          label: 'Imagem de capa (páginas de produto)',
+          value: 'cover',
+        },
+        {
           label: 'High Impact',
           value: 'highImpact',
         },
@@ -56,7 +61,7 @@ export const hero: Field = {
         features: ({ rootFeatures }) => {
           return [
             ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4', 'h6'] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
           ]
@@ -73,10 +78,60 @@ export const hero: Field = {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, { type } = {}) => ['brand', 'fullscreen', 'highImpact', 'mediumImpact'].includes(type),
+        condition: (_, { type } = {}) =>
+          ['brand', 'fullscreen', 'cover', 'highImpact', 'mediumImpact'].includes(type),
       },
       relationTo: 'media',
       required: true,
+    },
+    {
+      name: 'tone',
+      label: 'Cor do texto',
+      type: 'select',
+      defaultValue: 'onDark',
+      options: [
+        { label: 'Texto branco (imagem escura)', value: 'onDark' },
+        { label: 'Texto preto (imagem clara)', value: 'onLight' },
+      ],
+      admin: { condition: (_, { type } = {}) => type === 'cover' },
+    },
+    {
+      name: 'size',
+      label: 'Altura',
+      type: 'select',
+      defaultValue: 'full',
+      options: [
+        { label: 'Tela cheia', value: 'full' },
+        { label: 'Meia altura, texto centralizado (central de ajuda, blog)', value: 'half' },
+      ],
+      admin: { condition: (_, { type } = {}) => type === 'cover' },
+    },
+    {
+      name: 'searchPlaceholder',
+      label: 'Campo de busca da central de ajuda (texto de apoio)',
+      type: 'text',
+      admin: {
+        condition: (_, { type } = {}) => type === 'cover',
+        description:
+          'Opcional. Preenchido, mostra a caixa de busca na base do hero; a busca leva a /central-de-ajuda/busca/.',
+      },
+    },
+    {
+      name: 'logo',
+      label: 'Logo acima do título',
+      type: 'upload',
+      relationTo: 'media',
+      admin: { condition: (_, { type } = {}) => type === 'cover' },
+    },
+    {
+      name: 'mediaMobile',
+      label: 'Imagem (celular)',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        condition: (_, { type } = {}) => type === 'cover',
+        description: 'Usada em telas com menos de 992px; sem ela, vale a imagem principal.',
+      },
     },
     {
       name: 'video',
@@ -107,7 +162,7 @@ export const hero: Field = {
       label: 'Aviso legal (texto pequeno abaixo das chamadas)',
       type: 'textarea',
       admin: {
-        condition: (_, { type } = {}) => ['brand', 'fullscreen'].includes(type),
+        condition: (_, { type } = {}) => ['brand', 'fullscreen', 'cover'].includes(type),
       },
     },
     link({

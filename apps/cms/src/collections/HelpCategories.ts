@@ -31,6 +31,7 @@ export const HelpCategories: CollectionConfig = {
     { name: 'title', label: t('Título', 'Title'), type: 'text', required: true },
     slug({ disableUnique: true }),
     { name: 'description', label: t('Descrição', 'Description'), type: 'textarea' },
+    { name: 'icon', label: t('Ícone', 'Icon'), type: 'upload', relationTo: 'media' },
     {
       name: 'order',
       label: t('Ordem', 'Order'),

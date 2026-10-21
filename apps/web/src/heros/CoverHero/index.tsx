@@ -1,0 +1,152 @@
+import { Search } from 'lucide-react'
+import React from 'react'
+
+import type { Page } from '@digio/payload-types'
+
+import { ArrowRightIcon } from '@/components/ArrowRightIcon'
+import { CMSLink } from '@/components/Link'
+import { Picture } from '@/components/Picture'
+import RichText from '@/components/RichText'
+import { cn } from '@/utilities/ui'
+
+/**
+ * Uber Conta inner-page hero (current site: `.hero.cover`). One screen tall, the cover image (own
+ * file for mobile, under 992px) behind a 570px column vertically centered: optional logo,
+ * tagline (h6), title (h1), text, one call to action and an optional legal note. White text on
+ * dark images (default) or black text on light ones. An anchor link ("#id") gets a down arrow.
+ */
+export const CoverHero: React.FC<Page['hero']> = ({
+  links,
+  media,
+  mediaMobile,
+  richText,
+  tone,
+  logo,
+  disclaimer,
+  disclaimerLink,
+  size,
+  searchPlaceholder,
+}) => {
+  const cta = Array.isArray(links) ? links[0]?.link : undefined
+  const isAnchor = Boolean(cta?.url?.startsWith('#'))
+  const onLight = tone === 'onLight'
+  const half = size === 'half'
+
+  const hero = (
+    <section
+      className={cn(
+        'relative -mt-24 flex overflow-hidden',
+        half ? 'min-h-0' : 'min-h-screen',
+        onLight ? 'bg-white text-black' : 'bg-black text-white',
+      )}
+      data-section-theme={onLight ? 'light' : 'navy'}
+    >
+      <Picture
+        alt=""
+        className="absolute inset-0 z-0 size-full object-cover"
+        image={media as never}
+        loading="eager"
+        mobile={mediaMobile as never}
+      />
+      <div
+        className={cn(
+          'container relative z-[2] flex flex-col',
+          half
+            ? 'h-[45vh] min-h-[22rem] items-center justify-end min-[992px]:h-[55vh]'
+            : 'min-h-screen items-start justify-center',
+        )}
+      >
+        <div
+          className={cn(
+            'w-full',
+            half ? 'max-w-[720px]' : 'max-w-[570px]',
+            half
+              ? 'mb-16 text-center min-[992px]:mb-[10vh]'
+              : 'max-md:flex max-md:h-screen max-md:flex-col max-md:pt-[15vh]',
+          )}
+        >
+          {logo && typeof logo === 'object' && (
+            <Picture
+              alt={logo.alt ?? ''}
+              className="mb-4 h-[25px] w-auto max-md:hidden"
+              image={logo}
+            />
+          )}
+          {richText && (
+            <RichText
+              className={cn(
+                half
+                  ? '!mx-auto [&_h1]:text-[calc(1.375rem+1.5vw)] min-[1200px]:[&_h1]:!text-[3rem]'
+                  : '!mx-0',
+                'w-full [&_h1]:mb-2 [&_h1]:text-[calc(1.525rem+3.3vw)] [&_h1]:font-semibold [&_h1]:leading-none min-[1200px]:[&_h1]:text-[4rem] [&_h6]:mb-2 [&_h6]:text-[1.25rem] [&_h6]:font-medium [&_p]:m-0 [&_p]:mt-4 [&_p]:font-light',
+                onLight
+                  ? '[&_h1]:text-black [&_h6]:text-black [&_p]:text-[#4b4b4b]'
+                  : '[&_h1]:text-white [&_h6]:text-white [&_p]:text-[#ddd]',
+              )}
+              data={richText}
+              enableGutter={false}
+            />
+          )}
+          {cta && (
+            <CMSLink
+              {...cta}
+              appearance={onLight ? 'default' : 'inverse'}
+              className="my-8 max-md:mb-4 max-md:mt-auto md:w-fit"
+              size="lg"
+            >
+              <ArrowRightIcon className={cn('size-[15px]', isAnchor && 'rotate-90')} />
+            </CMSLink>
+          )}
+          {disclaimer && (
+            <p
+              className={cn(
+                'm-0 text-xs font-normal leading-normal max-md:mb-8 max-md:text-center',
+                onLight ? 'text-[#4b4b4b]' : 'text-[#bababa]',
+              )}
+            >
+              {disclaimer}
+              {disclaimerLink?.label && (
+                <>
+                  {' '}
+                  <CMSLink
+                    {...disclaimerLink}
+                    appearance="inline"
+                    className="font-medium underline"
+                  />
+                </>
+              )}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+
+  if (!searchPlaceholder) return hero
+
+  // Help center: the search box sits on the lower edge of the hero, half over the next section.
+  return (
+    <div className="relative mb-8">
+      {hero}
+      <form
+        action="/central-de-ajuda/busca/"
+        className="absolute inset-x-0 bottom-0 z-[3] mx-auto w-[min(92%,36rem)] translate-y-1/2"
+        role="search"
+      >
+        <label className="sr-only" htmlFor="help-search">
+          {searchPlaceholder}
+        </label>
+        <div className="flex items-center gap-3 rounded-[0.6rem] bg-white px-5 py-4 text-black shadow-sm">
+          <Search aria-hidden className="size-5 shrink-0" />
+          <input
+            className="w-full border-0 bg-transparent p-0 text-sm font-normal text-black outline-none placeholder:text-[#4b4b4b]"
+            id="help-search"
+            name="q"
+            placeholder={searchPlaceholder}
+            type="search"
+          />
+        </div>
+      </form>
+    </div>
+  )
+}

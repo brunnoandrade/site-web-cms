@@ -59,12 +59,24 @@ export const BlogCarousel: React.FC<{ label: string; children: React.ReactNode[]
         tabIndex={0}
       >
         {children.map((child, i) => (
-          <li key={i} className="w-[280px] shrink-0 snap-start">
+          <li
+            key={i}
+            className={cn(
+              'w-[280px] shrink-0 snap-start',
+              // Up to three posts share the row (no scrolling), like the current site.
+              children.length <= 3 && 'min-[992px]:w-[calc((100%-40px)/3)]',
+            )}
+          >
             {child}
           </li>
         ))}
       </ul>
-      <div className="mt-4 flex items-center justify-center gap-4 min-[992px]:mt-16">
+      <div
+        className={cn(
+          'mt-4 flex items-center justify-center gap-4 min-[992px]:mt-16',
+          children.length <= 3 && 'min-[992px]:hidden',
+        )}
+      >
         <button
           aria-label="Posts anteriores"
           className={button}

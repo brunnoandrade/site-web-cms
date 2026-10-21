@@ -5,7 +5,10 @@ import React from 'react'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import RichText from '@/components/RichText'
+import { QuestionArticle, HelpBackBar } from '@/components/UberHelp'
 import { requireHelpTopic, topicQuestions } from '@/lib/help'
+import { categoryPath, getCategoryFaqs, getFaq, helpIndexLabel, isUberHelp } from '@/lib/uber-help'
+import { notFound } from 'next/navigation'
 import { requireTenant } from '@/lib/tenant'
 
 type Args = { params: Promise<{ tenant: string; topic: string }> }
@@ -17,6 +20,32 @@ export function generateStaticParams() {
 export default async function HelpTopicPage({ params }: Args) {
   const { tenant: tenantSlug, topic: topicSlug } = await params
   const tenant = await requireTenant(tenantSlug)
+
+  // Uber Conta: the URL is the question itself (/central-de-ajuda/<pergunta>/).
+  if (isUberHelp(tenant)) {
+    const faq = await getFaq(tenant.slug, decodeURIComponent(topicSlug))
+    if (!faq) notFound()
+    const category = typeof faq.category === 'object' ? faq.category : null
+    const related = category
+      ? (await getCategoryFaqs(tenant.slug, category.id)).filter(
+          (item) => item.id !== faq.id && item.slug,
+        )
+      : []
+    return (
+      <>
+        <HelpBackBar
+          back={category ? categoryPath(category.slug!) : '/central-de-ajuda/'}
+          items={[
+            { label: helpIndexLabel, href: '/central-de-ajuda/' },
+            ...(category ? [{ label: category.title, href: categoryPath(category.slug!) }] : []),
+            { label: faq.question },
+          ]}
+        />
+        <QuestionArticle faq={faq} related={related} />
+      </>
+    )
+  }
+
   const topic = await requireHelpTopic(tenant.slug, topicSlug)
   const questions = topicQuestions(topic)
 
@@ -55,6 +84,15 @@ export default async function HelpTopicPage({ params }: Args) {
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const { tenant: tenantSlug, topic: topicSlug } = await params
   const tenant = await requireTenant(tenantSlug)
+  if (isUberHelp(tenant)) {
+    const faq = await getFaq(tenant.slug, decodeURIComponent(topicSlug))
+    return {
+      title: faq ? `${faq.question} | Central de Ajuda | ${tenant.name}` : undefined,
+      alternates: {
+        canonical: `${tenant.siteUrl}/central-de-ajuda/${decodeURIComponent(topicSlug)}/`,
+      },
+    }
+  }
   const topic = await requireHelpTopic(tenant.slug, topicSlug)
   return {
     title: `${topic.title} | Central de Ajuda | ${tenant.name}`,

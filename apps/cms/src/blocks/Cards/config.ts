@@ -25,11 +25,27 @@ export const Cards: Block = {
       defaultValue: 'simple',
       options: [
         { label: t('Simples', 'Simple'), value: 'simple' },
-        { label: t('Destaque com imagem (cards grandes)', 'Feature with image (large cards)'), value: 'feature' },
-        { label: t('Produto (imagem e link "Conhecer")', 'Product (image and "Learn more" link)'), value: 'product' },
+        {
+          label: t('Destaque com imagem (cards grandes)', 'Feature with image (large cards)'),
+          value: 'feature',
+        },
+        {
+          label: t('Produto (imagem e link "Conhecer")', 'Product (image and "Learn more" link)'),
+          value: 'product',
+        },
         { label: t('Ícone com seta (soluções)', 'Icon with arrow (solutions)'), value: 'icon' },
         {
-          label: t('Atalhos (imagem de fundo e seta ao passar o mouse)', 'Shortcuts (background image, arrow on hover)'),
+          label: t(
+            'Benefícios (imagem ao lado e cards com ícone)',
+            'Benefits (side image and icon cards)',
+          ),
+          value: 'benefits',
+        },
+        {
+          label: t(
+            'Atalhos (imagem de fundo e seta ao passar o mouse)',
+            'Shortcuts (background image, arrow on hover)',
+          ),
           value: 'shortcut',
         },
       ],
@@ -44,12 +60,44 @@ export const Cards: Block = {
       relationTo: 'media',
       filterOptions: { mimeType: { in: ['video/mp4', 'video/webm'] } },
       admin: {
-        condition: withVariant('icon'),
+        condition: withVariant('icon', 'benefits'),
         description: t(
-          'Opcional. Toca em loop, sem som, atrás do título e dos cards da seção de soluções.',
-          'Optional. Loops silently behind the heading and cards of the solutions section.',
+          'Opcional. Toca em loop, sem som: atrás do título (soluções) ou no lugar da imagem ao lado (benefícios).',
+          'Optional. Loops silently: behind the heading (solutions) or instead of the side image (benefits).',
         ),
       },
+    },
+    {
+      name: 'image',
+      label: t('Imagem ao lado', 'Side image'),
+      type: 'upload',
+      relationTo: 'media',
+      admin: { condition: withVariant('benefits') },
+    },
+    {
+      name: 'backgroundImage',
+      label: t('Imagem de fundo do topo', 'Top background image'),
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        condition: withVariant('icon'),
+        description: t(
+          'Opcional. Imagem atrás do título (o vídeo, quando houver, tem prioridade).',
+          'Optional. Image behind the heading (a video, when set, takes precedence).',
+        ),
+      },
+    },
+    {
+      name: 'legend',
+      label: t('Aviso legal', 'Legal note'),
+      type: 'text',
+      admin: { condition: withVariant('icon') },
+    },
+    {
+      name: 'listHeading',
+      label: t('Subtítulo da lista', 'List subheading'),
+      type: 'text',
+      admin: { condition: withVariant('icon') },
     },
     {
       name: 'columns',
@@ -121,7 +169,9 @@ export const Cards: Block = {
         link({
           appearances: false,
           overrides: {
-            admin: { condition: (_: unknown, siblingData: Sibling) => Boolean(siblingData?.enableLink) },
+            admin: {
+              condition: (_: unknown, siblingData: Sibling) => Boolean(siblingData?.enableLink),
+            },
           },
         }),
       ],
@@ -136,7 +186,8 @@ export const Cards: Block = {
       overrides: {
         name: 'sectionLink',
         admin: {
-          condition: (_: unknown, siblingData: { enableSectionLink?: boolean }) => Boolean(siblingData?.enableSectionLink),
+          condition: (_: unknown, siblingData: { enableSectionLink?: boolean }) =>
+            Boolean(siblingData?.enableSectionLink),
         },
       },
     }),

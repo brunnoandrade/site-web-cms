@@ -12,6 +12,13 @@ import { RatesTableBlock } from '@/blocks/RatesTable/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { ImageContentBlock } from '@/blocks/ImageContent/Component'
+import { PartnerBlock } from '@/blocks/Partner/Component'
+import { StoryBlock } from '@/blocks/Story/Component'
+import { TimelineBlock } from '@/blocks/Timeline/Component'
+import { ContactsBlock } from '@/blocks/Contacts/Component'
+import { DocumentsBlock } from '@/blocks/Documents/Component'
+import { StepsBlock } from '@/blocks/Steps/Component'
 import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 
 const blockComponents = {
@@ -23,8 +30,22 @@ const blockComponents = {
   content: ContentBlock,
   cta: CallToActionBlock,
   mediaBlock: MediaBlock,
+  steps: StepsBlock,
+  imageContent: ImageContentBlock,
+  partner: PartnerBlock,
+  story: StoryBlock,
+  timeline: TimelineBlock,
+  contacts: ContactsBlock,
+  documents: DocumentsBlock,
   testimonials: TestimonialsBlock,
 }
+
+/** Blocks that render their own full-width section (or none), so they get no default one. */
+const ownSection = new Set(['partner', 'story', 'timeline', 'contacts', 'documents'])
+
+/** Image band with a mobile version (Uber Conta divider): 3rem above and below, not the 6rem section. */
+const isBand = (block: { blockType: string; mediaMobile?: unknown }) =>
+  block.blockType === 'mediaBlock' && Boolean(block.mediaMobile)
 
 export const RenderBlocks: React.FC<{
   blocks: Page['layout'][0][]
@@ -51,13 +72,16 @@ export const RenderBlocks: React.FC<{
             const Block = components[blockType]
 
             if (Block) {
-              const rendered = (
-                <Block {...block} disableInnerContainer tenant={tenant} />
-              )
+              const rendered = <Block {...block} disableInnerContainer tenant={tenant} />
               const anchor = 'anchor' in block && block.anchor ? block.anchor : undefined
               // Blocks with a "theme" field render their own full-width Section; the others get
               // the default (white) section around them.
-              const content = 'theme' in block ? rendered : <Section>{rendered}</Section>
+              const content =
+                'theme' in block || ownSection.has(blockType) || isBand(block as never) ? (
+                  rendered
+                ) : (
+                  <Section>{rendered}</Section>
+                )
               // The anchor id goes on a plain wrapper, so a `#id` link lands on the section.
               return anchor ? (
                 <div id={anchor} key={index}>

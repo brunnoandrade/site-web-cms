@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import React from 'react'
 
 import type { CardsBlock as CardsBlockProps } from '@digio/payload-types'
@@ -9,6 +9,7 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import { Picture } from '@/components/Picture'
 import { Section, SectionHeading, isDarkTheme } from '@/components/Section'
+import { Strip } from '@/components/Strip'
 import { HeroVideo } from '@/heros/FullscreenHero/HeroVideo'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { cn } from '@/utilities/ui'
@@ -231,13 +232,110 @@ const ShortcutCard: React.FC<{ item: Item }> = ({ item }) => {
   )
 }
 
+/**
+ * Uber Conta "características": grey section, heading on top, the side image (370px) and a
+ * horizontal strip of white cards (icon, title at the bottom) ending with a black card that
+ * links to the section button. Scrolls sideways (snap) when the cards do not fit.
+ */
+const BenefitsSection: React.FC<CardsBlockProps> = ({
+  theme,
+  heading,
+  intro,
+  image,
+  video,
+  items,
+  enableSectionLink,
+  sectionLink,
+}) => (
+  <Section className="bg-[#f3f3f3]" theme={theme ?? 'lilac'}>
+    <div className="container">
+      {(heading || intro) && (
+        <div className="mb-8 min-[992px]:mb-16 min-[992px]:text-center">
+          {heading && <SectionHeading>{heading}</SectionHeading>}
+          {intro && <p className="mb-0 mt-4 font-light text-[#4b4b4b]">{intro}</p>}
+        </div>
+      )}
+      <div className="flex flex-wrap gap-4 min-[992px]:flex-nowrap">
+        {typeof video === 'object' && video?.url ? (
+          <div className="relative w-full shrink-0 overflow-hidden rounded-2xl min-[992px]:w-[370px]">
+            <video
+              autoPlay
+              className="block size-full object-cover"
+              loop
+              muted
+              playsInline
+              poster={
+                typeof image === 'object' && image?.url
+                  ? getMediaUrl(image.url, image.updatedAt)
+                  : undefined
+              }
+              src={getMediaUrl(video.url, video.updatedAt)}
+            />
+          </div>
+        ) : (
+          image &&
+          typeof image === 'object' && (
+            <div className="w-full shrink-0 min-[992px]:w-[370px]">
+              <Picture
+                alt={image.alt ?? ''}
+                className="block h-auto max-w-full rounded-2xl"
+                image={image}
+              />
+            </div>
+          )
+        )}
+        <Strip className="flex-1" itemClassName="min-[992px]:w-[calc((100%-2rem)/3)]">
+          {[
+            ...(items ?? []).map((item, i) => (
+              <div
+                key={item.id ?? i}
+                className="flex h-full min-h-[215px] flex-col items-start rounded-2xl bg-white p-6 min-[992px]:min-h-[370px]"
+              >
+                {item.image && (
+                  <Picture alt="" className="mb-4 size-10 max-md:size-7" image={item.image} />
+                )}
+                <h4 className="mb-2 mt-auto text-xl font-semibold">{item.title}</h4>
+                {item.text && <p className="m-0 font-light text-[#4b4b4b]">{item.text}</p>}
+              </div>
+            )),
+            ...(enableSectionLink && sectionLink
+              ? [
+                  <CMSLink
+                    key="cta"
+                    {...sectionLink}
+                    appearance="inline"
+                    className="flex h-full min-h-[215px] flex-col items-start justify-end rounded-2xl bg-black p-6 text-xl font-semibold text-white transition-colors hover:bg-[#276ef1] max-[991px]:hidden min-[992px]:min-h-[370px]"
+                  >
+                    <ArrowRightIcon className="mt-4 size-[15px]" />
+                  </CMSLink>,
+                ]
+              : []),
+          ]}
+        </Strip>
+      </div>
+      {enableSectionLink && sectionLink && (
+        <CMSLink
+          {...sectionLink}
+          appearance="inverse"
+          className="mt-8 !bg-[#e8e8e8] !text-black hover:!bg-[#d6d6d6] min-[992px]:hidden"
+          size="lg"
+        >
+          <ArrowRightIcon className="size-[15px]" />
+        </CMSLink>
+      )}
+    </div>
+  </Section>
+)
+
 const shortcutColumns = {
   '2': 'min-[992px]:grid-cols-2',
   '3': 'min-[992px]:grid-cols-3',
   '4': 'min-[992px]:grid-cols-4',
 }
 
-export const CardsBlock: React.FC<CardsBlockProps> = ({
+export const CardsBlock: React.FC<CardsBlockProps> = (props) => <CardsBlockView {...props} />
+
+const CardsBlockView: React.FC<CardsBlockProps> = ({
   variant,
   theme,
   heading,
@@ -247,9 +345,31 @@ export const CardsBlock: React.FC<CardsBlockProps> = ({
   items,
   enableSectionLink,
   sectionLink,
+  image,
+  backgroundImage,
+  legend,
+  listHeading,
+  ...rest
 }) => {
   if (!items?.length) return null
   const dark = isDarkTheme(theme)
+
+  if (variant === 'benefits') {
+    return (
+      <BenefitsSection
+        {...rest}
+        enableSectionLink={enableSectionLink}
+        heading={heading}
+        image={image}
+        video={video}
+        intro={intro}
+        items={items}
+        sectionLink={sectionLink}
+        theme={theme}
+        variant={variant}
+      />
+    )
+  }
 
   if (variant === 'shortcut') {
     return (
@@ -290,6 +410,48 @@ export const CardsBlock: React.FC<CardsBlockProps> = ({
   const headingLeft = variant === 'icon'
   // Lending cards: heading left on mobile and centered from 992px, extra vertical room, 24px x 12px gaps.
   const product = variant === 'product'
+
+  // Uber Conta "relacionadas": image behind a centered heading and button, then the icon cards
+  // under their own subheading.
+  if (variant === 'icon' && !video && backgroundImage && typeof backgroundImage === 'object') {
+    const bg = backgroundImage.url
+      ? getMediaUrl(backgroundImage.url, backgroundImage.updatedAt)
+      : null
+    return (
+      <Section
+        className="pt-0 min-[992px]:bg-[image:var(--bg)] min-[992px]:bg-top min-[992px]:bg-no-repeat min-[992px]:[background-size:auto]"
+        style={{ '--bg': bg ? `url(${bg})` : 'none' } as React.CSSProperties}
+        theme={theme}
+      >
+        <div className="max-[991px]:bg-[image:var(--bg)] max-[991px]:bg-cover max-[991px]:bg-top">
+          <div className="container flex min-h-[35rem] flex-col pb-10 pt-16 min-[992px]:items-center min-[992px]:text-center">
+            {heading && <SectionHeading className="text-white">{heading}</SectionHeading>}
+            {intro && <p className="mb-0 mt-4 font-light text-white">{intro}</p>}
+            {enableSectionLink && sectionLink && (
+              <CMSLink {...sectionLink} appearance="inverse" className="mt-auto w-fit" size="lg">
+                <ArrowRightIcon className="size-[15px]" />
+              </CMSLink>
+            )}
+            {legend && <p className="mb-0 mt-4 text-sm text-white/80">{legend}</p>}
+          </div>
+        </div>
+        <div className="container">
+          {listHeading && (
+            <h3 className="mb-8 mt-4 text-2xl font-semibold text-white min-[992px]:mb-8 min-[992px]:mt-20 min-[992px]:text-center min-[992px]:text-[2rem]">
+              {listHeading}
+            </h3>
+          )}
+          <Strip itemClassName="min-[992px]:w-[calc((100%-3rem)/4)]" mobileScroll tone="light">
+            {(items ?? []).map((item, i) => (
+              <div key={item.id ?? i} className="h-full min-[992px]:min-h-[270px]">
+                <IconCard dark item={item} />
+              </div>
+            ))}
+          </Strip>
+        </div>
+      </Section>
+    )
+  }
 
   const videoSrc =
     variant === 'icon' && typeof video === 'object' && video?.url

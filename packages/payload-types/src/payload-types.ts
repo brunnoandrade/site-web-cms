@@ -168,7 +168,7 @@ export interface Page {
    */
   template?: ('default' | 'noHero' | 'landing') | null;
   hero: {
-    type: 'none' | 'brand' | 'fullscreen' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    type: 'none' | 'brand' | 'fullscreen' | 'cover' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
       root: {
         type: string;
@@ -209,6 +209,17 @@ export interface Page {
         }[]
       | null;
     media?: (number | null) | Media;
+    tone?: ('onDark' | 'onLight') | null;
+    size?: ('full' | 'half') | null;
+    /**
+     * Opcional. Preenchido, mostra a caixa de busca na base do hero; a busca leva a /central-de-ajuda/busca/.
+     */
+    searchPlaceholder?: string | null;
+    logo?: (number | null) | Media;
+    /**
+     * Usada em telas com menos de 992px; sem ela, vale a imagem principal.
+     */
+    mediaMobile?: (number | null) | Media;
     /**
      * Opcional. Com vídeo, a imagem acima não aparece (o fundo fica preto até o vídeo carregar, para não piscar outra imagem). Sem vídeo, ela é o fundo do hero.
      */
@@ -242,6 +253,13 @@ export interface Page {
     | ProductHighlightBlock
     | RatesTableBlock
     | FaqBlock
+    | StepsBlock
+    | ImageContentBlock
+    | PartnerBlock
+    | StoryBlock
+    | TimelineBlock
+    | ContactsBlock
+    | DocumentsBlock
     | TestimonialsBlock
     | BannerSectionBlock
     | ArchiveBlock
@@ -555,14 +573,21 @@ export interface ContentBlock {
  * via the `definition` "CardsBlock".
  */
 export interface CardsBlock {
-  variant?: ('simple' | 'feature' | 'product' | 'icon' | 'shortcut') | null;
+  variant?: ('simple' | 'feature' | 'product' | 'icon' | 'benefits' | 'shortcut') | null;
   theme?: ('light' | 'lilac' | 'navy' | 'blue') | null;
   heading?: string | null;
   intro?: string | null;
   /**
-   * Optional. Loops silently behind the heading and cards of the solutions section.
+   * Optional. Loops silently: behind the heading (solutions) or instead of the side image (benefits).
    */
   video?: (number | null) | Media;
+  image?: (number | null) | Media;
+  /**
+   * Optional. Image behind the heading (a video, when set, takes precedence).
+   */
+  backgroundImage?: (number | null) | Media;
+  legend?: string | null;
+  listHeading?: string | null;
   columns?: ('2' | '3' | '4') | null;
   items?:
     | {
@@ -896,12 +921,325 @@ export interface HelpCategory {
   generateSlug?: boolean | null;
   slug: string;
   description?: string | null;
+  icon?: (number | null) | Media;
   /**
    * Lower comes first.
    */
   order?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock".
+ */
+export interface StepsBlock {
+  theme?: ('light' | 'lilac' | 'navy' | 'blue') | null;
+  heading: string;
+  intro?: string | null;
+  enableLink?: boolean | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
+  items?:
+    | {
+        title: string;
+        text?: string | null;
+        /**
+         * Shown inside the phone next to the list while the step is open (above the text on phones).
+         */
+        image?: (number | null) | Media;
+        /**
+         * Optional. Used under 992px.
+         */
+        imageMobile?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'steps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageContentBlock".
+ */
+export interface ImageContentBlock {
+  variant?: ('card' | 'section') | null;
+  theme?: ('light' | 'lilac' | 'navy' | 'blue') | null;
+  image: number | Media;
+  /**
+   * Optional. Used under 992px.
+   */
+  imageMobile?: (number | null) | Media;
+  logo?: (number | null) | Media;
+  eyebrow?: string | null;
+  /**
+   * Enter adds a line break.
+   */
+  heading: string;
+  text?: string | null;
+  items?:
+    | {
+        icon?: (number | null) | Media;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  enableLink?: boolean | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
+  legend?: string | null;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageContent';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PartnerBlock".
+ */
+export interface PartnerBlock {
+  /**
+   * Enter adds a line break. Text between **double asterisks** is blue.
+   */
+  heading: string;
+  /**
+   * A blank line separates paragraphs.
+   */
+  text?: string | null;
+  enableLink?: boolean | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
+  video?: (number | null) | Media;
+  videoMobile?: (number | null) | Media;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'partner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryBlock".
+ */
+export interface StoryBlock {
+  image: number | Media;
+  /**
+   * Optional. Used under 992px.
+   */
+  imageMobile?: (number | null) | Media;
+  /**
+   * Enter adds a line break.
+   */
+  heading: string;
+  text?: string | null;
+  items?:
+    | {
+        icon?: (number | null) | Media;
+        title: string;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'story';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TimelineBlock".
+ */
+export interface TimelineBlock {
+  /**
+   * Enter adds a line break.
+   */
+  heading: string;
+  /**
+   * A blank line separates paragraphs.
+   */
+  text?: string | null;
+  items?:
+    | {
+        icon?: (number | null) | Media;
+        period: string;
+        title: string;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'timeline';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactsBlock".
+ */
+export interface ContactsBlock {
+  eyebrow?: string | null;
+  heading: string;
+  /**
+   * A blank line separates paragraphs.
+   */
+  text?: string | null;
+  enableLink?: boolean | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
+  groups?:
+    | {
+        title?: string | null;
+        entries?:
+          | {
+              title: string;
+              description?: string | null;
+              phone?: string | null;
+              icon?: (number | null) | Media;
+              enableLink?: boolean | null;
+              link?: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: number | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: number | Post;
+                    } | null);
+                url?: string | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contacts';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DocumentsBlock".
+ */
+export interface DocumentsBlock {
+  groups?:
+    | {
+        title: string;
+        items?:
+          | {
+              title: string;
+              icon?: (number | null) | Media;
+              /**
+               * One link opens directly ("Access"); more than one opens a menu with each link label.
+               */
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: number | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: number | Post;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
+   */
+  anchor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'documents';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1602,6 +1940,11 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        tone?: T;
+        size?: T;
+        searchPlaceholder?: T;
+        logo?: T;
+        mediaMobile?: T;
         video?: T;
         videoMobile?: T;
         disclaimer?: T;
@@ -1625,6 +1968,13 @@ export interface PagesSelect<T extends boolean = true> {
         productHighlight?: T | ProductHighlightBlockSelect<T>;
         ratesTable?: T | RatesTableBlockSelect<T>;
         faq?: T | FaqBlockSelect<T>;
+        steps?: T | StepsBlockSelect<T>;
+        imageContent?: T | ImageContentBlockSelect<T>;
+        partner?: T | PartnerBlockSelect<T>;
+        story?: T | StoryBlockSelect<T>;
+        timeline?: T | TimelineBlockSelect<T>;
+        contacts?: T | ContactsBlockSelect<T>;
+        documents?: T | DocumentsBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
         bannerSection?: T | BannerSectionBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
@@ -1681,6 +2031,10 @@ export interface CardsBlockSelect<T extends boolean = true> {
   heading?: T;
   intro?: T;
   video?: T;
+  image?: T;
+  backgroundImage?: T;
+  legend?: T;
+  listHeading?: T;
   columns?: T;
   items?:
     | T
@@ -1794,6 +2148,218 @@ export interface FaqBlockSelect<T extends boolean = true> {
         reference?: T;
         url?: T;
         label?: T;
+      };
+  anchor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock_select".
+ */
+export interface StepsBlockSelect<T extends boolean = true> {
+  theme?: T;
+  heading?: T;
+  intro?: T;
+  enableLink?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  items?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        image?: T;
+        imageMobile?: T;
+        id?: T;
+      };
+  anchor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageContentBlock_select".
+ */
+export interface ImageContentBlockSelect<T extends boolean = true> {
+  variant?: T;
+  theme?: T;
+  image?: T;
+  imageMobile?: T;
+  logo?: T;
+  eyebrow?: T;
+  heading?: T;
+  text?: T;
+  items?:
+    | T
+    | {
+        icon?: T;
+        text?: T;
+        id?: T;
+      };
+  enableLink?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  legend?: T;
+  anchor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PartnerBlock_select".
+ */
+export interface PartnerBlockSelect<T extends boolean = true> {
+  heading?: T;
+  text?: T;
+  enableLink?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  video?: T;
+  videoMobile?: T;
+  anchor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryBlock_select".
+ */
+export interface StoryBlockSelect<T extends boolean = true> {
+  image?: T;
+  imageMobile?: T;
+  heading?: T;
+  text?: T;
+  items?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  anchor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TimelineBlock_select".
+ */
+export interface TimelineBlockSelect<T extends boolean = true> {
+  heading?: T;
+  text?: T;
+  items?:
+    | T
+    | {
+        icon?: T;
+        period?: T;
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  anchor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactsBlock_select".
+ */
+export interface ContactsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  text?: T;
+  enableLink?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  groups?:
+    | T
+    | {
+        title?: T;
+        entries?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              phone?: T;
+              icon?: T;
+              enableLink?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  anchor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DocumentsBlock_select".
+ */
+export interface DocumentsBlockSelect<T extends boolean = true> {
+  groups?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              icon?: T;
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
       };
   anchor?: T;
   id?: T;
@@ -2102,6 +2668,7 @@ export interface HelpCategoriesSelect<T extends boolean = true> {
   generateSlug?: T;
   slug?: T;
   description?: T;
+  icon?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;

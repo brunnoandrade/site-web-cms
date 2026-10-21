@@ -7,6 +7,11 @@ import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
 import { find } from '@/lib/cms'
+import { requireTenant } from '@/lib/tenant'
+import { isUberConta } from '@/lib/uber-help'
+import { findOne } from '@/lib/cms'
+
+import { UberBlog } from './UberBlog'
 
 export const POSTS_PER_PAGE = 12
 
@@ -38,6 +43,24 @@ export async function BlogListing({ tenant, category, page }: Props) {
         ? blogCategoryPath(category.slug)
         : blogIndexPath
       : blogPagePath(n, category?.slug)
+
+  if (isUberConta(await requireTenant(tenant))) {
+    const [categories, blogPage] = await Promise.all([
+      find('categories', { tenant, limit: 50, sort: 'title', tags: ['posts'] }),
+      findOne('pages', { tenant, tags: ['pages_blog'], where: { slug: { equals: 'blog' } } }),
+    ])
+    return (
+      <UberBlog
+        categories={categories.docs}
+        current={category}
+        hero={blogPage?.hero}
+        hrefFor={hrefFor}
+        page={posts.page ?? 1}
+        posts={posts.docs}
+        totalPages={posts.totalPages}
+      />
+    )
+  }
 
   return (
     <div className="pt-24 pb-24">
