@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowLeft, ChevronRight, X } from 'lucide-react'
+import { ArrowLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useCallback, useEffect, useId, useRef, useState } from 'react'
@@ -270,7 +270,7 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
           )}
           <button
             aria-label="Fechar menu"
-            className="inline-flex size-[30px] items-center justify-center rounded-md"
+            className="-mr-0.5 inline-flex size-7 items-center justify-center rounded-[6px]"
             onClick={() => {
               closeAll()
               togglerRef.current?.focus()
@@ -278,7 +278,12 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
             ref={closeRef}
             type="button"
           >
-            <X aria-hidden className="size-6" />
+            <svg aria-hidden fill="none" height="28" viewBox="0 0 24 24" width="28">
+              <path
+                d="M19.167 5.833 17.333 4l-5.75 5.833L5.833 4 4 5.833l5.833 5.75L4 17.333l1.833 1.834 5.75-5.834 5.75 5.834 1.834-1.834-5.834-5.75z"
+                fill="currentColor"
+              />
+            </svg>
           </button>
         </div>
 
