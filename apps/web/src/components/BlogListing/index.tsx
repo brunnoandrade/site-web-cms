@@ -1,5 +1,4 @@
 import type { Category } from '@digio/payload-types'
-import { blogCategoryPath, blogIndexPath, blogPagePath } from '@digio/routes'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
@@ -9,6 +8,7 @@ import { Pagination } from '@/components/Pagination'
 import { find } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
 import { isUberConta } from '@/lib/uber-help'
+import { pathsOf } from '@/lib/urlStyle'
 import { findOne } from '@/lib/cms'
 
 import { UberBlog } from './UberBlog'
@@ -24,7 +24,9 @@ type Props = {
 
 /** Blog index and category pages, with the WordPress pagination URLs. */
 export async function BlogListing({ tenant, category, page }: Props) {
-  const uber = isUberConta(await requireTenant(tenant))
+  const tenantDoc = await requireTenant(tenant)
+  const urls = pathsOf(tenantDoc)
+  const uber = isUberConta(tenantDoc)
   // The Uber Conta blog lists 6 per page, like the current site.
   const perPage = uber ? 6 : POSTS_PER_PAGE
   const posts = await find('posts', {
@@ -40,12 +42,7 @@ export async function BlogListing({ tenant, category, page }: Props) {
   // /blog/page/99/ beyond the last page is a 404, not an empty listing.
   if (page > 1 && page > posts.totalPages) notFound()
 
-  const hrefFor = (n: number) =>
-    n === 1
-      ? category
-        ? blogCategoryPath(category.slug)
-        : blogIndexPath
-      : blogPagePath(n, category?.slug)
+  const hrefFor = (n: number) => urls.blogPage(n, category?.slug)
 
   if (uber) {
     const [categories, blogPage] = await Promise.all([
@@ -55,6 +52,7 @@ export async function BlogListing({ tenant, category, page }: Props) {
     return (
       <UberBlog
         categories={categories.docs}
+        urls={urls}
         current={category}
         hero={blogPage?.hero}
         hrefFor={hrefFor}

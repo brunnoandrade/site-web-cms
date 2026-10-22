@@ -52,7 +52,7 @@ Blocos (~10): hero (campo da página), `cards`, `ratesTable`, `faq`, `cta`, `con
 - Categorias atuais do blog: emprestimos, games, meu-digio, noticias, salvando-grana, seguranca.
 - Central de ajuda: `/central-de-ajuda/`, `/central-de-ajuda/[topico]/` e `/central-de-ajuda/[topico]/[pergunta]/`, a **mesma estrutura do site atual** (29 tópicos e cerca de 418 perguntas, cada pergunta com página própria). Um tópico (`help-topics`) lista suas perguntas (`faqs`) em ordem; o slug da pergunta é único dentro do tópico.
 - Slugs: sempre pelo campo `slug()` de `apps/cms/src/fields/slug.ts`, que translitera acentos (`cartão` → `cartao`); o padrão do Payload os descarta.
-- `trailingSlash: true` no Next, porque as URLs atuais terminam com `/`.
+- **A forma da URL é uma política por propriedade** (campos `trailingSlash` e `blogUrlStyle` do tenant, `packages/routes` e `apps/web/src/lib/urlPolicy.ts`), para a virada manter os endereços do site atual: Digio com barra final e posts em `/blog/<categoria>/<post>/`; Uber Conta sem barra e posts planos em `/blog/<post>` (filtro `?categoria=`, páginas `?page=`). O Next fica com `trailingSlash: false` e o proxy aplica a política (redirect 301 da outra forma). Links e canonical saem sempre pela função `pathsOf(tenant)`, nunca montados à mão.
 
 ## Redirects e rastreio (regras obrigatórias)
 - Os redirects ficam na coleção `redirects` do plugin, agrupada em "SEO" no admin. Só `admin` e `seo` podem editar.

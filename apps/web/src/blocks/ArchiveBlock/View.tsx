@@ -9,12 +9,14 @@ import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
 import { Section, isDarkTheme } from '@/components/Section'
 import Link from 'next/link'
-import { documentPath } from '@digio/routes'
+import { paths, type UrlStyle } from '@digio/routes'
 
 import { BlogCarousel } from './BlogCarousel'
 import type { FeedItem } from './feed'
 
 export type ArchiveBlockViewProps = ArchiveBlockProps & {
+  /** URL policy of the property (trailing slash, flat posts); defaults to the Digio form. */
+  urlStyle?: UrlStyle
   id?: string
   posts: Post[]
   /** External feed items (Medium): when present, the carousel shows them instead of `posts`. */
@@ -81,7 +83,9 @@ export const ArchiveBlockView: React.FC<ArchiveBlockViewProps> = (props) => {
     introContent,
     posts,
     feed = [],
+    urlStyle,
   } = props
+  const urls = paths(urlStyle)
 
   if (posts.length === 0 && feed.length === 0) return null
   const dark = isDarkTheme(theme)
@@ -126,7 +130,7 @@ export const ArchiveBlockView: React.FC<ArchiveBlockViewProps> = (props) => {
             : posts.map((post) => (
                 <BlogSlide
                   key={post.id}
-                  href={documentPath('posts', post) ?? '#'}
+                  href={urls.document('posts', post) ?? '#'}
                   image={post.meta?.image}
                   title={post.title}
                 />

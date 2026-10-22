@@ -1,7 +1,7 @@
 import { getServerSideSitemap } from 'next-sitemap'
-import { documentPath } from '@digio/routes'
 import { find } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
+import { pathsOf } from '@/lib/urlStyle'
 
 const getPostsSitemap = async (tenantSlug: string) => {
   const tenant = await requireTenant(tenantSlug)
@@ -30,7 +30,7 @@ const getPostsSitemap = async (tenantSlug: string) => {
 
   const sitemap = results.docs
     ? results.docs
-        .map((post) => ({ post, path: documentPath('posts', post) }))
+        .map((post) => ({ post, path: pathsOf(tenant).document('posts', post) }))
         .filter(({ path }) => Boolean(path))
         .map(({ post, path }) => ({
           loc: `${SITE_URL}${path}`,

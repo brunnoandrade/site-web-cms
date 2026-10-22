@@ -36,6 +36,9 @@ const tenants = [
     themePreset: 'uber-conta',
     layout: 'uber-conta',
     siteUrl: 'http://uberconta.localhost:3000',
+    // URLs of ubercontabrasil.com.br: no trailing slash, flat blog posts.
+    trailingSlash: false,
+    blogUrlStyle: 'flat',
     domains: [{ domain: 'uberconta.localhost' }],
   },
 ]

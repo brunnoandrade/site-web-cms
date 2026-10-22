@@ -306,6 +306,14 @@ export interface Tenant {
    */
   layout?: ('digio' | 'uber-conta') | null;
   /**
+   * Ligado: /pix/ (a forma canônica; /pix redireciona). Desligado: /pix (e /pix/ redireciona). Use a forma do site que está sendo substituído.
+   */
+  trailingSlash?: boolean | null;
+  /**
+   * Plana mantém o endereço dos posts quando o site atual não usa categoria na URL. Mudar isso muda os endereços dos posts: confira com o time de SEO.
+   */
+  blogUrlStyle?: ('category' | 'flat') | null;
+  /**
    * Hosts que respondem por esta propriedade (ex.: www.digio.com.br). Sem protocolo, porta ou caminho. Um domínio só pode pertencer a uma propriedade.
    */
   domains?:
@@ -575,6 +583,9 @@ export interface ContentBlock {
 export interface CardsBlock {
   variant?: ('simple' | 'feature' | 'product' | 'icon' | 'benefits' | 'shortcut') | null;
   theme?: ('light' | 'lilac' | 'navy' | 'blue') | null;
+  /**
+   * Enter adds a line break.
+   */
   heading?: string | null;
   intro?: string | null;
   /**
@@ -2852,6 +2863,8 @@ export interface TenantsSelect<T extends boolean = true> {
   siteUrl?: T;
   themePreset?: T;
   layout?: T;
+  trailingSlash?: T;
+  blogUrlStyle?: T;
   domains?:
     | T
     | {

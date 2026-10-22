@@ -7,7 +7,7 @@ import type { Payload, PayloadRequest } from 'payload'
 import type { Media, Tenant } from '@digio/payload-types'
 
 import { custom, richText } from './home'
-import { richHeading } from './uber-product-page'
+import { href, richHeading } from './uber-product-page'
 
 type Args = {
   payload: Payload
@@ -18,6 +18,9 @@ type Args = {
 }
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
+
+/** Custom link with the Uber Conta URL form (no trailing slash). */
+const link = (label: string, url: string) => custom(label, href(url))
 
 const APP_URL = 'https://uberconta.onelink.me/asYc/nayzzxcl'
 
@@ -131,14 +134,14 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
         type: 'fullscreen' as const,
         richText: richText({ tag: 'h1', text: 'Receba seus ganhos na hora com a Uber Conta!' }),
         links: [
-          { link: { ...custom('Conhecer mais', '#solucoes'), appearance: 'default' as const } },
+          { link: { ...link('Conhecer mais', '#solucoes'), appearance: 'default' as const } },
         ],
         media: images[0].id,
         video: heroVideo.id,
         videoMobile: heroVideoMobile.id,
         disclaimer:
           'Este é um produto oferecido pelo Banco Digio e está sujeito à elegibilidade, análise de crédito e condições variáveis.',
-        disclaimerLink: custom('Saber mais.', '#solucoes'),
+        disclaimerLink: link('Saber mais.', '#solucoes'),
       },
       layout: [
         {
@@ -157,7 +160,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
               imageMobile: shortcutMobile[0].id,
               background: 'navy' as const,
               enableLink: true,
-              link: custom('Conta', '/conta-digital/'),
+              link: link('Conta', '/conta-digital/'),
             },
             {
               title: 'Um aplicativo\ncompleto',
@@ -166,7 +169,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
               imageMobile: shortcutMobile[1].id,
               background: 'blue' as const,
               enableLink: true,
-              link: custom('Conta', '/conta-digital/'),
+              link: link('Conta', '/conta-digital/'),
             },
             {
               title: 'Cartão para usar\ncomo quiser',
@@ -175,7 +178,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
               imageMobile: shortcutMobile[2].id,
               background: 'lilac' as const,
               enableLink: true,
-              link: custom('Cartão', '/cartao/'),
+              link: link('Cartão', '/cartao/'),
             },
           ],
         },
@@ -192,14 +195,14 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
               text: 'Até R$ 10.000 na conta em minutos,\ncom pagamento em até 18x.',
               image: loanPersonal.id,
               enableLink: true,
-              link: custom('Conhecer', '/credito-pessoal/'),
+              link: link('Conhecer', '/credito-pessoal/'),
             },
             {
               title: 'Crédito Rápido',
               text: 'Empréstimos emergenciais de até R$ 300\ncom possibilidade de recontratação.',
               image: loanFast.id,
               enableLink: true,
-              link: custom('Conhecer', '/credito-rapido/'),
+              link: link('Conhecer', '/credito-rapido/'),
             },
           ],
         },
@@ -235,7 +238,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           video: solutionsVideo.id,
           videoMobile: solutionsVideoMobile.id,
           enableSectionLink: true,
-          sectionLink: custom('Aproveitar soluções', '#solucoes-lista'),
+          sectionLink: link('Aproveitar soluções', '#solucoes-lista'),
           columns: '3' as const,
           items: [
             {
@@ -243,42 +246,42 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
               text: 'Parcele IPVA, licenciamento e multas em até 12x.',
               image: await solutionIcon('vehicle', 'Débitos Veiculares'),
               enableLink: true,
-              link: custom('Débitos Veiculares', '/debitos-veiculares/'),
+              link: link('Débitos Veiculares', '/debitos-veiculares/'),
             },
             {
               title: 'Uber Conta Desconto',
               text: 'Compre com descontos em grandes marcas.',
               image: await solutionIcon('discount', 'Uber Conta Desconto'),
               enableLink: true,
-              link: custom('Descontos', '/descontos/'),
+              link: link('Descontos', '/descontos/'),
             },
             {
               title: 'Uber Chip',
               text: 'Planos de 14GB a 55GB a partir de R$ 20, com apps liberados e bônus exclusivos.',
               image: await solutionIcon('chip', 'Uber Chip'),
               enableLink: true,
-              link: custom('Uber Chip', '/uber-chip/'),
+              link: link('Uber Chip', '/uber-chip/'),
             },
             {
               title: 'Seguro Celular',
               text: 'Proteja seu aparelho de imprevistos por apenas R$ 29,90 ao mês.',
               image: await solutionIcon('security', 'Seguro Celular'),
               enableLink: true,
-              link: custom('Seguro Celular', '/seguro-celular/'),
+              link: link('Seguro Celular', '/seguro-celular/'),
             },
             {
               title: 'Tag Veloe',
               text: 'Adquira sua tag de pedágio por apenas R$ 8,90 ao mês.',
               image: await solutionIcon('tag', 'Tag Veloe'),
               enableLink: true,
-              link: custom('Tag Veloe', '/tag-veloe/'),
+              link: link('Tag Veloe', '/tag-veloe/'),
             },
             {
               title: 'Atendimento 24h',
               text: 'Conte com suporte via aplicativo ou telefone.',
               image: await solutionIcon('support', 'Atendimento 24h'),
               enableLink: true,
-              link: custom('Central de ajuda', '/central-de-ajuda/'),
+              link: link('Central de ajuda', '/central-de-ajuda/'),
             },
           ],
         },
@@ -287,14 +290,13 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           anchor: 'blog',
           populateBy: 'collection' as const,
           relationTo: 'posts' as const,
-          limit: 6,
+          limit: 10,
           variant: 'carousel' as const,
           eyebrow: 'Uber Blog',
-          feedUrl: 'https://medium.com/feed/@ubercontabrasil',
           introContent: richHeading('h2', 'Conteúdo\nrelevante\npara seu dia a dia'),
           enableMoreLink: true,
           moreLink: {
-            ...custom('Ir para o Blog', 'https://medium.com/@ubercontabrasil'),
+            ...link('Ir para o Blog', 'https://medium.com/@ubercontabrasil'),
             newTab: true,
           },
         },
@@ -311,7 +313,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           heading: 'Ficou com alguma dúvida?',
           faqs: faqs.map((faq) => faq.id),
           enableMoreLink: true,
-          moreLink: custom('Outras dúvidas', '/central-de-ajuda/'),
+          moreLink: link('Outras dúvidas', '/central-de-ajuda/'),
         },
       ],
       meta: {
@@ -332,7 +334,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
   const appStore = await upload('app-store.png', 'Baixar na App Store')
 
   const links = (...items: [string, string][]) =>
-    items.map(([label, url]) => ({ link: custom(label, url) }))
+    items.map(([label, url]) => ({ link: link(label, url) }))
 
   await payload.create({
     collection: 'header',
@@ -341,7 +343,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
     data: withTenant({
       logo: logoHeader.id,
       enableCta: true,
-      cta: custom('Abrir conta', APP_URL),
+      cta: link('Abrir conta', APP_URL),
       navItems: [
         {
           kind: 'mega' as const,
@@ -395,8 +397,8 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
             ],
           },
         },
-        { kind: 'link' as const, link: custom('Sobre', '/sobre/') },
-        { kind: 'link' as const, link: custom('Blog', '/blog/') },
+        { kind: 'link' as const, link: link('Sobre', '/sobre/') },
+        { kind: 'link' as const, link: link('Blog', '/blog/') },
         {
           // The current site shows a chevron on "Ajuda"; its panel content is a placeholder.
           kind: 'mega' as const,
@@ -473,7 +475,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           links: [
             {
               link: {
-                ...custom(
+                ...link(
                   'Baixar na Google Play',
                   'https://play.google.com/store/apps/details?id=br.com.digio.uber',
                 ),
@@ -483,7 +485,7 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
             },
             {
               link: {
-                ...custom(
+                ...link(
                   'Baixar na App Store',
                   'http://apps.apple.com/us/app/uber-conta/id1550784531',
                 ),

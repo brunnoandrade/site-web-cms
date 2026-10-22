@@ -139,13 +139,16 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
     <header className="fixed inset-x-0 top-4 z-50 px-3" ref={rootRef}>
       {/* Bar width = container (1140px at most) minus its 12px gutters. */}
       <div
-        className={cn(
-          'mx-auto max-w-[calc(1140px-1.5rem)] bg-[#282828]/70 text-white backdrop-blur-[7px] backdrop-brightness-110 backdrop-saturate-[1.8]',
-          openMega === null ? 'rounded-[2rem]' : 'rounded-t-[2rem] rounded-b-2xl',
-        )}
+        className="mx-auto max-w-[calc(1140px-1.5rem)] text-white"
         onPointerLeave={(event) => event.pointerType === 'mouse' && setOpenMega(null)}
       >
-        <div className="flex h-[65px] items-center px-[0.7rem] min-[992px]:h-[60px]">
+        {/* Bar 70% opaque, mega panel 90%, each with its own backdrop (as the original). */}
+        <div
+          className={cn(
+            'flex h-[65px] items-center bg-[#282828]/70 px-[0.7rem] min-[992px]:h-[60px] backdrop-blur-[7px] backdrop-brightness-110 backdrop-saturate-[1.8]',
+            openMega === null ? 'rounded-[2rem]' : 'rounded-t-[2rem]',
+          )}
+        >
           <Link
             aria-label={`${siteName}, página inicial`}
             className="relative ml-4 mt-[0.6px] shrink-0"
@@ -198,6 +201,7 @@ export const HeaderClient: React.FC<Props> = ({ data, siteName }) => {
           {cta && (
             <CMSLink
               {...cta}
+              newTab
               appearance="inline"
               className={cn(ctaClass, 'ml-auto min-[992px]:ml-0')}
             />
@@ -377,7 +381,7 @@ const MegaPanel = ({ id, item }: { id: string; item: NavItem }) => {
   return (
     <div
       aria-label={mega.label}
-      className="hidden border-t border-white/10 px-7 pb-10 pt-[31px] min-[992px]:grid min-[992px]:grid-cols-[337px_1fr] min-[992px]:gap-9"
+      className="hidden rounded-b-[2rem] bg-[#282828]/90 px-7 pb-10 pt-[31px] min-[992px]:grid min-[992px]:grid-cols-[337px_1fr] min-[992px]:gap-9 shadow-[0_4px_20px_#0003] backdrop-blur-[7px] backdrop-brightness-110 backdrop-saturate-[1.8]"
       id={id}
       role="region"
     >

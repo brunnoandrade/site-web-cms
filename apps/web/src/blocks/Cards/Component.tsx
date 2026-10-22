@@ -99,7 +99,11 @@ const ProductCard: React.FC<{ item: Item }> = ({ item }) => (
   </CardLink>
 )
 
-const IconCard: React.FC<{ item: Item; dark: boolean }> = ({ item, dark }) => {
+const IconCard: React.FC<{ item: Item; dark: boolean; related?: boolean }> = ({
+  item,
+  dark,
+  related,
+}) => {
   // Solutions on black (Uber Conta): translucent grey card, white on hover; spacing of the current site.
   const solution = dark && Boolean(item.image)
   return (
@@ -111,13 +115,14 @@ const IconCard: React.FC<{ item: Item; dark: boolean }> = ({ item, dark }) => {
         dark ? 'bg-navy-800 hover:bg-navy-700' : 'bg-lilac-50 hover:bg-lilac-100',
         solution &&
           'bg-[rgba(94,94,94,0.2)] text-white ease-[ease-in-out] hover:bg-white hover:text-black motion-reduce:transition-none',
+        related && 'min-h-[205px] min-[992px]:min-h-[270px]',
       )}
       item={item}
     >
       <div
         className={cn(
           'flex items-start justify-between',
-          solution ? 'mb-4 min-[992px]:mb-8 min-[992px]:mt-4' : 'mb-6 md:mb-8',
+          solution ? cn('mb-4 min-[992px]:mb-8', !related && 'min-[992px]:mt-4') : 'mb-6 md:mb-8',
         )}
       >
         {item.image ? (
@@ -134,7 +139,13 @@ const IconCard: React.FC<{ item: Item; dark: boolean }> = ({ item, dark }) => {
         )}
         {item.enableLink &&
           (item.image ? (
-            <ArrowRightIcon className={solution ? 'mt-[11px] w-[21px] max-md:mt-[5px]' : 'w-5'} />
+            <ArrowRightIcon
+              className={cn(
+                solution ? 'mt-[11px] w-[21px] max-md:mt-[5px]' : 'w-5',
+                // "Mais soluções pra você": the arrow only shows under 992px.
+                related && 'min-[992px]:hidden',
+              )}
+            />
           ) : (
             <ArrowUpRight aria-hidden className="size-5 opacity-80" />
           ))}
@@ -143,7 +154,10 @@ const IconCard: React.FC<{ item: Item; dark: boolean }> = ({ item, dark }) => {
         className={cn(
           'font-semibold',
           solution
-            ? 'mb-2 text-[calc(1.275rem+0.3vw)] leading-none max-md:text-base max-md:font-medium min-[1200px]:text-2xl'
+            ? cn(
+                'mb-2 text-[calc(1.275rem+0.3vw)] leading-none max-md:text-base max-md:font-medium min-[1200px]:text-2xl',
+                related && 'mt-auto',
+              )
             : 'md:text-lg',
         )}
         data-slot="icon-card-title"
@@ -154,7 +168,13 @@ const IconCard: React.FC<{ item: Item; dark: boolean }> = ({ item, dark }) => {
         <p
           className={cn(
             'font-[var(--weight-support,400)]',
-            solution ? 'm-0 text-base min-[992px]:min-h-[50px]' : 'mt-1 text-sm opacity-80',
+            solution
+              ? cn(
+                  'm-0 text-base',
+                  // In the "related" cards (flex column) the title margin and the text margin add up.
+                  related ? 'mt-2 min-h-[75px]' : 'min-[992px]:min-h-[50px]',
+                )
+              : 'mt-1 text-sm opacity-80',
           )}
           data-slot="icon-card-text"
         >
@@ -179,7 +199,7 @@ const SimpleCard: React.FC<{ item: Item }> = ({ item }) => (
 )
 
 /** Text with line breaks from the CMS; `hideBelow` is the class that hides the break on small screens. */
-const Lines: React.FC<{ text: string; hideBelow: string }> = ({ text, hideBelow }) => {
+const Lines: React.FC<{ text: string; hideBelow?: string }> = ({ text, hideBelow }) => {
   const lines = text.split('\n')
   return (
     <>
@@ -274,8 +294,16 @@ const BenefitsSection: React.FC<CardsBlockProps> = ({
     <div className="container">
       {(heading || intro) && (
         <div className="mb-8 min-[992px]:mb-16 min-[992px]:text-center">
-          {heading && <SectionHeading>{heading}</SectionHeading>}
-          {intro && <p className="mb-0 mt-4 font-light text-[#4b4b4b]">{intro}</p>}
+          {heading && (
+            <SectionHeading>
+              <Lines text={heading} />
+            </SectionHeading>
+          )}
+          {intro && (
+            <p className="mb-0 mt-4 font-light text-[#4b4b4b]">
+              <Lines text={intro} />
+            </p>
+          )}
         </div>
       )}
       <div className="flex flex-wrap gap-4 min-[992px]:flex-nowrap">
@@ -307,7 +335,14 @@ const BenefitsSection: React.FC<CardsBlockProps> = ({
             </div>
           )
         )}
-        <Strip className="flex-1" itemClassName="min-[992px]:w-[calc((100%-2rem)/3)]">
+        <Strip
+          autoplayMs={3000}
+          className="flex-1"
+          controlsClassName="min-[992px]:!mt-12 min-[992px]:-translate-x-[193px]"
+          gapClassName="gap-4 min-[992px]:gap-5"
+          itemClassName="min-[992px]:w-[calc((100%-40px)/3)]"
+          primaryControls
+        >
           {[
             ...(items ?? []).map((item, i) => (
               <div
@@ -327,9 +362,14 @@ const BenefitsSection: React.FC<CardsBlockProps> = ({
                     key="cta"
                     {...sectionLink}
                     appearance="inline"
-                    className="flex h-full min-h-[215px] flex-col items-start justify-end rounded-2xl bg-black p-6 text-xl font-semibold text-white transition-colors hover:bg-[#276ef1] max-[991px]:hidden min-[992px]:min-h-[370px]"
+                    className="flex h-full min-h-[215px] flex-col items-start rounded-2xl bg-black p-6 text-white transition-all duration-200 ease-[ease-in-out] hover:bg-[#276ef1] max-[991px]:hidden min-[992px]:min-h-[370px]"
+                    label={null}
                   >
-                    <ArrowRightIcon className="mt-4 size-[15px]" />
+                    {/* Arrow on top, label at the bottom (the current site's "item button"). */}
+                    <ArrowRightIcon className="shrink-0" />
+                    <span className="mb-0 mt-auto text-xl font-semibold leading-[1.3]">
+                      {sectionLink.label}
+                    </span>
                   </CMSLink>,
                 ]
               : []),
@@ -402,7 +442,11 @@ const CardsBlockView: React.FC<CardsBlockProps> = ({
         <div className="container">
           {(heading || intro) && (
             <div className="text-left min-[992px]:text-center">
-              {heading && <SectionHeading>{heading}</SectionHeading>}
+              {heading && (
+                <SectionHeading>
+                  <Lines text={heading} />
+                </SectionHeading>
+              )}
               {intro && (
                 <p
                   className={cn(
@@ -458,32 +502,53 @@ const CardsBlockView: React.FC<CardsBlockProps> = ({
         theme={theme}
       >
         <div className="max-[991px]:bg-[image:var(--bg-m)] max-[991px]:bg-no-repeat max-[991px]:[background-position:calc(50%+69px)_-363px] max-[991px]:[background-size:874px_auto]">
-          <div className="container flex min-h-[42rem] flex-col pb-10 pt-16 min-[992px]:min-h-[35rem] min-[992px]:items-center min-[992px]:text-center">
-            {heading && <SectionHeading className="text-white">{heading}</SectionHeading>}
-            {intro && <p className="mb-0 mt-4 font-light text-white">{intro}</p>}
+          <div className="container flex flex-col items-start pb-10 pt-16 min-[992px]:items-center min-[992px]:pb-16 min-[992px]:text-center">
+            {heading && (
+              <SectionHeading className="mb-4 text-white">
+                <Lines text={heading} />
+              </SectionHeading>
+            )}
+            {intro && (
+              <p className="m-0 mb-4 font-light text-white">
+                <Lines text={intro} />
+              </p>
+            )}
+            {/* 26rem of air between the text and the button: the photo behind it shows through. */}
             {enableSectionLink && sectionLink && (
               <CMSLink
                 {...sectionLink}
                 appearance="inverse"
-                className="mt-auto w-full min-[992px]:w-fit"
+                className="mb-8 mt-[26rem] w-full min-[992px]:w-fit"
                 size="lg"
               >
                 <ArrowRightIcon className="size-[15px]" />
               </CMSLink>
             )}
-            {legend && <p className="mb-0 mt-4 text-sm text-white/80">{legend}</p>}
+            {legend && (
+              <small className="m-0 block text-sm font-light leading-[1.5] text-white/70">
+                {legend}
+              </small>
+            )}
           </div>
         </div>
         <div className="container">
           {listHeading && (
-            <h3 className="mb-8 mt-4 text-2xl font-semibold text-white min-[992px]:mb-8 min-[992px]:mt-20 min-[992px]:text-center min-[992px]:text-[2rem]">
+            <h3 className="mb-8 mt-4 text-xl font-semibold leading-[1.3] text-white min-[992px]:mt-20 min-[992px]:text-center min-[992px]:text-[2rem]">
               {listHeading}
             </h3>
           )}
-          <Strip itemClassName="min-[992px]:w-[calc((100%-3rem)/4)]" mobileScroll tone="light">
+          <Strip
+            gapClassName="gap-[15px] min-[768px]:gap-[14px] min-[992px]:gap-5"
+            className="-mx-[0.7rem] max-[767px]:pl-[15px] min-[992px]:mx-0"
+            itemClassName="min-[768px]:w-[calc((100%-14px)/2)] min-[992px]:w-[calc((100%-60px)/4)]"
+            mobileItemClassName="w-[283px]"
+            mobileScroll
+            primaryControls
+            tone="light"
+          >
             {(items ?? []).map((item, i) => (
-              <div key={item.id ?? i} className="h-full min-[992px]:min-h-[270px]">
-                <IconCard dark item={item} />
+              <div key={item.id ?? i} className="h-full">
+                <IconCard dark item={item} related />
               </div>
             ))}
           </Strip>
@@ -517,7 +582,11 @@ const CardsBlockView: React.FC<CardsBlockProps> = ({
             )}
           >
             <div className={cn(videoSrc && 'relative z-[5] max-w-xl')}>
-              {heading && <SectionHeading>{heading}</SectionHeading>}
+              {heading && (
+                <SectionHeading>
+                  <Lines text={heading} />
+                </SectionHeading>
+              )}
               {intro && (
                 <p
                   className={cn(

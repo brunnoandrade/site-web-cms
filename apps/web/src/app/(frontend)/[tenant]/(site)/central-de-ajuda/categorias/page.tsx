@@ -9,6 +9,7 @@ import {
   getCategoryGroups,
   getHelpCategory,
   getHelpPage,
+  helpIndexHref,
   helpIndexLabel,
   isUberHelp,
 } from '@/lib/uber-help'
@@ -24,7 +25,7 @@ export default async function HelpCategoryPage({ params, searchParams }: Args) {
   const tenant = await requireTenant((await params).tenant)
   if (!isUberHelp(tenant)) notFound()
   const { slug } = await searchParams
-  if (!slug) redirect('/central-de-ajuda/')
+  if (!slug) redirect(helpIndexHref)
 
   const [category, page] = await Promise.all([
     getHelpCategory(tenant.slug, slug),
@@ -38,8 +39,8 @@ export default async function HelpCategoryPage({ params, searchParams }: Args) {
       {page && <RenderHero {...page.hero} />}
       <div className="bg-[#f3f3f3]">
         <HelpBackBar
-          back="/central-de-ajuda/"
-          items={[{ label: helpIndexLabel, href: '/central-de-ajuda/' }, { label: category.title }]}
+          back={helpIndexHref}
+          items={[{ label: helpIndexLabel, href: helpIndexHref }, { label: category.title }]}
         />
       </div>
       <CategoryGroups category={category} groups={groups} />
@@ -52,7 +53,9 @@ export async function generateMetadata({ params, searchParams }: Args): Promise<
   const { slug } = await searchParams
   const category = slug && isUberHelp(tenant) ? await getHelpCategory(tenant.slug, slug) : null
   return {
-    title: category ? `${category.title} | Central de Ajuda | ${tenant.name}` : `Central de Ajuda | ${tenant.name}`,
+    title: category
+      ? `${category.title} | Central de Ajuda | ${tenant.name}`
+      : `Central de Ajuda | ${tenant.name}`,
     description: category?.description ?? undefined,
   }
 }

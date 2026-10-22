@@ -19,30 +19,29 @@ export const StepsList: React.FC<{ items: Items }> = ({ items }) => {
 
   return (
     <>
-      <div className="max-[991px]:hidden min-[992px]:col-span-5 min-[1200px]:col-span-4">
-        {/* Some screens already include the phone frame (wider files, e.g. the WhatsApp one): no second frame. */}
-        {typeof current?.image === 'object' && (current.image?.width ?? 0) > 400 ? (
+      {/* Desktop: the phone mockup of the current site (440x780 image) with the app screen inside it:
+          -30px / -120px offsets and 35px / 60px padding, like its CSS. The column is 750px tall. */}
+      <div className="max-[991px]:hidden min-[992px]:col-span-5 min-[992px]:h-[750px] min-[1200px]:col-span-4">
+        {/* The phone mockup (440px box, as in the current site's CSS: -30px / -120px offsets). With the
+            short title text on the left, that offset puts the phone midway between the text and the steps;
+            centering it on the grid column would push it toward the steps. */}
+        <div className="-ml-[120px] -mt-[30px] h-[780px] w-[440px] bg-[url('/brand/uber-conta-phone-mockup.png')] bg-no-repeat pl-[60px] pt-[35px]">
           <Picture
-            alt={current.image?.alt ?? ''}
-            className="mx-auto block h-auto w-[440px] max-w-none"
-            image={current.image}
+            alt={typeof current?.image === 'object' ? (current.image?.alt ?? '') : ''}
+            className="mx-auto block h-auto w-[288px] rounded-[40px]"
+            image={current?.image as never}
           />
-        ) : (
-          <div className="mx-auto my-6 w-[320px] overflow-hidden rounded-[3rem] border-[10px] border-[#2a2a2a] bg-black p-0 shadow-[0_30px_60px_rgba(255,255,255,0.06)]">
-            <Picture
-              alt={typeof current?.image === 'object' ? (current.image?.alt ?? '') : ''}
-              className="block h-[620px] w-full object-cover object-top"
-              image={current?.image as never}
-            />
-          </div>
-        )}
+        </div>
       </div>
 
-      <ul className="m-0 list-none p-0 [counter-reset:step] max-[991px]:grid max-[991px]:-mt-6 min-[992px]:col-span-7 min-[1200px]:col-span-4">
+      <ul className="m-0 list-none p-0 [counter-reset:step] max-[991px]:grid max-[991px]:-mt-6 min-[992px]:col-span-7 min-[1200px]:col-span-4 min-[992px]:-mt-6">
         {items.map((item, i) => {
           const open = i === active
           return (
-            <li className={cn('max-[991px]:[grid-area:1/1]', !open && 'max-[991px]:invisible')} key={item.id ?? i}>
+            <li
+              className={cn('max-[991px]:[grid-area:1/1]', !open && 'max-[991px]:invisible')}
+              key={item.id ?? i}
+            >
               <div
                 className={cn(
                   'p-4 text-white transition-all duration-200 motion-reduce:transition-none min-[992px]:cursor-pointer min-[992px]:border-b min-[992px]:border-white/20 min-[992px]:px-0 max-[991px]:px-1',
@@ -63,16 +62,16 @@ export const StepsList: React.FC<{ items: Items }> = ({ items }) => {
                 </div>
                 <h4
                   className={cn(
-                    'm-0 text-2xl font-medium before:mb-2 before:block before:text-[140%] before:opacity-70 before:content-[counter(step,decimal-leading-zero)_"."] [counter-increment:step] min-[992px]:before:mb-1 min-[992px]:before:text-2xl',
-                    open
-                      ? 'min-[992px]:text-2xl'
-                      : 'min-[992px]:text-base min-[992px]:font-light min-[992px]:before:text-2xl',
+                    'mb-2 mt-0 text-2xl font-medium leading-[1.3] before:mb-2 before:block before:text-[140%] before:opacity-70 before:content-[counter(step,decimal-leading-zero)_"."] [counter-increment:step] ',
+                    open ? 'min-[992px]:text-2xl' : 'min-[992px]:text-base min-[992px]:font-light',
                   )}
                 >
                   {item.title}
                 </h4>
                 {item.text && (
-                  <p className={cn('mb-0 mt-2 font-light text-white', !open && 'min-[992px]:hidden')}>
+                  <p
+                    className={cn('mb-0 mt-2 font-light text-white', !open && 'min-[992px]:hidden')}
+                  >
                     {item.text}
                   </p>
                 )}

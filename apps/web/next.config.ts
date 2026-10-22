@@ -38,10 +38,10 @@ const nextConfig: NextConfig = {
   },
   headers: async () => [{ source: '/:path*', headers: securityHeaders }],
   reactStrictMode: true,
-  // Current site URLs end with '/'; keep them identical to avoid redirects and SEO loss.
-  trailingSlash: true,
-  // The proxy adds the trailing slash itself, after answering redirects, so an old URL
-  // without "/" is redirected in one hop (src/proxy.ts).
+  // The trailing slash is a per-property policy (tenant `trailingSlash`, see lib/urlPolicy.ts and
+  // packages/routes), answered by the proxy. Next must not impose one: with `trailingSlash: true`
+  // it would also add "/" to every canonical URL, even for properties whose URLs have none.
+  trailingSlash: false,
   skipTrailingSlashRedirect: true,
   // Self-contained server bundle for the Docker image (see Dockerfile).
   output: 'standalone',

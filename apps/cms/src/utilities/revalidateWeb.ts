@@ -1,3 +1,4 @@
+import { withStyle } from '@digio/routes'
 import type { PayloadRequest } from 'payload'
 
 import { getWebInternalURL } from './getURL'
@@ -63,7 +64,8 @@ export const revalidateWeb = async ({
     }
 
     const body = {
-      paths: paths.map((path) => `/${tenantSlug}${path}`),
+      // The site renders every page under an internal path with a trailing slash.
+      paths: paths.map((path) => `/${tenantSlug}${withStyle(path)}`),
       tags: tags.map((tag) => `${tenantSlug}:${tag}`),
     }
 

@@ -54,7 +54,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
           <div className="flex items-center gap-2">
             {data?.enableCta && data.cta && (
-              <CMSLink {...data.cta} appearance="accent" size="sm" />
+              <CMSLink {...data.cta} newTab appearance="accent" size="sm" />
             )}
             <button
               aria-controls={panelId}

@@ -67,8 +67,8 @@ def asset(media):
             tmp = path + '.svg'
             open(tmp, 'wb').write(raw)
             w, h = media.get('width') or 1, media.get('height') or 1
-            # Icons become 96px squares; wide logos keep their proportions (480px wide).
-            resize = "resize(480)" if w / h > 1.4 else "resize(96,96,{fit:'contain',background:{r:0,g:0,b:0,alpha:0}})"
+            # Icons become 96px squares; wide logos keep their proportions (1200px wide, sharp when scaled up).
+            resize = "resize(1200)" if w / h > 1.4 else "resize(96,96,{fit:'contain',background:{r:0,g:0,b:0,alpha:0}})"
             subprocess.run(['node', '-e', "require('sharp')(process.argv[1],{density:384})." + resize + ".png().toFile(process.argv[2])", tmp, path], check=True, cwd=os.path.join(HERE, '../..'))
             os.remove(tmp)
         else:
@@ -159,9 +159,9 @@ def build_documents(slug):
 
 
 def no_br(o):
-    """Product pages: the editors used <br> inside plain texts; the platform wraps by itself."""
+    """Product pages: <br> inside plain texts becomes a line break (rendered by Lines)."""
     if isinstance(o, str):
-        return re.sub(r'\s*<br\s*/?>\s*', ' ', o) if not o.startswith('<p') and not o.startswith('<ol') and not o.startswith('<ul') else o
+        return re.sub(r'\s*<br\s*/?>\s*', '\n', o) if not o.startswith('<p') and not o.startswith('<ol') and not o.startswith('<ul') else o
     if isinstance(o, list):
         return [no_br(x) for x in o]
     if isinstance(o, dict):
@@ -194,7 +194,8 @@ def build(slug):
         elif kind == 'acquire':
             steps = []
             for i in c['items']:
-                img, mob = pair(i.get('image_desktop'), i.get('image_mobile'))
+                # Steps: image_desktop is always the desktop one (the mobile crop can be wider, e.g. FGTS).
+                img, mob = asset(i.get('image_desktop')), asset(i.get('image_mobile'))
                 steps.append({'title': i['title'], 'text': i.get('description'), 'image': img, 'imageMobile': mob})
             out['steps'] = {'heading': c['title'], 'text': c.get('description'), 'button': c.get('button_text'), 'buttonUrl': c.get('button_url'), 'items': steps}
         elif kind == 'increase':
@@ -211,7 +212,7 @@ def build(slug):
         elif kind == 'related-solution':
             img, mob = pair(c.get('image_desktop'), c.get('image_mobile'))
             out['related'] = {'heading': c['title'], 'text': c.get('description'), 'legend': c.get('text'), 'button': c.get('button_text'), 'buttonUrl': c.get('button_url'), 'image': img, 'imageMobile': mob,
-                              'items': [{'title': i['title'], 'text': i.get('description'), 'icon': asset(i.get('icon')), 'url': i['url']} for i in c['items'] if i['url'].strip('/') != slug]}
+                              'items': [{'title': i['title'], 'text': i.get('description'), 'icon': asset(i.get('icon')), 'url': i['url']} for i in c['items']]}
         else:
             print('  unknown component', kind, file=sys.stderr)
     return no_br(out)

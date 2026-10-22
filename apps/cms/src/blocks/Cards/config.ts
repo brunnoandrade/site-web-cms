@@ -51,7 +51,12 @@ export const Cards: Block = {
       ],
     },
     sectionTheme(),
-    { name: 'heading', label: t('Título da seção', 'Section heading'), type: 'text' },
+    {
+      name: 'heading',
+      label: t('Título da seção', 'Section heading'),
+      type: 'textarea',
+      admin: { rows: 2, description: t('Enter cria uma quebra de linha.', 'Enter adds a line break.') },
+    },
     { name: 'intro', label: t('Texto de apoio', 'Intro text'), type: 'textarea' },
     {
       name: 'video',

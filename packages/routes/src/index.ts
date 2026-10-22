@@ -2,7 +2,10 @@
  * Public URLs of the website. Used by the CMS (automatic redirects, preview, SEO) and by the
  * website (links), so both always agree on where a document lives.
  *
- * Every page URL ends with "/" (the current site's URLs do, see trailingSlash in apps/web).
+ * By default every page URL ends with "/" and blog posts live under their category (WordPress
+ * structure). A property can choose another policy with a `UrlStyle` (tenant fields
+ * `trailingSlash` and `blogUrlStyle`), so a cutover keeps the URLs of the site being replaced:
+ * see `paths(style)`.
  */
 
 export type RoutableCollection = 'pages' | 'posts'
@@ -117,3 +120,75 @@ export const normalizePath = (input: string): string => {
 }
 
 export { hrefValidationMessage, isSafeHref } from './safeHref'
+
+// ---- URL policy per property ---------------------------------------------------------------
+
+/** How a property writes its URLs. The defaults are the Digio ones. */
+export type UrlStyle = {
+  /** "/pix/" (true, default) or "/pix" (false). The other form redirects. */
+  trailingSlash?: boolean
+  /** Posts at "/blog/<post>", category filter in "?categoria=", pages in "?page=". */
+  flatPosts?: boolean
+}
+
+type TenantUrlFields = {
+  trailingSlash?: boolean | null
+  blogUrlStyle?: string | null
+} | null | undefined
+
+/** The URL policy stored in a tenant document. */
+export const urlStyleOf = (tenant: TenantUrlFields): UrlStyle => ({
+  trailingSlash: tenant?.trailingSlash !== false,
+  flatPosts: tenant?.blogUrlStyle === 'flat',
+})
+
+/**
+ * Writes a path in the property's form: trailing slash added or removed (the root, file paths
+ * and the query string are left alone). Accepts a path with a query string.
+ */
+export const withStyle = (path: string, style: UrlStyle = {}): string => {
+  // Full URLs (https:, mailto:, //host) are not ours to rewrite.
+  if (/^([a-z][a-z0-9+.-]*:|\/\/)/i.test(path)) return path
+  const [pathname = '', ...rest] = path.split('?')
+  const query = rest.length ? `?${rest.join('?')}` : ''
+  if (pathname === '' || pathname === '/' || isFilePath(pathname) || pathname.startsWith('#')) {
+    return path
+  }
+  const trimmed = pathname.replace(/\/+$/, '')
+  return `${style.trailingSlash === false ? trimmed : `${trimmed}/`}${query}`
+}
+
+/** Every public URL of a property, in its own form. */
+export const paths = (style: UrlStyle = {}) => {
+  const s = (path: string) => withStyle(path, style)
+  const flat = style.flatPosts === true
+  const blogQuery = (pageNumber?: number, categorySlug?: string) => {
+    const params = new URLSearchParams()
+    if (categorySlug) params.set('categoria', categorySlug)
+    if (pageNumber && pageNumber > 1) params.set('page', String(pageNumber))
+    const query = params.toString()
+    return query ? `/blog?${query}` : '/blog'
+  }
+  const post = (categorySlug: string, slug: string) =>
+    flat ? s(`/blog/${slug}`) : s(postPath(categorySlug, slug))
+
+  return {
+    page: (slug?: string | null) => s(pagePath(slug)),
+    blogIndex: () => s(blogIndexPath),
+    blogCategory: (categorySlug: string) =>
+      flat ? blogQuery(1, categorySlug) : s(blogCategoryPath(categorySlug)),
+    blogPage: (pageNumber: number, categorySlug?: string) =>
+      flat ? blogQuery(pageNumber, categorySlug) : s(blogPagePath(pageNumber, categorySlug)),
+    post,
+    helpIndex: () => s(helpIndexPath),
+    helpTopic: (topicSlug: string) => s(helpTopicPath(topicSlug)),
+    helpQuestion: (topicSlug: string, questionSlug: string) =>
+      s(helpQuestionPath(topicSlug, questionSlug)),
+    /** Public URL of a page or post; posts need their category populated (null without it). */
+    document: (collection: RoutableCollection, doc: RoutableDoc): string | null => {
+      if (collection === 'pages') return s(pagePath(doc.slug))
+      const categorySlug = categorySlugOf(doc.category)
+      return categorySlug && doc.slug ? post(categorySlug, doc.slug) : null
+    },
+  }
+}

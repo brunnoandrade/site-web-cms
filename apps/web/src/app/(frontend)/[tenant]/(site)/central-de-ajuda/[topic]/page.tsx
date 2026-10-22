@@ -7,7 +7,15 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 import RichText from '@/components/RichText'
 import { QuestionArticle, HelpBackBar } from '@/components/UberHelp'
 import { requireHelpTopic, topicQuestions } from '@/lib/help'
-import { categoryPath, getCategoryFaqs, getFaq, helpIndexLabel, isUberHelp } from '@/lib/uber-help'
+import {
+  categoryPath,
+  getCategoryFaqs,
+  getFaq,
+  helpIndexHref,
+  helpIndexLabel,
+  isUberHelp,
+  questionPath,
+} from '@/lib/uber-help'
 import { notFound } from 'next/navigation'
 import { requireTenant } from '@/lib/tenant'
 
@@ -34,9 +42,9 @@ export default async function HelpTopicPage({ params }: Args) {
     return (
       <>
         <HelpBackBar
-          back={category ? categoryPath(category.slug!) : '/central-de-ajuda/'}
+          back={category ? categoryPath(category.slug!) : helpIndexHref}
           items={[
-            { label: helpIndexLabel, href: '/central-de-ajuda/' },
+            { label: helpIndexLabel, href: helpIndexHref },
             ...(category ? [{ label: category.title, href: categoryPath(category.slug!) }] : []),
             { label: faq.question },
           ]}
@@ -89,7 +97,7 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
     return {
       title: faq ? `${faq.question} | Central de Ajuda | ${tenant.name}` : undefined,
       alternates: {
-        canonical: `${tenant.siteUrl}/central-de-ajuda/${decodeURIComponent(topicSlug)}/`,
+        canonical: `${tenant.siteUrl}${questionPath(decodeURIComponent(topicSlug))}`,
       },
     }
   }

@@ -6,7 +6,7 @@ import React from 'react'
 import { HelpBackBar, QuestionList } from '@/components/UberHelp'
 import { RenderHero } from '@/heros/RenderHero'
 import { requireTenant } from '@/lib/tenant'
-import { getHelpPage, helpIndexLabel, isUberHelp, searchFaqs } from '@/lib/uber-help'
+import { getHelpPage, helpIndexHref, helpIndexLabel, isUberHelp, searchFaqs } from '@/lib/uber-help'
 
 type Args = {
   params: Promise<{ tenant: string }>
@@ -27,8 +27,8 @@ export default async function HelpSearchPage({ params, searchParams }: Args) {
       {page && <RenderHero {...page.hero} />}
       <div className="bg-[#f3f3f3]">
         <HelpBackBar
-          back="/central-de-ajuda/"
-          items={[{ label: helpIndexLabel, href: '/central-de-ajuda/' }, { label: 'Busca' }]}
+          back={helpIndexHref}
+          items={[{ label: helpIndexLabel, href: helpIndexHref }, { label: 'Busca' }]}
         />
       </div>
       <section className="bg-[#f3f3f3] pb-24">
@@ -38,8 +38,8 @@ export default async function HelpSearchPage({ params, searchParams }: Args) {
           </h1>
           {query && results.length === 0 && (
             <p className="font-light text-[#4b4b4b]">
-              Não encontramos nenhuma pergunta com esses termos. Tente outras palavras ou escolha uma
-              categoria na <Link href="/central-de-ajuda/">Central de Ajuda</Link>.
+              Não encontramos nenhuma pergunta com esses termos. Tente outras palavras ou escolha
+              uma categoria na <Link href={helpIndexHref}>Central de Ajuda</Link>.
             </p>
           )}
           {results.length > 0 && <QuestionList faqs={results} />}

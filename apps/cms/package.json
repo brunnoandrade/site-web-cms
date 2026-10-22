@@ -10,6 +10,7 @@
   "scripts": {
     "uber:home": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/update-uber-home.ts",
     "uber:pages": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/uber-pages.ts",
+    "urls:normalize": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/normalize-urls.ts",
     "uber:help": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/uber-help.ts",
     "uber:blog": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/uber-blog.ts",
     "blog:migrate": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/migrate-wordpress.ts",

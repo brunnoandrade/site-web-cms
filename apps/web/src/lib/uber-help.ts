@@ -10,8 +10,10 @@ import { find, findOne, type Tenant } from './cms'
 export const isUberConta = (tenant: Tenant) => tenant.themePreset === 'uber-conta'
 export const isUberHelp = isUberConta
 
-export const categoryPath = (slug: string) => `/central-de-ajuda/categorias/?slug=${slug}`
-export const questionPath = (slug: string) => `/central-de-ajuda/${slug}/`
+// The Uber Conta help center is written without the trailing slash, like the property's URLs.
+export const helpIndexHref = '/central-de-ajuda'
+export const categoryPath = (slug: string) => `/central-de-ajuda/categorias?slug=${slug}`
+export const questionPath = (slug: string) => `/central-de-ajuda/${slug}`
 
 /** The CMS page `central-de-ajuda`: hero (with the search box) and the blocks after the categories. */
 export const getHelpPage = cache(async (tenant: string) => {

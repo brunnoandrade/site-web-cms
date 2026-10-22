@@ -61,20 +61,20 @@
       {
         "title": "Toque em “Contratar via WhatsApp” e depois em “Simular contratação”",
         "text": "Digite o seu CPF, data de nascimento e nome completo, solicitação da assistente virtual.",
-        "image": "fgts_1_mobile_154f0a9a6f.png",
-        "imageMobile": "fgts_1_1b92860ab7.png"
+        "image": "fgts_1_1b92860ab7.png",
+        "imageMobile": "fgts_1_mobile_154f0a9a6f.png"
       },
       {
         "title": "Escolha o tipo de tutorial e siga o passo a passo do app FGTS",
         "text": "Depois disso é só ir em \"Já autorizei”.",
-        "image": "fgts_2_mobile_774b0fb1b0.png",
-        "imageMobile": "fgts_2_6ad36f70ea.png"
+        "image": "fgts_2_6ad36f70ea.png",
+        "imageMobile": "fgts_2_mobile_774b0fb1b0.png"
       },
       {
         "title": "Revise, aceite sua proposta e siga com a contratação",
         "text": "Preencha todos os dados do assistente virtual e confirme sua antecipação.",
-        "image": "fgts_3_mobile_6bbc8af1d7.png",
-        "imageMobile": "fgts_3_fca9d1e901.png"
+        "image": "fgts_3_fca9d1e901.png",
+        "imageMobile": "fgts_3_mobile_6bbc8af1d7.png"
       }
     ]
   },
@@ -158,6 +158,12 @@
         "text": "Compre com descontos e cashbacks em grandes marcas.",
         "icon": "store_16975c7fb1_4f99b9bd90.png",
         "url": "/descontos"
+      },
+      {
+        "title": "Antecipação do FGTS",
+        "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
+        "icon": "fgts_87e56198f7_334adeab8f.png",
+        "url": "/antecipacao-do-fgts"
       }
     ]
   }

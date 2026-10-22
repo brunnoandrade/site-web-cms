@@ -3,6 +3,7 @@ import React from 'react'
 import type { StepsBlock as StepsBlockProps } from '@digio/payload-types'
 
 import { ArrowRightIcon } from '@/components/ArrowRightIcon'
+import { Lines } from '@/components/Lines'
 import { CMSLink } from '@/components/Link'
 import { Section, SectionHeading } from '@/components/Section'
 
@@ -36,9 +37,15 @@ export const StepsBlock: React.FC<StepsBlockProps> = ({
     >
       <div className="container grid items-start gap-x-6 min-[992px]:grid-cols-12 min-[1200px]:grid-cols-12">
         <div className="mb-12 min-[992px]:col-span-12 min-[1200px]:col-span-4 min-[1200px]:mb-0">
-          <SectionHeading className="text-white">{heading}</SectionHeading>
-          {intro && <p className="mb-0 mt-4 font-light text-white">{intro}</p>}
-          {button && <div className="mt-8 max-[991px]:hidden">{button}</div>}
+          <SectionHeading className="text-white">
+            <Lines text={heading} />
+          </SectionHeading>
+          {intro && (
+            <p className="mb-0 mt-4 font-light text-white min-[992px]:mt-2">
+              <Lines text={intro} />
+            </p>
+          )}
+          {button && <div className="mt-6 max-[991px]:hidden">{button}</div>}
         </div>
         <StepsList items={items} />
       </div>

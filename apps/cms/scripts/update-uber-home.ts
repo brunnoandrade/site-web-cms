@@ -93,14 +93,15 @@ const blog = layout.find(
 if (blog) {
   blog.variant = 'carousel'
   blog.eyebrow = 'Uber Blog'
-  blog.feedUrl = 'https://medium.com/feed/@ubercontabrasil'
+  // The 10 latest posts of the blog (internal), like the current site; no Medium feed.
+  blog.feedUrl = null
   blog.moreLink = {
     type: 'custom',
     url: 'https://medium.com/@ubercontabrasil',
     label: 'Ir para o Blog',
     newTab: true,
   }
-  blog.limit = 6
+  blog.limit = 10
   blog.introContent = richHeading('h2', 'Conteúdo\nrelevante\npara seu dia a dia')
 }
 

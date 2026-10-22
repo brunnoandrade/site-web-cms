@@ -76,8 +76,16 @@ export const CoverHero: React.FC<Page['hero']> = ({
             <RichText
               className={cn(
                 half
-                  ? '!mx-auto [&_h1]:text-[calc(1.375rem+1.5vw)] min-[1200px]:[&_h1]:!text-[3rem]'
+                  ? cn(
+                      '!mx-auto',
+                      // Blog: the site's .display-2 (calc(1.575rem + 3.9vw), 4.5rem from 1200px), same on mobile.
+                      searchPlaceholder
+                        ? '[&_h1]:text-[calc(1.375rem+1.5vw)] min-[1200px]:[&_h1]:!text-[3rem]'
+                        : '[&_h1]:text-[calc(1.575rem+3.9vw)] min-[1200px]:[&_h1]:!text-[4.5rem]',
+                    )
                   : '!mx-0',
+                // Half hero tagline (.hero.half .tagline): #ddd, weight 500.
+                half && '[&_h6]:!font-medium [&_h6]:!text-[#ddd]',
                 'w-full [&_h1]:mb-2 [&_h1]:text-[calc(1.525rem+3.3vw)] [&_h1]:font-semibold [&_h1]:leading-none min-[1200px]:[&_h1]:text-[4rem] [&_h6]:mb-2 [&_h6]:text-[calc(1.275rem+0.3vw)] [&_h6]:font-semibold min-[1200px]:[&_h6]:text-2xl [&_h6]:leading-none max-md:[&_h6]:text-base max-md:[&_h6]:font-medium max-md:[&_h6]:!font-[family-name:var(--font-sans)] [&_p]:m-0 [&_p]:mt-4 max-md:[&_p]:mt-6 [&_p]:font-light [&_p]:leading-normal',
                 onLight
                   ? '[&_h1]:text-black [&_h6]:text-black [&_p]:text-[#4b4b4b]'
@@ -132,7 +140,7 @@ export const CoverHero: React.FC<Page['hero']> = ({
     <div className="relative mb-8">
       {hero}
       <form
-        action="/central-de-ajuda/busca/"
+        action="/central-de-ajuda/busca"
         className="absolute inset-x-0 bottom-0 z-[3] mx-auto w-[min(92%,46rem)] translate-y-1/2"
         role="search"
       >

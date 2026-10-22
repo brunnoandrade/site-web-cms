@@ -49,7 +49,7 @@
   },
   "steps": {
     "heading": "É rápido e fácil contratar",
-    "text": "Acesse seu aplicativo da Uber Conta e siga o passo a passo.",
+    "text": "Acesse seu aplicativo da Uber Conta e siga o\npasso a passo.",
     "button": "Quero contratar",
     "buttonUrl": "https://uberconta.onelink.me/asYc/otioz4u0",
     "items": [
@@ -167,6 +167,12 @@
         "text": "Receba a partir de 1 dia útil após a aprovação, com taxa de a partir 1,79% ao mês.",
         "icon": "fgts_87e56198f7_334adeab8f.png",
         "url": "/antecipacao-do-fgts"
+      },
+      {
+        "title": "Crédito Pessoal",
+        "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
+        "icon": "money_9aba18197b_9c900faffc.png",
+        "url": "/credito-pessoal"
       }
     ]
   }

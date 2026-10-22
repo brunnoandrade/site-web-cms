@@ -1,3 +1,5 @@
+import { withStyle } from '@digio/routes'
+
 import { custom } from './home'
 
 /**
@@ -196,12 +198,8 @@ export const heroRichText = (
     ]),
   }) as never
 
-/** Internal paths get a trailing slash (the site uses `trailingSlash`); anchors and URLs stay. */
-export const href = (url: string) => {
-  if (/^(https?:|mailto:|tel:|#)/.test(url)) return url
-  const [path, query] = url.split('?')
-  return (path.endsWith('/') ? path : `${path}/`) + (query ? `?${query}` : '')
-}
+/** Uber Conta writes its URLs without the trailing slash (tenant `trailingSlash` off). */
+export const href = (url: string) => withStyle(url, { trailingSlash: false })
 
 export type Ids = {
   media: (file: string) => number
@@ -284,8 +282,8 @@ export const buildProductPage = (page: ProductPage, ids: Ids) => {
       anchor: 'blog',
       populateBy: 'collection',
       relationTo: 'posts',
-      // The latest posts of the blog (3, like the current site); the home still reads Medium.
-      limit: 3,
+      // The 10 latest posts of the blog, newest first (the current site shows the same 10 everywhere).
+      limit: 10,
       variant: 'carousel',
       eyebrow: posts.eyebrow ?? undefined,
       introContent: richHeading('h2', posts.heading),

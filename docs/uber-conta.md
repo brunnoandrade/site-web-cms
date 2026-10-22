@@ -101,6 +101,22 @@ Estrutura diferente da Digio, por isso tem ramo próprio (`isUberConta`, tema `u
 - Imagens, vídeos e PDFs vêm do site em produção e são provisórios: usar os arquivos originais da Digio antes da virada.
 - Ajustes finos de tipografia, espaçamento e animações ficam para a revisão (combinado), página a página.
 
+## URLs e SEO na virada
+
+O Uber Conta mantém **os endereços do site atual**, sem redirect: o tenant tem `trailingSlash` desligado e `blogUrlStyle` "plana" (`bootstrap:dev` já cria assim; em um ambiente existente, mude no admin em Propriedades).
+
+| Item | Site atual e novo |
+|---|---|
+| Páginas | `/pix` (sem barra; `/pix/` responde 301 para `/pix`) |
+| Posts | `/blog/<post>` (sem categoria); `/blog/<categoria>/<post>/` responde 301 para `/blog/<post>` |
+| Blog | filtro `/blog?categoria=<categoria>`, páginas `/blog?page=2` (`/blog/page/2/` responde 301) |
+| Central de ajuda | `/central-de-ajuda`, `/central-de-ajuda/<pergunta>`, `/central-de-ajuda/categorias?slug=<categoria>` |
+| Canonical, sitemap e links internos | na mesma forma (função `pathsOf(tenant)`) |
+
+Como funciona: `apps/web/src/lib/urlPolicy.ts` (proxy) redireciona a forma não canônica; `packages/routes` (`paths(style)`) gera todos os links, canonicals e sitemaps; os redirects automáticos do CMS (troca de slug) já escrevem o destino na forma do tenant. Links digitados no admin (menu, rodapé, páginas) devem seguir a mesma forma; `npm run -w cms urls:normalize tenant=uber-conta [dry-run]` ajusta os existentes (os seeds já gravam sem barra).
+
+Conferência: as 96 URLs do sitemap do site atual respondem 200 direto (a única exceção é `/central-de-ajuda/categorias` sem `?slug=`, que redireciona para a central). Itens de SEO que ainda faltam (título, JSON-LD, robots, sitemap) estão no relatório de virada.
+
 ## Próximas etapas (propostas, uma por revisão)
 
 1. ~~**Cabeçalho com submenu** e logo por tenant~~ (feito; ver tabela).

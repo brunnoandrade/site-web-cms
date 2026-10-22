@@ -125,7 +125,7 @@
     "buttonUrl": "/central-de-ajuda"
   },
   "related": {
-    "heading": "Consulte IPVA, multas e licenciamentos e parcele agora!",
+    "heading": "Consulte IPVA, multas e\nlicenciamentos e parcele agora!",
     "text": "Todas as contas do seu carro em até 12x no cartão de crédito.",
     "legend": null,
     "button": "Consultar débitos",
@@ -144,6 +144,12 @@
         "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
         "icon": "money_9aba18197b_9c900faffc.png",
         "url": "/credito-pessoal"
+      },
+      {
+        "title": "Débitos Veiculares",
+        "text": "Parcele IPVA, licenciamento e multas em até 12x.",
+        "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
+        "url": "/debitos-veiculares"
       },
       {
         "title": "Uber Loja",

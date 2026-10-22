@@ -102,6 +102,35 @@ export const Tenants: CollectionConfig = {
       },
     },
     {
+      // URL policy of the property (see packages/routes). It must match the URLs of the site being
+      // replaced, so the cutover keeps every address and loses no indexing.
+      name: 'trailingSlash',
+      label: 'Barra no final da URL',
+      type: 'checkbox',
+      defaultValue: true,
+      admin: {
+        description:
+          'Ligado: /pix/ (a forma canônica; /pix redireciona). Desligado: /pix (e /pix/ redireciona). Use a forma do site que está sendo substituído.',
+      },
+    },
+    {
+      name: 'blogUrlStyle',
+      label: 'URL dos posts do blog',
+      type: 'select',
+      defaultValue: 'category',
+      options: [
+        { label: 'Com categoria: /blog/<categoria>/<post>/ (padrão WordPress)', value: 'category' },
+        {
+          label: 'Plana: /blog/<post>, filtro em ?categoria= e páginas em ?page=',
+          value: 'flat',
+        },
+      ],
+      admin: {
+        description:
+          'Plana mantém o endereço dos posts quando o site atual não usa categoria na URL. Mudar isso muda os endereços dos posts: confira com o time de SEO.',
+      },
+    },
+    {
       name: 'domains',
       label: 'Domínios',
       type: 'array',

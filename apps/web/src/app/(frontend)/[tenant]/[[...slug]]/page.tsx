@@ -1,7 +1,6 @@
 import type { Post } from '@digio/payload-types'
 import type { Metadata } from 'next'
 
-import { pagePath } from '@digio/routes'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import React, { cache } from 'react'
@@ -10,6 +9,7 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
+import { pathsOf } from '@/lib/urlStyle'
 import { generateMeta } from '@/utilities/generateMeta'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { getArchivePosts, pickedPosts } from '@/blocks/ArchiveBlock/data'
@@ -54,8 +54,8 @@ export default async function Page({ params: paramsPromise }: Args) {
     await Promise.all(
       layout.map(async (block) => {
         if (block.blockType !== 'archive' || !block.id) return
-        archivePosts[block.id] = await getArchivePosts({ ...block, tenant: tenant.slug }).catch(() =>
-          pickedPosts(block.selectedDocs),
+        archivePosts[block.id] = await getArchivePosts({ ...block, tenant: tenant.slug }).catch(
+          () => pickedPosts(block.selectedDocs),
         )
       }),
     )
@@ -85,7 +85,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const slug = toPageSlug(segments)
   const page = await queryPageBySlug({ tenant: tenant.slug, slug })
 
-  return generateMeta({ doc: page, tenant, path: pagePath(slug) })
+  return generateMeta({ doc: page, tenant, path: pathsOf(tenant).page(slug) })
 }
 
 const queryPageBySlug = cache(async ({ tenant, slug }: { tenant: string; slug: string }) => {

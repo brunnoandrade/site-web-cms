@@ -58,20 +58,20 @@
       {
         "title": "Selecione o plano ideal e toque em “Comprar Uber Chip",
         "text": "Confira os detalhes do plano antes de continuar.",
-        "image": "uber_chip_1_mobile_ea9dbd69e1.png",
-        "imageMobile": "uber_chip_1_bfb3fe2d9e.png"
+        "image": "uber_chip_1_bfb3fe2d9e.png",
+        "imageMobile": "uber_chip_1_mobile_ea9dbd69e1.png"
       },
       {
         "title": "Em “Identificação”, informe seus dados pessoais e endereço",
         "text": "Depois é só tocar em \"Continuar\".",
-        "image": "uber_chip_2_mobile_d4d346ba72.png",
-        "imageMobile": "uber_chip_2_1e3e06d445.png"
+        "image": "uber_chip_2_1e3e06d445.png",
+        "imageMobile": "uber_chip_2_mobile_d4d346ba72.png"
       },
       {
         "title": "Escolha como quer pagar, e vá em \"Finalizar”",
         "text": "Pronto! Seu Uber Chip foi solicitado com sucesso.",
-        "image": "uber_chip_3_mobile_c94c16f2c0.png",
-        "imageMobile": "uber_chip_3_373bb565a9.png"
+        "image": "uber_chip_3_373bb565a9.png",
+        "imageMobile": "uber_chip_3_mobile_c94c16f2c0.png"
       }
     ]
   },

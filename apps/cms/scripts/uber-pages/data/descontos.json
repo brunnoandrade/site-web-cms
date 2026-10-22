@@ -40,7 +40,7 @@
     ]
   },
   "steps": {
-    "heading": "Veja como acessar o cashback",
+    "heading": "Veja como\nacessar o\ncashback",
     "text": "Confira o passo a passo:",
     "button": "Quero conhecer",
     "buttonUrl": "https://uberconta.onelink.me/asYc/ubbkfbk5",
@@ -133,6 +133,12 @@
         "text": "Parcele IPVA, licenciamento e multas em até 12x.",
         "icon": "vehicle_464d5c7ed9_0dfda63b31.png",
         "url": "/debitos-veiculares"
+      },
+      {
+        "title": "Uber Loja",
+        "text": "Compre com descontos e cashbacks em grandes marcas.",
+        "icon": "store_16975c7fb1_4f99b9bd90.png",
+        "url": "/descontos"
       },
       {
         "title": "Antecipação do FGTS",

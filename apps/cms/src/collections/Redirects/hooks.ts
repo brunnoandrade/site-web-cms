@@ -9,12 +9,14 @@ import {
   isSafeHref,
   blogCategoryPath,
   categorySlugOf,
-  documentPath,
   normalizePath,
   parseHelpPath,
   parsePostPath,
+  paths,
   postPath,
+  urlStyleOf,
   type RoutableCollection,
+  type UrlStyle,
 } from '@digio/routes'
 
 import type { Redirect } from '@digio/payload-types'
@@ -30,6 +32,21 @@ const relationID = (value: unknown): TenantID | null => {
     value && typeof value === 'object' && 'id' in value ? (value as { id: unknown }).id : value
   const number = typeof id === 'string' ? Number(id) : id
   return typeof number === 'number' && Number.isFinite(number) ? number : null
+}
+
+/** URL policy of the tenant (trailing slash form, flat blog posts). */
+export const tenantUrlStyle = async (req: PayloadRequest, tenant: unknown): Promise<UrlStyle> => {
+  const id = relationID(tenant)
+  if (id === null) return urlStyleOf(null)
+  const doc = await req.payload.findByID({
+    collection: 'tenants',
+    id,
+    depth: 0,
+    overrideAccess: true,
+    req,
+    select: { trailingSlash: true, blogUrlStyle: true },
+  })
+  return urlStyleOf(doc)
 }
 
 export const tenantDomains = async (req: PayloadRequest, tenant: TenantID): Promise<string[]> => {
@@ -64,7 +81,7 @@ export const resolveDestinationPath = async (
       overrideAccess: true,
       req,
     })
-    return doc ? documentPath(relationTo, doc) : null
+    return doc ? paths(await tenantUrlStyle(req, tenant)).document(relationTo, doc) : null
   }
 
   return to.url ? customDestinationPath(to.url, await tenantDomains(req, tenant)) : null
@@ -77,10 +94,11 @@ export const resolveDestinationPath = async (
 export const routablePath = async (
   req: PayloadRequest,
   collection: RoutableCollection,
-  doc: { slug?: string | null; category?: unknown },
+  doc: { slug?: string | null; category?: unknown; tenant?: unknown },
 ): Promise<string | null> => {
+  const urls = paths(await tenantUrlStyle(req, doc.tenant))
   if (collection === 'pages' || categorySlugOf(doc.category as never)) {
-    return documentPath(collection, doc as never)
+    return urls.document(collection, doc as never)
   }
   const categoryID = relationID(doc.category)
   if (categoryID === null || !doc.slug) return null
@@ -93,7 +111,7 @@ export const routablePath = async (
     req,
     select: { slug: true },
   })
-  return category?.slug ? postPath(category.slug, doc.slug) : null
+  return category?.slug ? urls.post(category.slug, doc.slug) : null
 }
 
 /** Normalizes the source ("https://site/Foo?x" -> "/Foo/"). */
@@ -340,7 +358,10 @@ export const rememberPublishedPath =
       .catch(() => null)
 
     if (published?._status === 'published' && published.slug) {
-      const path = documentPath(collection, published)
+      const path = paths(await tenantUrlStyle(req, published.tenant)).document(
+        collection,
+        published,
+      )
       if (path) req.context[contextKey(collection, originalDoc.id)] = path
     }
     return data
@@ -380,6 +401,9 @@ export const redirectCategoryOnSlugChange: CollectionAfterChangeHook = async ({
   const oldSlug = previousDoc?.slug as string | undefined
   const tenant = relationID(doc.tenant)
   if (operation !== 'update' || !oldSlug || oldSlug === doc.slug || tenant === null) return doc
+
+  // With flat blog URLs the category is not part of any URL: nothing moves.
+  if ((await tenantUrlStyle(req, tenant)).flatPosts) return doc
 
   const { docs: posts } = await req.payload.find({
     collection: 'posts',

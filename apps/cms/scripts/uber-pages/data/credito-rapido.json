@@ -49,7 +49,7 @@
   },
   "steps": {
     "heading": "É rápido e fácil contratar",
-    "text": "Acesse seu aplicativo da Uber Conta e siga o passo a passo.",
+    "text": "Acesse seu aplicativo da Uber Conta e siga o\npasso a passo.",
     "button": "Quero contratar",
     "buttonUrl": "https://uberconta.onelink.me/asYc/otioz4u0",
     "items": [
@@ -153,6 +153,12 @@
         "text": "Receba até R$ 10 mil e pague em até 18x, com taxas a partir de 2,99% ao mês.",
         "icon": "money_9aba18197b_9c900faffc.png",
         "url": "/credito-pessoal"
+      },
+      {
+        "title": "Crédito Rápido",
+        "text": "Empréstimos emergenciais de até R$ 300,00.",
+        "icon": "sac_aec7fff918_e3b0322cdb.png",
+        "url": "/credito-rapido"
       }
     ]
   }

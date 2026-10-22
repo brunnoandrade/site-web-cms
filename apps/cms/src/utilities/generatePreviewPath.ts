@@ -25,7 +25,11 @@ export const generatePreviewPath = async ({ collection, slug, category, tenant, 
   }
 
   // Encode to support slugs with special characters
-  const path = await routablePath(req, collection, { slug: encodeURIComponent(slug), category })
+  const path = await routablePath(req, collection, {
+    slug: encodeURIComponent(slug),
+    category,
+    tenant,
+  })
   // A post without a category has no URL yet.
   if (!path) return null
 
