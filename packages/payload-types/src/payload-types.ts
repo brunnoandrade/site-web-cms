@@ -271,6 +271,10 @@ export interface Page {
      */
     image?: (number | null) | Media;
     description?: string | null;
+    /**
+     * Separadas por vírgula (meta keywords).
+     */
+    keywords?: string | null;
   };
   publishedAt?: string | null;
   /**
@@ -314,6 +318,18 @@ export interface Tenant {
    */
   blogUrlStyle?: ('category' | 'flat') | null;
   /**
+   * Anexado ao título de cada página no <title>. Ex.: " • Uber Conta". Vazio: " | <nome da propriedade>". Não vai para og:title nem twitter:title.
+   */
+  seoTitleSuffix?: string | null;
+  /**
+   * Usada em og:image e twitter:image quando a página não tem imagem própria (1200×630).
+   */
+  seoDefaultImage?: (number | null) | Media;
+  /**
+   * Servido em /llms.txt. Markdown: título (#), resumo (>), seções (##) com links "- [Nome](URL): descrição". Use {{siteUrl}} no lugar do endereço da propriedade. Vazio: /llms.txt não existe.
+   */
+  llmsTxt?: string | null;
+  /**
    * Hosts que respondem por esta propriedade (ex.: www.digio.com.br). Sem protocolo, porta ou caminho. Um domínio só pode pertencer a uma propriedade.
    */
   domains?:
@@ -324,56 +340,6 @@ export interface Tenant {
     | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: number;
-  tenant?: (number | null) | Tenant;
-  title: string;
-  heroImage?: (number | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  relatedPosts?: (number | Post)[] | null;
-  /**
-   * Defines the post URL: /blog/<category>/<slug>/. Changing the category of a published post creates the redirect automatically.
-   */
-  category: number | Category;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (number | Author)[] | null;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  wpId?: number | null;
-  wpModifiedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -471,6 +437,60 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  tenant?: (number | null) | Tenant;
+  title: string;
+  heroImage?: (number | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedPosts?: (number | Post)[] | null;
+  /**
+   * Defines the post URL: /blog/<category>/<slug>/. Changing the category of a published post creates the redirect automatically.
+   */
+  category: number | Category;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+    /**
+     * Separadas por vírgula (meta keywords).
+     */
+    keywords?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (number | Author)[] | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  wpId?: number | null;
+  wpModifiedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2008,6 +2028,7 @@ export interface PagesSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
+        keywords?: T;
       };
   publishedAt?: T;
   generateSlug?: T;
@@ -2466,6 +2487,7 @@ export interface PostsSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
+        keywords?: T;
       };
   publishedAt?: T;
   authors?: T;
@@ -2865,6 +2887,9 @@ export interface TenantsSelect<T extends boolean = true> {
   layout?: T;
   trailingSlash?: T;
   blogUrlStyle?: T;
+  seoTitleSuffix?: T;
+  seoDefaultImage?: T;
+  llmsTxt?: T;
   domains?:
     | T
     | {

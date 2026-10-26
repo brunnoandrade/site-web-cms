@@ -42,6 +42,10 @@ const nextConfig: NextConfig = {
   // packages/routes), answered by the proxy. Next must not impose one: with `trailingSlash: true`
   // it would also add "/" to every canonical URL, even for properties whose URLs have none.
   trailingSlash: false,
+  // Title and meta tags always inside <head> (the current site renders them there for every client),
+  // not streamed into the body for browsers: crawlers and link previews that do not run scripts
+  // then see them too.
+  htmlLimitedBots: /.*/,
   skipTrailingSlashRedirect: true,
   // Self-contained server bundle for the Docker image (see Dockerfile).
   output: 'standalone',

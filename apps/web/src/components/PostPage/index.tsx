@@ -13,7 +13,10 @@ import { requireTenant } from '@/lib/tenant'
 import { pathsOf } from '@/lib/urlStyle'
 import { generateMeta } from '@/utilities/generateMeta'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { JsonLd } from '@/components/JsonLd'
 import { UberPost } from '@/components/UberPost'
+import { blogPostingNode, breadcrumbNode, webPageNode } from '@/lib/jsonld'
+import { collapse, lexicalText } from '@/utilities/seo'
 import { isUberConta } from '@/lib/uber-help'
 
 export const queryPostBySlug = cache(async ({ tenant, slug }: { tenant: string; slug: string }) => {
@@ -65,6 +68,43 @@ export async function PostPage({
       <>
         {draft && <LivePreviewListener />}
         <UberPost post={post} tenant={tenant.slug} />
+        <JsonLd
+          data={[
+            breadcrumbNode(
+              tenant,
+              [
+                { name: 'Home', path: '/' },
+                { name: 'Blog', path: pathsOf(tenant).blogIndex() },
+                ...(typeof post.category === 'object' && post.category
+                  ? [
+                      {
+                        name: post.category.title,
+                        path: pathsOf(tenant).blogPage(1, post.category.slug),
+                      },
+                    ]
+                  : []),
+                { name: post.title, path: canonical },
+              ],
+              `${tenant.siteUrl}${canonical}#breadcrumb`,
+            ),
+            webPageNode(tenant, {
+              path: canonical,
+              name: post.title,
+              description: post.meta?.description,
+              extra: {
+                '@id': `${tenant.siteUrl}${canonical}#webpage`,
+                datePublished: post.publishedAt,
+                dateModified: post.updatedAt,
+              },
+            }),
+            blogPostingNode(
+              tenant,
+              post,
+              canonical,
+              collapse(lexicalText((post.content as { root?: unknown })?.root)),
+            ),
+          ]}
+        />
       </>
     )
   }
@@ -104,6 +144,7 @@ export async function postMetadata({
   return generateMeta({
     doc: post,
     tenant,
+    type: 'article',
     path:
       postCategory && post?.slug
         ? pathsOf(tenant).post(postCategory, post.slug)

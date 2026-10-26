@@ -67,10 +67,8 @@ const getPagesSitemap = async (tenantSlug: string) => {
   const dateFallback = new Date().toISOString()
 
   const defaultSitemap = [
-    {
-      loc: `${SITE_URL}/search/`,
-      lastmod: dateFallback,
-    },
+    // Uber Conta has no public search page (its search lives in the help center).
+    ...(isUberHelp(tenant) ? [] : [{ loc: `${SITE_URL}/search/`, lastmod: dateFallback }]),
     {
       loc: `${SITE_URL}${urls.blogIndex()}`,
       lastmod: dateFallback,

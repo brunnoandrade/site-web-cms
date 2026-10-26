@@ -161,7 +161,7 @@ export async function getTenant(slug: string): Promise<Tenant | null> {
     () =>
       request<PaginatedDocs<Tenant>>(
         '/api/tenants',
-        { where: { slug: { equals: slug } }, limit: 1, depth: 0 },
+        { where: { slug: { equals: slug } }, limit: 1, depth: 1 },
         { tags: ['tenants'] },
       ),
     emptyPage<Tenant>(),

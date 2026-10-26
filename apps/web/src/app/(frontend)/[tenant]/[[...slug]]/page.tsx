@@ -13,7 +13,9 @@ import { pathsOf } from '@/lib/urlStyle'
 import { generateMeta } from '@/utilities/generateMeta'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { getArchivePosts, pickedPosts } from '@/blocks/ArchiveBlock/data'
+import { JsonLd } from '@/components/JsonLd'
 import { SiteChrome } from '@/components/SiteChrome'
+import { faqPageNode, webPageNode } from '@/lib/jsonld'
 import { LivePreviewPage } from '@/components/LivePreviewPage'
 
 // Pages are rendered on the first request and cached per tenant (ISR), then refreshed by the
@@ -75,6 +77,16 @@ export default async function Page({ params: paramsPromise }: Args) {
         {template !== 'noHero' && <RenderHero {...hero} />}
         <RenderBlocks blocks={layout} tenant={tenant.slug} archive={ArchiveBlock} />
       </article>
+      <JsonLd
+        data={[
+          webPageNode(tenant, {
+            path: pathsOf(tenant).page(slug),
+            name: page.meta?.title || page.title,
+            description: page.meta?.description,
+          }),
+          ...(faqPageNode(layout) ? [faqPageNode(layout)!] : []),
+        ]}
+      />
     </SiteChrome>
   )
 }

@@ -1,0 +1,1362 @@
+{
+ "/": {
+  "title": "Receba seus ganhos na hora com a Uber Conta!",
+  "description": "Plataforma financeira integrada para motoristas e usuários, com soluções de conta digital, cartão, empréstimos, benefícios e serviços inteligentes.",
+  "keywords": "uber conta, fintech uber, conta digital uber, serviços financeiros uber, benefícios uber, app uber conta",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/antecipacao-do-fgts": {
+  "title": "Antecipação do Saque-Aniversário FGTS: Tem dinheiro guardado no FGTS?",
+  "description": "Antecipe seu FGTS de forma prática e segura, com taxas competitivas e contratação 100% digital.",
+  "keywords": "antecipação fgts, empréstimo fgts, saque aniversário, crédito fgts, fgts digital, fgts uber",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/cartao": {
+  "title": "Cartão Uber Conta: Mais facilidade para o seu dia a dia.",
+  "description": "Cartão Uber Conta para compras, assinaturas e pagamentos por aproximação, com cartão virtual e segurança em tempo real.",
+  "keywords": "cartão uber conta, cartão pré-pago uber, pagamento por aproximação, cartão virtual, google pay uber, segurança cartão",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/cashback": {
+  "title": "Cashback: Dinheiro de volta em centenas de lojas",
+  "description": "Receba cashback em compras e serviços parceiros e acumule benefícios direto na Uber Conta.",
+  "keywords": "cashback uber, benefícios uber, ganhar dinheiro de volta, recompensas, economia motorista, promoções uber",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/cdb": {
+  "title": "CDB Uber Conta: Você dirige, seus ganhos rendem",
+  "description": "Invista no CDB Uber Conta com rendimento de até 102% do CDI, resgate diário e proteção do FGC.",
+  "keywords": "cdb uber conta, investir uber, rendimento diário, 102% cdi, investimento seguro, fgc protegido",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/conta-digital": {
+  "title": "Conta Digital: Receba seus ganhos após cada viagem!",
+  "description": "Receba ganhos, faça pagamentos, transfira e movimente seu dinheiro com segurança na Uber Conta.",
+  "keywords": "conta digital uber, pagamentos, transferências, saldo uber, fintech uber, conta motorista",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/credito-pessoal": {
+  "title": "Crédito Pessoal: Dinheiro na conta em minutos",
+  "description": "Solicite crédito pessoal de forma rápida, segura e totalmente online, com aprovação simples e dinheiro direto na conta.",
+  "keywords": "crédito pessoal, empréstimo online, empréstimo rápido, crédito uber, solicitar empréstimo, dinheiro na conta",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/credito-rapido": {
+  "title": "Crédito Rápido: Dinheiro na Uber Conta em minutos",
+  "description": "Empréstimo rápido com análise imediata e liberação simplificada, ideal para quem precisa de dinheiro no mesmo dia.",
+  "keywords": "crédito rápido, empréstimo imediato, liberação rápida, dinheiro urgente, crédito fácil, empréstimo digital\n",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/debitos-veiculares": {
+  "title": "Débitos Veiculares: Parcele seus débitos em até 12x",
+  "description": "Consulte e pague débitos veiculares como multas e IPVA direto pela Uber Conta, com rapidez e praticidade.",
+  "keywords": "débitos veiculares, pagar ipva, multas de trânsito, serviços veiculares, uber motorista, consulta veículo",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/descontos": {
+  "title": "Uber Conta Desconto: Desconto em + de 1.000 lojas parceiras",
+  "description": "Economize em viagens e serviços usando o Uber Conta Desconto, exclusivo para quem mantém saldo na conta.",
+  "keywords": "uber conta desconto, descontos uber, economia uber, benefícios motorista, vantagens uber, saldo uber",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/km-de-vantagens": {
+  "title": "KM de Vantagens: Você abastece, seu dinheiro volta.",
+  "description": "Ganhe até 20% de volta ao abastecer em postos parceiros e receba cashback direto na Uber Conta.",
+  "keywords": "km de vantagens, cashback combustível, abastecimento, benefícios uber, economia motorista, postos parceiros",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/pix": {
+  "title": "Pix: Transferências ilimitadas!",
+  "description": "Faça e receba Pix ilimitados, gratuitos e instantâneos direto pela Uber Conta.",
+  "keywords": "pix uber, transferência instantânea, pix gratuito, pagar com pix, receber pix, conta digital",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/seguro-celular": {
+  "title": "Seguro Celular: Proteja sua ferramenta indispensável",
+  "description": "Proteção completa para seu celular contra roubo, furto e danos, com contratação rápida pelo app.",
+  "keywords": "seguro celular, proteção smartphone, seguro uber, furto celular, roubo celular, cobertura celular",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/tag-veloe": {
+  "title": "Tag Veloe: Passe direto em pedágios e estacionamentos",
+  "description": "Passe em pedágios e estacionamentos com mais rapidez usando a Tag Veloe integrada à Uber Conta.",
+  "keywords": "tag veloe, pedágio automático, estacionamento veloe, serviços uber, mobilidade prática, tag carro",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/uber-chip": {
+  "title": "Uber Chip: Mantenha-se conectado durante suas viagens.",
+  "description": "Chip móvel com planos exclusivos para motoristas, mais internet e navegação gratuita no app Uber.",
+  "keywords": "uber chip, plano motorista, chip uber, internet motorista, dados móveis uber, chip 4g 5g uber\n",
+  "ogType": "website",
+  "jsonld": [
+   "FAQPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/informacoes-financeiras": {
+  "title": "Informações Financeiras: Acesse os termos e informações legais que garantem transparência nas suas operações. Tudo em um só lugar.",
+  "description": "Encontre todas as informações financeiras da Uber Conta em um só lugar, com documentos, termos e detalhes dos serviços disponíveis.",
+  "keywords": "informações financeiras uber, documentos uber conta, termos e condições, contratos financeiros, transparência uber, serviços uber conta",
+  "ogType": "website",
+  "jsonld": [
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/sobre": {
+  "title": "Sobre: Conheça nossa história e a parceria do Digio com a Uber.",
+  "description": "Plataforma financeira integrada para motoristas e usuários, com soluções de conta digital, cartão, empréstimos, benefícios e serviços inteligentes.",
+  "keywords": "uber conta, fintech uber, conta digital uber, serviços financeiros uber, benefícios uber, app uber conta",
+  "ogType": "website",
+  "jsonld": [
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog": {
+  "title": "Blog",
+  "description": "Aqui você encontra os principais artigos sobre sua Uber Conta, com funcionalidades, novidades e tutoriais para você fazer cada vez mais com os seus ganhos.",
+  "keywords": "motorista, entregador, finanças, ganhos, cartão, pix, empréstimo, saque, economia, MEI",
+  "ogType": "website",
+  "jsonld": [
+   "Blog",
+   "BreadcrumbList",
+   "CollectionPage",
+   "Organization",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/blog/antecipe-seu-saque-aniversario-fgts-com-a-uber-conta": {
+  "title": "Antecipe seu Saque-Aniversário FGTS com a Uber Conta",
+  "description": "Use um dinheiro que já é seu: antecipe até 5 parcelas do Saque-Aniversário e receba em até 1 dia útil após aprovação.",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog/autoatendimento-o-que-e-e-quais-sao-as-vantagens": {
+  "title": "Autoatendimento: o que é e quais são as vantagens?",
+  "description": "Você gosta de pegar filas em caixas de supermercado, restaurantes, praças de pedágio ou em qualquer outro lugar que faz parte da sua rotina? Se a…",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog/cashback-uber-conta-como-economizar-e-ter-dinheiro-de-volta": {
+  "title": "Cashback Uber Conta: Como economizar e ter dinheiro de volta",
+  "description": "Você sabia que garantir cashback é uma forma de economizar e ganhar dinheiro de volta com suas compras?!",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog/cdb-uber-conta-voce-dirige-seu-dinheiro-rende": {
+  "title": "CDB Uber Conta: você dirige, seu dinheiro rende",
+  "description": "Já imaginou se, enquanto você trabalha para realizar seus sonhos, seu dinheiro trabalhasse todos os dias pra você?",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog/mensalidade-uber-conta-isencao-valores-e-muito-mais": {
+  "title": "Mensalidade Uber Conta: isenção, valores e muito mais!",
+  "description": "A partir do dia 11/05/2023, uma tarifa de manutenção foi implementada para os novos usuários da Uber Conta, operada pelo Digio, com o objetivo de…",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog/os-5-erros-financeiros-que-fazem-motoristas-perder-dinheiro-sem-perceber": {
+  "title": "Os 5 erros financeiros que fazem motoristas perder dinheiro sem perceber",
+  "description": "Como evitar os descuidos mais comuns e transformar seu trabalho no app em uma atividade realmente lucrativa.",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog/quais-sao-as-vantagens-da-uber-conta": {
+  "title": "Quais são as vantagens da Uber Conta?",
+  "description": "Conheça as vantagens da Uber Conta: repasse em até 1 hora, Pix gratuito e ilimitado, cashback, Tag Veloe, Cartão Uber, empréstimos e seguro celular.",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog/seguro-celular-uber-conta-proteja-sua-ferramenta-indispensavel": {
+  "title": "Seguro Celular Uber Conta: proteja sua ferramenta indispensável",
+  "description": "O celular, assim como seu carro, é uma ferramenta indispensável para o seu dia a dia. Com ele, você atende os chamados dos seus passageiros, traça suas…",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog/tudo-sobre-o-uber-conta-credito-pessoal": {
+  "title": "Tudo sobre o Uber Conta Crédito Pessoal",
+  "description": "Veja como funciona o Crédito Pessoal da Uber Conta: de R$ 700 a R$ 10 mil, em até 18 vezes, com taxas a partir de 2,99% ao mês.",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog/uber-conta-credito-rapido-tudo-o-que-voce-precisa-saber": {
+  "title": "Uber Conta Crédito Rápido: tudo o que você precisa saber!",
+  "description": "Sabe aquele momento de aperto, em que você só precisa de um valor curto pra resolver uma emergência ou algum problema temporário? Nós podemos te…",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/blog/uber-conta-km-de-vantagens-como-abastecer-com-cashback": {
+  "title": "Uber Conta + KM de Vantagens: como abastecer com cashback!",
+  "description": "Entre as muitas vantagens que os parceiros Uber têm, uma das mais atraentes é poder abastecer com até 10% de cashback em postos Ipiranga, por meio do…",
+  "keywords": null,
+  "ogType": "article",
+  "jsonld": [
+   "BlogPosting",
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda": {
+  "title": "Central de Ajuda",
+  "description": "Encontre suporte para dúvidas, serviços e funcionalidades da Uber Conta de forma rápida e simples.",
+  "keywords": "ajuda uber conta, suporte uber, atendimento uber, dúvidas conta digital, central de ajuda, suporte financeiro",
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/categorias": {
+  "title": "Central de Ajuda: Conta digital",
+  "description": "Recebimento dos ganhos de viagem, extrato e investimentos.",
+  "keywords": "ajuda uber conta, suporte uber, atendimento uber, dúvidas conta digital, central de ajuda, suporte financeiro",
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/categorias?slug=uber-conta": {
+  "title": "Central de Ajuda: Uber Conta",
+  "description": "Abertura de conta, tarifas e taxas, documentos, aplicativo, segurança.",
+  "keywords": "ajuda uber conta, suporte uber, atendimento uber, dúvidas conta digital, central de ajuda, suporte financeiro",
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/categorias?slug=conta-digital": {
+  "title": "Central de Ajuda: Conta digital",
+  "description": "Recebimento dos ganhos de viagem, extrato e investimentos.",
+  "keywords": "ajuda uber conta, suporte uber, atendimento uber, dúvidas conta digital, central de ajuda, suporte financeiro",
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/categorias?slug=pix": {
+  "title": "Central de Ajuda: Pix",
+  "description": "Transferências via Pix, modalidades, chaves e limites.",
+  "keywords": "ajuda uber conta, suporte uber, atendimento uber, dúvidas conta digital, central de ajuda, suporte financeiro",
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/categorias?slug=emprestimos": {
+  "title": "Central de Ajuda: Empréstimos",
+  "description": "Crédito Pessoal, Crédito Rápido e Antecipação do FGTS.",
+  "keywords": "ajuda uber conta, suporte uber, atendimento uber, dúvidas conta digital, central de ajuda, suporte financeiro",
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/categorias?slug=cartao": {
+  "title": "Central de Ajuda: Cartão",
+  "description": "Entrega, ativação, cartão físico e virtual, bloqueio e desbloqueio, perda e roubo.",
+  "keywords": "ajuda uber conta, suporte uber, atendimento uber, dúvidas conta digital, central de ajuda, suporte financeiro",
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/categorias?slug=solucoes": {
+  "title": "Central de Ajuda: Soluções",
+  "description": "Seguro Celular, Tag Veloe, Débitos Veiculares e Uber Chip.",
+  "keywords": "ajuda uber conta, suporte uber, atendimento uber, dúvidas conta digital, central de ajuda, suporte financeiro",
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/categorias?slug=beneficios": {
+  "title": "Central de Ajuda: Benefícios",
+  "description": "Cashback, Uber Conta Desconto e KM de vantagens.",
+  "keywords": "ajuda uber conta, suporte uber, atendimento uber, dúvidas conta digital, central de ajuda, suporte financeiro",
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "SoftwareApplication",
+   "WebPage",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/busca?q=pix": {
+  "title": "Busca",
+  "description": "Receba seus ganhos na hora com a Uber Conta!",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "Organization",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/a-uber-conta-e-segura": {
+  "title": "A Uber Conta é segura?",
+  "description": "Sim, a Uber Conta é 100% segura. Para acessar seu saldo, cartão ou fazer qualquer movimentação, você sempre precisa de senha ou biometria. Também é possível con",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-abro-uma-uber-conta": {
+  "title": "Como abro uma Uber Conta?",
+  "description": "Abrir sua Uber Conta é simples: No app “Uber Driver”, vá até o menu “Carteira” para iniciar o processo. Preencha seus dados pessoais, endereço residencial e inf",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-cadastrar-uma-chave-pix": {
+  "title": "Como cadastrar uma chave Pix?",
+  "description": "Cadastrar uma chave Pix na sua é simples: Na página inicial, toque em “Pix”. Em seguida, vá em “Minhas chaves”. Toque em “Cadastrar nova chave”. Escolha o tipo",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-confiro-meu-repasse-de-ganhos": {
+  "title": "Como confiro meu repasse de ganhos?",
+  "description": "Você consegue conferir seus repasses pelo app, seguindo o passo a passo: Abra o app da Uber Conta. Vá em &quot;Ganhos Uber” Pronto, agora é só conferir seus repasses",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-ativar-meu-cartao": {
+  "title": "Como faço para ativar meu cartão?",
+  "description": "Se você já recebeu seu cartão físico e quer ativá-lo, siga este passo a passo: Na página inicial da Uber Conta, toque em “Meus cartões”. Em seguida, selecione “",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-contratar-a-antecipacao-do-saque-aniversario-do-fgts": {
+  "title": "Como faço para contratar a antecipação do Saque-Aniversário do FGTS?",
+  "description": "É só clicar em contratar, fazer os passos do WhatsApp, e receber seu dinheiro em até 1 dia útil.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-contratar-a-tag-veloe": {
+  "title": "Como faço para contratar a Tag Veloe?",
+  "description": "A contratação é feita direto no app da Uber Conta, vá até a Uber Loja e siga o passo a passo: Toque em “Veloe”. Vá em &quot;Pedir meu adesivo”. Cadastre sua placa e",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-contratar-o-seguro-celular": {
+  "title": "Como faço para contratar o Seguro Celular?",
+  "description": "Pra contratar o Seguro Celular é simples, na página “Início” do seu app: Toque em “Seguro Celular”; Toque em “Simular contratação”; Digite o IMEI do seu celular",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-contratar-o-uber-chip": {
+  "title": "Como faço para contratar o Uber Chip?",
+  "description": "Para contratar o Uber Chip basta acessar https://uberchip.com.br/ e seguir o passo a passo: Escolha seu tipo de plano e quantidade de GBs, depois vá em &quot;Comprar",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-parcelar-os-debitos": {
+  "title": "Como faço para parcelar os débitos?",
+  "description": "Para parcelar os débitos você precisa entrar no app e ir em &quot;Débitos Veiculares&quot;, depois é só ir em &quot;Consultar&quot;. Preenchendo seus dados você consegue visualizar",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-rastrear-a-entrega-do-meu-cartao": {
+  "title": "Como faço para rastrear a entrega do meu cartão?",
+  "description": "Você pode acompanhar a entrega do seu cartão pelo app da Uber Conta. É simples: - Na página inicial do app, toque em “Meus Cartões”. - Em seguida, selecione “Ra",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-recarregar-minha-tag-veloe": {
+  "title": "Como faço para recarregar minha Tag Veloe?",
+  "description": "A recarga da tag Veloe é feita de maneira automática sempre que seu saldo está baixo, mas, se quiser, você pode recarregar sua tag manulamente pelo aplicativo d",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-usar-o-app-kmv": {
+  "title": "Como faço para usar o app KMV?",
+  "description": "Basta baixar o KMV na Google Play ou App Store e cadastar seu cartão Uber, depois disso, é só usar seu app com o Cartão Uber sempre que for abastecer.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-usar-o-kmv": {
+  "title": "Como faço para usar o KMV?",
+  "description": "Basta baixar o KMV na Google Play ou App Store e cadastar seu cartão Uber, depois disso, é só usar seu app com o Cartão Uber sempre que for abastecer.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-para-ver-as-lojas-parceiras-da-uber-conta-1": {
+  "title": "Como faço para ver as lojas parceiras da Uber Conta?",
+  "description": "Pra conferir as lojas parceiras é simples: Vá na aba &quot;Loja” no seu aplicativo. Depois, vá em &quot;Lojas parceiras” e toque em &quot;Ver todas as lojas&quot;. Pronto! Agora é",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-pra-pagar-boletos-com-a-uber-conta": {
+  "title": "Como faço pra pagar boletos com a Uber Conta?",
+  "description": "Para pagar boletos na Uber Conta, basta seguir o passo a passo: Na página inicial vá em &quot;Pagar. Escolha o item &quot;Pagar contas&quot;. Escaneie ou digite o código de ba",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-faco-uma-transferencia-pix-na-uber-conta": {
+  "title": "Como faço uma transferência Pix na Uber Conta?",
+  "description": "Pra fazer uma transferência usando o Pix é simples, basta seguir o passo a passo: Na página inicial vá em &quot;Pix&quot;. Depois, toque em ”Transferir” Escolha o tipo da",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-fazer-a-recarga-pela-uber-conta": {
+  "title": "Como fazer a recarga pela Uber Conta?",
+  "description": "Você consegue fazer a recarga do seu Chip em poucos passos: Abra o app da Uber Conta. Na página inicial vá em &quot;Recarga”. Digite o número que quer recarregar e v",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-funciona-a-cobertura-do-seguro-celular": {
+  "title": "Como funciona a cobertura do Seguro Celular?",
+  "description": "A cobertura do Seguro Celular atende os seguintes casos: Roubo: Em situações de ameaça ou violência sem chance de defesa. Furto qualificado: Quando há evidência",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-funciona-o-repasse-de-ganhos": {
+  "title": "Como funciona o repasse de ganhos?",
+  "description": "O repasse de ganhos começa a funcionar assim que você realiza o primeiro acesso à Uber Conta. O prazo para recebimento na sua Uber Conta é de até 1 hora após a",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-receber-com-pix-na-uber-conta": {
+  "title": "Como receber com Pix na Uber Conta?",
+  "description": "Você consegue receber Pix na Uber Conta compartilhando sua chave Pix. Mas, se quiser gerar um QRCode para pagamento, é só seguir o passo a passo: Na tela inicia",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-troco-a-senha-do-meu-app-uber-conta": {
+  "title": "Como troco a senha do meu app Uber Conta?",
+  "description": "Para alterar a senha do seu aplicativo, basta seguir o passo a passo: No menu, vá em “Segurança”. Depois vá em ”Alterar senha do aplicativo&quot;. Confirme sua senha",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/como-vejo-a-senha-do-meu-cartao": {
+  "title": "Como vejo a senha do meu cartão?",
+  "description": "Para consultar a senha do seu cartão, siga este passo a passo: No menu da Uber Conta, toque em “Ver senha do cartão”. Digite a senha que você utiliza para acess",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/consigo-parcelar-debitos-em-atraso": {
+  "title": "Consigo parcelar débitos em atraso?",
+  "description": "Sim! Você pode parcelar IPVA, Multas e Licenciamento com atraso em até 12x no cartão de crédito ou à vista com seu Cartão Uber Conta ou via Pix.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/e-possivel-desativar-o-pagamento-por-aproximacao": {
+  "title": "É possível desativar o pagamento por aproximação?",
+  "description": "Sim! Para desativar o pagamento pro aproximação é só seguir o passo a passo: Vá em &quot;Meus cartões”. Desative a opção &quot;Pagamento por aproximação”. Pronto, caso qu",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/em-quanto-tempo-eu-recebo-o-valor-da-antecipacao": {
+  "title": "Em quanto tempo eu recebo o valor da antecipação?",
+  "description": "O dinheiro da Antecipação do Saque-Aniversário FGTS fica disponível para você em até 1 dia útil.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-cdb-da-uber-conta-e-seguro": {
+  "title": "O CDB da Uber Conta é seguro?",
+  "description": "Sim! O CDB da Uber Conta é 100% seguro. Além de ter a proteção do FGC (Fundo Garantidor de Crédito) de até R$ 250 mil, o CDB da Uber Conta é emitido pelo Digio,",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-cdb-da-uber-conta-tem-impostos": {
+  "title": "O CDB da Uber Conta tem impostos?",
+  "description": "Sim! Como quase todo CDB, o CDB da Uber Conta tem incidência de IR e IOF, apenas sobre o valor do rendimento que diminui conforme o tempo de investimento de for",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-acontece-se-eu-parar-de-recarregar-meu-uber-chip": {
+  "title": "O que acontece se eu parar de recarregar meu Uber Chip?",
+  "description": "Se não houver recarga do Uber Chip e o prazo de renovação expirar você continuará recebendo chamadas e SMS, mas não terá acesso a internet e dados até que uma n",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-acontece-se-eu-perder-meu-cartao": {
+  "title": "O que acontece se eu perder meu cartão?",
+  "description": "Em caso de perda ou roubo, você pode solicitar a segunda via do seu cartão diretamente pelo app, na opção “Meus cartões”. Assim que você solicita a segunda via,",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-a-antecipacao-do-saque-aniversario-do-fgts": {
+  "title": "O que é a antecipação do Saque-Aniversário do FGTS?",
+  "description": "É uma forma prática e segura de receber (de uma vez só) todo este valor que você receberia em diversas parcelas de saque-aniversário",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-a-uber-conta": {
+  "title": "O que é a Uber Conta?",
+  "description": "A Uber Conta é uma conta digital criada para motoristas e entregadores da Uber em parceria com o Digio. Com ela você recebe seus ganhos na hora, tem Pix ilimita",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-cashback": {
+  "title": "O que é Cashback?",
+  "description": "Na tradução literal, cashback significa &quot;Dinheiro de volta”. Na prática, funciona assim: Você paga o valor total de uma compra e recebe uma parte desse dinheiro",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-credito-rapido": {
+  "title": "O que é Crédito Rápido?",
+  "description": "O Crédito Rápido é voltado para quem precisa de uma ajuda imediata, oferecendo valores menores e rapidez no pagamento. Após a contratação, o dinheiro fica dispo",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-e-sim": {
+  "title": "O que é eSIM?",
+  "description": "O eSIM é um chip virtual, que permite com que você instale um chip novo no celular sem precisar esperar pelo chip físico e sem precisar para de usar seu chip at",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-imei-e-onde-encontra-lo": {
+  "title": "O que é IMEI e onde encontrá-lo?",
+  "description": "O IMEI é o código de identificação do seu celular. Para encontrar, disque *#06# no teclado do seu celular, o código IMEI vai aparecer na tela. Alguns aparelhos",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-o-cdb": {
+  "title": "O que é o CDB?",
+  "description": "O CDB é o Certificado de Depósito Bancário. Com ele, você tem a mesma segurança de colocar seu dinheiro na poupança. O FGC (Fundo Garantidor de Créditos) garant",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-o-km-de-vantagens": {
+  "title": "O que é o KM de Vantagens?",
+  "description": "É o aplicativo da Ipiranga que transforma cada abastecimento em cashback para você economizar enquanto abastece.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-o-saque-aniversario-fgts": {
+  "title": "O que é o Saque-Aniversário FGTS?",
+  "description": "É uma forma de receber, anualmente, uma parte do benefício que você tem guardado no FGTS - sempre na data do seu aniversário.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-o-seguro-celular": {
+  "title": "O que é o Seguro Celular?",
+  "description": "O Seguro celular é uma proteção para seu smartphone. Ele cobre situações chatas como roubo, furto e até mesmo quebra total. Você conta com a cobertura mesmo se",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-pix-automatico": {
+  "title": "O que é Pix Automático?",
+  "description": "É uma funcionalidade que permite pagar contas recorrentes como água, luz, escola e muito mais. Tudo de forma automática com o Pix. Ao autorizar os pagamentos de",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-tag-veloe": {
+  "title": "O que é Tag Veloe?",
+  "description": "É uma tag de pedágio e estacionamento oferecida pelo Veloe para quem tem Uber Conta. Com ela você passa direto em cancelas, sem precisar parar ou pegar filas. F",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-e-uber-conta-desconto": {
+  "title": "O que é Uber Conta Desconto?",
+  "description": "É uma loja dentro da Uber Conta onde você garante descontos em mais de 1000 marcas parceiras de todos os segmentos.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-que-sao-debitos-veiculares": {
+  "title": "O que são débitos veiculares?",
+  "description": "São valores pendentes do seu veículo, como IPVA, licenciamento e multas que você pode consultar e pagar pelo app da Uber Conta, a conta digital feita pelo Digio",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/o-uber-chip-e-confiavel": {
+  "title": "O Uber Chip é confiável?",
+  "description": "Sim! O Uber Chip é uma parceria oficial entre a Surf e a Uber Conta, feito para os motoristas e entregadores da Uber. Além disso, o Uber Chip usa a infraestrutu",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/porque-fui-negado-no-emprestimo": {
+  "title": "Porque fui negado no empréstimo?",
+  "description": "Mesmo com uma oferta pré-aprovada, pode acontecer do seu pedido de empréstimo não ser aprovado. Isso porque, no momento da solicitação, a gente faz uma nova aná",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/posso-abrir-uma-uber-conta-sem-ser-parceiro-da-uber": {
+  "title": "Posso abrir uma Uber Conta sem ser parceiro da Uber?",
+  "description": "A Uber Conta foi criada especialmente para oferecer vantagens exclusivas a motoristas e entregadores parceiros da Uber. Por isso, só é possível abrir uma Uber C",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/posso-agendar-um-pix": {
+  "title": "Posso agendar um Pix?",
+  "description": "Sim, pra isso é só selecionar ”Agendar”na tela de digitação do valor e escolher a data que deseja que o Pix seja feito. Ah! Lembre-se de deixar sempre saldo suf",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/posso-parcelar-os-debitos-veiculares-com-o-cartao-da-uber-conta": {
+  "title": "Posso parcelar os Débitos Veiculares com o cartão da Uber Conta?",
+  "description": "Não, o cartão da Uber Conta funciona na função crédito à vista, por isso, só é possível usar ele pagar seus débitos à vista.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/preciso-esperar-pra-resgatar-o-valor-investido": {
+  "title": "Preciso esperar pra resgatar o valor investido?",
+  "description": "Não, você não precisa esperar para resgatar o valor investido. Caso você precise do valor investido para lidar com uma emergência, seu dinheiro estará disponíve",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quais-as-vantagens-do-uber-conta-desconto": {
+  "title": "Quais as vantagens do Uber Conta Desconto?",
+  "description": "Com o Uber Conta Desconto, você garante descontos exclusivos nas suas compras nas lojas parceiras. Por lá, tem mais de 1000 lojas parceiras de todos os segmento",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quais-metodos-de-pagamento-posso-usar-para-pagar": {
+  "title": "Quais métodos de pagamento posso usar para pagar?",
+  "description": "Você pode pagar seus débitos veiculares de várias formas: Usando seu Cartão Uber Conta; Com um cartão de crédito; Usando 2 cartões de crédito; Via Pix Usando Pi",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quais-modelos-de-celulares-possuem-cobertura": {
+  "title": "Quais modelos de celulares possuem cobertura?",
+  "description": "As marcas que possuem cobertura do seguro são Apple, Asus, Huawei, LG, Motorola, Samsung ou Xiaomi. Além disso, o celular deve ter no máximo 4 anos de fabricaçã",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quais-sao-os-emprestimos-da-uber-conta": {
+  "title": "Quais são os empréstimos da Uber Conta?",
+  "description": "Hoje a Uber Conta tem 2 tipos de empréstimos. O Crédito Pessoal é ideal pra quem precisa de valores maiores: Valores até R$ 10.000,00; Parcelas de 6 a 18 vezes;",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quais-sao-os-pre-requisitos-para-antecipar-o-fgts": {
+  "title": "Quais são os pré-requisitos para antecipar o FGTS?",
+  "description": "Qualquer pessoa com mais de 18 anos e com uma conta do FGTS ativa, com R$ 206,00 ou mais de saldo pode realizar a Antecipação do Saque-Aniversário. Além disso,",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/qual-a-diferenca-do-credito-pessoal-para-o-credito-rapido": {
+  "title": "Qual a diferença do Crédito Pessoal para o Crédito Rápido?",
+  "description": "O Crédito Pessoal é pensado pra quem precisa de um valor mais alto e mais tempo pra pagar, com parcelas que podem ir até 12 meses, por isso ele precisa de uma a",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/qual-a-diferenca-entre-cashback-e-uber-conta-desconto": {
+  "title": "Qual a diferença entre Cashback e Uber Conta Desconto?",
+  "description": "A principal diferença é que o cashback te dá dinheiro de volta após uma compra em alguma das lojas parceiras, enquanto o Uber Conta Desconto é aplicado no momen",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quando-posso-contratar-o-credito-rapido-novamente": {
+  "title": "Quando posso contratar o Crédito Rápido novamente?",
+  "description": "Depois de quitar o seu Crédito Rápido, você pode solicitar um novo assim que uma nova oferta estiver disponível no app (sujeito a elegibilidade, análise de créd",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quanto-custa-a-tag-veloe": {
+  "title": "Quanto custa a Tag Veloe?",
+  "description": "A tag Veloe não tem tarifa de adesão nem frete, só é cobrada a mensalidade de R$ 8,90, direto na sua Uber Conta.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quanto-de-cashback-posso-receber-com-o-kmv": {
+  "title": "Quanto de cashback posso receber com o KMV?",
+  "description": "A porcentagem de cashback varia de acordo com a sua categoria no Uber Pro: Azul: 4% de cashback. Ouro: 4% de cashback. Platina: 6% de cashback. Diamante: 10% de",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quanto-rende-o-cdb-da-uber-conta": {
+  "title": "Quanto rende o CDB da Uber Conta?",
+  "description": "O CDB da Uber Conta é um título pós-fixado e utiliza o CDI como referência. Ou seja, o valor de rendimento varia de acordo com as variações da Selic, que ocorre",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quanto-tempo-leva-pra-chegar-minha-tag-veloe": {
+  "title": "Quanto tempo leva pra chegar minha Tag Veloe?",
+  "description": "Na maioria das vezes, a tag Veloe chega até você em até 5 dias úteis.",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/que-vantagens-ou-opcoes-de-cashback-estao-disponiveis": {
+  "title": "Que vantagens ou opções de cashback estão disponíveis?",
+  "description": "Com a Uber Conta você tem acesso a diversas promoções de cashback em compras feitas pela Uber Loja. As promoções mudam de acordo com sua categoria no Uber Pro,",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quem-pode-ter-a-uber-conta": {
+  "title": "Quem pode ter a Uber Conta?",
+  "description": "Para abrir uma Uber Conta você precisa seguir os seguintes critérios: Ser um motorista ativo na Uber. Ter pelo menos 25 viagens ou entregas com a Uber. Não poss",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ },
+ "/central-de-ajuda/quem-pode-ter-emprestimos-na-uber-conta": {
+  "title": "Quem pode ter empréstimos na Uber Conta?",
+  "description": "Pra contratar os empréstimos não existem requisitos como categoria, nota ou tempo na Uber pra aprovação. O que acontece é que fazemos uma análise de crédito pra",
+  "keywords": null,
+  "ogType": "website",
+  "jsonld": [
+   "BreadcrumbList",
+   "Organization",
+   "QAPage",
+   "SoftwareApplication",
+   "WebSite"
+  ]
+ }
+}

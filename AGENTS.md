@@ -5,7 +5,7 @@ Contexto para agentes de IA (Claude Code, GitHub Copilot, etc.). Leia este arqui
 ## O que é
 Novo site institucional da Digio (substitui o site atual).
 Escopo desta entrega: **F0 (fundação) + F1 (evolução do site)**, não transacional.
-Detalhes em `docs/escopo.md`; virada em ondas em `docs/virada.md`; decisões e aderência ao SoAD em `docs/gaps-soad.md`; revisão de segurança, correções e pendências em `docs/seguranca.md`; propriedade Uber Conta em `docs/uber-conta.md`.
+Detalhes em `docs/escopo.md`; virada em ondas em `docs/virada.md`; decisões e aderência ao SoAD em `docs/gaps-soad.md`; revisão de segurança, correções e pendências em `docs/seguranca.md`; propriedade Uber Conta em `docs/uber-conta.md`; SEO (título, JSON-LD, mapas do site, conferência contra o site atual) em `docs/seo.md`.
 
 ## Stack
 - **Monorepo npm (workspaces) com dois projetos separados**, cada um com seu Dockerfile:
@@ -66,6 +66,9 @@ Blocos (~10): hero (campo da página), `cards`, `ratesTable`, `faq`, `cta`, `con
 
 ## Migração do blog
 `apps/cms/scripts/migrate-wordpress.ts` (`npm run -w cms blog:migrate tenant=digio [dry-run]`): puxa posts, categorias, autores e imagens pela API REST do WordPress (`/blog/wp-json/wp/v2/...`) e grava pela Local API do Payload. Preserva slug, categoria, datas e SEO, e reescreve links internos. É idempotente (IDs do WordPress, URL das imagens, data de modificação). A API de categorias exige login e o SEO não está na API: categorias vêm embutidas nos posts e o SEO vem do `<head>` de cada página publicada. Cada post é verificado contra perda de conteúdo na conversão. Guia e decisões pendentes: `docs/migracao-blog.md`.
+
+## SEO
+Metadados de toda página saem de `buildMetadata` (`apps/web/src/utilities/seo.ts`) e os dados estruturados de `apps/web/src/lib/jsonld.ts`; não montar `title`/`openGraph` à mão. O sufixo do `<title>` e a imagem padrão de compartilhamento são da propriedade (`seoTitleSuffix`, `seoDefaultImage`). `python3 scripts/seo-audit.py` compara o `<head>` e o JSON-LD de cada URL com o site atual (relatório do Uber Conta em `docs/seo-audit-uber-conta.md`). Detalhes em `docs/seo.md`.
 
 ## Resiliência
 O site precisa continuar no ar se o Payload cair. Páginas geradas estaticamente (SSG/ISR) com revalidação por webhook do CMS, e uma versão estática de fallback servida pela CDN.

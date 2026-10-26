@@ -6,10 +6,13 @@ import React from 'react'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { CategoryCards } from '@/components/UberHelp'
+import { JsonLd } from '@/components/JsonLd'
 import { RenderHero } from '@/heros/RenderHero'
+import { breadcrumbNode, webPageNode } from '@/lib/jsonld'
 import { find } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
-import { getHelpCategories, getHelpPage, isUberHelp } from '@/lib/uber-help'
+import { buildMetadata } from '@/utilities/seo'
+import { getHelpCategories, getHelpPage, helpIndexHref, isUberHelp } from '@/lib/uber-help'
 
 type Args = { params: Promise<{ tenant: string }> }
 
@@ -28,6 +31,19 @@ export default async function HelpCenter({ params }: Args) {
         {page && <RenderHero {...page.hero} />}
         <CategoryCards categories={categories} />
         {page && <RenderBlocks archive={ArchiveBlock} blocks={page.layout} tenant={tenant.slug} />}
+        <JsonLd
+          data={[
+            breadcrumbNode(tenant, [
+              { name: 'Home', path: '/' },
+              { name: 'Ajuda', path: helpIndexHref },
+            ]),
+            webPageNode(tenant, {
+              path: helpIndexHref,
+              name: page?.meta?.title ?? 'Central de Ajuda',
+              description: page?.meta?.description,
+            }),
+          ]}
+        />
       </>
     )
   }
@@ -92,9 +108,14 @@ export default async function HelpCenter({ params }: Args) {
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const tenant = await requireTenant((await params).tenant)
-  return {
-    title: `Central de Ajuda | ${tenant.name}`,
-    description: 'Tire suas dúvidas sobre cartão, conta, Pix e outros serviços.',
-    alternates: { canonical: `${tenant.siteUrl}${helpIndexPath}` },
-  }
+  const page = isUberHelp(tenant) ? await getHelpPage(tenant.slug) : null
+  return buildMetadata({
+    tenant,
+    path: isUberHelp(tenant) ? helpIndexHref : helpIndexPath,
+    title: page?.meta?.title ?? 'Central de Ajuda',
+    description:
+      page?.meta?.description ?? 'Tire suas dúvidas sobre cartão, conta, Pix e outros serviços.',
+    keywords: page?.meta?.keywords,
+    image: page?.meta?.image,
+  })
 }

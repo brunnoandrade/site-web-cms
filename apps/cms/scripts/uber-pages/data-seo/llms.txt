@@ -1,0 +1,47 @@
+# Uber Conta
+
+> A Uber Conta é uma conta digital criada para motoristas e entregadores parceiros da Uber, em parceria com o Banco Digio (grupo Bradesco). Oferece recebimento instantâneo dos ganhos das corridas, Pix ilimitado, cartão, empréstimos, investimentos e descontos em parceiros. Para abrir uma conta, é preciso ser motorista ativo na Uber, com pelo menos 25 viagens/entregas e sem restrições legais no CPF, além de passar por análise de crédito.
+
+## Conta digital
+
+- [Conta]({{siteUrl}}/conta-digital): recebimento dos ganhos na hora, direto na Uber Conta
+- [Pix]({{siteUrl}}/pix): Pix ilimitado pela conta digital
+- [Cartão]({{siteUrl}}/cartao): cartão para usar como quiser
+- [Investimentos (CDB)]({{siteUrl}}/cdb): opções de investimento em CDB
+
+## Empréstimos
+
+- [Crédito Pessoal]({{siteUrl}}/credito-pessoal): até R$ 10.000 na conta em minutos, pagamento em até 18x
+- [Crédito Rápido]({{siteUrl}}/credito-rapido): empréstimos emergenciais de até R$ 300, com recontratação
+- [Antecipação do FGTS]({{siteUrl}}/antecipacao-do-fgts): antecipação de valores do FGTS
+
+## Soluções
+
+- [Débitos Veiculares]({{siteUrl}}/debitos-veiculares): parcelamento de IPVA, licenciamento e multas em até 12x
+- [Seguro Celular]({{siteUrl}}/seguro-celular): proteção do aparelho por R$ 29,90/mês
+- [Tag Veloe]({{siteUrl}}/tag-veloe): tag de pedágio por R$ 8,90/mês
+- [Descontos]({{siteUrl}}/descontos): descontos em compras com marcas parceiras
+- [Cashback]({{siteUrl}}/cashback): cashback em compras
+
+## Benefícios
+
+- [Uber Chip]({{siteUrl}}/uber-chip): planos de 14GB a 55GB a partir de R$ 20, com apps liberados
+- [Cashback no Ipiranga (Km de Vantagens)]({{siteUrl}}/km-de-vantagens): cashback em abastecimento
+- [Parceria Elo - Vantagens exclusivas](https://www.elo.com.br/ofertas/parceiros/uber): benefícios exclusivos para clientes Uber Conta
+- [Parceria Elo - Descontos em compras](https://www.elo.com.br/campanhas/usecredito-supermercado): descontos em supermercados
+
+## Institucional
+
+- [Sobre]({{siteUrl}}/sobre): informações institucionais sobre a Uber Conta
+- [Blog]({{siteUrl}}/blog): artigos, novidades e tutoriais sobre a Uber Conta
+- [Central de Ajuda]({{siteUrl}}/central-de-ajuda): dúvidas frequentes e suporte
+- [Informações financeiras]({{siteUrl}}/informacoes-financeiras): dados financeiros e regulatórios
+
+## Apps
+
+- [Android (Google Play)](https://play.google.com/store/apps/details?id=br.com.digio.uber)
+- [iOS (App Store)](http://apps.apple.com/us/app/uber-conta/id1550784531)
+
+## Optional
+
+- Produto oferecido pelo Banco Digio S.A. (27.098.060/0001-45), instituição financeira do grupo Bradesco, sujeito a elegibilidade, análise de crédito e condições variáveis.

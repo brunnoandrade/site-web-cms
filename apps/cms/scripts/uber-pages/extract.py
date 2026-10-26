@@ -87,6 +87,8 @@ def pair(desktop, mobile):
 
 def clean_html(html):
     html = re.sub(r'<li>\s*-\s*', '<li>', html or '')
+    # The source has lists closed with the opening tag (`...</li><ol>`): the converter drops them.
+    html = re.sub(r'(</li>\s*)<(ol|ul)>\s*$', r'\1</\2>', html.strip())
     return html.strip()
 
 

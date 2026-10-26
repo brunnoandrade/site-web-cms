@@ -1,0 +1,123 @@
+# Auditoria de SEO: http://uberconta.localhost:3000 contra https://ubercontabrasil.com.br
+
+104 de 104 URLs sem diferenças.
+
+- ✅ `/`
+- ✅ `/antecipacao-do-fgts`
+- ✅ `/cartao`
+- ✅ `/cashback`
+- ✅ `/cdb`
+- ✅ `/conta-digital`
+- ✅ `/credito-pessoal`
+- ✅ `/credito-rapido`
+- ✅ `/debitos-veiculares`
+- ✅ `/descontos`
+- ✅ `/km-de-vantagens`
+- ✅ `/pix`
+- ✅ `/seguro-celular`
+- ✅ `/tag-veloe`
+- ✅ `/uber-chip`
+- ✅ `/informacoes-financeiras`
+- ✅ `/sobre`
+- ✅ `/blog`
+- ✅ `/blog/antecipe-seu-saque-aniversario-fgts-com-a-uber-conta`
+- ✅ `/blog/autoatendimento-o-que-e-e-quais-sao-as-vantagens`
+- ✅ `/blog/cashback-uber-conta-como-economizar-e-ter-dinheiro-de-volta`
+- ✅ `/blog/cdb-uber-conta-voce-dirige-seu-dinheiro-rende`
+- ✅ `/blog/mensalidade-uber-conta-isencao-valores-e-muito-mais`
+- ✅ `/blog/os-5-erros-financeiros-que-fazem-motoristas-perder-dinheiro-sem-perceber`
+- ✅ `/blog/quais-sao-as-vantagens-da-uber-conta`
+- ✅ `/blog/seguro-celular-uber-conta-proteja-sua-ferramenta-indispensavel`
+- ✅ `/blog/tudo-sobre-o-uber-conta-credito-pessoal`
+- ✅ `/blog/uber-conta-credito-rapido-tudo-o-que-voce-precisa-saber`
+- ✅ `/blog/uber-conta-km-de-vantagens-como-abastecer-com-cashback`
+- ✅ `/central-de-ajuda`
+- ✅ `/central-de-ajuda/categorias`
+  - ℹ️ title: «Central de Ajuda • Uber Conta» (ref «Central de Ajuda: Conta digital • Uber Conta») — esperado: sem ?slug= o site atual mostra a primeira categoria; aqui redireciona para /central-de-ajuda
+  - ℹ️ description: «Encontre suporte para dúvidas, serviços e funcionalidades da Uber Conta de forma rápida e simples.» (ref «Recebimento dos ganhos de viagem, extrato e investimentos.») — esperado: sem ?slug= o site atual mostra a primeira categoria; aqui redireciona para /central-de-ajuda
+  - ℹ️ og:title: «Central de Ajuda» (ref «Central de Ajuda: Conta digital») — esperado: idem
+  - ℹ️ twitter:title: «Central de Ajuda» (ref «Central de Ajuda: Conta digital») — esperado: idem
+  - ℹ️ canonical: http://uberconta.localhost:3000/central-de-ajuda (ref https://ubercontabrasil.com.br/central-de-ajuda/categorias) — esperado: o site atual aponta todas as categorias para /central-de-ajuda/categorias (sem ?slug=), o que junta as páginas; aqui cada categoria é o próprio canonical
+- ✅ `/central-de-ajuda/categorias?slug=uber-conta`
+  - ℹ️ canonical: http://uberconta.localhost:3000/central-de-ajuda/categorias?slug=uber-conta (ref https://ubercontabrasil.com.br/central-de-ajuda/categorias) — esperado: o site atual aponta todas as categorias para /central-de-ajuda/categorias (sem ?slug=), o que junta as páginas; aqui cada categoria é o próprio canonical
+- ✅ `/central-de-ajuda/categorias?slug=conta-digital`
+  - ℹ️ canonical: http://uberconta.localhost:3000/central-de-ajuda/categorias?slug=conta-digital (ref https://ubercontabrasil.com.br/central-de-ajuda/categorias) — esperado: o site atual aponta todas as categorias para /central-de-ajuda/categorias (sem ?slug=), o que junta as páginas; aqui cada categoria é o próprio canonical
+- ✅ `/central-de-ajuda/categorias?slug=pix`
+  - ℹ️ canonical: http://uberconta.localhost:3000/central-de-ajuda/categorias?slug=pix (ref https://ubercontabrasil.com.br/central-de-ajuda/categorias) — esperado: o site atual aponta todas as categorias para /central-de-ajuda/categorias (sem ?slug=), o que junta as páginas; aqui cada categoria é o próprio canonical
+- ✅ `/central-de-ajuda/categorias?slug=emprestimos`
+  - ℹ️ canonical: http://uberconta.localhost:3000/central-de-ajuda/categorias?slug=emprestimos (ref https://ubercontabrasil.com.br/central-de-ajuda/categorias) — esperado: o site atual aponta todas as categorias para /central-de-ajuda/categorias (sem ?slug=), o que junta as páginas; aqui cada categoria é o próprio canonical
+- ✅ `/central-de-ajuda/categorias?slug=cartao`
+  - ℹ️ canonical: http://uberconta.localhost:3000/central-de-ajuda/categorias?slug=cartao (ref https://ubercontabrasil.com.br/central-de-ajuda/categorias) — esperado: o site atual aponta todas as categorias para /central-de-ajuda/categorias (sem ?slug=), o que junta as páginas; aqui cada categoria é o próprio canonical
+- ✅ `/central-de-ajuda/categorias?slug=solucoes`
+  - ℹ️ canonical: http://uberconta.localhost:3000/central-de-ajuda/categorias?slug=solucoes (ref https://ubercontabrasil.com.br/central-de-ajuda/categorias) — esperado: o site atual aponta todas as categorias para /central-de-ajuda/categorias (sem ?slug=), o que junta as páginas; aqui cada categoria é o próprio canonical
+- ✅ `/central-de-ajuda/categorias?slug=beneficios`
+  - ℹ️ canonical: http://uberconta.localhost:3000/central-de-ajuda/categorias?slug=beneficios (ref https://ubercontabrasil.com.br/central-de-ajuda/categorias) — esperado: o site atual aponta todas as categorias para /central-de-ajuda/categorias (sem ?slug=), o que junta as páginas; aqui cada categoria é o próprio canonical
+- ✅ `/central-de-ajuda/busca?q=pix`
+  - ℹ️ og:title: «Busca» (ref «Busca • Uber Conta») — esperado: o site atual mantém o sufixo da marca no og:title da busca (as demais páginas não)
+  - ℹ️ twitter:title: «Busca» (ref «None») — esperado: o site atual não envia twitter:title na busca
+- ✅ `/central-de-ajuda/a-uber-conta-e-segura`
+- ✅ `/central-de-ajuda/como-abro-uma-uber-conta`
+- ✅ `/central-de-ajuda/como-cadastrar-uma-chave-pix`
+- ✅ `/central-de-ajuda/como-confiro-meu-repasse-de-ganhos`
+- ✅ `/central-de-ajuda/como-faco-para-ativar-meu-cartao`
+- ✅ `/central-de-ajuda/como-faco-para-contratar-a-antecipacao-do-saque-aniversario-do-fgts`
+- ✅ `/central-de-ajuda/como-faco-para-contratar-a-tag-veloe`
+- ✅ `/central-de-ajuda/como-faco-para-contratar-o-seguro-celular`
+- ✅ `/central-de-ajuda/como-faco-para-contratar-o-uber-chip`
+- ✅ `/central-de-ajuda/como-faco-para-parcelar-os-debitos`
+- ✅ `/central-de-ajuda/como-faco-para-rastrear-a-entrega-do-meu-cartao`
+  - ℹ️ description: «Você pode acompanhar a entrega do seu cartão pelo app da Uber Conta. É simples: Na página inicial do app, toque em “Meus Cartões”. Em seguida, selecione “Rastre» (ref «Você pode acompanhar a entrega do seu cartão pelo app da Uber Conta. É simples: - Na página inicial do app, toque em “Meus Cartões”. - Em seguida, selecione “Ra») — esperado: o texto do site atual usa "- " digitado como marcador de lista; aqui é uma lista de verdade (sem o hífen)
+- ✅ `/central-de-ajuda/como-faco-para-recarregar-minha-tag-veloe`
+- ✅ `/central-de-ajuda/como-faco-para-usar-o-app-kmv`
+- ✅ `/central-de-ajuda/como-faco-para-usar-o-kmv`
+- ✅ `/central-de-ajuda/como-faco-para-ver-as-lojas-parceiras-da-uber-conta-1`
+- ✅ `/central-de-ajuda/como-faco-pra-pagar-boletos-com-a-uber-conta`
+- ✅ `/central-de-ajuda/como-faco-uma-transferencia-pix-na-uber-conta`
+- ✅ `/central-de-ajuda/como-fazer-a-recarga-pela-uber-conta`
+- ✅ `/central-de-ajuda/como-funciona-a-cobertura-do-seguro-celular`
+- ✅ `/central-de-ajuda/como-funciona-o-repasse-de-ganhos`
+- ✅ `/central-de-ajuda/como-receber-com-pix-na-uber-conta`
+- ✅ `/central-de-ajuda/como-troco-a-senha-do-meu-app-uber-conta`
+- ✅ `/central-de-ajuda/como-vejo-a-senha-do-meu-cartao`
+- ✅ `/central-de-ajuda/consigo-parcelar-debitos-em-atraso`
+- ✅ `/central-de-ajuda/e-possivel-desativar-o-pagamento-por-aproximacao`
+- ✅ `/central-de-ajuda/em-quanto-tempo-eu-recebo-o-valor-da-antecipacao`
+- ✅ `/central-de-ajuda/o-cdb-da-uber-conta-e-seguro`
+- ✅ `/central-de-ajuda/o-cdb-da-uber-conta-tem-impostos`
+- ✅ `/central-de-ajuda/o-que-acontece-se-eu-parar-de-recarregar-meu-uber-chip`
+- ✅ `/central-de-ajuda/o-que-acontece-se-eu-perder-meu-cartao`
+- ✅ `/central-de-ajuda/o-que-e-a-antecipacao-do-saque-aniversario-do-fgts`
+- ✅ `/central-de-ajuda/o-que-e-a-uber-conta`
+- ✅ `/central-de-ajuda/o-que-e-cashback`
+- ✅ `/central-de-ajuda/o-que-e-credito-rapido`
+- ✅ `/central-de-ajuda/o-que-e-e-sim`
+- ✅ `/central-de-ajuda/o-que-e-imei-e-onde-encontra-lo`
+- ✅ `/central-de-ajuda/o-que-e-o-cdb`
+- ✅ `/central-de-ajuda/o-que-e-o-km-de-vantagens`
+- ✅ `/central-de-ajuda/o-que-e-o-saque-aniversario-fgts`
+- ✅ `/central-de-ajuda/o-que-e-o-seguro-celular`
+- ✅ `/central-de-ajuda/o-que-e-pix-automatico`
+- ✅ `/central-de-ajuda/o-que-e-tag-veloe`
+- ✅ `/central-de-ajuda/o-que-e-uber-conta-desconto`
+- ✅ `/central-de-ajuda/o-que-sao-debitos-veiculares`
+- ✅ `/central-de-ajuda/o-uber-chip-e-confiavel`
+- ✅ `/central-de-ajuda/porque-fui-negado-no-emprestimo`
+- ✅ `/central-de-ajuda/posso-abrir-uma-uber-conta-sem-ser-parceiro-da-uber`
+- ✅ `/central-de-ajuda/posso-agendar-um-pix`
+- ✅ `/central-de-ajuda/posso-parcelar-os-debitos-veiculares-com-o-cartao-da-uber-conta`
+- ✅ `/central-de-ajuda/preciso-esperar-pra-resgatar-o-valor-investido`
+- ✅ `/central-de-ajuda/quais-as-vantagens-do-uber-conta-desconto`
+- ✅ `/central-de-ajuda/quais-metodos-de-pagamento-posso-usar-para-pagar`
+- ✅ `/central-de-ajuda/quais-modelos-de-celulares-possuem-cobertura`
+- ✅ `/central-de-ajuda/quais-sao-os-emprestimos-da-uber-conta`
+- ✅ `/central-de-ajuda/quais-sao-os-pre-requisitos-para-antecipar-o-fgts`
+- ✅ `/central-de-ajuda/qual-a-diferenca-do-credito-pessoal-para-o-credito-rapido`
+- ✅ `/central-de-ajuda/qual-a-diferenca-entre-cashback-e-uber-conta-desconto`
+- ✅ `/central-de-ajuda/quando-posso-contratar-o-credito-rapido-novamente`
+- ✅ `/central-de-ajuda/quanto-custa-a-tag-veloe`
+- ✅ `/central-de-ajuda/quanto-de-cashback-posso-receber-com-o-kmv`
+- ✅ `/central-de-ajuda/quanto-rende-o-cdb-da-uber-conta`
+- ✅ `/central-de-ajuda/quanto-tempo-leva-pra-chegar-minha-tag-veloe`
+- ✅ `/central-de-ajuda/que-vantagens-ou-opcoes-de-cashback-estao-disponiveis`
+- ✅ `/central-de-ajuda/quem-pode-ter-a-uber-conta`
+- ✅ `/central-de-ajuda/quem-pode-ter-emprestimos-na-uber-conta`

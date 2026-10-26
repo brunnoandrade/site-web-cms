@@ -171,6 +171,12 @@ export const Pages: CollectionConfig<'pages'> = {
             }),
 
             MetaDescriptionField({}),
+            {
+              name: 'keywords',
+              label: 'Palavras-chave',
+              type: 'text',
+              admin: { description: 'Separadas por vírgula (meta keywords).' },
+            },
             PreviewField({
               // if the `generateUrl` function is configured
               hasGenerateFn: true,

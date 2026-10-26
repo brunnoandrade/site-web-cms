@@ -5,7 +5,9 @@ import React from 'react'
 
 import { HelpBackBar, QuestionList } from '@/components/UberHelp'
 import { RenderHero } from '@/heros/RenderHero'
+import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
+import { buildMetadata } from '@/utilities/seo'
 import { getHelpPage, helpIndexHref, helpIndexLabel, isUberHelp, searchFaqs } from '@/lib/uber-help'
 
 type Args = {
@@ -49,7 +51,16 @@ export default async function HelpSearchPage({ params, searchParams }: Args) {
   )
 }
 
-export async function generateMetadata({ params }: Pick<Args, 'params'>): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Args): Promise<Metadata> {
   const tenant = await requireTenant((await params).tenant)
-  return { title: `Busca | Central de Ajuda | ${tenant.name}`, robots: { index: false } }
+  const query = ((await searchParams).q ?? '').trim()
+  const home = await findOne('pages', { tenant: tenant.slug, where: { slug: { equals: 'home' } } })
+  return buildMetadata({
+    tenant,
+    path: `${helpIndexHref}/busca${query ? `?q=${encodeURIComponent(query)}` : ''}`,
+    title: 'Busca',
+    description: home?.meta?.title,
+    image: home?.meta?.image,
+    noindex: true,
+  })
 }

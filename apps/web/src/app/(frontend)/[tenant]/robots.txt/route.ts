@@ -1,6 +1,6 @@
 import { requireTenant } from '@/lib/tenant'
 
-/** robots.txt of each tenant, pointing to its own sitemaps. */
+/** robots.txt of each tenant, pointing to its own sitemap index. */
 export async function GET(_req: Request, { params }: { params: Promise<{ tenant: string }> }) {
   const { tenant: tenantSlug } = await params
   const tenant = await requireTenant(tenantSlug)
@@ -10,8 +10,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ tenant:
     'Disallow: /next/',
     'Disallow: /api/',
     '',
-    `Sitemap: ${tenant.siteUrl}/pages-sitemap.xml`,
-    `Sitemap: ${tenant.siteUrl}/posts-sitemap.xml`,
+    `Sitemap: ${tenant.siteUrl}/sitemap.xml`,
     '',
   ].join('\n')
 

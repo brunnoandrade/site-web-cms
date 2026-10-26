@@ -131,6 +131,35 @@ export const Tenants: CollectionConfig = {
       },
     },
     {
+      // Search engine and social defaults of the property (page titles, share image).
+      name: 'seoTitleSuffix',
+      label: 'Sufixo do título das páginas (SEO)',
+      type: 'text',
+      admin: {
+        description:
+          'Anexado ao título de cada página no <title>. Ex.: " • Uber Conta". Vazio: " | <nome da propriedade>". Não vai para og:title nem twitter:title.',
+      },
+    },
+    {
+      name: 'seoDefaultImage',
+      label: 'Imagem padrão de compartilhamento (SEO)',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description: 'Usada em og:image e twitter:image quando a página não tem imagem própria (1200×630).',
+      },
+    },
+    {
+      name: 'llmsTxt',
+      label: 'llms.txt (guia para assistentes de IA)',
+      type: 'textarea',
+      admin: {
+        rows: 24,
+        description:
+          'Servido em /llms.txt. Markdown: título (#), resumo (>), seções (##) com links "- [Nome](URL): descrição". Use {{siteUrl}} no lugar do endereço da propriedade. Vazio: /llms.txt não existe.',
+      },
+    },
+    {
       name: 'domains',
       label: 'Domínios',
       type: 'array',

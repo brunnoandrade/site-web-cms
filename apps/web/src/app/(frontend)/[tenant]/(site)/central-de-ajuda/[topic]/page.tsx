@@ -5,7 +5,9 @@ import React from 'react'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import RichText from '@/components/RichText'
+import { JsonLd } from '@/components/JsonLd'
 import { QuestionArticle, HelpBackBar } from '@/components/UberHelp'
+import { breadcrumbNode, qaPageNode } from '@/lib/jsonld'
 import { requireHelpTopic, topicQuestions } from '@/lib/help'
 import {
   categoryPath,
@@ -18,6 +20,7 @@ import {
 } from '@/lib/uber-help'
 import { notFound } from 'next/navigation'
 import { requireTenant } from '@/lib/tenant'
+import { buildMetadata, collapse, lexicalText } from '@/utilities/seo'
 
 type Args = { params: Promise<{ tenant: string; topic: string }> }
 
@@ -50,6 +53,17 @@ export default async function HelpTopicPage({ params }: Args) {
           ]}
         />
         <QuestionArticle faq={faq} related={related} />
+        <JsonLd
+          data={[
+            breadcrumbNode(tenant, [
+              { name: 'Home', path: '/' },
+              { name: helpIndexLabel, path: helpIndexHref },
+              ...(category ? [{ name: category.title, path: categoryPath(category.slug!) }] : []),
+              { name: faq.question },
+            ]),
+            qaPageNode(tenant, faq, questionPath(faq.slug!)),
+          ]}
+        />
       </>
     )
   }
@@ -94,12 +108,15 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const tenant = await requireTenant(tenantSlug)
   if (isUberHelp(tenant)) {
     const faq = await getFaq(tenant.slug, decodeURIComponent(topicSlug))
-    return {
-      title: faq ? `${faq.question} | Central de Ajuda | ${tenant.name}` : undefined,
-      alternates: {
-        canonical: `${tenant.siteUrl}${questionPath(decodeURIComponent(topicSlug))}`,
-      },
-    }
+    return buildMetadata({
+      tenant,
+      path: questionPath(decodeURIComponent(topicSlug)),
+      title: faq?.question,
+      // The start of the answer, as the current site does.
+      description: faq
+        ? collapse(lexicalText((faq.answer as { root?: unknown })?.root)).slice(0, 160)
+        : undefined,
+    })
   }
   const topic = await requireHelpTopic(tenant.slug, topicSlug)
   return {
