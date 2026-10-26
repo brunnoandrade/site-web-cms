@@ -82,7 +82,7 @@ export const Header: CollectionConfig = {
               type: 'array',
               maxRows: 8,
               fields: [
-                { name: 'label', label: 'Título da coluna (ex.: Conta digital)', type: 'text', required: true },
+                { name: 'label', label: 'Título da coluna (opcional, ex.: Conta digital)', type: 'text' },
                 {
                   name: 'links',
                   label: 'Links',

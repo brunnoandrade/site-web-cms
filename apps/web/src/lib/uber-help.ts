@@ -73,7 +73,9 @@ export const getCategoryFaqs = cache(async (tenant: string, categoryId: number):
     tags: ['faqs', 'help'],
     where: { category: { equals: categoryId } },
   })
-  return docs
+  const ranks = await faqRanks(tenant)
+  const rank = (faq: Faq) => ranks.get(faq.id) ?? Number.MAX_SAFE_INTEGER
+  return docs.sort((a, b) => rank(a) - rank(b))
 })
 
 const plain = (node: unknown): string => {
@@ -84,15 +86,41 @@ const plain = (node: unknown): string => {
 
 const normalize = (value: string) => value.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
 
-/** Questions whose text or answer contains every word of the search (accents and case ignored). */
+/** Position of each question in the help center (category, group, then the editors' order). */
+const faqRanks = cache(async (tenant: string): Promise<Map<number, number>> => {
+  const [categories, topics] = await Promise.all([
+    find('help-categories', { tenant, depth: 0, limit: 100, sort: 'order', tags: ['help'] }),
+    find('help-topics', { tenant, depth: 0, limit: 200, sort: 'order', tags: ['help'] }),
+  ])
+  const ranks = new Map<number, number>()
+  for (const category of categories.docs) {
+    for (const topic of topics.docs.filter((item) => item.category === category.id)) {
+      for (const faq of topic.faqs ?? []) {
+        if (typeof faq === 'number' && !ranks.has(faq)) ranks.set(faq, ranks.size)
+      }
+    }
+  }
+  return ranks
+})
+
+/**
+ * Questions whose text or answer contains every word of the search (accents and case ignored), in
+ * the order they appear in the help center.
+ */
 export const searchFaqs = async (tenant: string, query: string): Promise<Faq[]> => {
   const words = normalize(query).split(/\s+/).filter(Boolean)
   if (words.length === 0) return []
-  const { docs } = await find('faqs', { tenant, depth: 0, limit: 500, tags: ['faqs', 'help'] })
-  return docs.filter((faq) => {
-    const text = normalize(`${faq.question} ${plain((faq.answer as { root?: unknown })?.root)}`)
-    return faq.slug && words.every((word) => text.includes(word))
-  })
+  const [{ docs }, ranks] = await Promise.all([
+    find('faqs', { tenant, depth: 0, limit: 500, tags: ['faqs', 'help'] }),
+    faqRanks(tenant),
+  ])
+  const rank = (faq: Faq) => ranks.get(faq.id) ?? Number.MAX_SAFE_INTEGER
+  return docs
+    .filter((faq) => {
+      const text = normalize(`${faq.question} ${plain((faq.answer as { root?: unknown })?.root)}`)
+      return faq.slug && words.every((word) => text.includes(word))
+    })
+    .sort((a, b) => rank(a) - rank(b))
 }
 
 export const helpIndexLabel = 'Ajuda'

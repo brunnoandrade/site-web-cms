@@ -1491,7 +1491,7 @@ export interface Header {
           description?: string | null;
           groups?:
             | {
-                label: string;
+                label?: string | null;
                 links?:
                   | {
                       link: {

@@ -27,11 +27,13 @@ const Content: React.FC<Props & { logoClass?: string }> = ({
         image={logo}
       />
     )}
-    {eyebrow && <p className="mb-2 mt-0 text-white">{eyebrow}</p>}
-    <SectionHeading className="text-white">
+    {eyebrow && (
+      <p className="mb-4 mt-0 text-base font-medium leading-none text-white">{eyebrow}</p>
+    )}
+    <SectionHeading className="!text-4xl min-[992px]:!text-[2.5rem] leading-none tracking-normal text-white">
       <Lines breakClassName="max-[991px]:hidden" text={heading} />
     </SectionHeading>
-    {text && <p className="mb-0 mt-4 font-light text-[#ddd]">{text}</p>}
+    {text && <p className="mb-0 mt-4 font-light text-white">{text}</p>}
     {items && items.length > 0 && (
       <ul className="m-0 mt-8 list-none p-0">
         {items.map((item, i) => (
@@ -43,7 +45,7 @@ const Content: React.FC<Props & { logoClass?: string }> = ({
       </ul>
     )}
     {enableLink && link && (
-      <CMSLink {...link} appearance="inverse" className="my-8 w-fit" size="lg">
+      <CMSLink {...link} appearance="inverse" className="my-8 w-fit last:mb-0" size="lg">
         <ArrowRightIcon className="size-[15px]" />
       </CMSLink>
     )}
@@ -86,18 +88,22 @@ export const ImageContentBlock: React.FC<Props> = (props) => {
   }
 
   return (
-    <Section spacing="none" className="py-8 min-[992px]:py-16" theme="light">
-      <div className="container">
-        <div className="relative grid overflow-hidden rounded-2xl bg-black text-white min-[992px]:min-h-[29rem] min-[992px]:grid-cols-2 min-[992px]:rounded-[2rem]">
-          {/* The image is the whole card on desktop (the photo sits on the left, the text on the
-              right); on mobile it comes first and the text below it. */}
+    <Section
+      spacing="none"
+      className="py-0 min-[992px]:bg-[#f3f3f3] min-[992px]:py-8"
+      theme="light"
+    >
+      <div className="container pb-[7px]">
+        <div className="relative overflow-hidden rounded-2xl bg-black text-white min-[992px]:min-h-[425px] min-[992px]:rounded-[2rem]">
+          {/* The image is the whole card (the photo on the left, the text over its right half on
+              desktop, over its lower part on mobile). */}
           <Picture
             alt=""
             className="block h-auto w-full min-[992px]:absolute min-[992px]:inset-0 min-[992px]:h-full min-[992px]:object-cover min-[992px]:object-left"
             image={image}
             mobile={imageMobile}
           />
-          <div className="relative p-6 min-[992px]:col-start-2 min-[992px]:flex min-[992px]:flex-col min-[992px]:justify-center min-[992px]:py-12 min-[992px]:pr-12">
+          <div className="absolute inset-x-0 bottom-0 pb-6 pl-5 pr-11 min-[992px]:inset-y-0 min-[992px]:left-1/2 min-[992px]:flex min-[992px]:flex-col min-[992px]:justify-center min-[992px]:p-0 min-[992px]:pr-11">
             <Content {...props} />
           </div>
         </div>

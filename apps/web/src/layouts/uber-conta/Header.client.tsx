@@ -381,7 +381,7 @@ const MegaPanel = ({ id, item }: { id: string; item: NavItem }) => {
   return (
     <div
       aria-label={mega.label}
-      className="hidden rounded-b-[2rem] bg-[#282828]/90 px-7 pb-10 pt-[31px] min-[992px]:grid min-[992px]:grid-cols-[337px_1fr] min-[992px]:gap-9 shadow-[0_4px_20px_#0003] backdrop-blur-[7px] backdrop-brightness-110 backdrop-saturate-[1.8]"
+      className="hidden rounded-b-[2rem] bg-[#282828]/90 px-7 pb-8 pt-8 min-[992px]:grid min-[992px]:min-h-[200px] min-[992px]:grid-cols-[337px_1fr] min-[992px]:gap-9 shadow-[0_4px_20px_#0003] backdrop-blur-[7px] backdrop-brightness-110 backdrop-saturate-[1.8]"
       id={id}
       role="region"
     >
@@ -401,7 +401,9 @@ const MegaPanel = ({ id, item }: { id: string; item: NavItem }) => {
       <div className="grid grid-cols-3 gap-x-6 gap-y-6">
         {(mega.groups ?? []).map((group, g) => (
           <div key={group.id ?? g}>
-            <p className="mb-2 text-sm leading-[1.3] text-white/50">{group.label}</p>
+            {group.label && (
+              <p className="mb-2 text-sm leading-[1.3] text-white/50">{group.label}</p>
+            )}
             <ul>
               {(group.links ?? []).map(({ link, id: linkId }, j) => (
                 <li key={linkId ?? j}>

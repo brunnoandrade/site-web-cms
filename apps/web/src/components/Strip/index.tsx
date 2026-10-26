@@ -23,10 +23,14 @@ type Props = {
    * disabled at the start) with one dot per scroll position between them; dots also on mobile.
    */
   primaryControls?: boolean
+  /** With `primaryControls`: only the dots, without the round arrows. */
+  dotsOnly?: boolean
   /** Advances one position every `autoplayMs` and rewinds at the end (pauses on hover, focus and reduced motion). */
   autoplayMs?: number
   /** Extra classes for the controls row (e.g. to center it under a wider block). */
   controlsClassName?: string
+  /** Extra classes for the scrolling list (e.g. side padding before the first item). */
+  listClassName?: string
   className?: string
 }
 
@@ -43,8 +47,10 @@ export const Strip: React.FC<Props> = ({
   mobileItemClassName = 'w-[85%]',
   gapClassName = 'gap-4',
   primaryControls,
+  dotsOnly,
   autoplayMs,
   controlsClassName,
+  listClassName,
   className,
 }) => {
   const ref = useRef<HTMLUListElement>(null)
@@ -131,6 +137,7 @@ export const Strip: React.FC<Props> = ({
           'm-0 flex list-none snap-x snap-mandatory overflow-x-auto p-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
           gapClassName,
           !mobileScroll && 'max-[991px]:flex-col max-[991px]:overflow-visible',
+          listClassName,
         )}
       >
         {items.map((child, i) => (
@@ -154,15 +161,17 @@ export const Strip: React.FC<Props> = ({
             controlsClassName,
           )}
         >
-          <button
-            aria-label="Anterior"
-            className={cn(button, 'max-[991px]:hidden')}
-            disabled={state.start}
-            onClick={() => goTo(Math.max(0, state.index - 1))}
-            type="button"
-          >
-            <ArrowRightIcon className="w-[18px] rotate-180" />
-          </button>
+          {!dotsOnly && (
+            <button
+              aria-label="Anterior"
+              className={cn(button, 'max-[991px]:hidden')}
+              disabled={state.start}
+              onClick={() => goTo(Math.max(0, state.index - 1))}
+              type="button"
+            >
+              <ArrowRightIcon className="w-[18px] rotate-180" />
+            </button>
+          )}
           <div aria-hidden className="flex items-center gap-2">
             {Array.from({ length: state.pages }, (_, i) => (
               <button
@@ -184,15 +193,17 @@ export const Strip: React.FC<Props> = ({
               />
             ))}
           </div>
-          <button
-            aria-label="Próximo"
-            className={cn(button, 'max-[991px]:hidden')}
-            disabled={state.end}
-            onClick={() => goTo(Math.min(state.pages - 1, state.index + 1))}
-            type="button"
-          >
-            <ArrowRightIcon className="w-[18px]" />
-          </button>
+          {!dotsOnly && (
+            <button
+              aria-label="Próximo"
+              className={cn(button, 'max-[991px]:hidden')}
+              disabled={state.end}
+              onClick={() => goTo(Math.min(state.pages - 1, state.index + 1))}
+              type="button"
+            >
+              <ArrowRightIcon className="w-[18px]" />
+            </button>
+          )}
         </div>
       ) : (
         <div

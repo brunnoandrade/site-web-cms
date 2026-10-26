@@ -405,12 +405,11 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
           mega: {
             label: 'Ajuda',
             title: 'Ajuda',
-            description: 'Tire suas dúvidas e fale com a gente.',
+            description: 'Tire suas dúvidas aqui!',
             groups: [
               {
-                label: 'Atendimento',
                 links: links(
-                  ['Central de ajuda', '/central-de-ajuda/'],
+                  ['Dúvidas frequentes', '/central-de-ajuda/'],
                   ['Informações financeiras', '/informacoes-financeiras/'],
                 ),
               },

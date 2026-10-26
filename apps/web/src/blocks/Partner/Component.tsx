@@ -3,7 +3,7 @@ import React from 'react'
 import type { PartnerBlock as Props } from '@digio/payload-types'
 
 import { ArrowRightIcon } from '@/components/ArrowRightIcon'
-import { Lines, Paragraphs } from '@/components/Lines'
+import { Lines } from '@/components/Lines'
 import { CMSLink } from '@/components/Link'
 import { Section } from '@/components/Section'
 import { HeroVideo } from '@/heros/FullscreenHero/HeroVideo'
@@ -40,14 +40,22 @@ export const PartnerBlock: React.FC<Props> = ({
           srcMobile={srcMobile}
         />
       )}
-      <div className="container relative z-[5] pt-24 max-md:text-left md:text-center">
+      <div className="container relative z-[5] pt-24 max-md:pt-10 max-md:text-left md:text-center">
         <div className="mx-auto max-w-[740px]">
-          <h2 className="my-8 text-3xl font-semibold tracking-tight md:text-title">
-            <Lines breakClassName="max-md:hidden" highlightClassName="text-[#276ef1]" text={heading} />
+          <h2 className="my-8 text-[calc(1.425rem+2.1vw)] font-semibold leading-none min-[1200px]:text-[3rem]">
+            <Lines
+              breakClassName="max-md:hidden"
+              highlightClassName="text-[#276ef1]"
+              text={heading}
+            />
           </h2>
-          {text && <Paragraphs className="mb-4 mt-0 font-light text-[#4b4b4b]" text={text} />}
+          {text && (
+            <p className="mb-8 mt-0 font-light text-[#4b4b4b]">
+              <Lines text={text} />
+            </p>
+          )}
           {enableLink && link && (
-            <CMSLink {...link} appearance="default" className="mt-4" size="lg">
+            <CMSLink {...link} appearance="default" size="lg">
               <ArrowRightIcon className="size-[15px]" />
             </CMSLink>
           )}

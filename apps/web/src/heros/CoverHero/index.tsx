@@ -1,9 +1,9 @@
-import { Search } from 'lucide-react'
 import React from 'react'
 
 import type { Page } from '@digio/payload-types'
 
 import { ArrowRightIcon } from '@/components/ArrowRightIcon'
+import { HelpSearch } from '@/components/HelpSearch'
 import { CMSLink } from '@/components/Link'
 import { Picture } from '@/components/Picture'
 import RichText from '@/components/RichText'
@@ -59,16 +59,19 @@ export const CoverHero: React.FC<Page['hero']> = ({
         <div
           className={cn(
             'w-full',
-            half ? 'max-w-[720px]' : 'max-w-[552px]',
+            half ? cn('max-w-[720px]', searchPlaceholder && 'min-[768px]:w-fit') : 'max-w-[552px]',
             half
-              ? 'mb-16 text-center min-[992px]:mb-[10vh]'
+              ? cn(
+                  'mb-16 text-center min-[992px]:mb-[10vh]',
+                  searchPlaceholder && 'max-[991px]:mb-20',
+                )
               : 'max-md:flex max-md:h-screen max-md:flex-col max-md:pt-[15vh]',
           )}
         >
           {logo && typeof logo === 'object' && (
             <Picture
               alt={logo.alt ?? ''}
-              className="mb-4 h-[25px] w-auto max-md:hidden"
+              className="-ml-px mb-4 h-[25px] w-auto max-md:hidden"
               image={logo}
             />
           )}
@@ -78,15 +81,14 @@ export const CoverHero: React.FC<Page['hero']> = ({
                 half
                   ? cn(
                       '!mx-auto',
-                      // Blog: the site's .display-2 (calc(1.575rem + 3.9vw), 4.5rem from 1200px), same on mobile.
-                      searchPlaceholder
-                        ? '[&_h1]:text-[calc(1.375rem+1.5vw)] min-[1200px]:[&_h1]:!text-[3rem]'
-                        : '[&_h1]:text-[calc(1.575rem+3.9vw)] min-[1200px]:[&_h1]:!text-[4.5rem]',
+                      // Blog and help center: the site's .display-2 (calc(1.575rem + 3.9vw), 4.5rem from 1200px), same on mobile.
                     )
                   : '!mx-0',
                 // Half hero tagline (.hero.half .tagline): #ddd, weight 500.
                 half && '[&_h6]:!font-medium [&_h6]:!text-[#ddd]',
                 'w-full [&_h1]:mb-2 [&_h1]:text-[calc(1.525rem+3.3vw)] [&_h1]:font-semibold [&_h1]:leading-none min-[1200px]:[&_h1]:text-[4rem] [&_h6]:mb-2 [&_h6]:text-[calc(1.275rem+0.3vw)] [&_h6]:font-semibold min-[1200px]:[&_h6]:text-2xl [&_h6]:leading-none max-md:[&_h6]:text-base max-md:[&_h6]:font-medium max-md:[&_h6]:!font-[family-name:var(--font-sans)] [&_p]:m-0 [&_p]:mt-4 max-md:[&_p]:mt-6 [&_p]:font-light [&_p]:leading-normal',
+                half &&
+                  '[&_h1]:text-[calc(1.575rem+3.9vw)] [&_h1]:!leading-none min-[1200px]:[&_h1]:!text-[4.5rem]',
                 onLight
                   ? '[&_h1]:text-black [&_h6]:text-black [&_p]:text-[#4b4b4b]'
                   : '[&_h1]:text-white [&_h6]:text-white [&_p]:text-[#ddd]',
@@ -137,24 +139,18 @@ export const CoverHero: React.FC<Page['hero']> = ({
 
   // Help center: the search box sits on the lower edge of the hero, half over the next section.
   return (
-    <div className="relative mb-8">
+    <div className="relative bg-[#f3f3f3] pb-9">
       {hero}
       <form
         action="/central-de-ajuda/busca"
-        className="absolute inset-x-0 bottom-0 z-[3] mx-auto w-[min(92%,46rem)] translate-y-1/2"
+        className="absolute inset-x-0 bottom-0 z-[3]"
         role="search"
       >
-        <label className="sr-only" htmlFor="help-search">
-          {searchPlaceholder}
-        </label>
-        <div className="flex items-center gap-3 rounded-[0.6rem] bg-white px-5 py-4 text-black shadow-sm">
-          <Search aria-hidden className="size-5 shrink-0" />
-          <input
-            className="w-full border-0 bg-transparent p-0 text-sm font-normal text-black outline-none placeholder:text-[#4b4b4b]"
-            id="help-search"
-            name="q"
+        <div className="container">
+          <HelpSearch
             placeholder={searchPlaceholder}
-            type="search"
+            questionBase="/central-de-ajuda"
+            searchPath="/central-de-ajuda/busca"
           />
         </div>
       </form>
