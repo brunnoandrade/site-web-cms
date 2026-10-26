@@ -10,6 +10,7 @@ import RichText from '@/components/RichText'
 import { PostHero } from '@/heros/PostHero'
 import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
+import { uiTextsOf } from '@/lib/uiTexts'
 import { pathsOf } from '@/lib/urlStyle'
 import { generateMeta } from '@/utilities/generateMeta'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
@@ -73,7 +74,7 @@ export async function PostPage({
             breadcrumbNode(
               tenant,
               [
-                { name: 'Home', path: '/' },
+                { name: uiTextsOf(tenant).crumbHome, path: '/' },
                 { name: 'Blog', path: pathsOf(tenant).blogIndex() },
                 ...(typeof post.category === 'object' && post.category
                   ? [

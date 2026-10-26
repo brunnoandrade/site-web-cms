@@ -2,6 +2,7 @@
 
 import React, { useEffect, useId, useRef, useState } from 'react'
 
+import { useUiTexts } from '@/components/UiTexts'
 import { cn } from '@/utilities/ui'
 
 type Suggestion = { question: string; slug: string }
@@ -12,8 +13,6 @@ type Props = {
   searchPath: string
   /** Where each question links to (`<questionBase>/<slug>`). */
   questionBase: string
-  /** Terms shown when the box is focused and empty. */
-  popular?: string[]
 }
 
 const SearchIcon = () => (
@@ -61,12 +60,9 @@ const Highlight: React.FC<{ text: string; query: string }> = ({ text, query }) =
  * links to its page), "Enter" goes to the full search. The X clears the box; a click outside or
  * Esc closes the list.
  */
-export const HelpSearch: React.FC<Props> = ({
-  placeholder,
-  searchPath,
-  questionBase,
-  popular = ['Pix', 'Empréstimos', 'Aplicativo'],
-}) => {
+export const HelpSearch: React.FC<Props> = ({ placeholder, searchPath, questionBase }) => {
+  const texts = useUiTexts()
+  const popular = texts.popularSearches
   const id = useId()
   const wrapper = useRef<HTMLDivElement>(null)
   const [query, setQuery] = useState('')
@@ -136,7 +132,7 @@ export const HelpSearch: React.FC<Props> = ({
         />
         {typing && (
           <button
-            aria-label="Limpar busca"
+            aria-label={texts.searchClear}
             className="absolute right-6 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center border-0 bg-transparent p-0 text-black"
             onClick={() => {
               setQuery('')
@@ -153,12 +149,12 @@ export const HelpSearch: React.FC<Props> = ({
           </button>
         )}
       </div>
-      {open && (!typing || items) && (
+      {open && (typing ? items : popular.length > 0) && (
         <div className="absolute inset-x-0 top-full z-50 -mt-2.5 overflow-hidden rounded-b-2xl bg-white pt-2.5 shadow-[0_4px_12px_#0000001a]">
           {!typing || (items && items.length > 0) ? (
             <>
               <p className="m-0 mt-6 p-4 text-base font-semibold leading-none text-black">
-                Sugestões:
+                {texts.searchSuggestions}
               </p>
               <ul className="m-0 list-none p-0">
                 {typing
@@ -187,7 +183,7 @@ export const HelpSearch: React.FC<Props> = ({
             </>
           ) : (
             <p className="m-0 mt-6 p-4 text-base font-light leading-none text-black/50">
-              Nenhuma sugestão encontrada
+              {texts.searchNoResults}
             </p>
           )}
         </div>

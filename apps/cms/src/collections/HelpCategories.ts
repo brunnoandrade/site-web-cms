@@ -33,6 +33,16 @@ export const HelpCategories: CollectionConfig = {
     { name: 'description', label: t('Descrição', 'Description'), type: 'textarea' },
     { name: 'icon', label: t('Ícone', 'Icon'), type: 'upload', relationTo: 'media' },
     {
+      // Overrides of what the page would show in search results; empty uses the question/category.
+      name: 'seo',
+      label: t('SEO', 'SEO'),
+      type: 'group',
+      fields: [
+        { name: 'title', label: t('Título (SEO)', 'Title (SEO)'), type: 'text' },
+        { name: 'description', label: t('Descrição (SEO)', 'Description (SEO)'), type: 'textarea' },
+      ],
+    },
+    {
       name: 'order',
       label: t('Ordem', 'Order'),
       type: 'number',

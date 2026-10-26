@@ -9,6 +9,7 @@ import { JsonLd } from '@/components/JsonLd'
 import { RenderHero } from '@/heros/RenderHero'
 import { breadcrumbNode, itemListNode, webPageNode } from '@/lib/jsonld'
 import { requireTenant } from '@/lib/tenant'
+import { uiTextsOf } from '@/lib/uiTexts'
 import { buildMetadata } from '@/utilities/seo'
 import {
   getCategoryGroups,
@@ -40,6 +41,7 @@ export default async function HelpCategoryPage({ params, searchParams }: Args) {
   ])
   if (!category) notFound()
   const groups = await getCategoryGroups(tenant.slug, category.id)
+  const texts = uiTextsOf(tenant)
 
   return (
     <>
@@ -47,21 +49,21 @@ export default async function HelpCategoryPage({ params, searchParams }: Args) {
       <div className="bg-[#f3f3f3]">
         <HelpBackBar
           back={helpIndexHref}
-          items={[{ label: helpIndexLabel, href: helpIndexHref }, { label: category.title }]}
+          items={[{ label: texts.crumbHelp, href: helpIndexHref }, { label: category.title }]}
         />
       </div>
       <CategoryGroups category={category} groups={groups} />
       <JsonLd
         data={[
           breadcrumbNode(tenant, [
-            { name: 'Home', path: '/' },
-            { name: 'Ajuda', path: helpIndexHref },
+            { name: texts.crumbHome, path: '/' },
+            { name: texts.crumbHelp, path: helpIndexHref },
             { name: category.title },
           ]),
           webPageNode(tenant, {
             path: categoryPath(category.slug!),
-            name: `Central de Ajuda: ${category.title}`,
-            description: category.description,
+            name: category.seo?.title || `${texts.helpTitle}: ${category.title}`,
+            description: category.seo?.description || category.description,
             extra: {
               mainEntity: itemListNode(
                 tenant,
@@ -91,8 +93,10 @@ export async function generateMetadata({ params, searchParams }: Args): Promise<
   return buildMetadata({
     tenant,
     path: category ? `${categoryPath(category.slug!)}` : helpIndexHref,
-    title: category ? `Central de Ajuda: ${category.title}` : 'Central de Ajuda',
-    description: category?.description ?? page?.meta?.description,
+    title: category
+      ? category.seo?.title || `${uiTextsOf(tenant).helpTitle}: ${category.title}`
+      : uiTextsOf(tenant).helpTitle,
+    description: category?.seo?.description || category?.description || page?.meta?.description,
     keywords: page?.meta?.keywords,
     image: page?.meta?.image,
   })

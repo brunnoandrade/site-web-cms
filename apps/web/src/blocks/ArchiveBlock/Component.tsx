@@ -6,6 +6,7 @@ import { ArchiveBlockView } from './View'
 import { getArchivePosts } from './data'
 import { getMediumFeed } from './feed'
 import { requireTenant } from '@/lib/tenant'
+import { uiTextsOf } from '@/lib/uiTexts'
 import { styleOf } from '@/lib/urlStyle'
 
 export const ArchiveBlock: React.FC<
@@ -19,7 +20,15 @@ export const ArchiveBlock: React.FC<
   // With a feed the CMS posts are not needed.
   const posts = feed.length > 0 ? [] : await getArchivePosts(props)
 
-  const urlStyle = styleOf(await requireTenant(props.tenant))
+  const tenant = await requireTenant(props.tenant)
 
-  return <ArchiveBlockView {...props} feed={feed} posts={posts} urlStyle={urlStyle} />
+  return (
+    <ArchiveBlockView
+      {...props}
+      feed={feed}
+      posts={posts}
+      readMoreLabel={uiTextsOf(tenant).readMoreBlog}
+      urlStyle={styleOf(tenant)}
+    />
+  )
 }

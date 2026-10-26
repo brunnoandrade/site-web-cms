@@ -330,6 +330,38 @@ export interface Tenant {
    */
   llmsTxt?: string | null;
   /**
+   * Textos fixos da interface (botões, rótulos, mensagens). Vazio: usa o texto padrão do site.
+   */
+  uiTexts?: {
+    readMoreBlog?: string | null;
+    relatedQuestions?: string | null;
+    helpTitle?: string | null;
+    crumbHome?: string | null;
+    crumbHelp?: string | null;
+    searchPageTitle?: string | null;
+    searchSuggestions?: string | null;
+    searchNoResults?: string | null;
+    searchClear?: string | null;
+    popularSearches?:
+      | {
+          term: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Aparece nos dados estruturados de todas as páginas. Sem nome e sem links das lojas, o aplicativo não é listado.
+   */
+  app?: {
+    name?: string | null;
+    androidUrl?: string | null;
+    iosUrl?: string | null;
+    /**
+     * Usado nos dados estruturados da organização. Vazio: /icons/apple-touch-icon.png.
+     */
+    organizationLogo?: (number | null) | Media;
+  };
+  /**
    * Hosts que respondem por esta propriedade (ex.: www.digio.com.br). Sem protocolo, porta ou caminho. Um domínio só pode pertencer a uma propriedade.
    */
   domains?:
@@ -946,6 +978,10 @@ export interface Faq {
     };
     [k: string]: unknown;
   };
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
   category?: (number | null) | HelpCategory;
   updatedAt: string;
   createdAt: string;
@@ -965,6 +1001,10 @@ export interface HelpCategory {
   slug: string;
   description?: string | null;
   icon?: (number | null) | Media;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
   /**
    * Lower comes first.
    */
@@ -2702,6 +2742,12 @@ export interface FaqsSelect<T extends boolean = true> {
   generateSlug?: T;
   slug?: T;
   answer?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
   category?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -2717,6 +2763,12 @@ export interface HelpCategoriesSelect<T extends boolean = true> {
   slug?: T;
   description?: T;
   icon?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
   order?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -2890,6 +2942,33 @@ export interface TenantsSelect<T extends boolean = true> {
   seoTitleSuffix?: T;
   seoDefaultImage?: T;
   llmsTxt?: T;
+  uiTexts?:
+    | T
+    | {
+        readMoreBlog?: T;
+        relatedQuestions?: T;
+        helpTitle?: T;
+        crumbHome?: T;
+        crumbHelp?: T;
+        searchPageTitle?: T;
+        searchSuggestions?: T;
+        searchNoResults?: T;
+        searchClear?: T;
+        popularSearches?:
+          | T
+          | {
+              term?: T;
+              id?: T;
+            };
+      };
+  app?:
+    | T
+    | {
+        name?: T;
+        androidUrl?: T;
+        iosUrl?: T;
+        organizationLogo?: T;
+      };
   domains?:
     | T
     | {

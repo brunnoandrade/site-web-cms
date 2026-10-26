@@ -54,6 +54,24 @@ export const seedUberSeo = async (payload: Payload) => {
       seoTitleSuffix: ' • Uber Conta',
       seoDefaultImage: shareId,
       llmsTxt: await readFile(llmsFile, 'utf8'),
+      // Interface texts and app of the property (editable in the admin; these are the current ones).
+      uiTexts: {
+        readMoreBlog: 'Leia no Blog',
+        relatedQuestions: 'Assuntos relacionados',
+        helpTitle: 'Central de Ajuda',
+        crumbHome: 'Home',
+        crumbHelp: 'Ajuda',
+        searchPageTitle: 'Busca',
+        searchSuggestions: 'Sugestões:',
+        searchNoResults: 'Nenhuma sugestão encontrada',
+        searchClear: 'Limpar busca',
+        popularSearches: [{ term: 'Pix' }, { term: 'Empréstimos' }, { term: 'Aplicativo' }],
+      },
+      app: {
+        name: 'Uber Conta',
+        androidUrl: 'https://play.google.com/store/apps/details?id=br.com.digio.uber',
+        iosUrl: 'http://apps.apple.com/us/app/uber-conta/id1550784531',
+      },
     },
   })
 

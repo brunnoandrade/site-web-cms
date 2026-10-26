@@ -7,8 +7,9 @@ import { HelpBackBar, QuestionList } from '@/components/UberHelp'
 import { RenderHero } from '@/heros/RenderHero'
 import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
+import { uiTextsOf } from '@/lib/uiTexts'
 import { buildMetadata } from '@/utilities/seo'
-import { getHelpPage, helpIndexHref, helpIndexLabel, isUberHelp, searchFaqs } from '@/lib/uber-help'
+import { getHelpPage, helpIndexHref, isUberHelp, searchFaqs } from '@/lib/uber-help'
 
 type Args = {
   params: Promise<{ tenant: string }>
@@ -19,6 +20,7 @@ export default async function HelpSearchPage({ params, searchParams }: Args) {
   const tenant = await requireTenant((await params).tenant)
   if (!isUberHelp(tenant)) notFound()
   const query = ((await searchParams).q ?? '').trim()
+  const texts = uiTextsOf(tenant)
   const [page, results] = await Promise.all([
     getHelpPage(tenant.slug),
     searchFaqs(tenant.slug, query),
@@ -30,7 +32,10 @@ export default async function HelpSearchPage({ params, searchParams }: Args) {
       <div className="bg-[#f3f3f3]">
         <HelpBackBar
           back={helpIndexHref}
-          items={[{ label: helpIndexLabel, href: helpIndexHref }, { label: 'Busca' }]}
+          items={[
+            { label: texts.crumbHelp, href: helpIndexHref },
+            { label: texts.searchPageTitle },
+          ]}
         />
       </div>
       <section className="bg-[#f3f3f3] pb-24">
@@ -41,7 +46,7 @@ export default async function HelpSearchPage({ params, searchParams }: Args) {
           {query && results.length === 0 && (
             <p className="font-light text-[#4b4b4b]">
               Não encontramos nenhuma pergunta com esses termos. Tente outras palavras ou escolha
-              uma categoria na <Link href={helpIndexHref}>Central de Ajuda</Link>.
+              uma categoria na <Link href={helpIndexHref}>{texts.helpTitle}</Link>.
             </p>
           )}
           {results.length > 0 && <QuestionList faqs={results} />}
@@ -58,7 +63,7 @@ export async function generateMetadata({ params, searchParams }: Args): Promise<
   return buildMetadata({
     tenant,
     path: `${helpIndexHref}/busca${query ? `?q=${encodeURIComponent(query)}` : ''}`,
-    title: 'Busca',
+    title: uiTextsOf(tenant).searchPageTitle,
     description: home?.meta?.title,
     image: home?.meta?.image,
     noindex: true,

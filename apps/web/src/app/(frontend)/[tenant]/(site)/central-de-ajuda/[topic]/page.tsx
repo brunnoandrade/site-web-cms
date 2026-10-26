@@ -14,12 +14,12 @@ import {
   getCategoryFaqs,
   getFaq,
   helpIndexHref,
-  helpIndexLabel,
   isUberHelp,
   questionPath,
 } from '@/lib/uber-help'
 import { notFound } from 'next/navigation'
 import { requireTenant } from '@/lib/tenant'
+import { uiTextsOf } from '@/lib/uiTexts'
 import { buildMetadata, collapse, lexicalText } from '@/utilities/seo'
 
 type Args = { params: Promise<{ tenant: string; topic: string }> }
@@ -34,6 +34,7 @@ export default async function HelpTopicPage({ params }: Args) {
 
   // Uber Conta: the URL is the question itself (/central-de-ajuda/<pergunta>/).
   if (isUberHelp(tenant)) {
+    const texts = uiTextsOf(tenant)
     const faq = await getFaq(tenant.slug, decodeURIComponent(topicSlug))
     if (!faq) notFound()
     const category = typeof faq.category === 'object' ? faq.category : null
@@ -47,17 +48,17 @@ export default async function HelpTopicPage({ params }: Args) {
         <HelpBackBar
           back={category ? categoryPath(category.slug!) : helpIndexHref}
           items={[
-            { label: helpIndexLabel, href: helpIndexHref },
+            { label: texts.crumbHelp, href: helpIndexHref },
             ...(category ? [{ label: category.title, href: categoryPath(category.slug!) }] : []),
             { label: faq.question },
           ]}
         />
-        <QuestionArticle faq={faq} related={related} />
+        <QuestionArticle faq={faq} related={related} relatedTitle={texts.relatedQuestions} />
         <JsonLd
           data={[
             breadcrumbNode(tenant, [
-              { name: 'Home', path: '/' },
-              { name: helpIndexLabel, path: helpIndexHref },
+              { name: texts.crumbHome, path: '/' },
+              { name: texts.crumbHelp, path: helpIndexHref },
               ...(category ? [{ name: category.title, path: categoryPath(category.slug!) }] : []),
               { name: faq.question },
             ]),
@@ -111,11 +112,13 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
     return buildMetadata({
       tenant,
       path: questionPath(decodeURIComponent(topicSlug)),
-      title: faq?.question,
+      title: faq?.seo?.title || faq?.question,
       // The start of the answer, as the current site does.
-      description: faq
-        ? collapse(lexicalText((faq.answer as { root?: unknown })?.root)).slice(0, 160)
-        : undefined,
+      description:
+        faq?.seo?.description ||
+        (faq
+          ? collapse(lexicalText((faq.answer as { root?: unknown })?.root)).slice(0, 160)
+          : undefined),
     })
   }
   const topic = await requireHelpTopic(tenant.slug, topicSlug)

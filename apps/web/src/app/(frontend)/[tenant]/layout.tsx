@@ -5,7 +5,9 @@ import React from 'react'
 import { AdminBar } from '@/components/AdminBar'
 import { AnchorScroll } from '@/components/AnchorScroll'
 import { JsonLd } from '@/components/JsonLd'
-import { siteNodes, uberAppNode } from '@/lib/jsonld'
+import { UiTextsProvider } from '@/components/UiTexts'
+import { appNode, siteNodes } from '@/lib/jsonld'
+import { uiTextsOf } from '@/lib/uiTexts'
 import { isUberConta } from '@/lib/uber-help'
 import { themeStyle } from '@/lib/themes'
 import { requireTenant } from '@/lib/tenant'
@@ -39,10 +41,10 @@ export default async function TenantLayout({ children, params }: Args) {
       <JsonLd
         data={[
           ...siteNodes(tenant, isUberConta(tenant) ? '/central-de-ajuda/busca' : undefined),
-          ...(isUberConta(tenant) ? [uberAppNode()] : []),
+          ...(appNode(tenant) ? [appNode(tenant)!] : []),
         ]}
       />
-      {children}
+      <UiTextsProvider value={uiTextsOf(tenant)}>{children}</UiTextsProvider>
     </div>
   )
 }

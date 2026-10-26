@@ -146,7 +146,8 @@ export const Tenants: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       admin: {
-        description: 'Usada em og:image e twitter:image quando a página não tem imagem própria (1200×630).',
+        description:
+          'Usada em og:image e twitter:image quando a página não tem imagem própria (1200×630).',
       },
     },
     {
@@ -158,6 +159,105 @@ export const Tenants: CollectionConfig = {
         description:
           'Servido em /llms.txt. Markdown: título (#), resumo (>), seções (##) com links "- [Nome](URL): descrição". Use {{siteUrl}} no lugar do endereço da propriedade. Vazio: /llms.txt não existe.',
       },
+    },
+    {
+      // Fixed texts of the site's interface. Each one has a default in the website code: leave
+      // empty to use it. Changing a text here changes it on every page of the property.
+      name: 'uiTexts',
+      label: 'Textos do site',
+      type: 'group',
+      admin: {
+        description:
+          'Textos fixos da interface (botões, rótulos, mensagens). Vazio: usa o texto padrão do site.',
+      },
+      fields: [
+        {
+          name: 'readMoreBlog',
+          label: 'Link dos cartões do blog',
+          type: 'text',
+          admin: { placeholder: 'Leia no Blog' },
+        },
+        {
+          name: 'relatedQuestions',
+          label: 'Título dos cartões relacionados (pergunta)',
+          type: 'text',
+          admin: { placeholder: 'Assuntos relacionados' },
+        },
+        {
+          name: 'helpTitle',
+          label: 'Nome da central de ajuda (títulos e trilha)',
+          type: 'text',
+          admin: { placeholder: 'Central de Ajuda' },
+        },
+        {
+          name: 'crumbHome',
+          label: 'Trilha: início',
+          type: 'text',
+          admin: { placeholder: 'Home' },
+        },
+        {
+          name: 'crumbHelp',
+          label: 'Trilha: ajuda',
+          type: 'text',
+          admin: { placeholder: 'Ajuda' },
+        },
+        {
+          name: 'searchPageTitle',
+          label: 'Título da página de busca',
+          type: 'text',
+          admin: { placeholder: 'Busca' },
+        },
+        {
+          name: 'searchSuggestions',
+          label: 'Busca: título das sugestões',
+          type: 'text',
+          admin: { placeholder: 'Sugestões:' },
+        },
+        {
+          name: 'searchNoResults',
+          label: 'Busca: sem sugestões',
+          type: 'text',
+          admin: { placeholder: 'Nenhuma sugestão encontrada' },
+        },
+        {
+          name: 'searchClear',
+          label: 'Busca: botão de limpar (leitor de tela)',
+          type: 'text',
+          admin: { placeholder: 'Limpar busca' },
+        },
+        {
+          name: 'popularSearches',
+          label: 'Busca: termos populares (mostrados ao clicar na caixa vazia)',
+          type: 'array',
+          maxRows: 8,
+          fields: [{ name: 'term', label: 'Termo', type: 'text', required: true }],
+        },
+      ],
+    },
+    {
+      // The app of the property, listed in the structured data (schema.org) of every page.
+      name: 'app',
+      label: 'Aplicativo (dados estruturados)',
+      type: 'group',
+      admin: {
+        description:
+          'Aparece nos dados estruturados de todas as páginas. Sem nome e sem links das lojas, o aplicativo não é listado.',
+      },
+      fields: [
+        { name: 'name', label: 'Nome do aplicativo', type: 'text' },
+        { name: 'androidUrl', label: 'Link na Google Play', type: 'text' },
+        { name: 'iosUrl', label: 'Link na App Store', type: 'text' },
+        {
+          name: 'organizationLogo',
+          label: 'Logo da empresa (quadrado, 180×180)',
+          type: 'upload',
+          relationTo: 'media',
+          admin: {
+            description:
+              'Usado nos dados estruturados da organização. Vazio: /icons/apple-touch-icon.png.',
+          },
+        },
+      ],
     },
     {
       name: 'domains',

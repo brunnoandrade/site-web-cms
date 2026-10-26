@@ -29,6 +29,16 @@ export const Faqs: CollectionConfig = {
     slug({ useAsSlug: 'question', disableUnique: true, required: false }),
     { name: 'answer', label: t('Resposta', 'Answer'), type: 'richText', required: true },
     {
+      // Overrides of what the page would show in search results; empty uses the question/category.
+      name: 'seo',
+      label: t('SEO', 'SEO'),
+      type: 'group',
+      fields: [
+        { name: 'title', label: t('Título (SEO)', 'Title (SEO)'), type: 'text' },
+        { name: 'description', label: t('Descrição (SEO)', 'Description (SEO)'), type: 'textarea' },
+      ],
+    },
+    {
       name: 'category',
       label: t('Categoria da ajuda', 'Help category'),
       type: 'relationship',

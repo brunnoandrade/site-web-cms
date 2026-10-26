@@ -137,7 +137,11 @@ export const CategoryGroups: React.FC<{ category: HelpCategory; groups: HelpTopi
 )
 
 /** Question page: the answer in an article and "Assuntos relacionados" as a row of cards. */
-export const QuestionArticle: React.FC<{ faq: Faq; related: Faq[] }> = ({ faq, related }) => (
+export const QuestionArticle: React.FC<{ faq: Faq; related: Faq[]; relatedTitle: string }> = ({
+  faq,
+  related,
+  relatedTitle,
+}) => (
   <>
     <article className="container pb-4 min-[768px]:pb-12">
       <div className="mx-auto max-w-[1116px]">
@@ -154,7 +158,7 @@ export const QuestionArticle: React.FC<{ faq: Faq; related: Faq[] }> = ({ faq, r
     {related.length > 0 && (
       <section aria-labelledby="relacionados" className="container pb-16">
         <h2 className="mb-8 mt-0 text-base font-medium leading-none text-black" id="relacionados">
-          Assuntos relacionados
+          {relatedTitle}
         </h2>
         <Strip
           className="-mx-[15px]"

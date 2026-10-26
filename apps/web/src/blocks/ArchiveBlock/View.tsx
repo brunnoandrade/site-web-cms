@@ -13,6 +13,7 @@ import { paths, type UrlStyle } from '@digio/routes'
 
 import { BlogCarousel } from './BlogCarousel'
 import type { FeedItem } from './feed'
+import { defaultUiTexts } from '@/lib/uiTexts'
 
 export type ArchiveBlockViewProps = ArchiveBlockProps & {
   /** URL policy of the property (trailing slash, flat posts); defaults to the Digio form. */
@@ -21,6 +22,8 @@ export type ArchiveBlockViewProps = ArchiveBlockProps & {
   posts: Post[]
   /** External feed items (Medium): when present, the carousel shows them instead of `posts`. */
   feed?: FeedItem[]
+  /** Text of the link of each carousel card (tenant "Textos do site"). */
+  readMoreLabel?: string
 }
 
 /**
@@ -32,7 +35,8 @@ const BlogSlide: React.FC<{
   href: string
   image?: NonNullable<Post['meta']>['image'] | string | null
   external?: boolean
-}> = ({ title, href, image, external }) => (
+  readMoreLabel: string
+}> = ({ title, href, image, external, readMoreLabel }) => (
   <Link
     className="group block h-full overflow-hidden rounded-lg"
     href={href}
@@ -64,7 +68,7 @@ const BlogSlide: React.FC<{
         {title}
       </h4>
       <span className="link-underline mt-4 text-sm text-[#276ef1]">
-        Leia no Blog
+        {readMoreLabel}
         <ArrowRightIcon className="-mt-0.5 ml-2 inline w-[15px]" />
       </span>
     </span>
@@ -84,6 +88,7 @@ export const ArchiveBlockView: React.FC<ArchiveBlockViewProps> = (props) => {
     posts,
     feed = [],
     urlStyle,
+    readMoreLabel = defaultUiTexts.readMoreBlog,
   } = props
   const urls = paths(urlStyle)
 
@@ -124,6 +129,7 @@ export const ArchiveBlockView: React.FC<ArchiveBlockViewProps> = (props) => {
                   external
                   href={item.href}
                   image={item.image}
+                  readMoreLabel={readMoreLabel}
                   title={item.title}
                 />
               ))
@@ -132,6 +138,7 @@ export const ArchiveBlockView: React.FC<ArchiveBlockViewProps> = (props) => {
                   key={post.id}
                   href={urls.document('posts', post) ?? '#'}
                   image={post.meta?.image}
+                  readMoreLabel={readMoreLabel}
                   title={post.title}
                 />
               ))}

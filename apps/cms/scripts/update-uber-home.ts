@@ -1,4 +1,6 @@
 /**
+ * WARNING: overwrites CMS content with the data of the old site; initial load only, never run it once editors own the content (docs/uber-conta.md).
+ *
  * Brings the Uber Conta home blocks (solutions video and icons, blog carousel, divider, FAQ cards)
  * to the seed's current state without touching the rest of the page (the seed would recreate all
  * the tenant content). Usage: npm run -w cms uber:home. Uploads files again on every run.

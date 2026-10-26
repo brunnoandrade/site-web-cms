@@ -11,6 +11,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { breadcrumbNode, webPageNode } from '@/lib/jsonld'
 import { find } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
+import { uiTextsOf } from '@/lib/uiTexts'
 import { buildMetadata } from '@/utilities/seo'
 import { getHelpCategories, getHelpPage, helpIndexHref, isUberHelp } from '@/lib/uber-help'
 
@@ -22,6 +23,7 @@ export default async function HelpCenter({ params }: Args) {
 
   // Uber Conta: hero with search, category cards and the blocks of the CMS page.
   if (isUberHelp(tenant)) {
+    const texts = uiTextsOf(tenant)
     const [page, categories] = await Promise.all([
       getHelpPage(tenant.slug),
       getHelpCategories(tenant.slug),
@@ -34,12 +36,12 @@ export default async function HelpCenter({ params }: Args) {
         <JsonLd
           data={[
             breadcrumbNode(tenant, [
-              { name: 'Home', path: '/' },
-              { name: 'Ajuda', path: helpIndexHref },
+              { name: texts.crumbHome, path: '/' },
+              { name: texts.crumbHelp, path: helpIndexHref },
             ]),
             webPageNode(tenant, {
               path: helpIndexHref,
-              name: page?.meta?.title ?? 'Central de Ajuda',
+              name: page?.meta?.title ?? texts.helpTitle,
               description: page?.meta?.description,
             }),
           ]}
@@ -112,7 +114,7 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
   return buildMetadata({
     tenant,
     path: isUberHelp(tenant) ? helpIndexHref : helpIndexPath,
-    title: page?.meta?.title ?? 'Central de Ajuda',
+    title: page?.meta?.title ?? uiTextsOf(tenant).helpTitle,
     description:
       page?.meta?.description ?? 'Tire suas dúvidas sobre cartão, conta, Pix e outros serviços.',
     keywords: page?.meta?.keywords,

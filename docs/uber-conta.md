@@ -117,6 +117,23 @@ Como funciona: `apps/web/src/lib/urlPolicy.ts` (proxy) redireciona a forma não 
 
 Conferência: as 96 URLs do sitemap do site atual respondem 200 direto (a única exceção é `/central-de-ajuda/categorias` sem `?slug=`, que redireciona para a central). Itens de SEO que ainda faltam (título, JSON-LD, robots, sitemap) estão no relatório de virada.
 
+## Manutenção: o que se edita onde
+
+**No admin (sem deploy):** páginas e blocos, cabeçalho (mega menu) e rodapé (incluindo o texto legal), posts e categorias do blog, perguntas, categorias e grupos da Central de Ajuda (com título e descrição de SEO opcionais por pergunta e por categoria), redirects e o SEO de páginas e posts. Na propriedade (Tenants → Uber Conta):
+
+| Grupo | O que controla |
+|---|---|
+| Textos do site | "Leia no Blog", "Assuntos relacionados", nome da Central de Ajuda nos títulos e trilha, textos da busca (sugestões, sem resultado, limpar) e os termos populares. Campo vazio usa o padrão do código |
+| Aplicativo | nome e links da Google Play e App Store (dados estruturados de todas as páginas) e o logo da empresa |
+| SEO | sufixo do título, imagem padrão de compartilhamento, `llms.txt` |
+| URL | barra final e forma das URLs do blog |
+
+**Só por deploy:** logo do cabeçalho (`public/brand/uber-conta-logo.svg`, o CMS recusa SVG), o celular do bloco de passos (`public/brand/uber-conta-phone-mockup.png`), favicons e `apple-touch-icon`, cor do tema (`theme-color`) e tokens de cor, e os endereços fixos da Central de Ajuda (`/central-de-ajuda`, `/busca`, `/categorias`), que preservam as URLs atuais.
+
+### Scripts de importação: só para a carga inicial
+
+`uber:pages`, `uber:help`, `uber:blog`, `uber:home` e `uber:seo` (e o `bootstrap:dev`, que os chama) **gravam por cima do conteúdo** com os dados capturados do site antigo. Servem para montar um ambiente de desenvolvimento ou para a carga inicial. **Depois que os editores assumirem o conteúdo, não rode em homologação nem em produção**: apagaria as edições feitas no admin.
+
 ## Próximas etapas (propostas, uma por revisão)
 
 1. ~~**Cabeçalho com submenu** e logo por tenant~~ (feito; ver tabela).

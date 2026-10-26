@@ -6,6 +6,7 @@ import { JsonLd } from '@/components/JsonLd'
 import { breadcrumbNode, webPageNode } from '@/lib/jsonld'
 import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
+import { uiTextsOf } from '@/lib/uiTexts'
 import { buildMetadata } from '@/utilities/seo'
 import { pathsOf, styleOf } from '@/lib/urlStyle'
 
@@ -36,7 +37,7 @@ export default async function BlogIndex({ params, searchParams }: Args) {
         breadcrumbNode(
           tenant,
           [
-            { name: 'Home', path: '/' },
+            { name: uiTextsOf(tenant).crumbHome, path: '/' },
             { name: 'Blog', path },
           ],
           `${tenant.siteUrl}${path}#breadcrumb`,

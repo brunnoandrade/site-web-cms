@@ -1,6 +1,7 @@
 import type { Faq, Page, Post } from '@digio/payload-types'
 
 import type { Tenant } from '@/lib/cms'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { collapse, lexicalText, seoImage } from '@/utilities/seo'
 
 type Node = Record<string, unknown>
@@ -13,6 +14,13 @@ const abs = (tenant: Tenant, path: string) => `${tenant.siteUrl}${path}`
 const absoluteUrl = (tenant: Tenant, url: string) =>
   url.startsWith('http') ? url : abs(tenant, url)
 
+const organizationLogo = (tenant: Tenant) => {
+  const logo = tenant.app?.organizationLogo
+  return logo && typeof logo === 'object' && logo.url
+    ? absoluteUrl(tenant, getMediaUrl(logo.url))
+    : abs(tenant, '/icons/apple-touch-icon.png')
+}
+
 /** Organization and WebSite of the property, on every page. */
 export const siteNodes = (tenant: Tenant, searchPath?: string): Node[] => [
   {
@@ -24,7 +32,7 @@ export const siteNodes = (tenant: Tenant, searchPath?: string): Node[] => [
         url: tenant.siteUrl,
         logo: {
           '@type': 'ImageObject',
-          url: abs(tenant, '/icons/apple-touch-icon.png'),
+          url: organizationLogo(tenant),
           width: 180,
           height: 180,
         },
@@ -48,18 +56,20 @@ export const siteNodes = (tenant: Tenant, searchPath?: string): Node[] => [
   },
 ]
 
-/** The Uber Conta app, listed on every page like on the current site. */
-export const uberAppNode = (): Node => ({
-  '@type': 'SoftwareApplication',
-  name: 'Uber Conta',
-  operatingSystem: 'ANDROID, IOS',
-  applicationCategory: 'FinanceApplication',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'BRL' },
-  downloadUrl: [
-    'https://play.google.com/store/apps/details?id=br.com.digio.uber',
-    'http://apps.apple.com/us/app/uber-conta/id1550784531',
-  ],
-})
+/** The property's app (tenant "Aplicativo"), listed on every page. None without a name and a store link. */
+export const appNode = (tenant: Tenant): Node | null => {
+  const { name, androidUrl, iosUrl } = tenant.app ?? {}
+  const urls = [androidUrl, iosUrl].filter((url): url is string => Boolean(url))
+  if (!name || urls.length === 0) return null
+  return {
+    '@type': 'SoftwareApplication',
+    name,
+    operatingSystem: [androidUrl && 'ANDROID', iosUrl && 'IOS'].filter(Boolean).join(', '),
+    applicationCategory: 'FinanceApplication',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'BRL' },
+    downloadUrl: urls,
+  }
+}
 
 export const breadcrumbNode = (
   tenant: Tenant,

@@ -42,6 +42,10 @@ Central de Ajuda do Uber Conta: a pergunta usa a pergunta como título e os 160 
 
 `/llms.txt` é o guia para assistentes de IA (resumo da empresa e links por seção). Fica no campo "llms.txt" do tenant, em Markdown, e `{{siteUrl}}` vira o endereço da propriedade, então o mesmo texto serve em qualquer ambiente. Campo vazio: `/llms.txt` responde 404. O texto do Uber Conta é o do site atual (`apps/cms/scripts/uber-pages/data-seo/llms.txt`), com um ajuste: o link do Blog aponta para `/blog` do site, não para o Medium.
 
+## O que a propriedade controla
+
+No admin, em Tenants: sufixo do título, imagem padrão de compartilhamento, `llms.txt`, "Textos do site" (textos de interface e termos populares da busca) e "Aplicativo" (nome e links das lojas, logo da empresa para os dados estruturados). Perguntas e categorias da Central de Ajuda têm título e descrição de SEO opcionais (vazio: título da pergunta e início da resposta; título e descrição da categoria).
+
 ## Dados do site atual (Uber Conta)
 
 `npm run -w cms uber:seo` aplica ao CMS os títulos, descrições e palavras-chave capturados do site atual (`apps/cms/scripts/uber-pages/data-seo/seo.json`), o sufixo do título, a imagem de compartilhamento (`share.png`) e o `llms.txt` da propriedade. É seguro rodar de novo. O `bootstrap:dev` já o chama ao fim (depois do conteúdo).

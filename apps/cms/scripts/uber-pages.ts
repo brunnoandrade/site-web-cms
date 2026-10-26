@@ -1,4 +1,5 @@
-/** Creates or updates the Uber Conta inner pages. Usage: npm run -w cms uber:pages [slug ...] (body in src/endpoints/seed/uber-content.ts). */
+/** WARNING: overwrites CMS content with the data of the old site; initial load only, never run it once editors own the content (docs/uber-conta.md).
+ * Creates or updates the Uber Conta inner pages. Usage: npm run -w cms uber:pages [slug ...] (body in src/endpoints/seed/uber-content.ts). */
 import config from '@payload-config'
 import { getPayload } from 'payload'
 
