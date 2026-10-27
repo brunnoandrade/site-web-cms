@@ -10,6 +10,7 @@ import { appNode, siteNodes } from '@/lib/jsonld'
 import { uiTextsOf } from '@/lib/uiTexts'
 import { isUberConta } from '@/lib/uber-help'
 import { themeStyle } from '@/lib/themes'
+import { setCurrentTenant } from '@/lib/currentTenant'
 import { requireTenant } from '@/lib/tenant'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { SEO_ROBOTS } from '@/utilities/seo'
@@ -27,6 +28,7 @@ type Args = {
 export default async function TenantLayout({ children, params }: Args) {
   const { tenant: tenantSlug } = await params
   const tenant = await requireTenant(tenantSlug)
+  setCurrentTenant(tenant.slug)
   const { isEnabled } = await draftMode()
 
   return (

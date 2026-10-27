@@ -10,6 +10,9 @@ import { uiTextsOf } from '@/lib/uiTexts'
 import { buildMetadata } from '@/utilities/seo'
 import { pathsOf, styleOf } from '@/lib/urlStyle'
 
+// Reads the query string, so it is rendered per request; CMS data stays cached by the fetch tags.
+export const dynamic = 'force-dynamic'
+
 type Args = {
   params: Promise<{ tenant: string }>
   searchParams: Promise<{ categoria?: string; page?: string }>

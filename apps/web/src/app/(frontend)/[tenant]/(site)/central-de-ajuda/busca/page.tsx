@@ -11,6 +11,9 @@ import { uiTextsOf } from '@/lib/uiTexts'
 import { buildMetadata } from '@/utilities/seo'
 import { getHelpPage, helpIndexHref, isUberHelp, searchFaqs } from '@/lib/uber-help'
 
+// Reads the query string, so it is rendered per request; CMS data stays cached by the fetch tags.
+export const dynamic = 'force-dynamic'
+
 type Args = {
   params: Promise<{ tenant: string }>
   searchParams: Promise<{ q?: string }>

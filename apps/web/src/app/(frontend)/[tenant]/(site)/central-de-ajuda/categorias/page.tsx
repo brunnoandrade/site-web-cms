@@ -22,6 +22,9 @@ import {
   questionPath,
 } from '@/lib/uber-help'
 
+// Reads the query string, so it is rendered per request; CMS data stays cached by the fetch tags.
+export const dynamic = 'force-dynamic'
+
 // The category comes in the query string (?slug=pix), like on the current site: the page is
 // rendered per request.
 type Args = {
