@@ -12,16 +12,21 @@ type Props = {
   /** Width (px) from which `src` is used; below it `srcMobile` (default 768). */
   breakpoint?: number
   className?: string
+  /** Proportion of the mobile video (`w / h`), to reserve its space before the file loads. */
+  aspectMobile?: string
+  /** Same for the desktop video, whose width follows its height. */
+  aspectDesktop?: string
 }
 
 /**
  * Decorative background video (fades in over .5s, like the current site). The file follows the
  * screen width (md = 768px, same breakpoint as the hero layout) and only that one is downloaded.
- * No `poster`: a still that differs from the video would flash while it loads or when the file
- * changes, so the black hero shows until the first frame. With reduced motion it does not play
+ * The poster (first frame, optional) is a separate image behind it (see FullscreenHero): it paints
+ * at once and the video fades in over it. A poster that differs from the video would flash, so it
+ * must be that frame; without one the black hero shows until the first frame. With reduced motion it does not play
  * (it shows the first frame of the video). There is no pause button, like the current site.
  */
-export const HeroVideo: React.FC<Props> = ({ src, srcMobile, breakpoint = 768, className }) => {
+export const HeroVideo: React.FC<Props> = ({ src, srcMobile, breakpoint = 768, className, aspectMobile, aspectDesktop }) => {
   const ref = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -49,6 +54,8 @@ export const HeroVideo: React.FC<Props> = ({ src, srcMobile, breakpoint = 768, c
       aria-hidden
       className={cn(
         'opacity-0 animate-[fadeIn_0.5s_ease-out_forwards] motion-reduce:animate-none motion-reduce:opacity-100',
+        aspectMobile && 'max-md:[aspect-ratio:var(--video-aspect-mobile)]',
+        aspectDesktop && 'md:[aspect-ratio:var(--video-aspect-desktop)]',
         className,
       )}
       loop
@@ -56,6 +63,12 @@ export const HeroVideo: React.FC<Props> = ({ src, srcMobile, breakpoint = 768, c
       playsInline
       preload="metadata"
       ref={ref}
+      style={
+        {
+          '--video-aspect-mobile': aspectMobile,
+          '--video-aspect-desktop': aspectDesktop,
+        } as React.CSSProperties
+      }
       tabIndex={-1}
     />
   )

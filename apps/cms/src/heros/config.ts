@@ -158,6 +158,30 @@ export const hero: Field = {
       },
     },
     {
+      name: 'poster',
+      label: 'Poster do vídeo (computador)',
+      type: 'upload',
+      relationTo: 'media',
+      filterOptions: { mimeType: { contains: 'image/' } },
+      admin: {
+        condition: (_, { type } = {}) => type === 'fullscreen',
+        description:
+          'Recomendado com vídeo. Primeiro quadro do vídeo, exportado como imagem: aparece na hora, enquanto o vídeo carrega, e reserva o espaço da tela (melhora o LCP e evita saltos de layout). Tem que ser igual ao primeiro quadro, para não piscar outra imagem.',
+      },
+    },
+    {
+      name: 'posterMobile',
+      label: 'Poster do vídeo (celular)',
+      type: 'upload',
+      relationTo: 'media',
+      filterOptions: { mimeType: { contains: 'image/' } },
+      admin: {
+        condition: (_, { type } = {}) => type === 'fullscreen',
+        description:
+          'Primeiro quadro do vídeo de celular, na mesma proporção dele. Sem ele, o celular usa o poster do computador.',
+      },
+    },
+    {
       name: 'disclaimer',
       label: 'Aviso legal (texto pequeno abaixo das chamadas)',
       type: 'textarea',

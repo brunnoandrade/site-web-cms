@@ -103,6 +103,14 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
     'video/mp4',
   )
 
+  // First frame of each hero video: paints at once (LCP) and reserves the video's space.
+  const heroPoster = await upload('hero-poster.webp', 'Celular com o app Uber Conta', 'image/webp')
+  const heroPosterMobile = await upload(
+    'hero-mobile-poster.webp',
+    'Celular com o app Uber Conta',
+    'image/webp',
+  )
+
   // Solutions: the video behind the heading and the icons (SVGs of the current site, rasterized).
   const solutionsVideo = await upload(
     'solutions.mp4',
@@ -139,6 +147,8 @@ export async function seedUberConta({ payload, req, tenant, images, context }: A
         media: images[0].id,
         video: heroVideo.id,
         videoMobile: heroVideoMobile.id,
+        poster: heroPoster.id,
+        posterMobile: heroPosterMobile.id,
         disclaimer:
           'Este é um produto oferecido pelo Banco Digio e está sujeito à elegibilidade, análise de crédito e condições variáveis.',
         disclaimerLink: link('Saber mais.', '#solucoes'),

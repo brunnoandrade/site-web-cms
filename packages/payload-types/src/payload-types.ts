@@ -228,6 +228,14 @@ export interface Page {
      * Opcional. Usado em telas com menos de 768px (em geral um vídeo vertical). Sem ele, o celular usa o vídeo do computador.
      */
     videoMobile?: (number | null) | Media;
+    /**
+     * Recomendado com vídeo. Primeiro quadro do vídeo, exportado como imagem: aparece na hora, enquanto o vídeo carrega, e reserva o espaço da tela (melhora o LCP e evita saltos de layout). Tem que ser igual ao primeiro quadro, para não piscar outra imagem.
+     */
+    poster?: (number | null) | Media;
+    /**
+     * Primeiro quadro do vídeo de celular, na mesma proporção dele. Sem ele, o celular usa o poster do computador.
+     */
+    posterMobile?: (number | null) | Media;
     disclaimer?: string | null;
     disclaimerLink?: {
       type?: ('reference' | 'custom') | null;
@@ -2030,6 +2038,8 @@ export interface PagesSelect<T extends boolean = true> {
         mediaMobile?: T;
         video?: T;
         videoMobile?: T;
+        poster?: T;
+        posterMobile?: T;
         disclaimer?: T;
         disclaimerLink?:
           | T

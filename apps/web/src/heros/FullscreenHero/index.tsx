@@ -5,6 +5,7 @@ import type { Media as MediaType, Page } from '@digio/payload-types'
 import { ArrowRightIcon } from '@/components/ArrowRightIcon'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
+import { Picture } from '@/components/Picture'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
@@ -25,11 +26,25 @@ const urlOf = (media?: MediaType | number | null) =>
  * the bottom (full width, arrow pointing down) and the legal note is centered under it. The video
  * (its own mobile file, usually vertical) keeps its proportions, full width, 100px above the bottom edge, behind the text.
  */
-export const FullscreenHero: React.FC<Page['hero']> = ({ links, media, video, videoMobile, richText, disclaimer, disclaimerLink }) => {
+export const FullscreenHero: React.FC<Page['hero']> = ({
+  links,
+  media,
+  video,
+  videoMobile,
+  poster,
+  posterMobile,
+  richText,
+  disclaimer,
+  disclaimerLink,
+}) => {
   const videoSrc = urlOf(video as MediaType | number | null | undefined)
   const videoMobileSrc = urlOf(videoMobile as MediaType | number | null | undefined)
   const cover =
     'absolute inset-x-0 bottom-[100px] z-[1] h-auto w-full md:inset-x-auto md:bottom-auto md:right-0 md:top-0 md:h-full md:min-h-[900px] md:w-auto md:max-w-full md:object-cover'
+  // Box of the video: its proportion is the poster's, so the space is reserved before the file loads.
+  const posterOf = (value: typeof poster) => (typeof value === 'object' && value?.width && value.height ? value : null)
+  const mobilePoster = posterOf(posterMobile) ?? posterOf(poster)
+  const desktopPoster = posterOf(poster)
   const cta = Array.isArray(links) ? links[0]?.link : undefined
   const isAnchor = Boolean(cta?.url?.startsWith('#'))
 
@@ -39,7 +54,25 @@ export const FullscreenHero: React.FC<Page['hero']> = ({ links, media, video, vi
       data-section-theme="navy"
     >
       {videoSrc ? (
-        <HeroVideo className={cover} src={videoSrc} srcMobile={videoMobileSrc} />
+        <>
+          {/* Poster: first frame of the video. It is the LCP and keeps the video's place while it loads. */}
+          <Picture
+            alt=""
+            breakpoint={768}
+            className={cover}
+            image={poster}
+            mobile={posterMobile}
+            priority
+            sizes="100vw"
+          />
+          <HeroVideo
+            aspectDesktop={desktopPoster ? `${desktopPoster.width} / ${desktopPoster.height}` : undefined}
+            aspectMobile={mobilePoster ? `${mobilePoster.width} / ${mobilePoster.height}` : undefined}
+            className={cover}
+            src={videoSrc}
+            srcMobile={videoMobileSrc}
+          />
+        </>
       ) : (
         media &&
         typeof media === 'object' && (
