@@ -67,7 +67,7 @@ export async function UberPost({ post, tenant }: { post: Post; tenant: string })
             alt=""
             className="absolute inset-0 size-full object-cover object-center opacity-50"
             image={post.heroImage}
-            loading="eager"
+            priority
           />
         )}
         {/* Current site: .hero.half in .post (45vh, 55vh from 992px; title display-2, left aligned). */}

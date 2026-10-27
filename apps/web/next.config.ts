@@ -32,7 +32,7 @@ const nextConfig: NextConfig = {
         pathname: `${mediaURL.pathname.replace(/\/$/, '')}/**`,
       },
     ],
-    qualities: [100],
+    qualities: [75, 100],
     // Local development only: MinIO runs on localhost, which Next.js blocks by default.
     dangerouslyAllowLocalIP: process.env.IMAGES_ALLOW_LOCAL_IP === 'true',
   },

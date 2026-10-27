@@ -45,8 +45,8 @@ export const CoverHero: React.FC<Page['hero']> = ({
         alt=""
         className="absolute inset-0 z-0 size-full object-cover"
         image={media as never}
-        loading="eager"
         mobile={mediaMobile as never}
+        priority
       />
       <div
         className={cn(
