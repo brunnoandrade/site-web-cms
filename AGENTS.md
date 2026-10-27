@@ -5,7 +5,7 @@ Contexto para agentes de IA (Claude Code, GitHub Copilot, etc.). Leia este arqui
 ## O que é
 Novo site institucional da Digio (substitui o site atual).
 Escopo desta entrega: **F0 (fundação) + F1 (evolução do site)**, não transacional.
-Detalhes em `docs/escopo.md`; virada em ondas em `docs/virada.md`; decisões e aderência ao SoAD em `docs/gaps-soad.md`; revisão de segurança, correções e pendências em `docs/seguranca.md`; propriedade Uber Conta em `docs/uber-conta.md`; SEO (título, JSON-LD, mapas do site, conferência contra o site atual) em `docs/seo.md`.
+Detalhes em `docs/escopo.md`; virada em ondas em `docs/virada.md`; decisões e aderência ao SoAD em `docs/gaps-soad.md`; revisão de segurança, correções e pendências em `docs/seguranca.md`; propriedade Uber Conta em `docs/uber-conta.md`; SEO (título, JSON-LD, mapas do site, conferência contra o site atual) em `docs/seo.md`; desempenho (Lighthouse, linha de base, regras de 404, imagens e hero com vídeo) em `docs/desempenho.md`.
 
 ## Stack
 - **Monorepo npm (workspaces) com dois projetos separados**, cada um com seu Dockerfile:
