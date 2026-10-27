@@ -49,6 +49,8 @@ BOOTSTRAP_ADMIN_EMAIL=voce@digio.com.br BOOTSTRAP_ADMIN_PASSWORD=<senha> \
 npm run -w cms bootstrap:dev
 ```
 
+**Máquina nova, um comando só:** `BOOTSTRAP_ADMIN_EMAIL=voce@digio.com.br BOOTSTRAP_ADMIN_PASSWORD='<senha>' npm run setup:local` ([scripts/setup-local.sh](scripts/setup-local.sh)). Cria os `.env` com segredos gerados (iguais no CMS e no site, incluindo `CMS_API_KEY`), sobe Postgres, MinIO e Keycloak, instala as dependências e roda o `bootstrap:dev`. Não sobrescreve `.env` existente. O que **não** vem do git: edições feitas pelo admin, mídia enviada e posts do WordPress (`blog:migrate`); o conteúdo de seed (Digio e Uber Conta, com imagens) é todo versionado.
+
 O `bootstrap:dev` cria:
 
 - a propriedade **Digio**, servida em http://localhost:3000;

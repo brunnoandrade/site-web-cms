@@ -9,6 +9,7 @@
     "dev:cms": "npm run dev -w cms",
     "dev:web": "npm run dev -w web",
     "format": "prettier --write .",
+    "setup:local": "bash scripts/setup-local.sh",
     "format:check": "prettier --check .",
     "generate:types": "npm run generate:types -w cms",
     "lint": "npm run lint --workspaces --if-present",
