@@ -71,10 +71,7 @@ export const HelpSearch: React.FC<Props> = ({ placeholder, searchPath, questionB
 
   useEffect(() => {
     const term = query.trim()
-    if (!term) {
-      setItems(null)
-      return
-    }
+    if (!term) return
     const controller = new AbortController()
     const timer = window.setTimeout(() => {
       fetch(`/api/help-suggest?q=${encodeURIComponent(term)}`, { signal: controller.signal })
@@ -114,7 +111,6 @@ export const HelpSearch: React.FC<Props> = ({ placeholder, searchPath, questionB
       <div className="relative z-[100]">
         <SearchIcon />
         <input
-          aria-expanded={open}
           autoComplete="off"
           className={cn(
             'block h-[73px] w-full rounded-2xl border-2 border-solid border-transparent bg-white px-12 py-6 text-sm font-normal leading-[1.5] text-black shadow-[0_3px_3px_#00000003] outline-none transition-[border-color,box-shadow] duration-150 ease-in-out placeholder:text-black/75 focus:border-black motion-reduce:transition-none',
@@ -123,6 +119,7 @@ export const HelpSearch: React.FC<Props> = ({ placeholder, searchPath, questionB
           name="q"
           onChange={(event) => {
             setQuery(event.target.value)
+            if (!event.target.value.trim()) setItems(null)
             setOpen(true)
           }}
           onFocus={() => setOpen(true)}
@@ -136,6 +133,7 @@ export const HelpSearch: React.FC<Props> = ({ placeholder, searchPath, questionB
             className="absolute right-6 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center border-0 bg-transparent p-0 text-black"
             onClick={() => {
               setQuery('')
+              setItems(null)
               setOpen(false)
             }}
             type="button"

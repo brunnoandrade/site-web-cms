@@ -98,7 +98,9 @@ export const Strip: React.FC<Props> = ({
   // Autoplay: one position every `autoplayMs`, back to the start after the last one.
   const paused = useRef(false)
   const live = useRef({ state, goTo, overflow })
-  live.current = { state, goTo, overflow }
+  useEffect(() => {
+    live.current = { state, goTo, overflow }
+  })
   useEffect(() => {
     if (!autoplayMs || typeof window === 'undefined') return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return

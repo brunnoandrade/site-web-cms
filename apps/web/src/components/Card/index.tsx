@@ -37,6 +37,7 @@ export const Card: React.FC<{
         'group flex flex-col overflow-hidden rounded-card bg-white text-navy-900 shadow-[0_1px_0_#dde1f3] ring-1 ring-[#dde1f3] transition-shadow hover:cursor-pointer hover:shadow-lg',
         className,
       )}
+      // eslint-disable-next-line react-hooks/refs -- ref objects from the hook, only read in handlers
       ref={card.ref}
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-lilac-100">
@@ -57,6 +58,7 @@ export const Card: React.FC<{
         )}
         {titleToUse && (
           <h3 className="text-lg font-semibold leading-snug">
+            {/* eslint-disable-next-line react-hooks/refs -- see card ref above */}
             <Link className="focus-visible:underline group-hover:underline" href={href} ref={link.ref}>
               {titleToUse}
             </Link>

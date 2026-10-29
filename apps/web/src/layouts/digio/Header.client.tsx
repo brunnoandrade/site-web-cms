@@ -26,7 +26,11 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   const navItems = (data?.navItems ?? []).filter((item) => item.kind !== 'mega' && item.link)
 
   // Close the mobile menu on navigation and with Escape.
-  useEffect(() => setOpen(false), [pathname])
+  const [openedAt, setOpenedAt] = useState(pathname)
+  if (openedAt !== pathname) {
+    setOpenedAt(pathname)
+    setOpen(false)
+  }
   useEffect(() => {
     if (!open) return
     const onKey = (event: KeyboardEvent) => event.key === 'Escape' && setOpen(false)

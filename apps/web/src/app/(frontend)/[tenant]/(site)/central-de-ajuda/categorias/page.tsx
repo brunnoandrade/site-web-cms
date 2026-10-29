@@ -17,7 +17,6 @@ import {
   categoryPath,
   getHelpPage,
   helpIndexHref,
-  helpIndexLabel,
   isUberHelp,
   questionPath,
 } from '@/lib/uber-help'

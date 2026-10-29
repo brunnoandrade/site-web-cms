@@ -55,6 +55,7 @@ export const RenderBlocks: React.FC<{
    * The archive block fetches its posts, which only a server component can do. The public page
    * passes the server one; the live preview (client) passes a view fed with prefetched posts.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- server and preview views take different props
   archive: React.ComponentType<any>
 }> = (props) => {
   const { blocks, tenant, archive } = props

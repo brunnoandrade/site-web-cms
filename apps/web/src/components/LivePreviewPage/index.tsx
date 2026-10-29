@@ -11,6 +11,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { getCMSPublicURL } from '@/utilities/getURL'
 
 // Goes through the site itself (see app/(frontend)/next/live-preview/route.ts), not the CMS.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- shape defined by useLivePreview
 const relayRequest = ({ data, endpoint }: { data: Record<string, any>; endpoint: string }) =>
   fetch('/next/live-preview/', {
     method: 'POST',
@@ -37,6 +38,7 @@ export const LivePreviewPage: React.FC<Props> = ({ initialData, tenant, archiveP
     requestHandler: relayRequest,
   })
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- same contract as RenderBlocks `archive`
   const Archive = React.useMemo<React.FC<any>>(
     () =>
       function PreviewArchive(props) {

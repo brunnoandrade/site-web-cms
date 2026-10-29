@@ -27,7 +27,7 @@ const eslintConfig = [
   // Must stay last among rule sets: turns off rules that conflict with Prettier.
   prettierConfig,
   {
-    ignores: ['.next/', 'src/payload-generated-schema.ts', 'src/app/(payload)/admin/importMap.js'],
+    ignores: ['.next/', 'src/migrations/', 'src/payload-generated-schema.ts', 'src/app/(payload)/admin/importMap.js'],
   },
 ]
 
