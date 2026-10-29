@@ -166,4 +166,8 @@ As variáveis `NEXT_PUBLIC_*` e o host de imagens do site entram no build (`--bu
 | `npm run -w cms redirects:import` | importa redirects de um CSV ([docs/redirects.md](docs/redirects.md))               |
 | `npm run -w cms blog:migrate`     | migra o blog do WordPress ([docs/migracao-blog.md](docs/migracao-blog.md))         |
 
+**Banco e migrations:** o schema vem de `apps/cms/src/migrations` (a inicial cria todas as tabelas). Em produção o CMS aplica as pendentes ao subir (`prodMigrations`); em dev o Payload continua sincronizando o schema sozinho (push). Ao mudar coleções ou campos, gere uma nova com `npm run -w cms payload migrate:create <nome>` e versione o resultado; para aplicar à mão, `npm run -w cms payload migrate`. Com várias réplicas subindo ao mesmo tempo, prefira rodar `migrate` uma vez antes (job de deploy).
+
+**Health check:** `GET /api/health` no CMS devolve `200 {"status":"ok"}` se o banco responde e `503` se não (sem dados sensíveis, sem cache).
+
 Dentro de cada app: `npm run -w cms <script>` ou `npm run -w web <script>` (por exemplo, `test:e2e` e `generate:importmap`).
