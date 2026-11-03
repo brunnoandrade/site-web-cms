@@ -49,7 +49,7 @@ Blog, central de ajuda e busca ficam em `app/(frontend)/[tenant]/(site)/`, cujo 
 | **FAQ** | Duas colunas, perguntas em `<details>`, link "Outras dúvidas" | FAQ |
 | **Chamada (CTA)** e **Texto** | Com fundo da seção | — |
 
-Ícones disponíveis (lucide): `apps/cms/src/fields/icon.ts` e `apps/web/src/components/Icon`.
+Ícones disponíveis (lucide): `src/fields/icon.ts` e `src/components/Icon`.
 
 O cabeçalho é uma pílula marinho fixa no topo, com botão em destaque ("Abrir conta", configurável). O rodapé tem até 6 colunas de links e o texto legal.
 

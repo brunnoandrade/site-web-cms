@@ -4,17 +4,17 @@ Segundo tenant de produção da plataforma, depois do `digio`. O site atual (Nux
 
 ## Como subir localmente
 
-`npm run -w cms bootstrap:dev` cria o tenant `uber-conta` (domínio `uberconta.localhost`, tema `uber-conta`) com a home, FAQs, cabeçalho e rodapé de exemplo (`apps/cms/src/endpoints/seed/uber-conta.ts`) **e, em seguida, as páginas internas, a central de ajuda e o blog** (`seed/uber-content.ts`). Tudo numa execução (cerca de 30 s): os arquivos de `seed/uber-conta-assets/` vão para o storage (MinIO/S3) e os registros para o banco, sem passo manual. Testado numa instalação do zero (banco e bucket vazios): 19 páginas, 285 mídias, 65 perguntas, 11 posts. Os scripts `uber:pages`, `uber:help` e `uber:blog` continuam existindo para atualizar só uma parte sem recriar tudo. Acesse `http://uberconta.localhost:3000`. Os textos são os do site atual; as imagens são provisórias. O cabeçalho usa logo branca e o rodapé (claro) usa logo preta, ambas em `seed/uber-conta-assets/`. Para trocar uma imagem sem rodar o seed: admin → Layout → Cabeçalho/Rodapé → campo de imagem.
+`npm run bootstrap:dev` cria o tenant `uber-conta` (domínio `uberconta.localhost`, tema `uber-conta`) com a home, FAQs, cabeçalho e rodapé de exemplo (`src/endpoints/seed/uber-conta.ts`) **e, em seguida, as páginas internas, a central de ajuda e o blog** (`seed/uber-content.ts`). Tudo numa execução (cerca de 30 s): os arquivos de `seed/uber-conta-assets/` vão para o storage (MinIO/S3) e os registros para o banco, sem passo manual. Testado numa instalação do zero (banco e bucket vazios): 19 páginas, 285 mídias, 65 perguntas, 11 posts. Os scripts `uber:pages`, `uber:help` e `uber:blog` continuam existindo para atualizar só uma parte sem recriar tudo. Acesse `http://uberconta.localhost:3000`. Os textos são os do site atual; as imagens são provisórias. O cabeçalho usa logo branca e o rodapé (claro) usa logo preta, ambas em `seed/uber-conta-assets/`. Para trocar uma imagem sem rodar o seed: admin → Layout → Cabeçalho/Rodapé → campo de imagem.
 
 ## Tema por propriedade
 
-Campo **Tema visual** (`themePreset`) no tenant. Cada preset sobrescreve os tokens de cor de `globals.css` em `apps/web/src/lib/themes.ts`, aplicado no `[tenant]/layout.tsx`. Os blocos não mudam: só a paleta. Novo tema = novo preset no código e na lista do campo (exige deploy; não é livre para o editor de propósito).
+Campo **Tema visual** (`themePreset`) no tenant. Cada preset sobrescreve os tokens de cor de `globals.css` em `src/lib/themes.ts`, aplicado no `[tenant]/layout.tsx`. Os blocos não mudam: só a paleta. Novo tema = novo preset no código e na lista do campo (exige deploy; não é livre para o editor de propósito).
 
 Os nomes dos tokens são herdados da Digio: `navy` é a cor de seção escura (preto no Uber Conta), `turquoise` o destaque sobre fundo escuro, `lilac` a seção clara (cinza `#E8E8E8`). Fonte: o Uber Conta usa UberMove (proprietária, não incluída); o site usa Montserrat até haver licença.
 
 ## Design system do Uber Conta (extraído do HTML do site atual)
 
-O tema `uber-conta` (`apps/web/src/lib/themes.ts`) reaproveita os componentes da plataforma e só troca tokens. O que vem do site atual:
+O tema `uber-conta` (`src/lib/themes.ts`) reaproveita os componentes da plataforma e só troca tokens. O que vem do site atual:
 
 | Item | Valor no site atual | Na plataforma |
 |---|---|---|
@@ -72,8 +72,8 @@ O sitemap do site atual tem 96 URLs, em 5 templates (conferido no HTML renderiza
 
 O site atual é Nuxt: cada HTML traz o conteúdo do Strapi em `<script id="__NUXT_DATA__">`, então **não há raspagem do layout**, só leitura de dados estruturados (título, textos, imagens desktop/mobile, listas, FAQs com slug e categoria).
 
-1. `python3 apps/cms/scripts/uber-pages/extract.py [slug]` (produtos, sobre, informações financeiras), `extract_help.py` (central) e `extract_blog.py` (blog) leem o site, gravam JSON em `scripts/uber-pages/data/` e `data-help/` e baixam as imagens, vídeos e PDFs para `src/endpoints/seed/uber-conta-assets/`. SVG de ícone/logo vira PNG com `sharp` (a mídia recusa SVG). Em algumas páginas as imagens desktop e mobile vêm trocadas no CMS atual: o extrator usa a largura para decidir.
-2. `npm run -w cms uber:pages [slug]`, `uber:help` e `uber:blog` gravam no tenant `uber-conta` (páginas, FAQs, categorias, posts, mídia). Rodam de novo sem duplicar (a mídia é achada pelo nome do arquivo, as perguntas pelo texto, os posts pelo slug).
+1. `python3 scripts/uber-pages/extract.py [slug]` (produtos, sobre, informações financeiras), `extract_help.py` (central) e `extract_blog.py` (blog) leem o site, gravam JSON em `scripts/uber-pages/data/` e `data-help/` e baixam as imagens, vídeos e PDFs para `src/endpoints/seed/uber-conta-assets/`. SVG de ícone/logo vira PNG com `sharp` (a mídia recusa SVG). Em algumas páginas as imagens desktop e mobile vêm trocadas no CMS atual: o extrator usa a largura para decidir.
+2. `npm run uber:pages [slug]`, `uber:help` e `uber:blog` gravam no tenant `uber-conta` (páginas, FAQs, categorias, posts, mídia). Rodam de novo sem duplicar (a mídia é achada pelo nome do arquivo, as perguntas pelo texto, os posts pelo slug).
 3. Conferência: captura em 1440px e 390px lado a lado com o original (Playwright) e a lista de 96 URLs contra o ambiente local.
 
 Adicionar ou corrigir uma página: editar o JSON (ou o admin) e rodar o script da página. Os dados extraídos ficam versionados, então não dependem do site atual depois.
@@ -113,7 +113,7 @@ O Uber Conta mantém **os endereços do site atual**, sem redirect: o tenant tem
 | Central de ajuda | `/central-de-ajuda`, `/central-de-ajuda/<pergunta>`, `/central-de-ajuda/categorias?slug=<categoria>` |
 | Canonical, sitemap e links internos | na mesma forma (função `pathsOf(tenant)`) |
 
-Como funciona: `apps/web/src/lib/urlPolicy.ts` (proxy) redireciona a forma não canônica; `packages/routes` (`paths(style)`) gera todos os links, canonicals e sitemaps; os redirects automáticos do CMS (troca de slug) já escrevem o destino na forma do tenant. Links digitados no admin (menu, rodapé, páginas) devem seguir a mesma forma; `npm run -w cms urls:normalize tenant=uber-conta [dry-run]` ajusta os existentes (os seeds já gravam sem barra).
+Como funciona: `src/lib/urlPolicy.ts` (proxy) redireciona a forma não canônica; `src/routes` (`paths(style)`) gera todos os links, canonicals e sitemaps; os redirects automáticos do CMS (troca de slug) já escrevem o destino na forma do tenant. Links digitados no admin (menu, rodapé, páginas) devem seguir a mesma forma; `npm run urls:normalize tenant=uber-conta [dry-run]` ajusta os existentes (os seeds já gravam sem barra).
 
 Conferência: as 96 URLs do sitemap do site atual respondem 200 direto (a única exceção é `/central-de-ajuda/categorias` sem `?slug=`, que redireciona para a central). Itens de SEO que ainda faltam (título, JSON-LD, robots, sitemap) estão no relatório de virada.
 

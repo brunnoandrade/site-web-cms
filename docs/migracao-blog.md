@@ -1,21 +1,21 @@
 # Migração do blog (WordPress → Payload)
 
-Script: [apps/cms/scripts/migrate-wordpress.ts](../apps/cms/scripts/migrate-wordpress.ts). A lógica fica em [apps/cms/src/wordpress/](../apps/cms/src/wordpress/).
+Script: [scripts/migrate-wordpress.ts](../scripts/migrate-wordpress.ts). A lógica fica em [src/wordpress/](../src/wordpress/).
 
 ## Como rodar
 
 ```bash
 # Simulação: lê e converte tudo, não grava nada (recomendado antes de cada execução)
-npm run -w cms blog:migrate tenant=digio dry-run
+npm run blog:migrate tenant=digio dry-run
 
 # Teste com os N posts mais antigos
-npm run -w cms blog:migrate tenant=digio limit=20
+npm run blog:migrate tenant=digio limit=20
 
 # Migração completa
-npm run -w cms blog:migrate tenant=digio
+npm run blog:migrate tenant=digio
 
 # Reprocessar mesmo o que não mudou no WordPress (por exemplo, depois de melhorar o conversor)
-npm run -w cms blog:migrate tenant=digio force
+npm run blog:migrate tenant=digio force
 ```
 
 Opções: `source=<url do blog>` (padrão `https://www.digio.com.br/blog`, ou a variável `WP_BLOG_URL`), `limit=N`, `dry-run` e `force`.
@@ -55,7 +55,7 @@ Se um post trocar de slug ou de categoria no WordPress entre duas execuções, o
 
 ## Decisões
 
-1. **Autores (decidido em 25/09/2026):** os posts assinados por "Usuário de serviço ADM via cofre" (conta de sistema) são migrados como **"Digio"** (`DEFAULT_AUTHOR_OVERRIDES` em [migrate.ts](../apps/cms/src/wordpress/migrate.ts)).
+1. **Autores (decidido em 25/09/2026):** os posts assinados por "Usuário de serviço ADM via cofre" (conta de sistema) são migrados como **"Digio"** (`DEFAULT_AUTHOR_OVERRIDES` em [migrate.ts](../src/wordpress/migrate.ts)).
 2. **Vídeos (decidido em 25/09/2026):** os 41 vídeos do YouTube ficam como link. Um bloco de vídeo pode ser criado depois, se necessário.
 3. **Migração completa:** por enquanto o ambiente é só local, com 20 posts migrados para teste. A migração dos 518 é feita quando houver um ambiente real (a simulação completa já passou sem erros).
 4. **Arquivos do WordPress:** links para `wp-content` (PDFs etc.) que sobrarem no conteúdo aparecem no relatório. Eles precisam ser importados ou substituídos antes de desligar o WordPress.

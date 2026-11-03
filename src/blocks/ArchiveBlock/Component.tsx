@@ -1,0 +1,34 @@
+import type { ArchiveBlock as ArchiveBlockProps } from '@/payload-types'
+
+import React from 'react'
+
+import { ArchiveBlockView } from './View'
+import { getArchivePosts } from './data'
+import { getMediumFeed } from './feed'
+import { requireTenant } from '@/lib/tenant'
+import { uiTextsOf } from '@/lib/uiTexts'
+import { styleOf } from '@/lib/urlStyle'
+
+export const ArchiveBlock: React.FC<
+  ArchiveBlockProps & {
+    id?: string
+    tenant: string
+  }
+> = async (props) => {
+  const feed =
+    props.variant === 'carousel' ? await getMediumFeed(props.feedUrl, props.limit || 6) : []
+  // With a feed the CMS posts are not needed.
+  const posts = feed.length > 0 ? [] : await getArchivePosts(props)
+
+  const tenant = await requireTenant(props.tenant)
+
+  return (
+    <ArchiveBlockView
+      {...props}
+      feed={feed}
+      posts={posts}
+      readMoreLabel={uiTextsOf(tenant).readMoreBlog}
+      urlStyle={styleOf(tenant)}
+    />
+  )
+}

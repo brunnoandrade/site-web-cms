@@ -9,3 +9,11 @@
 .git
 .vscode
 docs
+.claude
+.github
+.jenkins
+docker
+*.sql
+CREDENCIAIS-LOCAIS.md
+tests
+playwright-report

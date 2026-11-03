@@ -5,7 +5,7 @@ Regras em [CLAUDE.md](../CLAUDE.md), seção "Redirects e rastreio". Este guia e
 ## Como funcionam
 
 - **Onde ficam:** no admin, grupo **SEO > Redirects**, separados por propriedade. Só os papéis `admin` e `seo` editam.
-- **Quem responde:** o proxy do site ([apps/web/src/proxy.ts](../apps/web/src/proxy.ts)), antes de qualquer página, com 301 (ou 302, se marcado).
+- **Quem responde:** o proxy do site ([src/proxy.ts](../src/proxy.ts)), antes de qualquer página, com 301 (ou 302, se marcado).
 - **Query string:** a do visitante é sempre preservada (`utm_*`, `gclid`, `fbclid`…). Se o destino já tiver um parâmetro com o mesmo nome, vale o do destino.
 - **URLs sem barra final:** `/antiga` e `/antiga/` são a mesma origem, e o redirect acontece num salto só.
 - **Quando passam a valer:** ao salvar um redirect, o CMS avisa o site e a mudança vale na hora. Se o CMS cair, o site continua usando a última lista que conhece.
@@ -35,7 +35,7 @@ Mudanças em rascunho não criam redirect: só a publicação cria. O redirect a
 ## Importação em massa (CSV)
 
 ```bash
-npm run -w cms redirects:import <arquivo.csv> tenant=digio [wave=1] [dry-run]
+npm run redirects:import <arquivo.csv> tenant=digio [wave=1] [dry-run]
 ```
 
 Formato (vírgula ou ponto e vírgula, UTF-8; exemplo em [exemplos/redirects.csv](exemplos/redirects.csv)):

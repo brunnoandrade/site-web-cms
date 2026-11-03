@@ -6,7 +6,7 @@ Comparação entre o SoAD "Plataforma Web Digio (Payload CMS Multi-tenant)" e es
 
 | # | Tema | Decisão | Impacto no SoAD |
 |---|---|---|---|
-| D1 | Arquitetura | **Dois projetos separados**: `apps/cms` (Payload: admin e API) e `apps/web` (site público). O site lê o conteúdo pela API REST do CMS, não pela Local API. | Atualizar a seção "Sistemas", o diagrama C2 e o ADR 002 (hoje dizem "mesmo deploy, Local API sem hop HTTP"). |
+| D1 | Arquitetura | **Um único app Next.js** (Payload: admin em `/admin` e API em `/api`, mais o site público), uma imagem e um deploy. Substitui a decisão anterior de dois projetos. O site lê o conteúdo pela Local API (inclusive o proxy e o live preview), sem HTTP interno; o webhook de revalidação é a exceção. | O SoAD (seção "Sistemas", diagrama C2 e ADR 002) volta a descrever "mesmo deploy". Atenção: o "admin só pela VPN" precisa ser feito na CDN/WAF por caminho (`/admin` e escritas em `/api`), ver pontos de atenção abaixo. |
 | D2 | Banco | **PostgreSQL** (RDS PostgreSQL). O Payload 3 não tem adaptador MySQL. | Corrigir o ADR 005, a lista de tecnologias, o ambiente de desenvolvimento e a estimativa de custo (hoje dizem MySQL). |
 | D3 | Multi-tenant | Deixar a plataforma **pronta para todos os cenários** já nesta entrega: N tenants, domínio próprio por tenant, conteúdo, usuários e mídia isolados, criação de tenant por configuração, sem deploy. O tenant inicial é `digio`. | Alinhado com o SoAD. Amplia o `escopo.md` (F0 + F1 previa um só site). |
 | D4 | Autenticação do admin | **Dois autenticadores lado a lado**: login local (e-mail e senha) e SSO corporativo (RH-SSO/Keycloak, OIDC), com botão "Entrar com SSO" na tela de login. Cada um valida as próprias credenciais e tem o próprio logout. | O SoAD pede "sem usuário local em produção": o login local tem que poder ser desligado por ambiente (ver regras abaixo). |
@@ -39,13 +39,13 @@ Comparação entre o SoAD "Plataforma Web Digio (Payload CMS Multi-tenant)" e es
 | Logs estruturados, métricas e tracing | Não existe | Observabilidade (OpenTelemetry) |
 | Health check para o EKS | Não existe | Rotas de liveness e readiness nos dois apps |
 | LGPD: formulários com consentimento | O form-builder não tem campo de consentimento | M.14 |
-| Catálogo de blocos como pacote npm | Blocos dentro do `apps/web` | M.7/M.8: `packages/blocks` |
+| Catálogo de blocos como pacote npm | Blocos dentro de `src/blocks` | M.7/M.8: `packages/blocks` |
 | Ambiente local com Podman | O compose funciona com Docker; Podman não foi testado | Testar com Podman |
 
-## Pontos de atenção da arquitetura com dois projetos
+## Pontos de atenção da arquitetura
 
-1. **Formulários públicos:** hoje o navegador do visitante envia direto para o CMS. Com o CMS só na VPN, isso quebra. O envio tem que passar pelo `apps/web`, com um proxy no servidor.
+1. **Formulários públicos:** hoje o navegador do visitante envia direto para o CMS. Com o CMS só na VPN, isso quebra. O envio tem que passar por uma rota do site, com um proxy no servidor.
 2. **Usuário de serviço do preview** (`CMS_API_KEY`): é uma conta local. Precisa ser aceito pela SI como conta de serviço, sem login interativo, ou ser substituído.
-   - Já aplicado: só contas de serviço (papel `preview`, só leitura) podem ter chave de API, e só o super admin gera ou troca a chave. A opção não aparece para os outros usuários, e tirar o papel `preview` revoga a chave. Regra em `apps/cms/src/collections/Users/hooks/apiKey.ts`, testes em `tests/int/api-key.int.spec.ts`.
+   - Já aplicado: só contas de serviço (papel `preview`, só leitura) podem ter chave de API, e só o super admin gera ou troca a chave. A opção não aparece para os outros usuários, e tirar o papel `preview` revoga a chave. Regra em `src/collections/Users/hooks/apiKey.ts`, testes em `tests/int/api-key.int.spec.ts`.
 3. **Barra de admin no site:** depende da sessão do CMS no navegador. Com SSO e domínios diferentes, precisa ser revista ou removida.
-4. **Admin só pela VPN:** com dois projetos, o CMS inteiro fica fora da internet pública. O `apps/web` acessa a API do CMS pela rede interna.
+4. **Admin só pela VPN:** com um app só, o `/admin` e a API de escrita ficam no mesmo host do site público. A restrição à VPN passa a ser regra de CDN/WAF por caminho (`/admin`, `/api` com métodos de escrita), e o app responde ao admin só no host definido por `ADMIN_HOST` (feito; a API `/api` não é restringida pelo app).

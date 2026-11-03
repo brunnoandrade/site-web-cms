@@ -1,6 +1,6 @@
 # Desempenho (PageSpeed / Lighthouse)
 
-Medição feita com o Lighthouse 12 local (mesmo motor do PageSpeed) contra o **build de produção** (`next build` + `node .next/standalone/apps/web/server.js`). Nunca meça com `next dev`: os números não valem. Para medir sem derrubar o dev server, copie `apps/web` para uma pasta temporária (troque o `name` do `package.json`, senão o workspace conflita) e suba na porta 3100 com `uberconta.localhost`.
+Medição feita com o Lighthouse 12 local (mesmo motor do PageSpeed) contra o **build de produção** (`next build` + `node .next/standalone/server.js`). Nunca meça com `next dev`: os números não valem. Para medir sem derrubar o dev server, copie `apps/web` para uma pasta temporária (troque o `name` do `package.json`, senão o workspace conflita) e suba na porta 3100 com `uberconta.localhost`.
 
 ## Linha de base (mobile, uma execução por página, localhost sem CDN)
 

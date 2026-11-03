@@ -1,6 +1,6 @@
 {
   "npm.packageManager": "npm",
-  "eslint.workingDirectories": [{ "pattern": "apps/*" }],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -32,7 +32,7 @@
     "editor.formatOnSave": true
   },
   "editor.formatOnSaveMode": "file",
-  "js/ts.tsdk.path": "apps/web/node_modules/typescript/lib",
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "[javascript][typescript][typescriptreact]": {
     "editor.codeActionsOnSave": {

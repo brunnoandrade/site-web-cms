@@ -2,13 +2,30 @@
 
 Contas que existem só no desenvolvimento local (`docker compose` + `npm run dev`). Nenhuma delas vale para DEV, HML ou PRD.
 
-Admin: http://localhost:3001/admin
+Admin: http://localhost:3000/admin
 
 ## Login local (e-mail e senha)
 
 | Conta | Papel | Como é criada |
 |---|---|---|
-| a que você informar no bootstrap | super admin (todas as propriedades) | `npm run -w cms bootstrap:dev`, com `BOOTSTRAP_ADMIN_EMAIL` e `BOOTSTRAP_ADMIN_PASSWORD` |
+| a que você informar no bootstrap | super admin (todas as propriedades) | `npm run bootstrap:dev`, com `BOOTSTRAP_ADMIN_EMAIL` e `BOOTSTRAP_ADMIN_PASSWORD` |
+
+### Um usuário por perfil (`npm run users:local`)
+
+Cria (ou atualiza) as contas abaixo, todas com a senha `digio123` (mude com `LOCAL_USERS_PASSWORD`). Precisa dos tenants do `bootstrap:dev`. Só roda fora de produção.
+
+| E-mail | Perfil |
+|---|---|
+| `admin@digio.local` | super admin (todas as propriedades) |
+| `admin.digio@digio.local` | admin da Digio |
+| `editor.digio@digio.local` | editor da Digio |
+| `seo.digio@digio.local` | seo da Digio |
+| `admin.uber@digio.local` | admin da Uber Conta |
+| `editor.uber@digio.local` | editor da Uber Conta |
+| `seo.uber@digio.local` | seo da Uber Conta |
+| `multi@digio.local` | seo na Digio e editor na Uber Conta |
+
+`preview@digio.local` é a conta de serviço do preview (senha aleatória, só usa API key).
 | `demo-author@example.com` | editor, autor dos posts de exemplo | seed; a senha é aleatória, então não é usada para login |
 
 Cada pessoa do time cria a própria conta local no bootstrap. **Senhas reais não entram no repositório.** Se quiser anotar a sua, use o arquivo `CREDENCIAIS-LOCAIS.md` na raiz, que está no `.gitignore`.
@@ -17,7 +34,7 @@ Para trocar a senha: Admin > Usuários > sua conta > "Mudar senha".
 
 ## Login SSO (Keycloak local)
 
-Botão **"Entrar com SSO corporativo"** na tela de login. Todos os usuários têm a senha `Senha-123` (fixture de teste, definida em [apps/docker/keycloak/digio-realm.json](../apps/docker/keycloak/digio-realm.json)).
+Botão **"Entrar com SSO corporativo"** na tela de login. Todos os usuários têm a senha `Senha-123` (fixture de teste, definida em [docker/keycloak/digio-realm.json](../docker/keycloak/digio-realm.json)).
 
 | Usuário | Resultado esperado |
 |---|---|
@@ -43,7 +60,7 @@ Console de administração do Keycloak: http://localhost:8080/admin (`admin` / `
 
 | Conta | Para que serve |
 |---|---|
-| `preview@digio.local` | usada pelo site para ler rascunhos no preview, pela API key (`CMS_API_KEY` em `apps/web/.env`). Papel `preview`: só leitura, sem acesso ao admin |
+| `preview@digio.local` | usada pelo site para ler rascunhos no preview, pela API key (`CMS_API_KEY` em `.env`). Papel `preview`: só leitura, sem acesso ao admin |
 
 ## Outros acessos locais
 

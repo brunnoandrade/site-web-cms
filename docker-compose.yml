@@ -1,7 +1,7 @@
 # Local development only. DEV/HML/PRD environments are owned by infra; do not use this file for them.
 #
 #   docker compose up -d                 Postgres + MinIO (run the apps with `npm run dev`)
-#   docker compose --profile app up -d   also builds and runs the CMS and website containers
+#   docker compose --profile app up -d   also builds and runs the app container (website + CMS at /admin)
 services:
   postgres:
     image: postgres:17-alpine
@@ -57,7 +57,7 @@ services:
       S3_BUCKET: ${S3_BUCKET:-digio-media}
 
   # Local identity provider standing in for the corporate RH-SSO (Red Hat build of Keycloak).
-  # Realm, client and test users: apps/docker/keycloak/digio-realm.json (dev only, test passwords).
+  # Realm, client and test users: docker/keycloak/digio-realm.json (dev only, test passwords).
   keycloak:
     image: quay.io/keycloak/keycloak:26.7.4
     restart: unless-stopped
@@ -71,7 +71,7 @@ services:
       KC_HOSTNAME: http://localhost:${KEYCLOAK_PORT:-8080}
       KC_HEALTH_ENABLED: 'true'
     volumes:
-      - ./apps/docker/keycloak:/opt/keycloak/data/import:ro
+      - ./docker/keycloak:/opt/keycloak/data/import:ro
     healthcheck:
       test:
         [
@@ -82,13 +82,16 @@ services:
       timeout: 5s
       retries: 30
 
-  cms:
+  # Site + CMS (/admin) in a single container, built from the root Dockerfile.
+  app:
     profiles: [app]
     build:
       context: .
-      dockerfile: apps/cms/Dockerfile
       args:
-        NEXT_PUBLIC_WEB_URL: http://localhost:${WEB_PORT:-3000}
+        NEXT_PUBLIC_CMS_URL: http://localhost:${APP_PORT:-3000}
+        NEXT_PUBLIC_WEB_URL: http://localhost:${APP_PORT:-3000}
+        NEXT_PUBLIC_MEDIA_URL: http://localhost:${MINIO_API_PORT:-9200}/${S3_BUCKET:-digio-media}
+        IMAGES_ALLOW_LOCAL_IP: 'true'
     restart: unless-stopped
     depends_on:
       postgres:
@@ -96,36 +99,18 @@ services:
       minio-init:
         condition: service_completed_successfully
     ports:
-      - '${CMS_PORT:-3001}:3001'
-    env_file: apps/cms/.env
+      - '${APP_PORT:-3000}:3000'
+    env_file: .env
     environment:
-      # Container-to-container addresses override the localhost ones from apps/cms/.env.
+      # Container-to-container addresses override the localhost ones from .env.
       DATABASE_URL: postgres://${POSTGRES_USER:-digio}:${POSTGRES_PASSWORD:-digio}@postgres:5432/${POSTGRES_DB:-digio}
       S3_ENDPOINT: http://minio:9000
-      SERVER_URL: http://localhost:${CMS_PORT:-3001}
-      WEB_URL: http://localhost:${WEB_PORT:-3000}
-      WEB_INTERNAL_URL: http://web:3000
-      # SSO needs one issuer URL reachable by both the browser and the CMS; inside this
+      SERVER_URL: http://localhost:${APP_PORT:-3000}
+      WEB_URL: http://localhost:${APP_PORT:-3000}
+      WEB_INTERNAL_URL: http://localhost:3000
+      # SSO needs one issuer URL reachable by both the browser and the app; inside this
       # container localhost:8080 is not Keycloak. Test SSO with `npm run dev` instead.
       AUTH_SSO_ENABLED: 'false'
-
-  web:
-    profiles: [app]
-    build:
-      context: .
-      dockerfile: apps/web/Dockerfile
-      args:
-        NEXT_PUBLIC_CMS_URL: http://localhost:${CMS_PORT:-3001}
-        NEXT_PUBLIC_MEDIA_URL: http://localhost:${MINIO_API_PORT:-9200}/${S3_BUCKET:-digio-media}
-        IMAGES_ALLOW_LOCAL_IP: 'true'
-    restart: unless-stopped
-    depends_on:
-      - cms
-    ports:
-      - '${WEB_PORT:-3000}:3000'
-    env_file: apps/web/.env
-    environment:
-      CMS_URL: http://cms:3001
 
 volumes:
   postgres-data:
