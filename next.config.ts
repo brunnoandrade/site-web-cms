@@ -11,6 +11,21 @@ const dirname = path.dirname(__filename)
 // Public media storage (MinIO locally, CDN in higher environments).
 const mediaURL = new URL(process.env.NEXT_PUBLIC_MEDIA_URL || 'http://localhost:9200')
 
+// Origins allowed to embed the site (the admin's live preview iframe).
+const framePreviewAncestors = [
+  "'self'",
+  ...new Set(
+    [process.env.NEXT_PUBLIC_CMS_URL, process.env.SERVER_URL].flatMap((url) => {
+      try {
+        return url ? [new URL(url).origin] : []
+      } catch {
+        return []
+      }
+    }),
+  ),
+  ...(process.env.ADMIN_HOST ? [`https://${process.env.ADMIN_HOST}`] : []),
+].join(' ')
+
 const baseSecurityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
@@ -57,11 +72,13 @@ const nextConfig: NextConfig = {
       ],
     },
     {
-      // The site is embedded only by the admin's live preview (same origin).
+      // The site is embedded only by the admin's live preview. The admin lives on its own origin
+      // (ADMIN_HOST / NEXT_PUBLIC_CMS_URL) and each tenant's site on another (e.g.
+      // uberconta.localhost), so 'self' alone would block the preview iframe.
       source: '/((?!admin|api).*)',
       headers: [
         ...baseSecurityHeaders,
-        { key: 'Content-Security-Policy', value: "frame-ancestors 'self'" },
+        { key: 'Content-Security-Policy', value: `frame-ancestors ${framePreviewAncestors}` },
       ],
     },
   ],

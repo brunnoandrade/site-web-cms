@@ -11,7 +11,7 @@ Revisão estática (white-box) feita em 2026-10-05/06. Os itens marcados como **
 | Open redirect no preview (`/\evil.com`) | `isSafeRelativePath` rejeita barra invertida e caracteres de controle |
 | Login local ligado quando `AUTH_LOCAL_ENABLED` está vazio | Em produção, vazio = desligado |
 | Upload de mídia sem restrição (SVG/HTML no bucket público) | Allowlist de MIME em `Media.ts` (sem SVG) e limite de 50 MB |
-| Sem headers de segurança | `nosniff`, `Referrer-Policy`, `Permissions-Policy`, HSTS; admin com `frame-ancestors 'none'`; site só embutível pelo CMS (live preview) |
+| Sem headers de segurança | `nosniff`, `Referrer-Policy`, `Permissions-Policy`, HSTS; admin com `frame-ancestors 'none'`; site só embutível pelo admin (live preview; `frame-ancestors` com a origem do admin, ver `docs/live-preview.md`) |
 | Segredos comparados com `!==` | `timingSafeEqual` em `/api/revalidate/` e `CRON_SECRET` |
 | `decodeURIComponent` sem proteção em `readCookie` | Cookie malformado é tratado como ausente |
 | Acesso SSO só era recalculado no login: com o usuário desabilitado e sem grupo no Keycloak, a sessão do CMS seguia ativa (confirmado ao vivo) | A cada `SSO_REVALIDATE_SECONDS` (padrão 300) o CMS troca o refresh token (guardado criptografado no usuário) por novas claims: papéis/propriedades são ressincronizados e uma recusa do IdP encerra a sessão. Se o IdP estiver fora, mantém a sessão por até 1 h (`auth/revalidate.ts`) |

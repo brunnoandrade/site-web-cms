@@ -10,6 +10,7 @@ import { handleEndpoints } from 'payload'
  * the page, which is what `useLivePreview` needs. It reads only, and only in draft mode.
  */
 const MAX_DEPTH = 2
+const COLLECTIONS = ['pages', 'posts']
 
 export async function POST(request: Request): Promise<Response> {
   const { isEnabled } = await draftMode()
@@ -18,13 +19,21 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   const body = (await request.json().catch(() => null)) as {
+    collection?: unknown
     id?: unknown
     data?: unknown
     depth?: unknown
     locale?: unknown
   } | null
   const id = body?.id
-  if (!body || (typeof id !== 'string' && typeof id !== 'number') || !/^[\w-]+$/.test(String(id))) {
+  const collection = body?.collection ?? 'pages'
+  if (
+    !body ||
+    typeof collection !== 'string' ||
+    !COLLECTIONS.includes(collection) ||
+    (typeof id !== 'string' && typeof id !== 'number') ||
+    !/^[\w-]+$/.test(String(id))
+  ) {
     return Response.json({ error: 'Invalid request' }, { status: 400 })
   }
 
@@ -33,7 +42,7 @@ export async function POST(request: Request): Promise<Response> {
   // Same request the REST API receives: POST + GET override, so the body can carry the form data.
   const res = await handleEndpoints({
     config,
-    request: new Request(`http://localhost/api/pages/${encodeURIComponent(String(id))}`, {
+    request: new Request(`http://localhost/api/${collection}/${encodeURIComponent(String(id))}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

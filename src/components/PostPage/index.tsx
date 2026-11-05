@@ -1,21 +1,19 @@
 import type { Metadata } from 'next'
 
-import { RelatedPosts } from '@/blocks/RelatedPosts/Component'
 import { categorySlugOf } from '@/routes'
 import { draftMode } from 'next/headers'
 import { notFound, permanentRedirect } from 'next/navigation'
 import React, { cache } from 'react'
-import RichText from '@/components/RichText'
 
-import { PostHero } from '@/heros/PostHero'
 import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
 import { uiTextsOf } from '@/lib/uiTexts'
 import { pathsOf } from '@/lib/urlStyle'
 import { generateMeta } from '@/utilities/generateMeta'
-import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { LivePreviewPost } from '@/components/LivePreviewPost'
+import { DefaultPostView } from '@/components/PostPage/DefaultPostView'
 import { JsonLd } from '@/components/JsonLd'
-import { UberPost } from '@/components/UberPost'
+import { UberPost, latestPostsOf } from '@/components/UberPost'
 import { blogPostingNode, breadcrumbNode, webPageNode } from '@/lib/jsonld'
 import { collapse, lexicalText } from '@/utilities/seo'
 import { isUberConta } from '@/lib/uber-help'
@@ -64,10 +62,21 @@ export async function PostPage({
     permanentRedirect(canonical)
   }
 
+  // Live preview (admin iframe): the form drives the page in the browser, no refresh on each edit.
+  if (draft) {
+    const uber = isUberConta(tenant)
+    return (
+      <LivePreviewPost
+        initialData={post}
+        variant={uber ? 'uber' : 'default'}
+        latest={uber ? await latestPostsOf(tenant.slug) : []}
+      />
+    )
+  }
+
   if (isUberConta(tenant)) {
     return (
       <>
-        {draft && <LivePreviewListener />}
         <UberPost post={post} tenant={tenant.slug} />
         <JsonLd
           data={[
@@ -110,25 +119,7 @@ export async function PostPage({
     )
   }
 
-  return (
-    <article className="pt-16 pb-16">
-      {draft && <LivePreviewListener />}
-
-      <PostHero post={post} />
-
-      <div className="flex flex-col items-center gap-4 pt-8">
-        <div className="container">
-          <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
-          {post.relatedPosts && post.relatedPosts.length > 0 && (
-            <RelatedPosts
-              className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-            />
-          )}
-        </div>
-      </div>
-    </article>
-  )
+  return <DefaultPostView post={post} />
 }
 
 export async function postMetadata({

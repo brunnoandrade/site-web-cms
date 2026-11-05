@@ -8,16 +8,8 @@ import React from 'react'
 import { ArchiveBlockView } from '@/blocks/ArchiveBlock/View'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
+import { relayRequest } from '@/lib/livePreviewRelay'
 import { getCMSPublicURL } from '@/utilities/getURL'
-
-// Goes through the site itself (see app/(frontend)/next/live-preview/route.ts), not the CMS.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- shape defined by useLivePreview
-const relayRequest = ({ data, endpoint }: { data: Record<string, any>; endpoint: string }) =>
-  fetch('/next/live-preview/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ...data, id: endpoint.split('/').pop() }),
-  })
 
 type Props = {
   initialData: Page
