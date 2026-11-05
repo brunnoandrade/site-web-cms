@@ -67,8 +67,8 @@ export function UberPostView({ post, latest }: { post: Post; latest: LatestPost[
             priority
           />
         )}
-        {/* Current site: .hero.half in .post (45vh, 55vh from 992px; title display-2, left aligned). */}
-        <div className="container relative flex h-[45vh] min-h-[22rem] flex-col items-start justify-end min-[992px]:h-[55vh]">
+        {/* Current site: .hero.half in .post (min 45vh, 55vh from 992px; grows with the title, so it is never clipped; title display-2, left aligned). */}
+        <div className="container relative flex min-h-[max(22rem,45vh)] flex-col items-start justify-end pt-32 min-[992px]:min-h-[55vh]">
           <div className="mb-20 w-full min-[992px]:mb-[10vh]">
             <h1 className="m-0 text-[calc(1.575rem+3.9vw)] font-semibold leading-none min-[1200px]:text-[4.5rem]">
               {post.title}
