@@ -2,6 +2,8 @@ import type { CollectionConfig } from 'payload'
 
 import { anyone, getTenantIDsWithRoles, isSuperAdmin, superAdminOnly } from '../../access/roles'
 import { normalizeDomains, validateUniqueDomains } from './hooks/domains'
+import { revalidateSite } from './hooks/revalidate'
+import { matches, robotsRules } from './validators'
 
 /**
  * A tenant is one web property (institutional site, landing page) with its own
@@ -215,11 +217,173 @@ export const Tenants: CollectionConfig = {
             },
           ],
         },
+        {
+          label: 'Indexação e ícones',
+          description:
+            'Como os buscadores e os navegadores enxergam a propriedade: bloqueio de indexação, regras do robots.txt, descrição padrão e ícones.',
+          fields: [
+            {
+              name: 'blockIndexing',
+              label: 'Bloquear indexação (ambientes de teste)',
+              type: 'checkbox',
+              defaultValue: false,
+              admin: {
+                description:
+                  'Ligado: o robots.txt bloqueia tudo (Disallow: /) e todas as páginas saem com noindex, nofollow. Use em DEV e HML; em produção, deixe desligado.',
+              },
+            },
+            {
+              name: 'robotsExtra',
+              label: 'Regras extras do robots.txt',
+              type: 'textarea',
+              validate: robotsRules,
+              admin: {
+                rows: 6,
+                description:
+                  'Uma regra por linha, só "Allow:" e "Disallow:" (ex.: Disallow: /busca/). Entram no bloco "User-agent: *", depois de "/next/" e "/api/". Linhas com # são comentários.',
+              },
+            },
+            {
+              name: 'seoDefaultDescription',
+              label: 'Descrição padrão',
+              type: 'textarea',
+              admin: {
+                rows: 3,
+                description:
+                  'Usada em description, og:description e twitter:description quando a página não tem descrição própria. Até uns 155 caracteres.',
+              },
+            },
+            {
+              name: 'favicon',
+              label: 'Favicon',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description:
+                  'PNG quadrado, no mínimo 48×48. Vazio: o favicon padrão da plataforma.',
+              },
+            },
+            {
+              name: 'appIcon',
+              label: 'Ícone do app e logo da organização',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description:
+                  'PNG quadrado, 180×180. Vira o apple-touch-icon e o logo nos dados estruturados. Vazio: /icons/apple-touch-icon.png.',
+              },
+            },
+          ],
+        },
+        {
+          label: 'Rastreio',
+          description:
+            'Analytics e consentimento (LGPD). Nada é carregado no preview do admin; vazio: sem rastreio.',
+          fields: [
+            {
+              name: 'tracking',
+              label: 'Rastreio',
+              type: 'group',
+              fields: [
+                {
+                  name: 'gtmId',
+                  label: 'ID do Google Tag Manager',
+                  type: 'text',
+                  validate: matches(/^GTM-[A-Z0-9]+$/, 'Formato: GTM-XXXXXXX'),
+                  admin: { description: 'Ex.: GTM-ABC1234. Carregado depois da interação.' },
+                },
+                {
+                  name: 'ga4Id',
+                  label: 'ID de medição do GA4',
+                  type: 'text',
+                  validate: matches(/^G-[A-Z0-9]+$/, 'Formato: G-XXXXXXXXXX'),
+                  admin: {
+                    description:
+                      'Ex.: G-ABC123DEF4. Só é usado sem GTM (com GTM, configure o GA4 dentro do container, para não contar em dobro).',
+                  },
+                },
+                {
+                  name: 'consentBanner',
+                  label: 'Mostrar banner de consentimento',
+                  type: 'checkbox',
+                  defaultValue: false,
+                  admin: {
+                    description:
+                      'Ligado: o rastreio começa negado (Consent Mode v2) e só é liberado se o visitante aceitar. Desligado: o rastreio carrega direto. Desligue se o GTM já traz a sua ferramenta de consentimento.',
+                  },
+                },
+                {
+                  name: 'privacyUrl',
+                  label: 'Link da política de privacidade',
+                  type: 'text',
+                  admin: {
+                    description: 'Mostrado no banner. Caminho (/privacidade) ou URL completa.',
+                    condition: (_, siblingData) => Boolean(siblingData?.consentBanner),
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Empresa e redes',
+          description:
+            'Dados da empresa e redes sociais, usados nos dados estruturados (schema.org) de todas as páginas.',
+          fields: [
+            {
+              name: 'company',
+              label: 'Empresa',
+              type: 'group',
+              fields: [
+                { name: 'legalName', label: 'Razão social', type: 'text' },
+                { name: 'cnpj', label: 'CNPJ', type: 'text' },
+                { name: 'address', label: 'Endereço', type: 'text' },
+                {
+                  name: 'sacPhone',
+                  label: 'Telefone do SAC',
+                  type: 'text',
+                  admin: { description: 'Ex.: +55 11 4003-0000 ou 0800 000 0000.' },
+                },
+              ],
+            },
+            {
+              name: 'socials',
+              label: 'Redes sociais',
+              type: 'array',
+              maxRows: 10,
+              fields: [
+                {
+                  name: 'network',
+                  label: 'Rede',
+                  type: 'select',
+                  required: true,
+                  options: [
+                    { label: 'Instagram', value: 'instagram' },
+                    { label: 'LinkedIn', value: 'linkedin' },
+                    { label: 'YouTube', value: 'youtube' },
+                    { label: 'Facebook', value: 'facebook' },
+                    { label: 'X (Twitter)', value: 'x' },
+                    { label: 'TikTok', value: 'tiktok' },
+                  ],
+                },
+                {
+                  name: 'url',
+                  label: 'Endereço do perfil',
+                  type: 'text',
+                  required: true,
+                  validate: matches(/^https:\/\//, 'Use o endereço completo, com https://'),
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
   ],
   hooks: {
     beforeValidate: [normalizeDomains],
     beforeChange: [validateUniqueDomains],
+    // The site renders the tracking, company and social data of the property on every page.
+    afterChange: [revalidateSite],
   },
 }

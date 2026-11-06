@@ -24,5 +24,5 @@ Desktop da home: 76 (CLS 0,78) antes, 100 depois. O site atual tem TBT acima de 
 
 - Mídia: o seed usa vídeos de 1,8 MB (hero e soluções); em produção, comprimir e usar `faststart`.
 - Ainda falham em todas as páginas: cache longo dos assets (CDN), JS não usado, CSS bloqueante e contraste em alguns trechos.
-- GTM/GA ainda não existem no código: ao entrar, carregar depois da interação ou do consentimento, para não repetir o TBT do site atual.
+- GTM/GA4 vêm da aba "Rastreio" de Propriedades (`src/components/Tracking`): carregados quando o navegador fica ocioso (`requestIdleCallback`, no máximo 4 s), nunca no preview. Sem ID, nada é carregado.
 - Colocar Lighthouse CI com limites (LCP < 2,5 s, CLS < 0,1, TBT < 200 ms).

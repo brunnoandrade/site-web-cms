@@ -14,6 +14,18 @@ export const SEO_ROBOTS: Metadata['robots'] = {
   'max-video-preview': -1,
 }
 
+/** Robots directive of a property: closed to search engines when its indexing is blocked (DEV/HML). */
+export const robotsOf = (tenant: Tenant, noindex?: boolean): Metadata['robots'] =>
+  tenant.blockIndexing
+    ? { index: false, follow: false }
+    : noindex
+      ? { index: false, follow: true }
+      : SEO_ROBOTS
+
+/** Description of a page: its own, then the property's default. */
+export const seoDescription = (tenant: Tenant, description?: string | null) =>
+  description || tenant.seoDefaultDescription || undefined
+
 /** Text of a Lexical tree, words separated by one space. */
 export const lexicalText = (node: unknown): string => {
   if (!node || typeof node !== 'object') return ''
@@ -61,7 +73,7 @@ export const buildMetadata = ({
   tenant,
   path,
   title,
-  description,
+  description: ownDescription,
   keywords,
   image,
   type = 'website',
@@ -72,11 +84,12 @@ export const buildMetadata = ({
   const url = `${tenant.siteUrl}${path}`
   const imageUrl = seoImage(tenant, image)
   const shareTitle = title || tenant.name
+  const description = seoDescription(tenant, ownDescription)
   return {
     title: seoTitle(tenant, title),
     description: description || undefined,
     keywords: keywords || undefined,
-    robots: noindex ? { index: false, follow: true } : SEO_ROBOTS,
+    robots: robotsOf(tenant, noindex),
     alternates: { canonical: url },
     openGraph: {
       type,

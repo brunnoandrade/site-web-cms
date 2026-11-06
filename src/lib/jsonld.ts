@@ -1,6 +1,7 @@
 import type { Faq, Page, Post } from '@/payload-types'
 
 import type { Tenant } from '@/lib/cms'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { collapse, lexicalText, seoImage } from '@/utilities/seo'
 
 type Node = Record<string, unknown>
@@ -13,8 +14,13 @@ const abs = (tenant: Tenant, path: string) => `${tenant.siteUrl}${path}`
 const absoluteUrl = (tenant: Tenant, url: string) =>
   url.startsWith('http') ? url : abs(tenant, url)
 
-/** Square logo (180x180) of the organization, served by the site itself. */
-const organizationLogo = (tenant: Tenant) => abs(tenant, '/icons/apple-touch-icon.png')
+/** Square logo (180x180) of the organization: the property's app icon, or the platform's. */
+const organizationLogo = (tenant: Tenant) => {
+  const icon = tenant.appIcon
+  return icon && typeof icon === 'object' && icon.url
+    ? absoluteUrl(tenant, getMediaUrl(icon.url))
+    : abs(tenant, '/icons/apple-touch-icon.png')
+}
 
 type AppInfo = { name: string; androidUrl?: string; iosUrl?: string }
 
@@ -31,18 +37,33 @@ const apps: Record<string, AppInfo> = {
 export const siteNodes = (tenant: Tenant, searchPath?: string): Node[] => [
   {
     '@graph': [
-      {
+      clean({
         '@type': 'Organization',
         '@id': abs(tenant, '/#organization'),
         name: tenant.name,
         url: tenant.siteUrl,
+        legalName: tenant.company?.legalName,
+        taxID: tenant.company?.cnpj,
+        address: tenant.company?.address
+          ? { '@type': 'PostalAddress', streetAddress: tenant.company.address }
+          : undefined,
+        contactPoint: tenant.company?.sacPhone
+          ? {
+              '@type': 'ContactPoint',
+              contactType: 'customer service',
+              telephone: tenant.company.sacPhone,
+              areaServed: 'BR',
+              availableLanguage: 'pt-BR',
+            }
+          : undefined,
+        sameAs: tenant.socials?.length ? tenant.socials.map((item) => item.url) : undefined,
         logo: {
           '@type': 'ImageObject',
           url: organizationLogo(tenant),
           width: 180,
           height: 180,
         },
-      },
+      }),
       clean({
         '@type': 'WebSite',
         '@id': abs(tenant, '/#website'),

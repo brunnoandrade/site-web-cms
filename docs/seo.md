@@ -44,7 +44,7 @@ Central de Ajuda do Uber Conta: a pergunta usa a pergunta como título e os 160 
 
 ## O que a propriedade controla
 
-No admin, em Tenants (abas Geral, Aparência, URLs e SEO): sufixo do título, imagem padrão de compartilhamento, `llms.txt`. O aplicativo (nome e links das lojas) dos dados estruturados e o logo da organização ficam no código, em `src/lib/jsonld.ts` (`apps`). Perguntas e categorias da Central de Ajuda têm título e descrição de SEO opcionais (vazio: título da pergunta e início da resposta; título e descrição da categoria).
+No admin, em Tenants (abas Geral, Aparência, URLs, SEO, Indexação e ícones, Rastreio e Empresa e redes): sufixo do título, imagem padrão de compartilhamento, `llms.txt`. O aplicativo (nome e links das lojas) dos dados estruturados e o logo da organização ficam no código, em `src/lib/jsonld.ts` (`apps`). Perguntas e categorias da Central de Ajuda têm título e descrição de SEO opcionais (vazio: título da pergunta e início da resposta; título e descrição da categoria).
 
 ## Dados do site atual (Uber Conta)
 
@@ -62,3 +62,22 @@ Diferenças aceitas hoje:
 - `canonical` das categorias da Central: o site atual aponta todas para `/central-de-ajuda/categorias`, o que junta as páginas no Google; aqui cada categoria é o próprio canonical.
 - `/central-de-ajuda/categorias` sem `?slug=` redireciona para `/central-de-ajuda`.
 - Na busca, o site atual mantém o sufixo no `og:title` e não envia `twitter:title`.
+
+## Rastreio, consentimento e dados da empresa
+
+Em Propriedades, aba **Rastreio**: ID do GTM (`GTM-…`), ID do GA4 (`G-…`, só vale sem GTM, para não contar em dobro), banner de consentimento e link da política de privacidade. O componente `src/components/Tracking` carrega o script ocioso, fora do preview.
+
+- **Banner ligado:** Consent Mode v2 começa tudo `denied` e vira `granted` só se o visitante aceitar. A escolha fica no `localStorage` (`consent:<propriedade>`).
+- **Banner desligado:** o rastreio carrega direto (`granted`). Use assim quando o GTM já traz a ferramenta de consentimento do site atual (ver `docs/virada.md`), para não ter dois avisos.
+- Textos do banner ficam no componente (`texts`).
+
+Aba **Empresa e redes**: razão social, CNPJ, endereço, SAC e redes sociais. Entram no `Organization` do JSON-LD (`legalName`, `taxID`, `address`, `contactPoint`, `sameAs`). Campos vazios não saem. Salvar Propriedades derruba o cache do site (hook `revalidateSite`).
+
+## Indexação e ícones
+
+Aba **Indexação e ícones** de Propriedades:
+
+- **Bloquear indexação:** `robots.txt` vira `Disallow: /` e todas as páginas saem com `noindex, nofollow` (`robotsOf` em `src/utilities/seo.ts`). Para DEV e HML. Em produção, desligado.
+- **Regras extras do robots.txt:** só `Allow:`/`Disallow:` (e comentários `#`), validadas no admin para o editor não conseguir mexer em `User-agent` ou `Sitemap`. Entram depois de `/next/` e `/api/`. Ignoradas quando a indexação está bloqueada.
+- **Descrição padrão:** vale quando a página não tem descrição (`seoDescription`), em `description`, `og:` e `twitter:`.
+- **Favicon** e **ícone do app:** PNG (a mídia não aceita SVG nem ICO). O ícone do app é o `apple-touch-icon` e o logo do `Organization` no JSON-LD. Vazios: os arquivos da plataforma em `public/` (`/favicon.ico`, `/favicon.svg`, `/icons/apple-touch-icon.png`).

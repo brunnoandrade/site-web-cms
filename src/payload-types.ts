@@ -346,6 +346,60 @@ export interface Tenant {
    * Servido em /llms.txt. Markdown: título (#), resumo (>), seções (##) com links "- [Nome](URL): descrição". Use {{siteUrl}} no lugar do endereço da propriedade. Vazio: /llms.txt não existe.
    */
   llmsTxt?: string | null;
+  /**
+   * Ligado: o robots.txt bloqueia tudo (Disallow: /) e todas as páginas saem com noindex, nofollow. Use em DEV e HML; em produção, deixe desligado.
+   */
+  blockIndexing?: boolean | null;
+  /**
+   * Uma regra por linha, só "Allow:" e "Disallow:" (ex.: Disallow: /busca/). Entram no bloco "User-agent: *", depois de "/next/" e "/api/". Linhas com # são comentários.
+   */
+  robotsExtra?: string | null;
+  /**
+   * Usada em description, og:description e twitter:description quando a página não tem descrição própria. Até uns 155 caracteres.
+   */
+  seoDefaultDescription?: string | null;
+  /**
+   * PNG quadrado, no mínimo 48×48. Vazio: o favicon padrão da plataforma.
+   */
+  favicon?: (number | null) | Media;
+  /**
+   * PNG quadrado, 180×180. Vira o apple-touch-icon e o logo nos dados estruturados. Vazio: /icons/apple-touch-icon.png.
+   */
+  appIcon?: (number | null) | Media;
+  tracking?: {
+    /**
+     * Ex.: GTM-ABC1234. Carregado depois da interação.
+     */
+    gtmId?: string | null;
+    /**
+     * Ex.: G-ABC123DEF4. Só é usado sem GTM (com GTM, configure o GA4 dentro do container, para não contar em dobro).
+     */
+    ga4Id?: string | null;
+    /**
+     * Ligado: o rastreio começa negado (Consent Mode v2) e só é liberado se o visitante aceitar. Desligado: o rastreio carrega direto. Desligue se o GTM já traz a sua ferramenta de consentimento.
+     */
+    consentBanner?: boolean | null;
+    /**
+     * Mostrado no banner. Caminho (/privacidade) ou URL completa.
+     */
+    privacyUrl?: string | null;
+  };
+  company?: {
+    legalName?: string | null;
+    cnpj?: string | null;
+    address?: string | null;
+    /**
+     * Ex.: +55 11 4003-0000 ou 0800 000 0000.
+     */
+    sacPhone?: string | null;
+  };
+  socials?:
+    | {
+        network: 'instagram' | 'linkedin' | 'youtube' | 'facebook' | 'x' | 'tiktok';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2931,6 +2985,34 @@ export interface TenantsSelect<T extends boolean = true> {
   seoTitleSuffix?: T;
   seoDefaultImage?: T;
   llmsTxt?: T;
+  blockIndexing?: T;
+  robotsExtra?: T;
+  seoDefaultDescription?: T;
+  favicon?: T;
+  appIcon?: T;
+  tracking?:
+    | T
+    | {
+        gtmId?: T;
+        ga4Id?: T;
+        consentBanner?: T;
+        privacyUrl?: T;
+      };
+  company?:
+    | T
+    | {
+        legalName?: T;
+        cnpj?: T;
+        address?: T;
+        sacPhone?: T;
+      };
+  socials?:
+    | T
+    | {
+        network?: T;
+        url?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
