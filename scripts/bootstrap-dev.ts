@@ -13,6 +13,7 @@ import { createLocalReq, getPayload } from 'payload'
 
 import { seed } from '../src/endpoints/seed'
 import { seedUberContent } from '../src/endpoints/seed/uber-content'
+import { seedTenantProfiles } from '../src/endpoints/seed/tenant-profiles'
 import { seedUberSeo } from '../src/endpoints/seed/uber-seo'
 import { revalidateAllWeb } from '../src/utilities/revalidateWeb'
 
@@ -110,6 +111,9 @@ for (const tenant of tenantDocs) {
     await seedUberSeo(payload)
   }
 }
+
+// Analytics, company, social networks and icons of each property (after the media was recreated).
+await seedTenantProfiles(payload)
 
 // The seed skips per-document revalidation: refresh the website cache once at the end.
 payload.logger.info(

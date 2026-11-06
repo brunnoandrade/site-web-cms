@@ -81,3 +81,12 @@ Aba **Indexação e ícones** de Propriedades:
 - **Regras extras do robots.txt:** só `Allow:`/`Disallow:` (e comentários `#`), validadas no admin para o editor não conseguir mexer em `User-agent` ou `Sitemap`. Entram depois de `/next/` e `/api/`. Ignoradas quando a indexação está bloqueada.
 - **Descrição padrão:** vale quando a página não tem descrição (`seoDescription`), em `description`, `og:` e `twitter:`.
 - **Favicon** e **ícone do app:** PNG (a mídia não aceita SVG nem ICO). O ícone do app é o `apple-touch-icon` e o logo do `Organization` no JSON-LD. Vazios: os arquivos da plataforma em `public/` (`/favicon.ico`, `/favicon.svg`, `/icons/apple-touch-icon.png`).
+
+## Dados públicos das propriedades
+
+`src/endpoints/seed/tenant-profiles.ts` (aplicado pelo `bootstrap:dev` e por `npm run tenants:profile`) preenche em Propriedades o que vem dos sites atuais: GTM, empresa (razão social, CNPJ, endereço, SAC), redes sociais, descrição padrão e ícones. Fontes: rodapé, `<head>` e scripts de digio.com.br e ubercontabrasil.com.br.
+
+- **GTM:** Digio `GTM-536PM49`; Uber Conta `GTM-PFPD9ZJ`. Não disparam em localhost (`NEXT_PUBLIC_TRACKING_ON_LOCALHOST=true` liga para testar).
+- **Banner de consentimento:** desligado nas duas (a ferramenta de consentimento do site atual vem pelo GTM; ver `docs/virada.md`).
+- **Sem valor, por não existir no site atual:** Uber Conta sem redes sociais (só Medium, que o CMS não oferece) e sem ícone do app; Digio sem imagem de compartilhamento padrão, `llms.txt` e link de privacidade. O sufixo do título da Digio fica no padrão (" | Digio").
+- O favicon da Digio no site atual é 16×16 (abaixo dos 48×48 recomendados).

@@ -29,6 +29,14 @@ const texts = {
   label: 'Aviso de cookies',
 } as const
 
+/**
+ * Local and test hosts do not send hits: the property's real GTM/GA4 would receive the traffic of
+ * development. `NEXT_PUBLIC_TRACKING_ON_LOCALHOST=true` turns it on to test the tags.
+ */
+const isLocalHost = () =>
+  process.env.NEXT_PUBLIC_TRACKING_ON_LOCALHOST !== 'true' &&
+  /^(localhost|127\.0\.0\.1|\[::1\]|.*\.localhost)$/.test(window.location.hostname)
+
 const storageKey = (tenant: string) => `consent:${tenant}`
 
 const CHANGE_EVENT = 'consent-change'
@@ -87,7 +95,7 @@ export const Tracking: React.FC<Props> = ({ tenant, gtmId, ga4Id, consentBanner,
   )
 
   useEffect(() => {
-    if (!enabled) return
+    if (!enabled || isLocalHost()) return
     const choice = consentBanner ? readChoice(tenant) : 'granted'
 
     window.dataLayer ??= []

@@ -29,6 +29,7 @@
     "uber:blog": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/uber-blog.ts",
     "blog:migrate": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/migrate-wordpress.ts",
     "bootstrap:dev": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/bootstrap-dev.ts",
+    "tenants:profile": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/tenant-profiles.ts",
     "users:local": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/local-users.ts"
   },
   "dependencies": {
