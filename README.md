@@ -177,6 +177,6 @@ As variáveis `NEXT_PUBLIC_*` e o host de imagens entram no build (`--build-arg`
 
 **Banco e migrations:** o schema vem de `src/migrations` (a inicial cria todas as tabelas). Em produção o CMS aplica as pendentes ao subir (`prodMigrations`); em dev o Payload continua sincronizando o schema sozinho (push). Ao mudar coleções ou campos, gere uma nova com `npm run payload migrate:create <nome>` e versione o resultado; para aplicar à mão, `npm run payload migrate`. Com várias réplicas subindo ao mesmo tempo, prefira rodar `migrate` uma vez antes (job de deploy).
 
-**Health check:** `GET /api/health` devolve `200 {"status":"ok"}` se o banco responde e `503` se não (sem dados sensíveis, sem cache).
+**Health check:** `GET /api/health` (liveness) devolve `200 {"status":"UP","service":"web-platform","timestamp":"…"}` sempre que o processo responde: não consulta banco, Payload nem S3. `GET /api/health/ready` (readiness) devolve `200` com o mesmo formato se o banco responde e `503 {"status":"DOWN",…}` se não. Públicos, sem dados sensíveis e sem cache.
 
 Outros scripts úteis: `test:e2e` e `generate:importmap`.

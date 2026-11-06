@@ -20,7 +20,6 @@ import { Tenants } from './collections/Tenants'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
-import { health } from './endpoints/health'
 import { migrations } from './migrations'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
@@ -110,7 +109,6 @@ export default buildConfig({
     Tenants,
     Users,
   ],
-  endpoints: [health],
   // REST only (the website uses it): GraphQL would expose introspection and let one request
   // fan out into hundreds of aliased queries.
   graphQL: { disable: true },
