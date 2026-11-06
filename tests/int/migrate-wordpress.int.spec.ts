@@ -111,7 +111,7 @@ describe('WordPress migration', () => {
 
   afterAll(async () => {
     const context = { disableRevalidate: true }
-    for (const collection of ['redirects', 'posts', 'categories', 'authors', 'media'] as const) {
+    for (const collection of ['posts', 'categories', 'authors', 'media'] as const) {
       await payload.delete({ collection, context, where: { tenant: { equals: tenant.id } } })
     }
     await payload.delete({ collection: 'tenants', id: tenant.id })
@@ -156,27 +156,6 @@ describe('WordPress migration', () => {
     expect(report.media).toMatchObject({ imported: 0, reused: 1 })
     expect(requests.filter((url) => url.endsWith('.png'))).toEqual([])
     expect((await findPost()).title).toBe('Novo título')
-  })
-
-  it('a slug changed in WordPress keeps the old URL working (redirect)', async () => {
-    const newSlug = `post-${run}-novo`
-    await migrate([
-      post({
-        slug: newSlug,
-        link: `https://wp.test/blog/${categorySlug}/${newSlug}/`,
-        modified_gmt: '2024-07-01T10:00:00',
-      }),
-    ])
-    const { docs } = await payload.find({
-      collection: 'redirects',
-      where: {
-        and: [
-          { tenant: { equals: tenant.id } },
-          { from: { equals: `/blog/${categorySlug}/post-${run}/` } },
-        ],
-      },
-    })
-    expect(docs[0]?.destinationPath).toBe(`/blog/${categorySlug}/${newSlug}/`)
   })
 
   it('a dry run writes nothing', async () => {

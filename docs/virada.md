@@ -11,7 +11,7 @@ Uma CDN controlada pela Digio fica na frente do site atual e do site novo. Cada 
 
 ## Em cada onda
 1. Congelar o conteúdo daquela seção no site atual (1–2 dias antes).
-2. Ativar os redirects da seção no CMS.
+2. Preparar na CDN os redirects das URLs que mudam de endereço naquela seção (o CMS não tem redirects).
 3. Trocar a regra de caminho na CDN.
 4. Rodar `scripts/validate-urls.ts` e acompanhar o GA4 em tempo real.
 5. Critério de volta: erro 5xx, 404 em URL com tráfego ou queda de sessões. Nesse caso, reverter a regra na CDN.
@@ -19,7 +19,7 @@ Uma CDN controlada pela Digio fica na frente do site atual e do site novo. Cada 
 ## Implicações para o código
 - Header, footer e menu têm que ficar coerentes com o site atual enquanto os dois convivem.
 - O mesmo GTM e a mesma ferramenta de consentimento nos dois sites.
-- Os redirects precisam poder ser ativados por seção. Sugestão: campo `wave` (1–4) e `active` na coleção `redirects`.
+- Redirects de URLs que mudam ficam na CDN, por onda (o CMS não tem mais a coleção `redirects`).
 
 ## Pedidos ao responsável pelo site atual (semana 1)
 Lista de redirects atuais, inventário de URLs e sitemap, quem controla domínio/DNS/CDN/certificado, integrações chamadas pelo site, export de conteúdo e mídia, e dados do contrato.

@@ -24,15 +24,11 @@ const tenantCollections: CollectionSlug[] = [
   'pages',
   'posts',
   'search',
-  'redirects',
   'header',
   'footer',
-  'banners',
   'help-topics',
   'faqs',
   'help-categories',
-  'rates',
-  'products',
   'authors',
   'categories',
   'media',
@@ -271,7 +267,7 @@ export const seed = async ({
   })
 
   payload.logger.info(
-    `— Seeding products, rates, FAQs, help center, banner, components page and home...`,
+    `— Seeding FAQs, help center, components page and home...`,
   )
 
   const { faqs } = await seedCatalog({ payload, req, tenant, image: imageHomeDoc, context })

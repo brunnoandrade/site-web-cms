@@ -79,5 +79,5 @@ O `bootstrap:dev` cria conteúdo diferente em cada propriedade:
 
 | Propriedade | Conteúdo |
 |---|---|
-| Digio (`digio`) | demo completo: home, componentes, 3 posts, produtos, taxas, FAQs e central de ajuda |
+| Digio (`digio`) | demo completo: home, componentes, 3 posts, FAQs e central de ajuda |
 | Uber Conta (`uber-conta`) | home, FAQs, header e footer, com os textos do site atual e imagens provisórias. Sem blog e sem central de ajuda |

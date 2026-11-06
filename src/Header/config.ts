@@ -19,6 +19,10 @@ export const Header: CollectionConfig = {
   },
   admin: {
     group: 'Layout',
+    components: {
+      // One row per property (the plugin would jump straight to one document).
+      views: { list: { Component: '@/components/admin/LayoutList#LayoutList' } },
+    },
   },
   fields: [
     {
@@ -30,7 +34,10 @@ export const Header: CollectionConfig = {
       appearances: false,
       overrides: {
         name: 'cta',
-        admin: { condition: (_: unknown, siblingData: { enableCta?: boolean }) => Boolean(siblingData?.enableCta) },
+        admin: {
+          condition: (_: unknown, siblingData: { enableCta?: boolean }) =>
+            Boolean(siblingData?.enableCta),
+        },
       },
     }),
     {
@@ -63,7 +70,8 @@ export const Header: CollectionConfig = {
           overrides: {
             admin: {
               hideGutter: true,
-              condition: (_: unknown, siblingData: { kind?: string }) => siblingData?.kind !== 'mega',
+              condition: (_: unknown, siblingData: { kind?: string }) =>
+                siblingData?.kind !== 'mega',
             },
           },
         }),
@@ -71,9 +79,16 @@ export const Header: CollectionConfig = {
           name: 'mega',
           label: 'Mega menu',
           type: 'group',
-          admin: { condition: (_: unknown, siblingData: { kind?: string }) => siblingData?.kind === 'mega' },
+          admin: {
+            condition: (_: unknown, siblingData: { kind?: string }) => siblingData?.kind === 'mega',
+          },
           fields: [
-            { name: 'label', label: 'Rótulo no menu (ex.: Pra você)', type: 'text', required: true },
+            {
+              name: 'label',
+              label: 'Rótulo no menu (ex.: Pra você)',
+              type: 'text',
+              required: true,
+            },
             { name: 'title', label: 'Título do painel', type: 'text' },
             { name: 'description', label: 'Descrição do painel', type: 'textarea' },
             {
@@ -82,7 +97,11 @@ export const Header: CollectionConfig = {
               type: 'array',
               maxRows: 8,
               fields: [
-                { name: 'label', label: 'Título da coluna (opcional, ex.: Conta digital)', type: 'text' },
+                {
+                  name: 'label',
+                  label: 'Título da coluna (opcional, ex.: Conta digital)',
+                  type: 'text',
+                },
                 {
                   name: 'links',
                   label: 'Links',

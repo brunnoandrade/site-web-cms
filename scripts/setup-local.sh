@@ -51,5 +51,4 @@ Pronto. Próximos passos:
 Opcional:
   npm run users:local                             # um usuário por perfil (senha digio123), só local
   npm run blog:migrate tenant=digio limit=20      # posts reais do WordPress (precisa de rede)
-  npm run redirects:import docs/exemplos/redirects.csv tenant=digio
 EOF

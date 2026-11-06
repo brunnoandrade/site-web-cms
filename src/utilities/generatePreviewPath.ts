@@ -2,7 +2,7 @@ import type { RoutableCollection } from '@/routes'
 import { createPreviewToken } from '@/routes/previewToken'
 import type { PayloadRequest } from 'payload'
 
-import { routablePath } from '../collections/Redirects/hooks'
+import { routablePath } from './routablePath'
 import { getTenantSiteURL } from './tenantSite'
 
 type Props = {

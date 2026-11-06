@@ -4,11 +4,8 @@ import { Section } from '@/components/Section'
 
 import type { Page } from '@/payload-types'
 
-import { BannerSectionBlock } from '@/blocks/BannerSection/Component'
 import { CardsBlock } from '@/blocks/Cards/Component'
 import { FaqBlock } from '@/blocks/Faq/Component'
-import { ProductHighlightBlock } from '@/blocks/ProductHighlight/Component'
-import { RatesTableBlock } from '@/blocks/RatesTable/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
@@ -22,11 +19,8 @@ import { StepsBlock } from '@/blocks/Steps/Component'
 import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 
 const blockComponents = {
-  bannerSection: BannerSectionBlock,
   cards: CardsBlock,
   faq: FaqBlock,
-  productHighlight: ProductHighlightBlock,
-  ratesTable: RatesTableBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
   mediaBlock: MediaBlock,

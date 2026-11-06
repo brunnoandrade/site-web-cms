@@ -3,7 +3,7 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'paylo
 import { revalidateWeb } from '../utilities/revalidateWeb'
 
 /**
- * For content embedded in pages through blocks (products, rates, FAQs, banners): any change
+ * For content embedded in pages through blocks (FAQs): any change
  * refreshes the tenant's cached pages, plus the given extra tags.
  */
 export const revalidateTenantContent = (

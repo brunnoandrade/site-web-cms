@@ -2,7 +2,6 @@ import { revalidatePath, revalidateTag } from 'next/cache'
 import type { NextRequest } from 'next/server'
 
 import { isBearer } from '@/lib/bearer'
-import { invalidateRedirects } from '@/lib/redirects'
 
 type Body = {
   paths?: unknown
@@ -35,13 +34,6 @@ export async function POST(req: NextRequest): Promise<Response> {
   // expire: 0 so the next visit gets the new content instead of a stale copy.
   for (const tag of tags) revalidateTag(tag, { expire: 0 })
   for (const path of paths) revalidatePath(path)
-
-  // The proxy keeps redirects in memory: drop the tenant's table ('<tenant>:redirects').
-  for (const tag of tags) {
-    const match = /^(.+):redirects$/.exec(tag)
-    if (match) invalidateRedirects(match[1])
-    if (tag === 'cms') invalidateRedirects()
-  }
 
   return Response.json({ revalidated: true, paths, tags, now: Date.now() })
 }

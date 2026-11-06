@@ -1,11 +1,10 @@
 import { convertHTMLToLexical, editorConfigFactory } from '@payloadcms/richtext-lexical'
 import { JSDOM } from 'jsdom'
-import { createLocalReq, type Payload, type RichTextField } from 'payload'
+import { type Payload, type RichTextField } from 'payload'
 import { normalizePath, postPath } from '@/routes'
 
 import type { Author, Category, Post, Tenant } from '@/payload-types'
 
-import { applyUrlChange } from '../collections/Redirects/hooks'
 import { countHtml, countLexical, describeLoss, numericUploadIDs } from './contentCheck'
 import { attachMediaToImages, cleanWordPressHtml } from './html'
 import { fetchPublicImage } from './safeFetch'
@@ -95,7 +94,6 @@ export async function migrateWordPress(
   const tenant = await findTenant(payload, options.tenant)
   const siteOrigins = [...new Set([new URL(base).origin, new URL(tenant.siteUrl).origin])]
   const context = { disableRevalidate: true }
-  const req = await createLocalReq({ context }, payload)
 
   // ---- HTTP -----------------------------------------------------------------------------
   const get = async (url: string, attempts = 3): Promise<Response> => {
@@ -291,28 +289,17 @@ export async function migrateWordPress(
         continue
       }
 
-      const saved = existing
-        ? await payload.update({
-            collection: 'posts',
-            id: existing.id,
-            data: data as never,
-            context,
-          })
-        : await payload.create({ collection: 'posts', data: data as never, context })
-      if (existing) report.posts.updated++
-      else report.posts.created++
-
-      // URLs are expected to be the same as in WordPress; if not, keep the old one working.
-      if (oldPath !== newPath) {
-        await applyUrlChange({
-          req,
-          tenant: tenant.id,
-          oldPath,
-          newPath,
-          destination: { reference: { relationTo: 'posts', value: saved.id } },
-        })
-        report.urlChanges.push({ from: oldPath, to: newPath })
+      if (existing) {
+        await payload.update({ collection: 'posts', id: existing.id, data: data as never, context })
+        report.posts.updated++
+      } else {
+        await payload.create({ collection: 'posts', data: data as never, context })
+        report.posts.created++
       }
+
+      // URLs are expected to be the same as in WordPress. When one differs there is no redirect to
+      // keep the old address working: it is listed in the report (`urlChanges`) to be handled.
+      if (oldPath !== newPath) report.urlChanges.push({ from: oldPath, to: newPath })
 
       if ((index + 1) % 25 === 0) log(`${index + 1}/${wpPosts.length} posts processados`)
     } catch (err) {

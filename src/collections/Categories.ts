@@ -5,7 +5,6 @@ import { anyone, tenantRoles } from '../access/roles'
 import { wpIdField } from '../fields/wpId'
 import { revalidateTenantContent } from '../hooks/revalidateTenantContent'
 import { t } from '../utilities/labels'
-import { redirectCategoryOnSlugChange } from './Redirects/hooks'
 
 const revalidate = revalidateTenantContent(['posts', 'categories', 'posts-sitemap'])
 
@@ -57,7 +56,7 @@ export const Categories: CollectionConfig = {
     wpIdField,
   ],
   hooks: {
-    afterChange: [redirectCategoryOnSlugChange, revalidate.afterChange],
+    afterChange: [revalidate.afterChange],
     afterDelete: [revalidate.afterDelete],
   },
 }

@@ -3,7 +3,7 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'paylo
 import type { Post } from '@/payload-types'
 
 import { revalidateWeb } from '../../../utilities/revalidateWeb'
-import { routablePath } from '../../Redirects/hooks'
+import { routablePath } from '@/utilities/routablePath'
 
 // Blog listings (/blog/, category pages, archive blocks, related posts) use the 'posts' tag.
 const tags = ['posts', 'posts-sitemap']

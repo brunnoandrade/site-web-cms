@@ -29,8 +29,7 @@
     "uber:blog": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/uber-blog.ts",
     "blog:migrate": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/migrate-wordpress.ts",
     "bootstrap:dev": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/bootstrap-dev.ts",
-    "users:local": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/local-users.ts",
-    "redirects:import": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/import-redirects.ts"
+    "users:local": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/local-users.ts"
   },
   "dependencies": {
     "@payloadcms/admin-bar": "3.90.2",
@@ -39,7 +38,6 @@
     "@payloadcms/next": "3.90.2",
     "@payloadcms/plugin-multi-tenant": "3.90.2",
     "@payloadcms/plugin-nested-docs": "3.90.2",
-    "@payloadcms/plugin-redirects": "3.90.2",
     "@payloadcms/plugin-search": "3.90.2",
     "@payloadcms/plugin-seo": "3.90.2",
     "@payloadcms/richtext-lexical": "3.90.2",

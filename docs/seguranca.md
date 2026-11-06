@@ -55,6 +55,6 @@ Escopo: links e redirects, formulários, rotas do site, scripts de migração e 
 - Papéis por REST (editor, seo, admin de A e de B, super-admin): leitura, escrita, movimentação e criação entre tenants são negadas; rascunhos e versões ficam isolados por tenant; ninguém escala papel, adiciona a si mesmo a outro tenant, cria API key, troca o slug do tenant ou cria super-admin. Atenção: o Payload responde **200** e descarta o campo sem permissão, então verifique o estado salvo, não o status.
 - Rotas do site: `/<slug-do-tenant>/` direto no host de outro tenant dá 404; `robots.txt` usa o host da requisição; `X-Forwarded-Host` desconhecido dá 404.
 - `scripts/public-api-smoke.py` repete as sondas anônimas contra qualquer ambiente (`CMS=… WEB=…`).
-- Não coberto: `import-redirects` (CSV, só admin/seo, passa pelos mesmos hooks), fuzzing do admin e teste de carga.
+- Não coberto: fuzzing do admin e teste de carga.
 
 - Ressalva da revalidação: se o Keycloak ativar rotação de refresh token com reuso proibido, requisições paralelas em várias instâncias do CMS podem se atropelar (há controle só dentro do processo).

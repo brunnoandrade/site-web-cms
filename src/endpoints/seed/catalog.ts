@@ -36,95 +36,11 @@ type Args = {
 }
 
 /**
- * Demo catalog: products, a published (validated) rate table, FAQs, help center and a banner,
+ * Demo catalog: FAQs and help center,
  * plus the "componentes" page that uses every block.
  */
 export async function seedCatalog({ payload, req, tenant, image, context }: Args) {
   const withTenant = <T extends object>(data: T) => ({ ...data, tenant: tenant.id })
-
-  const card = await payload.create({
-    collection: 'products',
-    req,
-    context,
-    data: withTenant({
-      name: 'Cartão de crédito',
-      slug: 'cartao-de-credito',
-      category: 'credit-card' as const,
-      summary: 'Cartão sem anuidade, com controle total pelo app.',
-      image: image.id,
-      benefits: [{ text: 'Sem anuidade' }, { text: 'Cartão virtual para compras online' }],
-      enableLink: true,
-      link: { type: 'custom' as const, url: '/cartao/', label: 'Peça o seu' },
-    }),
-  })
-
-  const loan = await payload.create({
-    collection: 'products',
-    req,
-    context,
-    data: withTenant({
-      name: 'Empréstimo pessoal',
-      slug: 'emprestimo-pessoal',
-      category: 'loan' as const,
-      summary: 'Crédito com taxas a partir de 1,99% ao mês, direto pelo app.',
-      image: image.id,
-      enableLink: true,
-      link: { type: 'custom' as const, url: '/emprestimo/', label: 'Simule no app' },
-    }),
-  })
-
-  // Passes every rule of validateRates: 1.99% a.m. = 26.68% a.a.; CET 2.20% a.m. = 29.84% a.a.
-  const rates = await payload.create({
-    collection: 'rates',
-    req,
-    context,
-    data: withTenant({
-      title: 'Empréstimo pessoal: taxas vigentes',
-      product: loan.id,
-      validFrom: '2026-10-01T12:00:00.000Z',
-      items: [
-        {
-          label: 'Juros',
-          kind: 'interest' as const,
-          period: 'monthly' as const,
-          valueType: 'percent' as const,
-          value: 1.99,
-          valueMax: 6.99,
-        },
-        {
-          label: 'Juros',
-          kind: 'interest' as const,
-          period: 'yearly' as const,
-          valueType: 'percent' as const,
-          value: 26.68,
-        },
-        {
-          label: 'CET',
-          kind: 'cet' as const,
-          period: 'monthly' as const,
-          valueType: 'percent' as const,
-          value: 2.2,
-        },
-        {
-          label: 'CET',
-          kind: 'cet' as const,
-          period: 'yearly' as const,
-          valueType: 'percent' as const,
-          value: 29.84,
-        },
-        {
-          label: 'Tarifa de cadastro',
-          kind: 'fee' as const,
-          period: 'once' as const,
-          valueType: 'currency' as const,
-          value: 0,
-        },
-      ],
-      legalNote:
-        'Taxas sujeitas à análise de crédito. Exemplo para desenvolvimento: não são as taxas reais do Digio.',
-      _status: 'published' as const,
-    }),
-  })
 
   const [accountCategory, cardCategory] = await Promise.all([
     payload.create({
@@ -192,20 +108,6 @@ export async function seedCatalog({ payload, req, tenant, image, context }: Args
     }),
   })
 
-  const banner = await payload.create({
-    collection: 'banners',
-    req,
-    context,
-    data: withTenant({
-      title: 'Banner de exemplo',
-      alt: 'Pessoa usando o app no celular',
-      image: image.id,
-      enableLink: true,
-      link: { type: 'custom' as const, url: '/cartao/', label: 'Conheça o cartão' },
-      active: true,
-    }),
-  })
-
   await payload.create({
     collection: 'pages',
     req,
@@ -235,21 +137,10 @@ export async function seedCatalog({ payload, req, tenant, image, context }: Args
           ],
         },
         {
-          blockType: 'productHighlight' as const,
-          product: card.id,
-          imagePosition: 'right' as const,
-        },
-        {
-          blockType: 'ratesTable' as const,
-          heading: 'Taxas do empréstimo pessoal',
-          rates: rates.id,
-        },
-        {
           blockType: 'faq' as const,
           heading: 'Perguntas frequentes',
           faqs: faqs.map((faq) => faq.id),
         },
-        { blockType: 'bannerSection' as const, banner: banner.id },
         {
           blockType: 'mediaBlock' as const,
           media: image.id,

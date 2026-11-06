@@ -32,7 +32,6 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { wpIdField } from '../../fields/wpId'
-import { createRedirectOnUrlChange, rememberPublishedPath } from '../Redirects/hooks'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -246,8 +245,7 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   ],
   hooks: {
-    afterChange: [revalidatePost, createRedirectOnUrlChange('posts')],
-    beforeChange: [rememberPublishedPath('posts')],
+    afterChange: [revalidatePost],
     afterDelete: [revalidateDelete],
   },
   versions: {

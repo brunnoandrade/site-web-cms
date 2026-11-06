@@ -8,11 +8,8 @@ import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { BannerSection } from '../../blocks/BannerSection/config'
 import { Cards } from '../../blocks/Cards/config'
 import { Faq } from '../../blocks/Faq/config'
-import { ProductHighlight } from '../../blocks/ProductHighlight/config'
-import { RatesTable } from '../../blocks/RatesTable/config'
 import { ImageContent } from '../../blocks/ImageContent/config'
 import { Partner } from '../../blocks/Partner/config'
 import { Story } from '../../blocks/Story/config'
@@ -22,7 +19,6 @@ import { Documents } from '../../blocks/Documents/config'
 import { Steps } from '../../blocks/Steps/config'
 import { Testimonials } from '../../blocks/Testimonials/config'
 import { hero } from '@/heros/config'
-import { createRedirectOnUrlChange, rememberPublishedPath } from '../Redirects/hooks'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { clearHeroWithoutHero } from './hooks/clearHeroWithoutHero'
@@ -130,8 +126,6 @@ export const Pages: CollectionConfig<'pages'> = {
                 Cards,
                 CallToAction,
                 MediaBlock,
-                ProductHighlight,
-                RatesTable,
                 Faq,
                 Steps,
                 ImageContent,
@@ -141,7 +135,6 @@ export const Pages: CollectionConfig<'pages'> = {
                 Contacts,
                 Documents,
                 Testimonials,
-                BannerSection,
                 Archive,
               ].map(withAnchor),
               required: true,
@@ -199,8 +192,8 @@ export const Pages: CollectionConfig<'pages'> = {
     slug({ disableUnique: true }),
   ],
   hooks: {
-    afterChange: [revalidatePage, createRedirectOnUrlChange('pages')],
-    beforeChange: [clearHeroWithoutHero, populatePublishedAt, rememberPublishedPath('pages')],
+    afterChange: [revalidatePage],
+    beforeChange: [clearHeroWithoutHero, populatePublishedAt],
     afterDelete: [revalidateDelete],
   },
   versions: {

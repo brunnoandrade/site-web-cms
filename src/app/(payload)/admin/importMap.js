@@ -27,6 +27,7 @@ import { BlockquoteFeatureClient as BlockquoteFeatureClient_e70f5e05f09f93e00b99
 import { OrderedListFeatureClient as OrderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { UnorderedListFeatureClient as UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { RowLabel as RowLabel_ec255a65fa6fa8d1faeb09cf35284224 } from '@/Header/RowLabel'
+import { LayoutList as LayoutList_63b4b01fb1b1637c7aac51f9d4842cb7 } from '@/components/admin/LayoutList'
 import { RowLabel as RowLabel_1f6ff6ff633e3695d348f4f3c58f1466 } from '@/Footer/RowLabel'
 import { WatchTenantCollection as WatchTenantCollection_1d0591e3cf4f332c83a86da13a0de59a } from '@payloadcms/plugin-multi-tenant/client'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
@@ -34,7 +35,7 @@ import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from 
 import { default as default_db9ac62598c46d0f1db201f6af05442e } from '@/components/LogoutButton'
 import { DigioIcon as DigioIcon_f77ec3bc2a97fef187a7c13c91615578 } from '@/components/DigioLogo'
 import { DigioLogo as DigioLogo_f77ec3bc2a97fef187a7c13c91615578 } from '@/components/DigioLogo'
-import { GlobalViewRedirect as GlobalViewRedirect_d6d5f193a167989e2ee7d14202901e62 } from '@payloadcms/plugin-multi-tenant/rsc'
+import { LayoutViewRedirect as LayoutViewRedirect_e702b297d527b6f3a017d71c6ee45cbb } from '@/components/admin/LayoutViewRedirect'
 import { default as default_91c3143ace9a9166d2a5f1b2748f6cd7 } from '@/components/SsoLogin'
 import { TenantSelector as TenantSelector_d6d5f193a167989e2ee7d14202901e62 } from '@payloadcms/plugin-multi-tenant/rsc'
 import { TenantSelectionProvider as TenantSelectionProvider_d6d5f193a167989e2ee7d14202901e62 } from '@payloadcms/plugin-multi-tenant/rsc'
@@ -72,6 +73,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#OrderedListFeatureClient": OrderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#UnorderedListFeatureClient": UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/Header/RowLabel#RowLabel": RowLabel_ec255a65fa6fa8d1faeb09cf35284224,
+  "@/components/admin/LayoutList#LayoutList": LayoutList_63b4b01fb1b1637c7aac51f9d4842cb7,
   "@/Footer/RowLabel#RowLabel": RowLabel_1f6ff6ff633e3695d348f4f3c58f1466,
   "@payloadcms/plugin-multi-tenant/client#WatchTenantCollection": WatchTenantCollection_1d0591e3cf4f332c83a86da13a0de59a,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
@@ -79,7 +81,7 @@ export const importMap = {
   "@/components/LogoutButton#default": default_db9ac62598c46d0f1db201f6af05442e,
   "@/components/DigioLogo#DigioIcon": DigioIcon_f77ec3bc2a97fef187a7c13c91615578,
   "@/components/DigioLogo#DigioLogo": DigioLogo_f77ec3bc2a97fef187a7c13c91615578,
-  "@payloadcms/plugin-multi-tenant/rsc#GlobalViewRedirect": GlobalViewRedirect_d6d5f193a167989e2ee7d14202901e62,
+  "@/components/admin/LayoutViewRedirect#LayoutViewRedirect": LayoutViewRedirect_e702b297d527b6f3a017d71c6ee45cbb,
   "@/components/SsoLogin#default": default_91c3143ace9a9166d2a5f1b2748f6cd7,
   "@payloadcms/plugin-multi-tenant/rsc#TenantSelector": TenantSelector_d6d5f193a167989e2ee7d14202901e62,
   "@payloadcms/plugin-multi-tenant/rsc#TenantSelectionProvider": TenantSelectionProvider_d6d5f193a167989e2ee7d14202901e62,

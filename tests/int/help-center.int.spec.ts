@@ -4,7 +4,7 @@ import type { Faq, HelpCategory, Tenant } from '@/payload-types'
 
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-/** Help center (/central-de-ajuda/<topico>/<pergunta>/): question slugs and redirects. */
+/** Help center (/central-de-ajuda/<topico>/<pergunta>/): question slugs. */
 
 let payload: Payload
 const run = `${Date.now()}`
@@ -73,7 +73,7 @@ describe('help center', () => {
   })
 
   afterAll(async () => {
-    for (const collection of ['redirects', 'help-topics', 'faqs', 'help-categories'] as const) {
+    for (const collection of ['help-topics', 'faqs', 'help-categories'] as const) {
       await payload.delete({ collection, context, where: { tenant: { equals: tenant.id } } })
     }
     await payload.delete({ collection: 'tenants', id: tenant.id })
@@ -96,28 +96,5 @@ describe('help center', () => {
   it('always gives a question a slug, even when left empty', async () => {
     const doc = await faq('Sem endereço definido', { slug: '' } as never)
     expect(doc.slug).toBe('sem-endereco-definido')
-  })
-
-  it('a redirect cannot hide a published topic or question page', async () => {
-    const question = await faq('O que é CVV?')
-    await topic('cartao-digio', [question.id])
-    const create = (from: string) =>
-      payload.create({
-        collection: 'redirects',
-        context,
-        data: { tenant: tenant.id, from, to: { type: 'custom', url: '/x/' } },
-      })
-    const hides = {
-      data: {
-        errors: expect.arrayContaining([
-          expect.objectContaining({ message: expect.stringMatching(/esconderia/) }),
-        ]),
-      },
-    }
-    await expect(create('/central-de-ajuda/cartao-digio/')).rejects.toMatchObject(hides)
-    await expect(create('/central-de-ajuda/cartao-digio/o-que-e-cvv/')).rejects.toMatchObject(hides)
-    // An old question URL that no longer exists can be redirected.
-    const ok = await create('/central-de-ajuda/cartao-digio/pergunta-antiga/')
-    expect(ok.id).toBeDefined()
   })
 })

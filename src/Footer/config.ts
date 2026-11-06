@@ -19,6 +19,10 @@ export const Footer: CollectionConfig = {
   },
   admin: {
     group: 'Layout',
+    components: {
+      // One row per property (the plugin would jump straight to one document).
+      views: { list: { Component: '@/components/admin/LayoutList#LayoutList' } },
+    },
   },
   fields: [
     {
@@ -60,7 +64,10 @@ export const Footer: CollectionConfig = {
               label: 'Imagem no lugar do texto (ex.: selo da loja de apps)',
               type: 'upload',
               relationTo: 'media',
-              admin: { description: 'Se preenchida, o link aparece como imagem; o rótulo vira o texto alternativo.' },
+              admin: {
+                description:
+                  'Se preenchida, o link aparece como imagem; o rótulo vira o texto alternativo.',
+              },
             },
           ],
         },

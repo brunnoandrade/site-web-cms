@@ -72,17 +72,13 @@ export interface Config {
     categories: Category;
     authors: Author;
     media: Media;
-    products: Product;
-    rates: Rate;
     faqs: Faq;
     'help-categories': HelpCategory;
     'help-topics': HelpTopic;
-    banners: Banner;
     header: Header;
     footer: Footer;
     tenants: Tenant;
     users: User;
-    redirects: Redirect;
     search: Search;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
@@ -97,17 +93,13 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    products: ProductsSelect<false> | ProductsSelect<true>;
-    rates: RatesSelect<false> | RatesSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     'help-categories': HelpCategoriesSelect<false> | HelpCategoriesSelect<true>;
     'help-topics': HelpTopicsSelect<false> | HelpTopicsSelect<true>;
-    banners: BannersSelect<false> | BannersSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     tenants: TenantsSelect<false> | TenantsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
-    redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
@@ -258,8 +250,6 @@ export interface Page {
     | CardsBlock
     | CallToActionBlock
     | MediaBlock
-    | ProductHighlightBlock
-    | RatesTableBlock
     | FaqBlock
     | StepsBlock
     | ImageContentBlock
@@ -269,7 +259,6 @@ export interface Page {
     | ContactsBlock
     | DocumentsBlock
     | TestimonialsBlock
-    | BannerSectionBlock
     | ArchiveBlock
   )[];
   meta?: {
@@ -840,115 +829,6 @@ export interface MediaBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProductHighlightBlock".
- */
-export interface ProductHighlightBlock {
-  product: number | Product;
-  imagePosition?: ('right' | 'left') | null;
-  /**
-   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
-   */
-  anchor?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'productHighlight';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products".
- */
-export interface Product {
-  id: number;
-  tenant?: (number | null) | Tenant;
-  name: string;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  category: 'credit-card' | 'account' | 'loan' | 'investment' | 'insurance' | 'other';
-  /**
-   * Up to 280 characters. Used in highlights.
-   */
-  summary: string;
-  image?: (number | null) | Media;
-  benefits?:
-    | {
-        text: string;
-        id?: string | null;
-      }[]
-    | null;
-  enableLink?: boolean | null;
-  link?: {
-    type?: ('reference' | 'custom') | null;
-    newTab?: boolean | null;
-    reference?:
-      | ({
-          relationTo: 'pages';
-          value: number | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: number | Post;
-        } | null);
-    url?: string | null;
-    label: string;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "RatesTableBlock".
- */
-export interface RatesTableBlock {
-  heading?: string | null;
-  /**
-   * The website shows the published, validated version of the table.
-   */
-  rates: number | Rate;
-  /**
-   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
-   */
-  anchor?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'ratesTable';
-}
-/**
- * Business rules (CET, monthly/yearly consistency, validity and legal note) are checked on publish.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "rates".
- */
-export interface Rate {
-  id: number;
-  tenant?: (number | null) | Tenant;
-  title: string;
-  product: number | Product;
-  validFrom: string;
-  validUntil?: string | null;
-  items?:
-    | {
-        label: string;
-        kind: 'interest' | 'cet' | 'fee' | 'other';
-        period: 'monthly' | 'yearly' | 'once';
-        valueType: 'percent' | 'currency';
-        value: number;
-        valueMax?: number | null;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Required to publish.
-   */
-  legalNote?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FaqBlock".
  */
 export interface FaqBlock {
@@ -1382,59 +1262,6 @@ export interface TestimonialsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BannerSectionBlock".
- */
-export interface BannerSectionBlock {
-  /**
-   * Only shown on the website when active and within its display period.
-   */
-  banner: number | Banner;
-  /**
-   * Identifier for in-page links. E.g. "solutions": a link to #solutions scrolls to this section. Lowercase letters, numbers and hyphens only.
-   */
-  anchor?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'bannerSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "banners".
- */
-export interface Banner {
-  id: number;
-  tenant?: (number | null) | Tenant;
-  title: string;
-  /**
-   * Describes the image for screen readers.
-   */
-  alt: string;
-  image: number | Media;
-  mobileImage?: (number | null) | Media;
-  enableLink?: boolean | null;
-  link?: {
-    type?: ('reference' | 'custom') | null;
-    newTab?: boolean | null;
-    reference?:
-      | ({
-          relationTo: 'pages';
-          value: number | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: number | Post;
-        } | null);
-    url?: string | null;
-    label: string;
-  };
-  active?: boolean | null;
-  startsAt?: string | null;
-  endsAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ArchiveBlock".
  */
 export interface ArchiveBlock {
@@ -1731,46 +1558,6 @@ export interface User {
   collection: 'users';
 }
 /**
- * Answered by the website proxy, keeping the query string (utm_*, gclid, fbclid). Chains and duplicated sources are refused.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "redirects".
- */
-export interface Redirect {
-  id: number;
-  tenant?: (number | null) | Tenant;
-  /**
-   * Old path, relative to the property domain (e.g. /cartao/). Full URLs are accepted; the query string is ignored.
-   */
-  from: string;
-  to?: {
-    type?: ('reference' | 'custom') | null;
-    reference?:
-      | ({
-          relationTo: 'pages';
-          value: number | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: number | Post;
-        } | null);
-    url?: string | null;
-  };
-  type?: ('301' | '302') | null;
-  /**
-   * Empty for external destinations.
-   */
-  destinationPath?: string | null;
-  active?: boolean | null;
-  /**
-   * See docs/virada.md.
-   */
-  wave?: ('1' | '2' | '3' | '4') | null;
-  origin?: ('manual' | 'auto' | 'import') | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1939,14 +1726,6 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'products';
-        value: number | Product;
-      } | null)
-    | ({
-        relationTo: 'rates';
-        value: number | Rate;
-      } | null)
-    | ({
         relationTo: 'faqs';
         value: number | Faq;
       } | null)
@@ -1957,10 +1736,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'help-topics';
         value: number | HelpTopic;
-      } | null)
-    | ({
-        relationTo: 'banners';
-        value: number | Banner;
       } | null)
     | ({
         relationTo: 'header';
@@ -1977,10 +1752,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
-      } | null)
-    | ({
-        relationTo: 'redirects';
-        value: number | Redirect;
       } | null)
     | ({
         relationTo: 'search';
@@ -2084,8 +1855,6 @@ export interface PagesSelect<T extends boolean = true> {
         cards?: T | CardsBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
-        productHighlight?: T | ProductHighlightBlockSelect<T>;
-        ratesTable?: T | RatesTableBlockSelect<T>;
         faq?: T | FaqBlockSelect<T>;
         steps?: T | StepsBlockSelect<T>;
         imageContent?: T | ImageContentBlockSelect<T>;
@@ -2095,7 +1864,6 @@ export interface PagesSelect<T extends boolean = true> {
         contacts?: T | ContactsBlockSelect<T>;
         documents?: T | DocumentsBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
-        bannerSection?: T | BannerSectionBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
       };
   meta?:
@@ -2227,28 +1995,6 @@ export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
   mediaMobile?: T;
   background?: T;
-  anchor?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProductHighlightBlock_select".
- */
-export interface ProductHighlightBlockSelect<T extends boolean = true> {
-  product?: T;
-  imagePosition?: T;
-  anchor?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "RatesTableBlock_select".
- */
-export interface RatesTableBlockSelect<T extends boolean = true> {
-  heading?: T;
-  rates?: T;
   anchor?: T;
   id?: T;
   blockName?: T;
@@ -2509,16 +2255,6 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BannerSectionBlock_select".
- */
-export interface BannerSectionBlockSelect<T extends boolean = true> {
-  banner?: T;
-  anchor?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ArchiveBlock_select".
  */
 export interface ArchiveBlockSelect<T extends boolean = true> {
@@ -2714,63 +2450,6 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products_select".
- */
-export interface ProductsSelect<T extends boolean = true> {
-  tenant?: T;
-  name?: T;
-  generateSlug?: T;
-  slug?: T;
-  category?: T;
-  summary?: T;
-  image?: T;
-  benefits?:
-    | T
-    | {
-        text?: T;
-        id?: T;
-      };
-  enableLink?: T;
-  link?:
-    | T
-    | {
-        type?: T;
-        newTab?: T;
-        reference?: T;
-        url?: T;
-        label?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "rates_select".
- */
-export interface RatesSelect<T extends boolean = true> {
-  tenant?: T;
-  title?: T;
-  product?: T;
-  validFrom?: T;
-  validUntil?: T;
-  items?:
-    | T
-    | {
-        label?: T;
-        kind?: T;
-        period?: T;
-        valueType?: T;
-        value?: T;
-        valueMax?: T;
-        id?: T;
-      };
-  legalNote?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faqs_select".
  */
 export interface FaqsSelect<T extends boolean = true> {
@@ -2827,32 +2506,6 @@ export interface HelpTopicsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "banners_select".
- */
-export interface BannersSelect<T extends boolean = true> {
-  tenant?: T;
-  title?: T;
-  alt?: T;
-  image?: T;
-  mobileImage?: T;
-  enableLink?: T;
-  link?:
-    | T
-    | {
-        type?: T;
-        newTab?: T;
-        reference?: T;
-        url?: T;
-        label?: T;
-      };
-  active?: T;
-  startsAt?: T;
-  endsAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3059,28 +2712,6 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "redirects_select".
- */
-export interface RedirectsSelect<T extends boolean = true> {
-  tenant?: T;
-  from?: T;
-  to?:
-    | T
-    | {
-        type?: T;
-        reference?: T;
-        url?: T;
-      };
-  type?: T;
-  destinationPath?: T;
-  active?: T;
-  wave?: T;
-  origin?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "search_select".
  */
 export interface SearchSelect<T extends boolean = true> {
@@ -3204,10 +2835,6 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: number | Post;
-        } | null)
-      | ({
-          relationTo: 'rates';
-          value: number | Rate;
         } | null)
       | ({
           relationTo: 'help-topics';

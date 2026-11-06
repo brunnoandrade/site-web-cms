@@ -13,7 +13,7 @@ Imagem única: [Dockerfile](Dockerfile) (compatível com Podman) e [Jenkinsfile]
 
 **Admin por host:** com `ADMIN_HOST` definido (ex.: `admin.digio.com.br`), `/admin` e `/auth/sso` respondem só nesse host e dão 404 nos domínios das propriedades; a raiz do host do admin redireciona para `/admin`. Vazio, vale qualquer domínio (desenvolvimento). A API (`/api`) continua em todos os hosts, porque o site a usa; a restrição dela é da CDN/WAF.
 
-Contexto do projeto: [CLAUDE.md](CLAUDE.md) e [docs/](docs/). Usuários e senhas do ambiente local: [docs/usuarios-locais.md](docs/usuarios-locais.md). Redirects, importação CSV e validação de URLs: [docs/redirects.md](docs/redirects.md). Migração do blog: [docs/migracao-blog.md](docs/migracao-blog.md). Revisão de segurança, correções e pendências: [docs/seguranca.md](docs/seguranca.md). Referência do template original: [README.payload-template.md](README.payload-template.md).
+Contexto do projeto: [CLAUDE.md](CLAUDE.md) e [docs/](docs/). Usuários e senhas do ambiente local: [docs/usuarios-locais.md](docs/usuarios-locais.md). Validação de URLs: [docs/validate-urls.md](docs/validate-urls.md). Migração do blog: [docs/migracao-blog.md](docs/migracao-blog.md). Revisão de segurança, correções e pendências: [docs/seguranca.md](docs/seguranca.md). Referência do template original: [README.payload-template.md](README.payload-template.md).
 
 ## Como o site e o CMS conversam
 
@@ -26,7 +26,7 @@ navegador ──► app Next.js ──► Postgres
     └──────────────────► storage de mídia (MinIO / CDN) ◄── uploads do CMS
 ```
 
-- **Conteúdo:** o site lê pela Local API do Payload ([src/lib/cms.ts](src/lib/cms.ts)), sem HTTP, e guarda em cache (`unstable_cache`) com tags. O proxy (tenant e redirects) e o relay do live preview também rodam em processo. O único HTTP interno é o webhook de revalidação, usado por seed e migração, que rodam fora do servidor.
+- **Conteúdo:** o site lê pela Local API do Payload ([src/lib/cms.ts](src/lib/cms.ts)), sem HTTP, e guarda em cache (`unstable_cache`) com tags. O proxy (tenant e política de URL) e o relay do live preview também rodam em processo. O único HTTP interno é o webhook de revalidação, usado por seed e migração, que rodam fora do servidor.
 - **Publicação:** os hooks do CMS chamam `POST /api/revalidate/` no site, que invalida as páginas e tags afetadas ([src/utilities/revalidateWeb.ts](src/utilities/revalidateWeb.ts)).
 - **Mídia:** as imagens saem direto do storage (`MEDIA_PUBLIC_URL`), sem passar pelo CMS.
 - **Se o banco ou o CMS cair:** como o site e o CMS são o mesmo processo, a resiliência vem do cache (ISR) e do fallback estático na CDN, não de processos separados.
@@ -64,7 +64,7 @@ O `bootstrap:dev` cria:
 - a propriedade **Uber Conta**, servida em http://uberconta.localhost:3000 (`*.localhost` já aponta para a sua máquina, sem mexer no `/etc/hosts`);
 - o seu usuário super admin e a conta de serviço do preview (`preview@digio.local`);
 - conteúdo de exemplo nas duas propriedades, **diferente em cada uma** (a Uber Conta tem o seed em [src/endpoints/seed/uber-conta.ts](src/endpoints/seed/uber-conta.ts)):
-  - **Digio**: demo completo (home, componentes, contato, blog, produtos e taxas, central de ajuda);
+  - **Digio**: demo completo (home, componentes, contato, blog, central de ajuda);
   - **Uber Conta**: conteúdo próprio da propriedade, ver `docs/uber-conta.md`.
 
 O `bootstrap:dev` **recria todo o conteúdo** das propriedades, inclusive apagando posts migrados do WordPress. Para ter posts reais depois dele: `npm run blog:migrate tenant=digio limit=20`.
@@ -162,19 +162,18 @@ As variáveis `NEXT_PUBLIC_*` e o host de imagens entram no build (`--build-arg`
 
 ## Scripts (na raiz)
 
-| Comando                    | O que faz                                                                          |
-| -------------------------- | ---------------------------------------------------------------------------------- |
-| `npm run dev`              | site e CMS no mesmo app (porta 3000)                                               |
-| `npm run build`            | build de produção (site + CMS)                                                     |
-| `npm run lint`             | ESLint                                                                             |
-| `npm run format`           | formata com Prettier (`format:check` só confere)                                   |
-| `npm run typecheck`        | TypeScript (strict)                                                                |
-| `npm run test:unit`        | Vitest, testes unitários (sem banco)                                               |
-| `npm run test:int`         | Vitest, integração do CMS (precisa do compose)                                     |
-| `npm run generate:types`   | regenera `src/payload-types.ts`                                                    |
-| `npm run validate-urls`    | confere URLs antigas em qualquer ambiente ([docs/redirects.md](docs/redirects.md)) |
-| `npm run redirects:import` | importa redirects de um CSV ([docs/redirects.md](docs/redirects.md))               |
-| `npm run blog:migrate`     | migra o blog do WordPress ([docs/migracao-blog.md](docs/migracao-blog.md))         |
+| Comando                  | O que faz                                                                                  |
+| ------------------------ | ------------------------------------------------------------------------------------------ |
+| `npm run dev`            | site e CMS no mesmo app (porta 3000)                                                       |
+| `npm run build`          | build de produção (site + CMS)                                                             |
+| `npm run lint`           | ESLint                                                                                     |
+| `npm run format`         | formata com Prettier (`format:check` só confere)                                           |
+| `npm run typecheck`      | TypeScript (strict)                                                                        |
+| `npm run test:unit`      | Vitest, testes unitários (sem banco)                                                       |
+| `npm run test:int`       | Vitest, integração do CMS (precisa do compose)                                             |
+| `npm run generate:types` | regenera `src/payload-types.ts`                                                            |
+| `npm run validate-urls`  | confere URLs antigas em qualquer ambiente ([docs/validate-urls.md](docs/validate-urls.md)) |
+| `npm run blog:migrate`   | migra o blog do WordPress ([docs/migracao-blog.md](docs/migracao-blog.md))                 |
 
 **Banco e migrations:** o schema vem de `src/migrations` (a inicial cria todas as tabelas). Em produção o CMS aplica as pendentes ao subir (`prodMigrations`); em dev o Payload continua sincronizando o schema sozinho (push). Ao mudar coleções ou campos, gere uma nova com `npm run payload migrate:create <nome>` e versione o resultado; para aplicar à mão, `npm run payload migrate`. Com várias réplicas subindo ao mesmo tempo, prefira rodar `migrate` uma vez antes (job de deploy).
 

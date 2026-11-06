@@ -45,9 +45,9 @@ Opções: `source=<url do blog>` (padrão `https://www.digio.com.br/blog`, ou a 
 
 ## URLs
 
-A URL nova é comparada com a URL do post no WordPress. Se forem diferentes, o script cria o redirect 301 automaticamente. Nos 518 posts atuais, as URLs são todas iguais.
+A URL nova é comparada com a URL do post no WordPress. Se forem diferentes, o script lista a diferença no relatório (`urlChanges`); como o CMS não tem redirects, a URL antiga precisa ser tratada na CDN. Nos 518 posts atuais, as URLs são todas iguais.
 
-Se um post trocar de slug ou de categoria no WordPress entre duas execuções, o redirect da URL antiga também é criado automaticamente.
+Se um post trocar de slug ou de categoria no WordPress entre duas execuções, o post é atualizado e o endereço antigo deixa de existir, sem redirect (o CMS não tem redirects): conferir com `validate-urls` e tratar na CDN.
 
 ## Resultado da simulação completa (25/09/2026)
 

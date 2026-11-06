@@ -13,12 +13,9 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Authors } from './collections/Authors'
-import { Banners } from './collections/Banners'
 import { Faqs } from './collections/Faqs'
 import { HelpCategories } from './collections/HelpCategories'
 import { HelpTopics } from './collections/HelpTopics'
-import { Products } from './collections/Products'
-import { Rates } from './collections/Rates'
 import { Tenants } from './collections/Tenants'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
@@ -105,12 +102,9 @@ export default buildConfig({
     Categories,
     Authors,
     Media,
-    Products,
-    Rates,
     Faqs,
     HelpCategories,
     HelpTopics,
-    Banners,
     Header,
     Footer,
     Tenants,

@@ -1,9 +1,8 @@
 import { NextResponse, type NextRequest } from 'next/server'
 
 import { isAdminHost, isAdminHostAllowed } from './lib/adminHost'
-import { getRedirectRules, matchRedirect } from './lib/redirects'
 import { resolveTenant, type TenantInfo } from './lib/tenantResolver'
-import { internalPath, policyRedirect, styledDestination } from './lib/urlPolicy'
+import { internalPath, policyRedirect } from './lib/urlPolicy'
 
 /**
  * Admin defaults: Portuguese and light theme. Payload reads both from cookies and otherwise
@@ -38,10 +37,8 @@ const isAdminPath = (pathname: string) =>
  * 0. the CMS admin (/admin) and the SSO routes (/auth) are not tenant pages. With ADMIN_HOST set
  *    they answer 404 on every other host; the admin gets its language and theme defaults;
  * 1. resolves the request host to a tenant;
- * 2. answers the tenant's redirects (301/302), keeping the query string;
- * 3. applies the property's URL policy (trailing slash form, flat blog URLs; see lib/urlPolicy.ts),
- *    after the redirects, so an old URL takes one hop;
- * 4. rewrites to the internal `/<tenant>/...` routes (app/(frontend)/[tenant]).
+ * 2. applies the property's URL policy (trailing slash form, flat blog URLs; see lib/urlPolicy.ts);
+ * 3. rewrites to the internal `/<tenant>/...` routes (app/(frontend)/[tenant]).
  */
 export async function proxy(request: NextRequest) {
   // Behind the CDN the original host may come in X-Forwarded-Host.
@@ -74,14 +71,6 @@ export async function proxy(request: NextRequest) {
   const { slug: tenant, style } = tenantInfo
 
   const { pathname, search } = request.nextUrl
-
-  const redirect = matchRedirect(await getRedirectRules(tenant), pathname, search)
-  if (redirect) {
-    return NextResponse.redirect(
-      new URL(styledDestination(redirect.location, style), request.nextUrl),
-      redirect.status,
-    )
-  }
 
   // trailingSlash is handled here (skipTrailingSlashRedirect in next.config.ts).
   const policy = policyRedirect(pathname, search, style)

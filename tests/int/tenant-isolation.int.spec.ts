@@ -89,7 +89,7 @@ describe('multi-tenant isolation', () => {
 
   afterAll(async () => {
     const tenantIDs = [tenants.a?.id, tenants.b?.id].filter(Boolean)
-    for (const collection of ['pages', 'redirects', 'media'] as const) {
+    for (const collection of ['pages', 'media'] as const) {
       await payload.delete({ collection, context, where: { tenant: { in: tenantIDs } } })
     }
     await payload.delete({ collection: 'users', where: { email: { like: `-${run}@test.local` } } })
@@ -223,33 +223,6 @@ describe('multi-tenant isolation', () => {
         ...as(users.seoA),
       })
       expect(page.meta?.title).toBe('Título SEO')
-    })
-
-    it('manages redirects; editors cannot', async () => {
-      const redirect = await payload.create({
-        collection: 'redirects',
-        context,
-        data: {
-          from: `/antiga-${run}/`,
-          to: { type: 'custom', url: '/nova/' },
-          tenant: tenants.a.id,
-        },
-        ...as(users.seoA),
-      })
-      expect(redirect.id).toBeDefined()
-
-      await expect(
-        payload.create({
-          collection: 'redirects',
-          context,
-          data: {
-            from: `/outra-${run}/`,
-            to: { type: 'custom', url: '/nova/' },
-            tenant: tenants.a.id,
-          },
-          ...as(users.editorA),
-        }),
-      ).rejects.toThrow()
     })
   })
 
