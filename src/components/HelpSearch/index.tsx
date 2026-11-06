@@ -2,8 +2,16 @@
 
 import React, { useEffect, useId, useRef, useState } from 'react'
 
-import { useUiTexts } from '@/components/UiTexts'
 import { cn } from '@/utilities/ui'
+
+const texts = {
+  searchClear: 'Limpar busca',
+  searchSuggestions: 'Sugestões:',
+  searchNoResults: 'Nenhuma sugestão encontrada',
+} as const
+
+/** Terms shown when the empty box is focused. */
+const popular = ['Pix', 'Empréstimos', 'Aplicativo']
 
 type Suggestion = { question: string; slug: string }
 
@@ -61,8 +69,6 @@ const Highlight: React.FC<{ text: string; query: string }> = ({ text, query }) =
  * Esc closes the list.
  */
 export const HelpSearch: React.FC<Props> = ({ placeholder, searchPath, questionBase }) => {
-  const texts = useUiTexts()
-  const popular = texts.popularSearches
   const id = useId()
   const wrapper = useRef<HTMLDivElement>(null)
   const [query, setQuery] = useState('')

@@ -1,7 +1,6 @@
 import type { Faq, Page, Post } from '@/payload-types'
 
 import type { Tenant } from '@/lib/cms'
-import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { collapse, lexicalText, seoImage } from '@/utilities/seo'
 
 type Node = Record<string, unknown>
@@ -14,11 +13,18 @@ const abs = (tenant: Tenant, path: string) => `${tenant.siteUrl}${path}`
 const absoluteUrl = (tenant: Tenant, url: string) =>
   url.startsWith('http') ? url : abs(tenant, url)
 
-const organizationLogo = (tenant: Tenant) => {
-  const logo = tenant.app?.organizationLogo
-  return logo && typeof logo === 'object' && logo.url
-    ? absoluteUrl(tenant, getMediaUrl(logo.url))
-    : abs(tenant, '/icons/apple-touch-icon.png')
+/** Square logo (180x180) of the organization, served by the site itself. */
+const organizationLogo = (tenant: Tenant) => abs(tenant, '/icons/apple-touch-icon.png')
+
+type AppInfo = { name: string; androidUrl?: string; iosUrl?: string }
+
+/** The mobile app of each property (by tenant slug), listed in the structured data of every page. */
+const apps: Record<string, AppInfo> = {
+  'uber-conta': {
+    name: 'Uber Conta',
+    androidUrl: 'https://play.google.com/store/apps/details?id=br.com.digio.uber',
+    iosUrl: 'http://apps.apple.com/us/app/uber-conta/id1550784531',
+  },
 }
 
 /** Organization and WebSite of the property, on every page. */
@@ -56,9 +62,9 @@ export const siteNodes = (tenant: Tenant, searchPath?: string): Node[] => [
   },
 ]
 
-/** The property's app (tenant "Aplicativo"), listed on every page. None without a name and a store link. */
+/** The property's app (`apps`), listed on every page. None for properties without one. */
 export const appNode = (tenant: Tenant): Node | null => {
-  const { name, androidUrl, iosUrl } = tenant.app ?? {}
+  const { name, androidUrl, iosUrl } = apps[tenant.slug] ?? {}
   const urls = [androidUrl, iosUrl].filter((url): url is string => Boolean(url))
   if (!name || urls.length === 0) return null
   return {

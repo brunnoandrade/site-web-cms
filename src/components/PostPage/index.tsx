@@ -7,7 +7,7 @@ import React, { cache } from 'react'
 
 import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
-import { uiTextsOf } from '@/lib/uiTexts'
+import { texts } from '@/lib/texts'
 import { pathsOf } from '@/lib/urlStyle'
 import { generateMeta } from '@/utilities/generateMeta'
 import { LivePreviewPost } from '@/components/LivePreviewPost'
@@ -83,7 +83,7 @@ export async function PostPage({
             breadcrumbNode(
               tenant,
               [
-                { name: uiTextsOf(tenant).crumbHome, path: '/' },
+                { name: texts.crumbHome, path: '/' },
                 { name: 'Blog', path: pathsOf(tenant).blogIndex() },
                 ...(typeof post.category === 'object' && post.category
                   ? [

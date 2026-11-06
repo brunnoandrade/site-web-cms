@@ -44,7 +44,7 @@ Central de Ajuda do Uber Conta: a pergunta usa a pergunta como título e os 160 
 
 ## O que a propriedade controla
 
-No admin, em Tenants: sufixo do título, imagem padrão de compartilhamento, `llms.txt`, "Textos do site" (textos de interface e termos populares da busca) e "Aplicativo" (nome e links das lojas, logo da empresa para os dados estruturados). Perguntas e categorias da Central de Ajuda têm título e descrição de SEO opcionais (vazio: título da pergunta e início da resposta; título e descrição da categoria).
+No admin, em Tenants (abas Geral, Aparência, URLs e SEO): sufixo do título, imagem padrão de compartilhamento, `llms.txt`. O aplicativo (nome e links das lojas) dos dados estruturados e o logo da organização ficam no código, em `src/lib/jsonld.ts` (`apps`). Perguntas e categorias da Central de Ajuda têm título e descrição de SEO opcionais (vazio: título da pergunta e início da resposta; título e descrição da categoria).
 
 ## Dados do site atual (Uber Conta)
 

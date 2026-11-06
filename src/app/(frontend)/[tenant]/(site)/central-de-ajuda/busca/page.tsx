@@ -7,7 +7,7 @@ import { HelpBackBar, QuestionList } from '@/components/UberHelp'
 import { RenderHero } from '@/heros/RenderHero'
 import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
-import { uiTextsOf } from '@/lib/uiTexts'
+import { texts } from '@/lib/texts'
 import { buildMetadata } from '@/utilities/seo'
 import { getHelpPage, helpIndexHref, isUberHelp, searchFaqs } from '@/lib/uber-help'
 
@@ -23,7 +23,6 @@ export default async function HelpSearchPage({ params, searchParams }: Args) {
   const tenant = await requireTenant((await params).tenant)
   if (!isUberHelp(tenant)) notFound()
   const query = ((await searchParams).q ?? '').trim()
-  const texts = uiTextsOf(tenant)
   const [page, results] = await Promise.all([
     getHelpPage(tenant.slug),
     searchFaqs(tenant.slug, query),
@@ -66,7 +65,7 @@ export async function generateMetadata({ params, searchParams }: Args): Promise<
   return buildMetadata({
     tenant,
     path: `${helpIndexHref}/busca${query ? `?q=${encodeURIComponent(query)}` : ''}`,
-    title: uiTextsOf(tenant).searchPageTitle,
+    title: texts.searchPageTitle,
     description: home?.meta?.title,
     image: home?.meta?.image,
     noindex: true,

@@ -5,9 +5,7 @@ import React from 'react'
 import { AdminBar } from '@/components/AdminBar'
 import { AnchorScroll } from '@/components/AnchorScroll'
 import { JsonLd } from '@/components/JsonLd'
-import { UiTextsProvider } from '@/components/UiTexts'
 import { appNode, siteNodes } from '@/lib/jsonld'
-import { uiTextsOf } from '@/lib/uiTexts'
 import { isUberConta } from '@/lib/uber-help'
 import { themeStyle } from '@/lib/themes'
 import { setCurrentTenant } from '@/lib/currentTenant'
@@ -46,7 +44,7 @@ export default async function TenantLayout({ children, params }: Args) {
           ...(appNode(tenant) ? [appNode(tenant)!] : []),
         ]}
       />
-      <UiTextsProvider value={uiTextsOf(tenant)}>{children}</UiTextsProvider>
+      {children}
     </div>
   )
 }

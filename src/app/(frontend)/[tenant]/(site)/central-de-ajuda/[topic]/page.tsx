@@ -19,7 +19,7 @@ import {
 } from '@/lib/uber-help'
 import { notFound } from 'next/navigation'
 import { requireTenant } from '@/lib/tenant'
-import { uiTextsOf } from '@/lib/uiTexts'
+import { texts } from '@/lib/texts'
 import { buildMetadata, collapse, lexicalText } from '@/utilities/seo'
 
 type Args = { params: Promise<{ tenant: string; topic: string }> }
@@ -34,7 +34,6 @@ export default async function HelpTopicPage({ params }: Args) {
 
   // Uber Conta: the URL is the question itself (/central-de-ajuda/<pergunta>/).
   if (isUberHelp(tenant)) {
-    const texts = uiTextsOf(tenant)
     const faq = await getFaq(tenant.slug, decodeURIComponent(topicSlug))
     if (!faq) notFound()
     const category = typeof faq.category === 'object' ? faq.category : null
@@ -53,7 +52,7 @@ export default async function HelpTopicPage({ params }: Args) {
             { label: faq.question },
           ]}
         />
-        <QuestionArticle faq={faq} related={related} relatedTitle={texts.relatedQuestions} />
+        <QuestionArticle faq={faq} related={related} />
         <JsonLd
           data={[
             breadcrumbNode(tenant, [

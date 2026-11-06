@@ -130,6 +130,15 @@ export const Archive: Block = {
       label: 'Selection',
       relationTo: ['posts'],
     },
+    {
+      name: 'readMoreLabel',
+      type: 'text',
+      label: 'Texto do link dos cartões',
+      admin: {
+        placeholder: 'Leia no Blog',
+        description: 'Aparece em cada cartão de post. Vazio: "Leia no Blog".',
+      },
+    },
     { name: 'enableMoreLink', type: 'checkbox', label: 'Botão "Ir para o blog"' },
     link({
       appearances: false,

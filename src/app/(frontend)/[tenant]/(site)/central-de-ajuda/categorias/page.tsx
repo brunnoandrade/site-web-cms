@@ -9,7 +9,7 @@ import { JsonLd } from '@/components/JsonLd'
 import { RenderHero } from '@/heros/RenderHero'
 import { breadcrumbNode, itemListNode, webPageNode } from '@/lib/jsonld'
 import { requireTenant } from '@/lib/tenant'
-import { uiTextsOf } from '@/lib/uiTexts'
+import { texts } from '@/lib/texts'
 import { buildMetadata } from '@/utilities/seo'
 import {
   getCategoryGroups,
@@ -43,7 +43,6 @@ export default async function HelpCategoryPage({ params, searchParams }: Args) {
   ])
   if (!category) notFound()
   const groups = await getCategoryGroups(tenant.slug, category.id)
-  const texts = uiTextsOf(tenant)
 
   return (
     <>
@@ -96,8 +95,8 @@ export async function generateMetadata({ params, searchParams }: Args): Promise<
     tenant,
     path: category ? `${categoryPath(category.slug!)}` : helpIndexHref,
     title: category
-      ? category.seo?.title || `${uiTextsOf(tenant).helpTitle}: ${category.title}`
-      : uiTextsOf(tenant).helpTitle,
+      ? category.seo?.title || `${texts.helpTitle}: ${category.title}`
+      : texts.helpTitle,
     description: category?.seo?.description || category?.description || page?.meta?.description,
     keywords: page?.meta?.keywords,
     image: page?.meta?.image,

@@ -123,8 +123,7 @@ Conferência: as 96 URLs do sitemap do site atual respondem 200 direto (a única
 
 | Grupo | O que controla |
 |---|---|
-| Textos do site | "Leia no Blog", "Assuntos relacionados", nome da Central de Ajuda nos títulos e trilha, textos da busca (sugestões, sem resultado, limpar) e os termos populares. Campo vazio usa o padrão do código |
-| Aplicativo | nome e links da Google Play e App Store (dados estruturados de todas as páginas) e o logo da empresa |
+| Textos fixos | Os textos fixos da interface ("Assuntos relacionados", nome e trilha da Central, textos e termos populares da busca) ficam no código; só o "Leia no Blog" é editável, por bloco de posts (campo "Texto do link dos cartões") |
 | SEO | sufixo do título, imagem padrão de compartilhamento, `llms.txt` |
 | URL | barra final e forma das URLs do blog |
 

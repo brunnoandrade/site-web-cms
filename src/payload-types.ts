@@ -310,6 +310,15 @@ export interface Tenant {
    */
   siteUrl: string;
   /**
+   * Hosts que respondem por esta propriedade (ex.: www.digio.com.br). Sem protocolo, porta ou caminho. Um domínio só pode pertencer a uma propriedade.
+   */
+  domains?:
+    | {
+        domain: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
    * Paleta aplicada a todo o site da propriedade. Novos temas exigem um deploy.
    */
   themePreset?: ('digio' | 'uber-conta') | null;
@@ -337,47 +346,6 @@ export interface Tenant {
    * Servido em /llms.txt. Markdown: título (#), resumo (>), seções (##) com links "- [Nome](URL): descrição". Use {{siteUrl}} no lugar do endereço da propriedade. Vazio: /llms.txt não existe.
    */
   llmsTxt?: string | null;
-  /**
-   * Textos fixos da interface (botões, rótulos, mensagens). Vazio: usa o texto padrão do site.
-   */
-  uiTexts?: {
-    readMoreBlog?: string | null;
-    relatedQuestions?: string | null;
-    helpTitle?: string | null;
-    crumbHome?: string | null;
-    crumbHelp?: string | null;
-    searchPageTitle?: string | null;
-    searchSuggestions?: string | null;
-    searchNoResults?: string | null;
-    searchClear?: string | null;
-    popularSearches?:
-      | {
-          term: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  /**
-   * Aparece nos dados estruturados de todas as páginas. Sem nome e sem links das lojas, o aplicativo não é listado.
-   */
-  app?: {
-    name?: string | null;
-    androidUrl?: string | null;
-    iosUrl?: string | null;
-    /**
-     * Usado nos dados estruturados da organização. Vazio: /icons/apple-touch-icon.png.
-     */
-    organizationLogo?: (number | null) | Media;
-  };
-  /**
-   * Hosts que respondem por esta propriedade (ex.: www.digio.com.br). Sem protocolo, porta ou caminho. Um domínio só pode pertencer a uma propriedade.
-   */
-  domains?:
-    | {
-        domain: string;
-        id?: string | null;
-      }[]
-    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1448,6 +1416,10 @@ export interface ArchiveBlock {
         value: number | Post;
       }[]
     | null;
+  /**
+   * Aparece em cada cartão de post. Vazio: "Leia no Blog".
+   */
+  readMoreLabel?: string | null;
   enableMoreLink?: boolean | null;
   moreLink?: {
     type?: ('reference' | 'custom') | null;
@@ -2506,6 +2478,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
   categories?: T;
   limit?: T;
   selectedDocs?: T;
+  readMoreLabel?: T;
   enableMoreLink?: T;
   moreLink?:
     | T
@@ -2945,6 +2918,12 @@ export interface TenantsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   siteUrl?: T;
+  domains?:
+    | T
+    | {
+        domain?: T;
+        id?: T;
+      };
   themePreset?: T;
   layout?: T;
   trailingSlash?: T;
@@ -2952,39 +2931,6 @@ export interface TenantsSelect<T extends boolean = true> {
   seoTitleSuffix?: T;
   seoDefaultImage?: T;
   llmsTxt?: T;
-  uiTexts?:
-    | T
-    | {
-        readMoreBlog?: T;
-        relatedQuestions?: T;
-        helpTitle?: T;
-        crumbHome?: T;
-        crumbHelp?: T;
-        searchPageTitle?: T;
-        searchSuggestions?: T;
-        searchNoResults?: T;
-        searchClear?: T;
-        popularSearches?:
-          | T
-          | {
-              term?: T;
-              id?: T;
-            };
-      };
-  app?:
-    | T
-    | {
-        name?: T;
-        androidUrl?: T;
-        iosUrl?: T;
-        organizationLogo?: T;
-      };
-  domains?:
-    | T
-    | {
-        domain?: T;
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
 }

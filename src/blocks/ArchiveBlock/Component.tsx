@@ -6,7 +6,6 @@ import { ArchiveBlockView } from './View'
 import { getArchivePosts } from './data'
 import { getMediumFeed } from './feed'
 import { requireTenant } from '@/lib/tenant'
-import { uiTextsOf } from '@/lib/uiTexts'
 import { styleOf } from '@/lib/urlStyle'
 
 export const ArchiveBlock: React.FC<
@@ -27,7 +26,7 @@ export const ArchiveBlock: React.FC<
       {...props}
       feed={feed}
       posts={posts}
-      readMoreLabel={uiTextsOf(tenant).readMoreBlog}
+      readMoreLabel={props.readMoreLabel?.trim() || undefined}
       urlStyle={styleOf(tenant)}
     />
   )

@@ -13,7 +13,6 @@ import { paths, type UrlStyle } from '@/routes'
 
 import { BlogCarousel } from './BlogCarousel'
 import type { FeedItem } from './feed'
-import { defaultUiTexts } from '@/lib/uiTexts'
 
 export type ArchiveBlockViewProps = ArchiveBlockProps & {
   /** URL policy of the property (trailing slash, flat posts); defaults to the Digio form. */
@@ -88,7 +87,7 @@ export const ArchiveBlockView: React.FC<ArchiveBlockViewProps> = (props) => {
     posts,
     feed = [],
     urlStyle,
-    readMoreLabel = defaultUiTexts.readMoreBlog,
+    readMoreLabel = 'Leia no Blog',
   } = props
   const urls = paths(urlStyle)
 

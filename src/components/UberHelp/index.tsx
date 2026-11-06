@@ -137,10 +137,10 @@ export const CategoryGroups: React.FC<{ category: HelpCategory; groups: HelpTopi
 )
 
 /** Question page: the answer in an article and "Assuntos relacionados" as a row of cards. */
-export const QuestionArticle: React.FC<{ faq: Faq; related: Faq[]; relatedTitle: string }> = ({
+export const QuestionArticle: React.FC<{ faq: Faq; related: Faq[]; relatedTitle?: string }> = ({
   faq,
   related,
-  relatedTitle,
+  relatedTitle = 'Assuntos relacionados',
 }) => (
   <>
     <article className="container pb-4 min-[768px]:pb-12">
