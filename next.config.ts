@@ -58,10 +58,23 @@ const nextConfig: NextConfig = {
       },
     ],
     qualities: [75, 100],
+    // AVIF first (smaller than WebP), WebP as the fallback.
+    formats: ['image/avif', 'image/webp'],
+    // Optimized images are kept 7 days (default: 4 hours). Next has no way to invalidate them, so
+    // a replaced file must get a new name or URL.
+    minimumCacheTTL: 60 * 60 * 24 * 7,
     // Local development only: MinIO runs on localhost, which Next.js blocks by default.
     dangerouslyAllowLocalIP: process.env.IMAGES_ALLOW_LOCAL_IP === 'true',
   },
   headers: async () => [
+    {
+      // Files in public/ have no hash in the name, so Next serves them with max-age=0. Fonts, brand
+      // and icons rarely change: 30 days, then revalidate in the background for another 7.
+      source: '/:dir(fonts|brand|icons)/:file*',
+      headers: [
+        { key: 'Cache-Control', value: 'public, max-age=2592000, stale-while-revalidate=604800' },
+      ],
+    },
     {
       // The admin and the API are never embedded.
       source: '/:path(admin|api)/:rest*',
