@@ -15,6 +15,8 @@ import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { getArchivePosts, pickedPosts } from '@/blocks/ArchiveBlock/data'
 import { JsonLd } from '@/components/JsonLd'
 import { SiteChrome } from '@/components/SiteChrome'
+import { SkipLink } from '@/components/SiteChrome/SkipLink'
+import { getLayout } from '@/layouts'
 import { faqPageNode, webPageNode } from '@/lib/jsonld'
 import { LivePreviewPage } from '@/components/LivePreviewPage'
 
@@ -62,12 +64,22 @@ export default async function Page({ params: paramsPromise }: Args) {
       }),
     )
 
+    // Menu and footer are rendered here and shown or hidden by the client, which follows the
+    // template of the unsaved form.
+    const { Header, Footer } = getLayout(tenant.layout)
     return (
-      <SiteChrome tenant={tenant.slug} bare={bare}>
-        <article className={heroOffset}>
-          <LivePreviewPage initialData={page} tenant={tenant.slug} archivePosts={archivePosts} />
-        </article>
-      </SiteChrome>
+      <LivePreviewPage
+        initialData={page}
+        tenant={tenant.slug}
+        archivePosts={archivePosts}
+        header={
+          <>
+            <SkipLink />
+            <Header tenant={tenant.slug} />
+          </>
+        }
+        footer={<Footer tenant={tenant.slug} />}
+      />
     )
   }
 
