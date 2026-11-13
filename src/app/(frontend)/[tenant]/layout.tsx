@@ -7,8 +7,8 @@ import { AnchorScroll } from '@/components/AnchorScroll'
 import { JsonLd } from '@/components/JsonLd'
 import { Tracking } from '@/components/Tracking'
 import { appNode, siteNodes } from '@/lib/jsonld'
-import { isUberConta } from '@/lib/uber-help'
-import { themeStyle } from '@/lib/themes'
+import { siteSearchPath } from '@/lib/helpStyle'
+import { themeColorOf, themeStyle } from '@/lib/themes'
 import { setCurrentTenant } from '@/lib/currentTenant'
 import { requireTenant } from '@/lib/tenant'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
@@ -42,7 +42,7 @@ export default async function TenantLayout({ children, params }: Args) {
       <AnchorScroll />
       <JsonLd
         data={[
-          ...siteNodes(tenant, isUberConta(tenant) ? '/central-de-ajuda/busca' : undefined),
+          ...siteNodes(tenant, siteSearchPath(tenant)),
           ...(appNode(tenant) ? [appNode(tenant)!] : []),
         ]}
       />
@@ -81,6 +81,7 @@ export async function generateMetadata({ params }: Omit<Args, 'children'>): Prom
       card: 'summary_large_image',
     },
     robots: robotsOf(tenant),
+    manifest: '/manifest.webmanifest',
     // The property's own icons; without them, the platform's (public/).
     icons: {
       icon: favicon
@@ -96,5 +97,6 @@ export async function generateMetadata({ params }: Omit<Args, 'children'>): Prom
 
 export async function generateViewport({ params }: Omit<Args, 'children'>): Promise<Viewport> {
   const tenant = await requireTenant((await params).tenant)
-  return tenant.themePreset === 'uber-conta' ? { themeColor: '#000000' } : {}
+  const themeColor = themeColorOf(tenant)
+  return themeColor ? { themeColor } : {}
 }

@@ -1,3 +1,4 @@
+import { hasFlatHelp } from '@/lib/helpStyle'
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 import React from 'react'
@@ -17,7 +18,6 @@ import {
   categoryPath,
   getHelpPage,
   helpIndexHref,
-  isUberHelp,
   questionPath,
 } from '@/lib/uber-help'
 
@@ -33,7 +33,7 @@ type Args = {
 
 export default async function HelpCategoryPage({ params, searchParams }: Args) {
   const tenant = await requireTenant((await params).tenant)
-  if (!isUberHelp(tenant)) notFound()
+  if (!hasFlatHelp(tenant)) notFound()
   const { slug } = await searchParams
   if (!slug) redirect(helpIndexHref)
 
@@ -85,7 +85,7 @@ export default async function HelpCategoryPage({ params, searchParams }: Args) {
 export async function generateMetadata({ params, searchParams }: Args): Promise<Metadata> {
   const tenant = await requireTenant((await params).tenant)
   const { slug } = await searchParams
-  const [category, page] = isUberHelp(tenant)
+  const [category, page] = hasFlatHelp(tenant)
     ? await Promise.all([
         slug ? getHelpCategory(tenant.slug, slug) : null,
         getHelpPage(tenant.slug),

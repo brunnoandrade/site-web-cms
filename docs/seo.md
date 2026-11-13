@@ -12,7 +12,7 @@ Como o site monta títulos, descrições, dados estruturados e mapas do site, e 
 | `keywords` | `meta.keywords` (campo "Palavras-chave" da aba SEO de páginas e posts) |
 | `robots` | `index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1`; `noindex, follow` na busca |
 | `canonical`, `og:url` | URL pública da propriedade + caminho, pela política de URL (`pathsOf(tenant)`) |
-| `og:image`, `twitter:image` | `meta.image` do documento, senão `seoDefaultImage` do tenant, senão `/website-template-OG.webp` |
+| `og:image`, `twitter:image` | `meta.image` do documento, senão `seoDefaultImage` do tenant, senão o ícone do app (`appIcon`), senão `/website-template-OG.webp` (imagem genérica da plataforma) |
 | `og:type` | `website`; `article` nos posts |
 | `theme-color` | `#000000` no Uber Conta |
 
@@ -28,14 +28,16 @@ Central de Ajuda do Uber Conta: a pergunta usa a pergunta como título e os 160 
 |---|---|
 | Todas as páginas | `Organization`, `WebSite` (com `SearchAction` no Uber Conta), `SoftwareApplication` (Uber Conta) |
 | Páginas do CMS | `WebPage`; `FAQPage` quando há bloco de perguntas frequentes |
-| Posts | `BreadcrumbList`, `WebPage`, `BlogPosting` |
+| Posts (todas as propriedades) | `BreadcrumbList`, `WebPage`, `BlogPosting` com `author` (`Person` por autor; sem autores, a `Organization`) e `articleSection` (categoria) |
 | Índice do blog | `BreadcrumbList`, `CollectionPage`, `Blog` |
 | Central de ajuda | índice: `BreadcrumbList`, `WebPage`; categoria: `BreadcrumbList`, `WebPage` com `ItemList`; pergunta: `BreadcrumbList`, `QAPage` |
 
 ## Mapas do site e robots
 
-- `/sitemap.xml`: índice que aponta para `/pages-sitemap.xml` e `/posts-sitemap.xml`.
-- `/robots.txt`: libera tudo menos `/next/` e `/api/`, e aponta para `/sitemap.xml`.
+- `/sitemap.xml`: índice que aponta para `/pages-sitemap.xml` e `/posts-sitemap.xml`. O `lastmod` de cada um é a data da última alteração do conteúdo (`src/lib/lastModified.ts`), nunca "agora": um `lastmod` que muda a cada requisição faz o Google ignorá-lo. Sem conteúdo, vale a data do tenant.
+- `/posts-sitemap.xml` traz a imagem de cada post (`image:image`: imagem de destaque, senão a de compartilhamento).
+- `/manifest.webmanifest`: nome, cores e ícone do app da propriedade (`src/lib/manifest.ts`). A cor do tema vem de `themeColorOf` (`src/lib/themes.ts`).
+- `/robots.txt`: libera tudo menos `/next/` e `/api/`, e aponta para `/sitemap.xml`. Com "Bloquear robôs de treinamento de IA" (`blockAiCrawlers`, aba Indexação e ícones), cada robô de `AI_CRAWLERS` (`src/lib/robots.ts`) ganha o próprio grupo `Disallow: /`. O Google Search e os assistentes que buscam a página a pedido do usuário não entram na lista.
 - O Uber Conta lista cada categoria da Central de Ajuda (`?slug=`) no mapa; o site atual lista só `/central-de-ajuda/categorias`.
 
 ## llms.txt
@@ -44,7 +46,7 @@ Central de Ajuda do Uber Conta: a pergunta usa a pergunta como título e os 160 
 
 ## O que a propriedade controla
 
-No admin, em Tenants (abas Geral, Aparência, URLs, SEO, Indexação e ícones, Rastreio e Empresa e redes): sufixo do título, imagem padrão de compartilhamento, `llms.txt`. O aplicativo (nome e links das lojas) dos dados estruturados e o logo da organização ficam no código, em `src/lib/jsonld.ts` (`apps`). Perguntas e categorias da Central de Ajuda têm título e descrição de SEO opcionais (vazio: título da pergunta e início da resposta; título e descrição da categoria).
+No admin, em Tenants (abas Geral, Aparência, URLs, SEO, Indexação e ícones, Rastreio e Empresa e redes): sufixo do título, imagem padrão de compartilhamento, `llms.txt`. Também por propriedade: idioma do conteúdo (`locale`, padrão `pt-BR`; o `lang` do `<html>` ainda é `pt-BR` fixo, porque fica no layout raiz, acima do tenant), cor do navegador (`themeColor`, também no manifest), estrutura da central de ajuda (`helpStyle`: `topics` ou `flat`; a plana tem a busca em `/central-de-ajuda/busca`, que vira o `SearchAction`) e o aplicativo (aba Empresa e redes: nome e links das lojas, no `SoftwareApplication`). Nenhuma regra de SEO depende do nome do tenant. O logo da organização é o ícone do app. Perguntas e categorias da Central de Ajuda têm título e descrição de SEO opcionais (vazio: título da pergunta e início da resposta; título e descrição da categoria).
 
 ## Dados do site atual (Uber Conta)
 
@@ -80,6 +82,7 @@ Aba **Indexação e ícones** de Propriedades:
 - **Bloquear indexação:** `robots.txt` vira `Disallow: /` e todas as páginas saem com `noindex, nofollow` (`robotsOf` em `src/utilities/seo.ts`). Para DEV e HML. Em produção, desligado.
 - **Regras extras do robots.txt:** só `Allow:`/`Disallow:` (e comentários `#`), validadas no admin para o editor não conseguir mexer em `User-agent` ou `Sitemap`. Entram depois de `/next/` e `/api/`. Ignoradas quando a indexação está bloqueada.
 - **Descrição padrão:** vale quando a página não tem descrição (`seoDescription`), em `description`, `og:` e `twitter:`.
+- **Ícone do manifest:** PNG 512×512, declarado como ícone de 192 e 512 px em `/manifest.webmanifest`, o que os navegadores exigem para oferecer a instalação do site como app. Vazio: só o ícone do app (180×180).
 - **Favicon** e **ícone do app:** PNG (a mídia não aceita SVG nem ICO). O ícone do app é o `apple-touch-icon` e o logo do `Organization` no JSON-LD. Vazios: os arquivos da plataforma em `public/` (`/favicon.ico`, `/favicon.svg`, `/icons/apple-touch-icon.png`).
 
 ## Dados públicos das propriedades
@@ -90,3 +93,20 @@ Aba **Indexação e ícones** de Propriedades:
 - **Banner de consentimento:** desligado nas duas (a ferramenta de consentimento do site atual vem pelo GTM; ver `docs/virada.md`).
 - **Sem valor, por não existir no site atual:** Uber Conta sem redes sociais (só Medium, que o CMS não oferece) e sem ícone do app; Digio sem imagem de compartilhamento padrão, `llms.txt` e link de privacidade. O sufixo do título da Digio fica no padrão (" | Digio").
 - O favicon da Digio no site atual é 16×16 (abaixo dos 48×48 recomendados).
+
+## Contrato entre propriedades
+
+`src/lib/tenantContract.test.ts` roda `robots.txt`, índice do sitemap, metadata, JSON-LD, manifest e dados de post com duas propriedades fictícias de escolhas opostas (barra final e URL por categoria x sem barra, posts planos e indexação bloqueada). Garante que nada sai com dados de outra propriedade nem depende do nome do tenant. Ao criar uma regra nova de SEO, ponha a lógica em função pura em `src/lib` e cubra-a ali.
+
+## Backlog de SEO (genérico, vale para qualquer propriedade)
+
+- Já feito: canonical próprio nas páginas de paginação do blog (`/blog/page/N`, `?page=N`).
+- `?utm_*` e outros parâmetros de rastreio: confirmar que o canonical aponta para a URL limpa em toda rota que lê `searchParams`.
+- `BreadcrumbList` (JSON-LD e visível) nas páginas do CMS, não só no blog e na ajuda.
+- `hreflang` e `lang` do `<html>` por propriedade (hoje `pt-BR` fixo no layout raiz), se houver mais de um idioma.
+- Qualidade no admin: um único `h1` por página, `alt` obrigatório na coleção `media`, contador de título (50–60) e descrição (120–160), aviso de título ou descrição duplicados na mesma propriedade.
+- Script de rastreio de links internos quebrados e cadeias de redirect, em complemento a `scripts/validate-urls.ts` (não há coleção de redirects: slug alterado vira 404).
+- IndexNow (Bing, Yandex) no webhook de revalidação, ao publicar ou alterar uma página.
+- Dados estruturados extras: `dateModified` e `image` em `BlogPosting`, `VideoObject`, `ContactPoint` na `Organization`.
+- Campos no tenant para os tokens de verificação do Google Search Console e do Bing Webmaster.
+- Sitemap: dividir em arquivos de até 50 mil URLs quando o blog crescer; `changefreq` e `priority` são ignorados pelo Google.

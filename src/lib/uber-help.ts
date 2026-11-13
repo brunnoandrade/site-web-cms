@@ -6,9 +6,8 @@ import { cache } from 'react'
 
 import { find, findOne, type Tenant } from './cms'
 
-/** Uber Conta property: its help center and blog have their own structure and design. */
+/** Uber Conta design: the blog and post views of this theme (the help center follows `helpStyle`). */
 export const isUberConta = (tenant: Tenant) => tenant.themePreset === 'uber-conta'
-export const isUberHelp = isUberConta
 
 // The Uber Conta help center is written without the trailing slash, like the property's URLs.
 export const helpIndexHref = '/central-de-ajuda'

@@ -1,7 +1,9 @@
+import { hasFlatHelp } from '@/lib/helpStyle'
 import { getServerSideSitemap } from 'next-sitemap'
 import { find } from '@/lib/cms'
+import { sitemapDates } from '@/lib/lastModified'
 import { requireTenant } from '@/lib/tenant'
-import { categoryPath, isUberHelp, questionPath } from '@/lib/uber-help'
+import { categoryPath, questionPath } from '@/lib/uber-help'
 import { pathsOf, styleOf } from '@/lib/urlStyle'
 
 /** Uber Conta help center: the index, one page per category and one per question (flat URLs). */
@@ -64,11 +66,11 @@ const getPagesSitemap = async (tenantSlug: string) => {
     select: { slug: true, updatedAt: true, faqs: true },
   })
 
-  const dateFallback = new Date().toISOString()
+  const dateFallback = (await sitemapDates(tenant)).pages
 
   const defaultSitemap = [
     // Uber Conta has no public search page (its search lives in the help center).
-    ...(isUberHelp(tenant) ? [] : [{ loc: `${SITE_URL}/search/`, lastmod: dateFallback }]),
+    ...(hasFlatHelp(tenant) ? [] : [{ loc: `${SITE_URL}/search/`, lastmod: dateFallback }]),
     {
       loc: `${SITE_URL}${urls.blogIndex()}`,
       lastmod: dateFallback,
@@ -94,7 +96,7 @@ const getPagesSitemap = async (tenantSlug: string) => {
         lastmod: category.updatedAt || dateFallback,
       }))
 
-  const uberHelp = isUberHelp(tenant)
+  const uberHelp = hasFlatHelp(tenant)
   const uberHelpSitemap = uberHelp
     ? await getUberHelpSitemap(tenant.slug, SITE_URL, dateFallback)
     : []

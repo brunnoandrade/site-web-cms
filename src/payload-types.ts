@@ -316,6 +316,10 @@ export interface Tenant {
    */
   layout?: ('digio' | 'uber-conta') | null;
   /**
+   * Cor da barra do navegador no celular e do manifest do site. Ex.: #000000. Vazio: a do navegador.
+   */
+  themeColor?: string | null;
+  /**
    * Ligado: /pix/ (a forma canônica; /pix redireciona). Desligado: /pix (e /pix/ redireciona). Use a forma do site que está sendo substituído.
    */
   trailingSlash?: boolean | null;
@@ -324,11 +328,19 @@ export interface Tenant {
    */
   blogUrlStyle?: ('category' | 'flat') | null;
   /**
+   * Também define a busca do site nos dados estruturados: só a estrutura plana tem a busca da central. Mudar isso muda os endereços da central: confira com o time de SEO.
+   */
+  helpStyle?: ('topics' | 'flat') | null;
+  /**
+   * Código do idioma (BCP 47) dos dados estruturados e do manifest. Ex.: pt-BR. O atributo lang do HTML ainda é pt-BR em todo o site.
+   */
+  locale?: string | null;
+  /**
    * Anexado ao título de cada página no <title>. Ex.: " • Uber Conta". Vazio: " | <nome da propriedade>". Não vai para og:title nem twitter:title.
    */
   seoTitleSuffix?: string | null;
   /**
-   * Usada em og:image e twitter:image quando a página não tem imagem própria (1200×630).
+   * Usada em og:image e twitter:image quando a página não tem imagem própria (1200×630). Vazio: o ícone do app da propriedade e, sem ele, a imagem genérica da plataforma; preencha para não compartilhar uma imagem que não é da marca.
    */
   seoDefaultImage?: (number | null) | Media;
   /**
@@ -339,6 +351,10 @@ export interface Tenant {
    * Ligado: o robots.txt bloqueia tudo (Disallow: /) e todas as páginas saem com noindex, nofollow. Use em DEV e HML; em produção, deixe desligado.
    */
   blockIndexing?: boolean | null;
+  /**
+   * Ligado: o robots.txt bloqueia GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot e outros que coletam páginas para treinar modelos. Não afeta o Google Search nem assistentes que buscam a página a pedido do usuário. Sem efeito com a indexação bloqueada (já fecha tudo).
+   */
+  blockAiCrawlers?: boolean | null;
   /**
    * Uma regra por linha, só "Allow:" e "Disallow:" (ex.: Disallow: /busca/). Entram no bloco "User-agent: *", depois de "/next/" e "/api/". Linhas com # são comentários.
    */
@@ -355,6 +371,10 @@ export interface Tenant {
    * PNG quadrado, 180×180. Vira o apple-touch-icon e o logo nos dados estruturados. Vazio: /icons/apple-touch-icon.png.
    */
   appIcon?: (number | null) | Media;
+  /**
+   * PNG quadrado, 512×512. Usado em /manifest.webmanifest como ícone de 192 e 512 px, que os navegadores exigem para oferecer a instalação do site como app. Vazio: só o ícone do app (180×180), sem instalação.
+   */
+  manifestIcon?: (number | null) | Media;
   tracking?: {
     /**
      * Ex.: GTM-ABC1234. Carregado depois da interação.
@@ -381,6 +401,14 @@ export interface Tenant {
      * Ex.: +55 11 4003-0000 ou 0800 000 0000.
      */
     sacPhone?: string | null;
+  };
+  /**
+   * Aplicativo da propriedade nos dados estruturados de todas as páginas. Sem nome ou sem links das lojas, nada é publicado.
+   */
+  app?: {
+    name?: string | null;
+    androidUrl?: string | null;
+    iosUrl?: string | null;
   };
   socials?:
     | {
@@ -2633,16 +2661,21 @@ export interface TenantsSelect<T extends boolean = true> {
       };
   themePreset?: T;
   layout?: T;
+  themeColor?: T;
   trailingSlash?: T;
   blogUrlStyle?: T;
+  helpStyle?: T;
+  locale?: T;
   seoTitleSuffix?: T;
   seoDefaultImage?: T;
   llmsTxt?: T;
   blockIndexing?: T;
+  blockAiCrawlers?: T;
   robotsExtra?: T;
   seoDefaultDescription?: T;
   favicon?: T;
   appIcon?: T;
+  manifestIcon?: T;
   tracking?:
     | T
     | {
@@ -2658,6 +2691,13 @@ export interface TenantsSelect<T extends boolean = true> {
         cnpj?: T;
         address?: T;
         sacPhone?: T;
+      };
+  app?:
+    | T
+    | {
+        name?: T;
+        androidUrl?: T;
+        iosUrl?: T;
       };
   socials?:
     | T

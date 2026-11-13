@@ -1,3 +1,4 @@
+import { hasFlatHelp } from '@/lib/helpStyle'
 import type { Metadata } from 'next'
 import { helpIndexPath, helpQuestionPath, helpTopicPath } from '@/routes'
 import Link from 'next/link'
@@ -9,14 +10,7 @@ import { JsonLd } from '@/components/JsonLd'
 import { QuestionArticle, HelpBackBar } from '@/components/UberHelp'
 import { breadcrumbNode, qaPageNode } from '@/lib/jsonld'
 import { requireHelpTopic, topicQuestions } from '@/lib/help'
-import {
-  categoryPath,
-  getCategoryFaqs,
-  getFaq,
-  helpIndexHref,
-  isUberHelp,
-  questionPath,
-} from '@/lib/uber-help'
+import { categoryPath, getCategoryFaqs, getFaq, helpIndexHref, questionPath } from '@/lib/uber-help'
 import { notFound } from 'next/navigation'
 import { requireTenant } from '@/lib/tenant'
 import { texts } from '@/lib/texts'
@@ -33,7 +27,7 @@ export default async function HelpTopicPage({ params }: Args) {
   const tenant = await requireTenant(tenantSlug)
 
   // Uber Conta: the URL is the question itself (/central-de-ajuda/<pergunta>/).
-  if (isUberHelp(tenant)) {
+  if (hasFlatHelp(tenant)) {
     const faq = await getFaq(tenant.slug, decodeURIComponent(topicSlug))
     if (!faq) notFound()
     const category = typeof faq.category === 'object' ? faq.category : null
@@ -106,7 +100,7 @@ export default async function HelpTopicPage({ params }: Args) {
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const { tenant: tenantSlug, topic: topicSlug } = await params
   const tenant = await requireTenant(tenantSlug)
-  if (isUberHelp(tenant)) {
+  if (hasFlatHelp(tenant)) {
     const faq = await getFaq(tenant.slug, decodeURIComponent(topicSlug))
     return buildMetadata({
       tenant,

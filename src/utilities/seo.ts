@@ -44,9 +44,15 @@ const mediaUrl = (image?: Media | number | null) =>
     ? getMediaUrl(image.sizes?.og?.url || image.url)
     : undefined
 
-/** Share image: the page's own, then the property's default, then the platform's. */
+/**
+ * Share image: the page's own, then the property's default, then the property's app icon (its logo,
+ * better than another brand's image), then the platform's.
+ */
 export const seoImage = (tenant: Tenant, image?: Media | number | null) =>
-  mediaUrl(image) ?? mediaUrl(tenant.seoDefaultImage) ?? '/website-template-OG.webp'
+  mediaUrl(image) ??
+  mediaUrl(tenant.seoDefaultImage) ??
+  mediaUrl(tenant.appIcon) ??
+  '/website-template-OG.webp'
 
 type Args = {
   tenant: Tenant

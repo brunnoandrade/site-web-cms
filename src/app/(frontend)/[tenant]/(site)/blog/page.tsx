@@ -1,3 +1,4 @@
+import { localeOf } from '@/lib/helpStyle'
 import type { Metadata } from 'next'
 import React from 'react'
 
@@ -58,7 +59,7 @@ export default async function BlogIndex({ params, searchParams }: Args) {
           url: `${tenant.siteUrl}${path}`,
           name: 'Blog',
           description: blogPage?.meta?.description,
-          inLanguage: 'pt-BR',
+          inLanguage: localeOf(tenant),
         },
       ]}
     />

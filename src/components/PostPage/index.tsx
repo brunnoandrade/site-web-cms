@@ -74,52 +74,62 @@ export async function PostPage({
     )
   }
 
+  // Structured data of every post, whatever the property's layout.
+  const jsonLd = (
+    <JsonLd
+      data={[
+        breadcrumbNode(
+          tenant,
+          [
+            { name: texts.crumbHome, path: '/' },
+            { name: 'Blog', path: pathsOf(tenant).blogIndex() },
+            ...(typeof post.category === 'object' && post.category
+              ? [
+                  {
+                    name: post.category.title,
+                    path: pathsOf(tenant).blogPage(1, post.category.slug),
+                  },
+                ]
+              : []),
+            { name: post.title, path: canonical },
+          ],
+          `${tenant.siteUrl}${canonical}#breadcrumb`,
+        ),
+        webPageNode(tenant, {
+          path: canonical,
+          name: post.title,
+          description: post.meta?.description,
+          extra: {
+            '@id': `${tenant.siteUrl}${canonical}#webpage`,
+            datePublished: post.publishedAt,
+            dateModified: post.updatedAt,
+          },
+        }),
+        blogPostingNode(
+          tenant,
+          post,
+          canonical,
+          collapse(lexicalText((post.content as { root?: unknown })?.root)),
+        ),
+      ]}
+    />
+  )
+
   if (isUberConta(tenant)) {
     return (
       <>
         <UberPost post={post} tenant={tenant.slug} />
-        <JsonLd
-          data={[
-            breadcrumbNode(
-              tenant,
-              [
-                { name: texts.crumbHome, path: '/' },
-                { name: 'Blog', path: pathsOf(tenant).blogIndex() },
-                ...(typeof post.category === 'object' && post.category
-                  ? [
-                      {
-                        name: post.category.title,
-                        path: pathsOf(tenant).blogPage(1, post.category.slug),
-                      },
-                    ]
-                  : []),
-                { name: post.title, path: canonical },
-              ],
-              `${tenant.siteUrl}${canonical}#breadcrumb`,
-            ),
-            webPageNode(tenant, {
-              path: canonical,
-              name: post.title,
-              description: post.meta?.description,
-              extra: {
-                '@id': `${tenant.siteUrl}${canonical}#webpage`,
-                datePublished: post.publishedAt,
-                dateModified: post.updatedAt,
-              },
-            }),
-            blogPostingNode(
-              tenant,
-              post,
-              canonical,
-              collapse(lexicalText((post.content as { root?: unknown })?.root)),
-            ),
-          ]}
-        />
+        {jsonLd}
       </>
     )
   }
 
-  return <DefaultPostView post={post} />
+  return (
+    <>
+      <DefaultPostView post={post} />
+      {jsonLd}
+    </>
+  )
 }
 
 export async function postMetadata({

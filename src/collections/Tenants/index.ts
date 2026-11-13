@@ -139,6 +139,16 @@ export const Tenants: CollectionConfig = {
                   'Estrutura visual do cabeçalho e do rodapé. Novos layouts exigem um deploy.',
               },
             },
+            {
+              name: 'themeColor',
+              label: 'Cor do navegador',
+              type: 'text',
+              validate: matches(/^#[0-9a-fA-F]{6}$/, 'Formato: #RRGGBB'),
+              admin: {
+                description:
+                  'Cor da barra do navegador no celular e do manifest do site. Ex.: #000000. Vazio: a do navegador.',
+              },
+            },
           ],
         },
         {
@@ -178,6 +188,27 @@ export const Tenants: CollectionConfig = {
                   'Plana mantém o endereço dos posts quando o site atual não usa categoria na URL. Mudar isso muda os endereços dos posts: confira com o time de SEO.',
               },
             },
+            {
+              name: 'helpStyle',
+              label: 'Estrutura da central de ajuda',
+              type: 'select',
+              defaultValue: 'topics',
+              options: [
+                {
+                  label: 'Tópicos: /central-de-ajuda/<tópico>/<pergunta>/ (padrão Digio)',
+                  value: 'topics',
+                },
+                {
+                  label:
+                    'Plana com busca: /central-de-ajuda/<pergunta>, categorias em ?slug= e busca em /central-de-ajuda/busca (padrão Uber Conta)',
+                  value: 'flat',
+                },
+              ],
+              admin: {
+                description:
+                  'Também define a busca do site nos dados estruturados: só a estrutura plana tem a busca da central. Mudar isso muda os endereços da central: confira com o time de SEO.',
+              },
+            },
           ],
         },
         {
@@ -185,6 +216,17 @@ export const Tenants: CollectionConfig = {
           description:
             'Padrões de busca e compartilhamento de todas as páginas, e o guia para assistentes de IA.',
           fields: [
+            {
+              name: 'locale',
+              label: 'Idioma do conteúdo',
+              type: 'text',
+              defaultValue: 'pt-BR',
+              validate: matches(/^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$/, 'Formato: pt-BR, en-US'),
+              admin: {
+                description:
+                  'Código do idioma (BCP 47) dos dados estruturados e do manifest. Ex.: pt-BR. O atributo lang do HTML ainda é pt-BR em todo o site.',
+              },
+            },
             {
               // Search engine and social defaults of the property (page titles, share image).
               name: 'seoTitleSuffix',
@@ -202,7 +244,7 @@ export const Tenants: CollectionConfig = {
               relationTo: 'media',
               admin: {
                 description:
-                  'Usada em og:image e twitter:image quando a página não tem imagem própria (1200×630).',
+                  'Usada em og:image e twitter:image quando a página não tem imagem própria (1200×630). Vazio: o ícone do app da propriedade e, sem ele, a imagem genérica da plataforma; preencha para não compartilhar uma imagem que não é da marca.',
               },
             },
             {
@@ -230,6 +272,16 @@ export const Tenants: CollectionConfig = {
               admin: {
                 description:
                   'Ligado: o robots.txt bloqueia tudo (Disallow: /) e todas as páginas saem com noindex, nofollow. Use em DEV e HML; em produção, deixe desligado.',
+              },
+            },
+            {
+              name: 'blockAiCrawlers',
+              label: 'Bloquear robôs de treinamento de IA',
+              type: 'checkbox',
+              defaultValue: false,
+              admin: {
+                description:
+                  'Ligado: o robots.txt bloqueia GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot e outros que coletam páginas para treinar modelos. Não afeta o Google Search nem assistentes que buscam a página a pedido do usuário. Sem efeito com a indexação bloqueada (já fecha tudo).',
               },
             },
             {
@@ -271,6 +323,16 @@ export const Tenants: CollectionConfig = {
               admin: {
                 description:
                   'PNG quadrado, 180×180. Vira o apple-touch-icon e o logo nos dados estruturados. Vazio: /icons/apple-touch-icon.png.',
+              },
+            },
+            {
+              name: 'manifestIcon',
+              label: 'Ícone do manifest (instalação como app)',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description:
+                  'PNG quadrado, 512×512. Usado em /manifest.webmanifest como ícone de 192 e 512 px, que os navegadores exigem para oferecer a instalação do site como app. Vazio: só o ícone do app (180×180), sem instalação.',
               },
             },
           ],
@@ -343,6 +405,31 @@ export const Tenants: CollectionConfig = {
                   label: 'Telefone do SAC',
                   type: 'text',
                   admin: { description: 'Ex.: +55 11 4003-0000 ou 0800 000 0000.' },
+                },
+              ],
+            },
+            {
+              // Mobile app of the property, listed in the structured data (SoftwareApplication).
+              name: 'app',
+              label: 'Aplicativo',
+              type: 'group',
+              admin: {
+                description:
+                  'Aplicativo da propriedade nos dados estruturados de todas as páginas. Sem nome ou sem links das lojas, nada é publicado.',
+              },
+              fields: [
+                { name: 'name', label: 'Nome do aplicativo', type: 'text' },
+                {
+                  name: 'androidUrl',
+                  label: 'Link na Google Play',
+                  type: 'text',
+                  validate: matches(/^(https?:\/\/.+)?$/, 'Use o endereço completo, com https://'),
+                },
+                {
+                  name: 'iosUrl',
+                  label: 'Link na App Store',
+                  type: 'text',
+                  validate: matches(/^(https?:\/\/.+)?$/, 'Use o endereço completo, com https://'),
                 },
               ],
             },

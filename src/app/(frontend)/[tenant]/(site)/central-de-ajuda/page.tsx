@@ -1,3 +1,4 @@
+import { hasFlatHelp } from '@/lib/helpStyle'
 import type { Metadata } from 'next'
 import { helpIndexPath, helpTopicPath } from '@/routes'
 import Link from 'next/link'
@@ -13,7 +14,7 @@ import { find } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
 import { texts } from '@/lib/texts'
 import { buildMetadata } from '@/utilities/seo'
-import { getHelpCategories, getHelpPage, helpIndexHref, isUberHelp } from '@/lib/uber-help'
+import { getHelpCategories, getHelpPage, helpIndexHref } from '@/lib/uber-help'
 
 type Args = { params: Promise<{ tenant: string }> }
 
@@ -22,7 +23,7 @@ export default async function HelpCenter({ params }: Args) {
   const tenant = await requireTenant((await params).tenant)
 
   // Uber Conta: hero with search, category cards and the blocks of the CMS page.
-  if (isUberHelp(tenant)) {
+  if (hasFlatHelp(tenant)) {
     const [page, categories] = await Promise.all([
       getHelpPage(tenant.slug),
       getHelpCategories(tenant.slug),
@@ -109,10 +110,10 @@ export default async function HelpCenter({ params }: Args) {
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const tenant = await requireTenant((await params).tenant)
-  const page = isUberHelp(tenant) ? await getHelpPage(tenant.slug) : null
+  const page = hasFlatHelp(tenant) ? await getHelpPage(tenant.slug) : null
   return buildMetadata({
     tenant,
-    path: isUberHelp(tenant) ? helpIndexHref : helpIndexPath,
+    path: hasFlatHelp(tenant) ? helpIndexHref : helpIndexPath,
     title: page?.meta?.title ?? texts.helpTitle,
     description:
       page?.meta?.description ?? 'Tire suas dúvidas sobre cartão, conta, Pix e outros serviços.',

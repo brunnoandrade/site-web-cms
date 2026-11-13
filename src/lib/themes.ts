@@ -52,3 +52,7 @@ const themes: Record<ThemePreset, Record<string, string>> = {
 /** CSS variables of the tenant theme; unknown presets fall back to Digio. */
 export const themeStyle = (preset?: string | null): React.CSSProperties =>
   (themes[preset as ThemePreset] ?? themes.digio) as React.CSSProperties
+
+/** Browser theme color (address bar, splash) of a property; none keeps the browser's default. */
+export const themeColorOf = (tenant: { themeColor?: string | null }): string | undefined =>
+  tenant.themeColor || undefined

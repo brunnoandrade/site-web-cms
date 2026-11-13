@@ -1,3 +1,4 @@
+import { hasFlatHelp } from '@/lib/helpStyle'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -9,7 +10,7 @@ import { findOne } from '@/lib/cms'
 import { requireTenant } from '@/lib/tenant'
 import { texts } from '@/lib/texts'
 import { buildMetadata } from '@/utilities/seo'
-import { getHelpPage, helpIndexHref, isUberHelp, searchFaqs } from '@/lib/uber-help'
+import { getHelpPage, helpIndexHref, searchFaqs } from '@/lib/uber-help'
 
 // Reads the query string, so it is rendered per request; CMS data stays cached by the fetch tags.
 export const dynamic = 'force-dynamic'
@@ -21,7 +22,7 @@ type Args = {
 
 export default async function HelpSearchPage({ params, searchParams }: Args) {
   const tenant = await requireTenant((await params).tenant)
-  if (!isUberHelp(tenant)) notFound()
+  if (!hasFlatHelp(tenant)) notFound()
   const query = ((await searchParams).q ?? '').trim()
   const [page, results] = await Promise.all([
     getHelpPage(tenant.slug),

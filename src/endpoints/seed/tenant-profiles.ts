@@ -28,6 +28,12 @@ type Profile = {
   }[]
   favicon: { file: string; alt: string }
   appIcon?: { file: string; alt: string }
+  /** 512×512 PNG for installing the site as an app (see scripts/make-manifest-icons.mjs). */
+  manifestIcon: { file: string; alt: string }
+  /** Browser color, structure of the help center and mobile app of the property. */
+  themeColor?: string
+  helpStyle?: 'topics' | 'flat'
+  app?: { name: string; androidUrl?: string; iosUrl?: string }
 }
 
 export const tenantProfiles: Profile[] = [
@@ -48,6 +54,7 @@ export const tenantProfiles: Profile[] = [
     ],
     favicon: { file: 'digio-favicon.png', alt: 'Favicon do Digio' },
     appIcon: { file: 'digio-app-icon.png', alt: 'Ícone do app Digio' },
+    manifestIcon: { file: 'digio-manifest-icon.png', alt: 'Ícone de instalação do Digio' },
   },
   {
     slug: 'uber-conta',
@@ -62,6 +69,17 @@ export const tenantProfiles: Profile[] = [
     // The only network listed on the current site is Medium, which the CMS does not offer.
     socials: [],
     favicon: { file: 'uber-conta-favicon.png', alt: 'Favicon da Uber Conta' },
+    manifestIcon: {
+      file: 'uber-conta-manifest-icon.png',
+      alt: 'Ícone de instalação da Uber Conta',
+    },
+    themeColor: '#000000',
+    helpStyle: 'flat',
+    app: {
+      name: 'Uber Conta',
+      androidUrl: 'https://play.google.com/store/apps/details?id=br.com.digio.uber',
+      iosUrl: 'http://apps.apple.com/us/app/uber-conta/id1550784531',
+    },
   },
 ]
 
@@ -103,7 +121,16 @@ export const seedTenantProfiles = async (payload: Payload) => {
         company: { ...company, sacPhone: profile.sacPhone },
         socials: profile.socials,
         seoDefaultDescription: profile.seoDefaultDescription,
+        themeColor: profile.themeColor ?? null,
+        helpStyle: profile.helpStyle ?? 'topics',
+        app: profile.app ?? { name: null, androidUrl: null, iosUrl: null },
         favicon: await mediaFor(payload, tenant.id, profile.favicon.file, profile.favicon.alt),
+        manifestIcon: await mediaFor(
+          payload,
+          tenant.id,
+          profile.manifestIcon.file,
+          profile.manifestIcon.alt,
+        ),
         ...(profile.appIcon
           ? {
               appIcon: await mediaFor(

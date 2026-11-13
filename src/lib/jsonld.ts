@@ -1,6 +1,7 @@
 import type { Faq, Page, Post } from '@/payload-types'
 
 import type { Tenant } from '@/lib/cms'
+import { localeOf } from '@/lib/helpStyle'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { collapse, lexicalText, seoImage } from '@/utilities/seo'
 
@@ -20,17 +21,6 @@ const organizationLogo = (tenant: Tenant) => {
   return icon && typeof icon === 'object' && icon.url
     ? absoluteUrl(tenant, getMediaUrl(icon.url))
     : abs(tenant, '/icons/apple-touch-icon.png')
-}
-
-type AppInfo = { name: string; androidUrl?: string; iosUrl?: string }
-
-/** The mobile app of each property (by tenant slug), listed in the structured data of every page. */
-const apps: Record<string, AppInfo> = {
-  'uber-conta': {
-    name: 'Uber Conta',
-    androidUrl: 'https://play.google.com/store/apps/details?id=br.com.digio.uber',
-    iosUrl: 'http://apps.apple.com/us/app/uber-conta/id1550784531',
-  },
 }
 
 /** Organization and WebSite of the property, on every page. */
@@ -53,7 +43,7 @@ export const siteNodes = (tenant: Tenant, searchPath?: string): Node[] => [
               contactType: 'customer service',
               telephone: tenant.company.sacPhone,
               areaServed: 'BR',
-              availableLanguage: 'pt-BR',
+              availableLanguage: localeOf(tenant),
             }
           : undefined,
         sameAs: tenant.socials?.length ? tenant.socials.map((item) => item.url) : undefined,
@@ -69,7 +59,7 @@ export const siteNodes = (tenant: Tenant, searchPath?: string): Node[] => [
         '@id': abs(tenant, '/#website'),
         url: tenant.siteUrl,
         name: tenant.name,
-        inLanguage: 'pt-BR',
+        inLanguage: localeOf(tenant),
         publisher: { '@id': abs(tenant, '/#organization') },
         potentialAction: searchPath
           ? {
@@ -83,9 +73,9 @@ export const siteNodes = (tenant: Tenant, searchPath?: string): Node[] => [
   },
 ]
 
-/** The property's app (`apps`), listed on every page. None for properties without one. */
+/** The property's app (`app` field), listed on every page. None for properties without one. */
 export const appNode = (tenant: Tenant): Node | null => {
-  const { name, androidUrl, iosUrl } = apps[tenant.slug] ?? {}
+  const { name, androidUrl, iosUrl } = tenant.app ?? {}
   const urls = [androidUrl, iosUrl].filter((url): url is string => Boolean(url))
   if (!name || urls.length === 0) return null
   return {
@@ -142,7 +132,7 @@ export const webPageNode = (
     name,
     description,
     url: abs(tenant, path === '/' ? '' : path),
-    inLanguage: 'pt-BR',
+    inLanguage: localeOf(tenant),
     ...extra,
   })
 
@@ -200,6 +190,29 @@ export const itemListNode = (tenant: Tenant, items: { name: string; path: string
   })),
 })
 
+/**
+ * Authors of a post as schema.org `Person` (name, photo). There are no public author pages, so no
+ * `url`. A post without authors is credited to the organization.
+ */
+export const authorNodes = (tenant: Tenant, post: Pick<Post, 'authors'>): Node[] => {
+  const people = (post.authors ?? [])
+    .filter((author): author is Exclude<typeof author, number> => typeof author === 'object')
+    .map((author) =>
+      clean({
+        '@type': 'Person',
+        name: author.name,
+        description: author.bio,
+        image:
+          author.avatar && typeof author.avatar === 'object' && author.avatar.url
+            ? absoluteUrl(tenant, getMediaUrl(author.avatar.url))
+            : undefined,
+      }),
+    )
+  return people.length > 0
+    ? people
+    : [{ '@type': 'Organization', '@id': abs(tenant, '/#organization') }]
+}
+
 export const blogPostingNode = (
   tenant: Tenant,
   post: Post,
@@ -219,7 +232,10 @@ export const blogPostingNode = (
     image: absoluteUrl(tenant, seoImage(tenant, post.meta?.image)),
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
-    inLanguage: 'pt-BR',
+    inLanguage: localeOf(tenant),
+    articleSection:
+      typeof post.category === 'object' && post.category ? post.category.title : undefined,
+    author: authorNodes(tenant, post),
     publisher: { '@id': abs(tenant, '/#organization') },
   })
 }
