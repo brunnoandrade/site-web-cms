@@ -52,7 +52,9 @@ export const CoverHero: React.FC<Page['hero']> = ({
         className={cn(
           'container relative z-[2] flex flex-col',
           half
-            ? 'h-[45vh] min-h-[22rem] items-center justify-end min-[992px]:h-[55vh]'
+            ? // Minimum height (not fixed): it grows with the text, so it is never clipped behind the
+              // menu; pt-32 keeps the content below the header (the section is pulled up -mt-24).
+              'min-h-[max(22rem,45vh)] items-center justify-end pt-32 min-[992px]:min-h-[55vh]'
             : 'min-h-screen items-start justify-center',
         )}
       >
