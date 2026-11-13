@@ -1,7 +1,9 @@
 import type { Category } from '@/payload-types'
+import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
+import { LivePreviewHero } from '@/components/LivePreviewHero'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
@@ -45,9 +47,16 @@ export async function BlogListing({ tenant, category, page }: Props) {
   const hrefFor = (n: number) => urls.blogPage(n, category?.slug)
 
   if (uber) {
+    // In the admin's live preview the hero follows the unsaved form and reads the draft.
+    const { isEnabled: draft } = await draftMode()
     const [categories, blogPage] = await Promise.all([
       find('categories', { tenant, limit: 50, sort: 'title', tags: ['posts'] }),
-      findOne('pages', { tenant, tags: ['pages_blog'], where: { slug: { equals: 'blog' } } }),
+      findOne('pages', {
+        tenant,
+        draft,
+        tags: ['pages_blog'],
+        where: { slug: { equals: 'blog' } },
+      }),
     ])
     return (
       <UberBlog
@@ -55,6 +64,7 @@ export async function BlogListing({ tenant, category, page }: Props) {
         urls={urls}
         current={category}
         hero={blogPage?.hero}
+        heroNode={draft && blogPage ? <LivePreviewHero initialData={blogPage} /> : undefined}
         hrefFor={hrefFor}
         page={posts.page ?? 1}
         posts={posts.docs}

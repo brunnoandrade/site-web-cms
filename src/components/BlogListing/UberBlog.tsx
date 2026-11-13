@@ -14,6 +14,8 @@ type Props = {
   /** URLs of the property (see src/routes). */
   urls: ReturnType<typeof paths>
   hero?: React.ComponentProps<typeof RenderHero>
+  /** Replaces `hero` (admin live preview). */
+  heroNode?: React.ReactNode
   categories: Category[]
   current?: Category
   posts: Pick<Post, 'id' | 'slug' | 'title' | 'category' | 'meta'>[]
@@ -26,6 +28,7 @@ type Props = {
 export const UberBlog: React.FC<Props> = ({
   urls,
   hero,
+  heroNode,
   categories,
   current,
   posts,
@@ -41,7 +44,7 @@ export const UberBlog: React.FC<Props> = ({
 
   return (
     <>
-      {hero && <RenderHero {...hero} />}
+      {heroNode ?? (hero && <RenderHero {...hero} />)}
       <section className="pb-10 pt-10">
         <div className="container">
           <ul className="m-0 mb-10 flex list-none flex-wrap gap-2 p-0">
