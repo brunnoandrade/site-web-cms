@@ -45,6 +45,10 @@ test.describe('website', () => {
     expect(await (await request.get(`${DIGIO}/pages-sitemap.xml`)).text()).toContain(
       `${DIGIO}/componentes/`,
     )
+    // /sitemap.xml lists the URLs directly, not just the child sitemaps.
+    const all = await (await request.get(`${DIGIO}/sitemap.xml`)).text()
+    expect(all).toContain('<urlset')
+    expect(all).toContain(`${DIGIO}/componentes/`)
   })
 
   test('blog keeps the WordPress URLs', async ({ page, request }) => {

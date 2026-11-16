@@ -36,8 +36,8 @@ Central de Ajuda do Uber Conta: a pergunta usa a pergunta como título e os 160 
 
 ## Mapas do site e robots
 
-- `/sitemap.xml`: índice que aponta para `/pages-sitemap.xml` e `/posts-sitemap.xml`. O `lastmod` de cada um é a data da última alteração do conteúdo (`src/lib/lastModified.ts`), nunca "agora": um `lastmod` que muda a cada requisição faz o Google ignorá-lo. Sem conteúdo, vale a data do tenant.
-- `/posts-sitemap.xml` traz a imagem de cada post (`image:image`: imagem de destaque, senão a de compartilhamento).
+- `/sitemap.xml`: todas as páginas e posts da propriedade em um só arquivo, como o site atual (Uber Conta: 91 páginas e 11 posts, sem URL repetida). `/pages-sitemap.xml` e `/posts-sitemap.xml` continuam servindo as mesmas URLs separadas. A montagem fica em `src/lib/sitemapEntries.ts`. O `lastmod` de cada URL é a data da última alteração do conteúdo (`src/lib/lastModified.ts`), nunca "agora": um `lastmod` que muda a cada requisição faz o Google ignorá-lo. Sem conteúdo, vale a data do tenant.
+- Os posts (em `/sitemap.xml` e em `/posts-sitemap.xml`) trazem a imagem de cada um (`image:image`: imagem de destaque, senão a de compartilhamento).
 - `/manifest.webmanifest`: nome, cores e ícone do app da propriedade (`src/lib/manifest.ts`). A cor do tema vem de `themeColorOf` (`src/lib/themes.ts`).
 - `/robots.txt`: libera tudo menos `/next/` e `/api/`, e aponta para `/sitemap.xml`. A aba Indexação e ícones de Propriedades traz uma pré-visualização somente leitura do arquivo final (`src/components/admin/RobotsPreview`), montada com a mesma função `robotsTxt`. Com "Bloquear robôs de treinamento de IA" (`blockAiCrawlers`, aba Indexação e ícones), cada robô de `AI_CRAWLERS` (`src/lib/robots.ts`) ganha o próprio grupo `Disallow: /`. O Google Search e os assistentes que buscam a página a pedido do usuário não entram na lista.
 - O Uber Conta lista cada categoria da Central de Ajuda (`?slug=`) no mapa; o site atual lista só `/central-de-ajuda/categorias`.
@@ -99,7 +99,7 @@ Aba **Indexação e ícones** de Propriedades:
 
 ## Contrato entre propriedades
 
-`src/lib/tenantContract.test.ts` roda `robots.txt`, índice do sitemap, metadata, JSON-LD, manifest e dados de post com duas propriedades fictícias de escolhas opostas (barra final e URL por categoria x sem barra, posts planos e indexação bloqueada). Garante que nada sai com dados de outra propriedade nem depende do nome do tenant. Ao criar uma regra nova de SEO, ponha a lógica em função pura em `src/lib` e cubra-a ali.
+`src/lib/tenantContract.test.ts` roda `robots.txt`, sitemap, metadata, JSON-LD, manifest e dados de post com duas propriedades fictícias de escolhas opostas (barra final e URL por categoria x sem barra, posts planos e indexação bloqueada). Garante que nada sai com dados de outra propriedade nem depende do nome do tenant. Ao criar uma regra nova de SEO, ponha a lógica em função pura em `src/lib` e cubra-a ali.
 
 ## Backlog de SEO (genérico, vale para qualquer propriedade)
 

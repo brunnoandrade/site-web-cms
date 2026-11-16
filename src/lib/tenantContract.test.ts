@@ -9,7 +9,7 @@ import { appNode, authorNodes, blogPostingNode, siteNodes } from './jsonld'
 import { webManifest } from './manifest'
 import { themeColorOf } from './themes'
 import { robotsTxt } from './robots'
-import { latestDate, postSitemapEntry, sitemapIndexXml } from './sitemaps'
+import { latestDate, mergeSitemapEntries, postSitemapEntry } from './sitemaps'
 
 /**
  * Contract: everything the site emits for a property comes from that property's own data, with no
@@ -46,21 +46,19 @@ const tenants = {
 } as unknown as Record<string, Tenant>
 
 describe.each(Object.values(tenants))('property $slug', (tenant) => {
-  it('robots.txt points to its own sitemap index', () => {
+  it('robots.txt points to its own sitemap', () => {
     expect(robotsTxt(tenant)).toContain(`Sitemap: ${tenant.siteUrl}/sitemap.xml`)
   })
 
-  it('sitemap index lists only its own host, with real dates', () => {
-    const xml = sitemapIndexXml(tenant, [
-      { path: '/pages-sitemap.xml', lastmod: tenant.updatedAt },
-      { path: '/posts-sitemap.xml', lastmod: tenant.updatedAt },
+  it('sitemap lists each URL once, on its own host', () => {
+    const entry = (path: string) => ({ loc: `${tenant.siteUrl}${path}`, lastmod: tenant.updatedAt })
+    const merged = mergeSitemapEntries([entry('/a'), entry('/b')], [entry('/b'), entry('/c')])
+    expect(merged.map((e) => e.loc)).toEqual([
+      `${tenant.siteUrl}/a`,
+      `${tenant.siteUrl}/b`,
+      `${tenant.siteUrl}/c`,
     ])
-    const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1])
-    expect(locs).toEqual([
-      `${tenant.siteUrl}/pages-sitemap.xml`,
-      `${tenant.siteUrl}/posts-sitemap.xml`,
-    ])
-    expect(xml).toContain(`<lastmod>${tenant.updatedAt}</lastmod>`)
+    expect(merged.every((e) => e.loc.startsWith(tenant.siteUrl))).toBe(true)
   })
 
   it('metadata uses its name, host and robots', () => {

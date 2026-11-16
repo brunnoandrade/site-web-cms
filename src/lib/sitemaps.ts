@@ -4,20 +4,15 @@ import type { Tenant } from '@/lib/cms'
 import type { Media, Post } from '@/payload-types'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 
-/** Sitemap index of a property: one entry per sitemap, each with the date of its latest change. */
-export const sitemapIndexXml = (
-  tenant: Pick<Tenant, 'siteUrl'>,
-  entries: { path: string; lastmod: string }[],
-): string => `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${entries
-  .map(
-    ({ path, lastmod }) =>
-      `  <sitemap><loc>${tenant.siteUrl}${path}</loc><lastmod>${lastmod}</lastmod></sitemap>`,
-  )
-  .join('\n')}
-</sitemapindex>
-`
+/** Joins sitemap entries, listing each URL once (the first entry wins). */
+export const mergeSitemapEntries = (...lists: ISitemapField[][]): ISitemapField[] => {
+  const seen = new Set<string>()
+  return lists.flat().filter(({ loc }) => {
+    if (seen.has(loc)) return false
+    seen.add(loc)
+    return true
+  })
+}
 
 /** The most recent of the given ISO dates; `fallback` when there is none. */
 export const latestDate = (dates: (string | null | undefined)[], fallback: string): string =>
