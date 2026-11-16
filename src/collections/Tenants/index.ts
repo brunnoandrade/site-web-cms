@@ -281,7 +281,7 @@ export const Tenants: CollectionConfig = {
               defaultValue: false,
               admin: {
                 description:
-                  'Ligado: o robots.txt bloqueia GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot e outros que coletam páginas para treinar modelos. Não afeta o Google Search nem assistentes que buscam a página a pedido do usuário. Sem efeito com a indexação bloqueada (já fecha tudo).',
+                  'Ligado: o robots.txt ganha um bloco "Disallow: /" para cada robô que coleta páginas para treinar modelos (GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot e outros). Esses blocos são acrescentados sozinhos ao servir o arquivo: não aparecem em "Regras extras"; veja o resultado na pré-visualização abaixo. Não afeta o Google Search nem assistentes que buscam a página a pedido do usuário. Sem efeito com a indexação bloqueada (já fecha tudo).',
               },
             },
             {
@@ -292,8 +292,13 @@ export const Tenants: CollectionConfig = {
               admin: {
                 rows: 6,
                 description:
-                  'Uma regra por linha, só "Allow:" e "Disallow:" (ex.: Disallow: /busca/). Entram no bloco "User-agent: *", depois de "/next/" e "/api/". Linhas com # são comentários.',
+                  'Uma regra por linha, só "Allow:" e "Disallow:" (ex.: Disallow: /busca/). Entram no bloco "User-agent: *", depois de "/next/" e "/api/". Linhas com # são comentários. Os bloqueios de robôs de IA não são escritos aqui.',
               },
+            },
+            {
+              name: 'robotsPreview',
+              type: 'ui',
+              admin: { components: { Field: '@/components/admin/RobotsPreview#RobotsPreview' } },
             },
             {
               name: 'seoDefaultDescription',

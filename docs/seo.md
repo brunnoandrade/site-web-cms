@@ -16,6 +16,8 @@ Como o site monta títulos, descrições, dados estruturados e mapas do site, e 
 | `og:type` | `website`; `article` nos posts |
 | `theme-color` | `#000000` no Uber Conta |
 
+**Aba SEO vazia não deixa a página sem nada** (`documentSeo` em `src/utilities/seo.ts`): título = título do documento; descrição = início do texto do post (160 caracteres, corte em palavra) ou a padrão da propriedade; imagem = `meta.image`, senão a imagem de destaque do post (`heroImage`) ou a do hero da página, senão as da propriedade. Vídeos nunca viram imagem de compartilhamento. `og:image` sai com largura, altura (tamanho `og` de 1200px) e `alt` (o da mídia, senão o título); o `BlogPosting` usa a mesma imagem e descrição. No admin (`src/fields/seo.ts`), os botões "Gerar" do plugin preenchem título (sem sufixo: o site o acrescenta), descrição (início do texto) e imagem (destaque ou hero). A aba também traz a **pré-visualização de compartilhamento** (`src/components/admin/SharePreview`): cartão com imagem, host, título e descrição como WhatsApp, LinkedIn e Facebook mostram, já com os fallbacks acima (o preview do plugin só mostra o resultado do Google, sem imagem). O `seoPlugin` 3.90 só atende os endpoints "gerar" (URL, título, descrição, imagem) das coleções listadas em `collections`; sem isso o preview do Google fica em `https://...` e os botões respondem 403. Por isso `src/plugins/index.ts` lista `pages` e `posts` e descarta o grupo `meta` que o plugin acrescenta (a aba já existe). Cuidado: `overrides` dos campos do plugin substituem o `admin` inteiro, inclusive o botão "Gerar"; ver `metaImage` em `src/fields/seo.ts`.
+
 Tudo é montado por `buildMetadata` (`src/utilities/seo.ts`); páginas e posts passam por `generateMeta`. O Next só põe o `<title>` e as meta tags dentro do `<head>` para robôs conhecidos; `htmlLimitedBots: /.*/` no `next.config.ts` faz isso para qualquer cliente, como o site atual (SSR do Nuxt).
 
 Central de Ajuda do Uber Conta: a pergunta usa a pergunta como título e os 160 primeiros caracteres da resposta como descrição; a categoria usa `Central de Ajuda: <categoria>` e a descrição da categoria; o índice e o blog usam a página `central-de-ajuda` e a página `blog` do CMS.
@@ -37,7 +39,7 @@ Central de Ajuda do Uber Conta: a pergunta usa a pergunta como título e os 160 
 - `/sitemap.xml`: índice que aponta para `/pages-sitemap.xml` e `/posts-sitemap.xml`. O `lastmod` de cada um é a data da última alteração do conteúdo (`src/lib/lastModified.ts`), nunca "agora": um `lastmod` que muda a cada requisição faz o Google ignorá-lo. Sem conteúdo, vale a data do tenant.
 - `/posts-sitemap.xml` traz a imagem de cada post (`image:image`: imagem de destaque, senão a de compartilhamento).
 - `/manifest.webmanifest`: nome, cores e ícone do app da propriedade (`src/lib/manifest.ts`). A cor do tema vem de `themeColorOf` (`src/lib/themes.ts`).
-- `/robots.txt`: libera tudo menos `/next/` e `/api/`, e aponta para `/sitemap.xml`. Com "Bloquear robôs de treinamento de IA" (`blockAiCrawlers`, aba Indexação e ícones), cada robô de `AI_CRAWLERS` (`src/lib/robots.ts`) ganha o próprio grupo `Disallow: /`. O Google Search e os assistentes que buscam a página a pedido do usuário não entram na lista.
+- `/robots.txt`: libera tudo menos `/next/` e `/api/`, e aponta para `/sitemap.xml`. A aba Indexação e ícones de Propriedades traz uma pré-visualização somente leitura do arquivo final (`src/components/admin/RobotsPreview`), montada com a mesma função `robotsTxt`. Com "Bloquear robôs de treinamento de IA" (`blockAiCrawlers`, aba Indexação e ícones), cada robô de `AI_CRAWLERS` (`src/lib/robots.ts`) ganha o próprio grupo `Disallow: /`. O Google Search e os assistentes que buscam a página a pedido do usuário não entram na lista.
 - O Uber Conta lista cada categoria da Central de Ajuda (`?slug=`) no mapa; o site atual lista só `/central-de-ajuda/categorias`.
 
 ## llms.txt
@@ -63,6 +65,7 @@ Lê as URLs da tabela de `docs/checklist-uber-conta.md`, compara `<head>` e tipo
 Diferenças aceitas hoje:
 - `canonical` das categorias da Central: o site atual aponta todas para `/central-de-ajuda/categorias`, o que junta as páginas no Google; aqui cada categoria é o próprio canonical.
 - `/central-de-ajuda/categorias` sem `?slug=` redireciona para `/central-de-ajuda`.
+- `robots.txt`: o do site atual (Nuxt) só diz `User-agent: *` / `Disallow:` (libera tudo) e o `Sitemap`. O do CMS acrescenta `Disallow: /next/` e `/api/`, caminhos internos da plataforma que não existem no site atual; nenhuma regra extra é necessária para o Uber Conta (conferido em 2026-11-16).
 - Na busca, o site atual mantém o sufixo no `og:title` e não envia `twitter:title`.
 
 ## Rastreio, consentimento e dados da empresa

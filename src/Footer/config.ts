@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { anyone, tenantRoles } from '@/access/roles'
 import { link } from '@/fields/link'
+import { tenantName } from '@/fields/tenantName'
 import { revalidateFooter } from './hooks/revalidateFooter'
 
 /**
@@ -19,12 +20,12 @@ export const Footer: CollectionConfig = {
   },
   admin: {
     group: 'Layout',
-    components: {
-      // One row per property (the plugin would jump straight to one document).
-      views: { list: { Component: '@/components/admin/LayoutList#LayoutList' } },
-    },
+    // Standard list (filtered by the selected property); the property and last change as columns.
+    useAsTitle: 'tenantName',
+    defaultColumns: ['tenantName', 'updatedAt'],
   },
   fields: [
+    tenantName,
     {
       name: 'logo',
       label: 'Logo',

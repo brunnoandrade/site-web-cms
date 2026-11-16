@@ -1,5 +1,18 @@
 import { Field } from 'payload'
 
+import { t } from '@/utilities/labels'
+
+const labels: Record<string, ReturnType<typeof t>> = {
+  title: t('Título', 'Title'),
+  priority: t('Prioridade', 'Priority'),
+  doc: t('Post', 'Post'),
+  docUrl: t('Endereço', 'URL'),
+}
+
+/** The plugin's own fields come with labels derived from their names (English): label them. */
+export const labelSearchField = (field: Field): Field =>
+  'name' in field && field.name && labels[field.name] ? { ...field, label: labels[field.name] } : field
+
 export const searchFields: Field[] = [
   {
     name: 'slug',
@@ -11,7 +24,7 @@ export const searchFields: Field[] = [
   },
   {
     name: 'meta',
-    label: 'Meta',
+    label: t('SEO', 'SEO'),
     type: 'group',
     index: true,
     admin: {
@@ -21,23 +34,23 @@ export const searchFields: Field[] = [
       {
         type: 'text',
         name: 'title',
-        label: 'Title',
+        label: t('Título', 'Title'),
       },
       {
         type: 'text',
         name: 'description',
-        label: 'Description',
+        label: t('Descrição', 'Description'),
       },
       {
         name: 'image',
-        label: 'Image',
+        label: t('Imagem', 'Image'),
         type: 'upload',
         relationTo: 'media',
       },
     ],
   },
   {
-    label: 'Categories',
+    label: t('Categorias', 'Categories'),
     name: 'categories',
     type: 'array',
     admin: {

@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import type { Page, Post } from '@/payload-types'
 
 import type { Tenant } from '@/lib/cms'
-import { buildMetadata } from './seo'
+import { buildMetadata, documentSeo } from './seo'
 
 /** Metadata of a page or post from its SEO fields (see buildMetadata). */
 export const generateMeta = async (args: {
@@ -14,14 +14,15 @@ export const generateMeta = async (args: {
   type?: 'website' | 'article'
 }): Promise<Metadata> => {
   const { doc, tenant, path, type } = args
+  const seo = documentSeo(doc)
   return buildMetadata({
     tenant,
     path,
     type,
-    title: doc?.meta?.title,
-    description: doc?.meta?.description,
+    title: seo.title,
+    description: seo.description,
     keywords: doc?.meta?.keywords,
-    image: doc?.meta?.image,
+    image: seo.image,
     publishedTime: (doc as Partial<Post> | null)?.publishedAt,
     modifiedTime: doc?.updatedAt,
   })

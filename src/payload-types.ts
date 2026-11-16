@@ -263,11 +263,11 @@ export interface Page {
   )[];
   meta?: {
     title?: string | null;
+    description?: string | null;
     /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     * Share image (WhatsApp, LinkedIn, Facebook, X) and Google. Ideal: 1200×630. Empty, the site uses the document’s featured or hero image, then the property default.
      */
     image?: (number | null) | Media;
-    description?: string | null;
     /**
      * Separadas por vírgula (meta keywords).
      */
@@ -352,11 +352,11 @@ export interface Tenant {
    */
   blockIndexing?: boolean | null;
   /**
-   * Ligado: o robots.txt bloqueia GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot e outros que coletam páginas para treinar modelos. Não afeta o Google Search nem assistentes que buscam a página a pedido do usuário. Sem efeito com a indexação bloqueada (já fecha tudo).
+   * Ligado: o robots.txt ganha um bloco "Disallow: /" para cada robô que coleta páginas para treinar modelos (GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot e outros). Esses blocos são acrescentados sozinhos ao servir o arquivo: não aparecem em "Regras extras"; veja o resultado na pré-visualização abaixo. Não afeta o Google Search nem assistentes que buscam a página a pedido do usuário. Sem efeito com a indexação bloqueada (já fecha tudo).
    */
   blockAiCrawlers?: boolean | null;
   /**
-   * Uma regra por linha, só "Allow:" e "Disallow:" (ex.: Disallow: /busca/). Entram no bloco "User-agent: *", depois de "/next/" e "/api/". Linhas com # são comentários.
+   * Uma regra por linha, só "Allow:" e "Disallow:" (ex.: Disallow: /busca/). Entram no bloco "User-agent: *", depois de "/next/" e "/api/". Linhas com # são comentários. Os bloqueios de robôs de IA não são escritos aqui.
    */
   robotsExtra?: string | null;
   /**
@@ -548,11 +548,11 @@ export interface Post {
   category: number | Category;
   meta?: {
     title?: string | null;
+    description?: string | null;
     /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     * Share image (WhatsApp, LinkedIn, Facebook, X) and Google. Ideal: 1200×630. Empty, the site uses the document’s featured or hero image, then the property default.
      */
     image?: (number | null) | Media;
-    description?: string | null;
     /**
      * Separadas por vírgula (meta keywords).
      */
@@ -1396,6 +1396,7 @@ export interface HelpTopic {
 export interface Header {
   id: number;
   tenant?: (number | null) | Tenant;
+  tenantName?: string | null;
   enableCta?: boolean | null;
   cta?: {
     type?: ('reference' | 'custom') | null;
@@ -1478,6 +1479,7 @@ export interface Header {
 export interface Footer {
   id: number;
   tenant?: (number | null) | Tenant;
+  tenantName?: string | null;
   logo?: (number | null) | Media;
   /**
    * Opcional. Sem ela, vale a logo principal em todas as telas.
@@ -1586,7 +1588,7 @@ export interface User {
   collection: 'users';
 }
 /**
- * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
+ * Automatic copy of the posts used by the blog search, kept up to date whenever a post is saved, published or deleted. Do not edit it here: edit the post.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "search".
@@ -1898,8 +1900,8 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
-        image?: T;
         description?: T;
+        image?: T;
         keywords?: T;
       };
   publishedAt?: T;
@@ -2326,8 +2328,8 @@ export interface PostsSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
-        image?: T;
         description?: T;
+        image?: T;
         keywords?: T;
       };
   publishedAt?: T;
@@ -2541,6 +2543,7 @@ export interface HelpTopicsSelect<T extends boolean = true> {
  */
 export interface HeaderSelect<T extends boolean = true> {
   tenant?: T;
+  tenantName?: T;
   enableCta?: T;
   cta?:
     | T
@@ -2603,6 +2606,7 @@ export interface HeaderSelect<T extends boolean = true> {
  */
 export interface FooterSelect<T extends boolean = true> {
   tenant?: T;
+  tenantName?: T;
   logo?: T;
   logoMobile?: T;
   highlightImage?: T;

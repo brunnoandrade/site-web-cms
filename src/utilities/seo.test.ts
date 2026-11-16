@@ -6,6 +6,8 @@ import {
   SEO_ROBOTS,
   buildMetadata,
   collapse,
+  documentSeo,
+  excerpt,
   lexicalText,
   robotsOf,
   seoDescription,
@@ -107,5 +109,41 @@ describe('seoDescription', () => {
     expect(meta.description).toBe('Padrão')
     expect(meta.openGraph?.description).toBe('Padrão')
     expect(meta.twitter?.description).toBe('Padrão')
+  })
+})
+
+describe('documentSeo', () => {
+  const img = (id: number, extra = {}) =>
+    ({ id, url: `/api/media/file/${id}.jpg`, mimeType: 'image/jpeg', ...extra }) as never
+
+  it('falls back to title, start of the text and featured image', () => {
+    const text = { children: [{ text: 'Como organizar o dinheiro do mês' }] }
+    const seo = documentSeo({
+      title: 'Dicas',
+      content: { root: text },
+      heroImage: img(7),
+    })
+    expect(seo.title).toBe('Dicas')
+    expect(seo.description).toBe('Como organizar o dinheiro do mês')
+    expect(seo.image).toMatchObject({ id: 7 })
+  })
+
+  it('prefers the SEO tab and ignores unpopulated or non-image uploads', () => {
+    const seo = documentSeo({
+      title: 'Dicas',
+      meta: { title: 'T', description: 'D', image: 3 },
+      heroImage: img(7, { mimeType: 'video/mp4' }),
+      hero: { media: img(9) },
+    })
+    expect(seo).toMatchObject({ title: 'T', description: 'D' })
+    expect(seo.image).toMatchObject({ id: 9 })
+  })
+})
+
+describe('excerpt', () => {
+  it('cuts at a word within the limit', () => {
+    const out = excerpt('palavra '.repeat(40))
+    expect(out.length).toBeLessThanOrEqual(160)
+    expect(out.endsWith('…')).toBe(true)
   })
 })

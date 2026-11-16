@@ -3,7 +3,7 @@ import type { Faq, Page, Post } from '@/payload-types'
 import type { Tenant } from '@/lib/cms'
 import { localeOf } from '@/lib/helpStyle'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
-import { collapse, lexicalText, seoImage } from '@/utilities/seo'
+import { collapse, documentSeo, lexicalText, seoImage } from '@/utilities/seo'
 
 type Node = Record<string, unknown>
 
@@ -220,16 +220,17 @@ export const blogPostingNode = (
   articleBody: string,
 ): Node => {
   const url = abs(tenant, path)
+  const seo = documentSeo(post)
   return clean({
     '@type': 'BlogPosting',
     '@id': `${url}#article`,
     mainEntityOfPage: { '@id': `${url}#webpage` },
     isPartOf: { '@id': `${url}#webpage` },
     headline: post.title,
-    description: post.meta?.description,
-    abstract: post.meta?.description,
+    description: seo.description,
+    abstract: seo.description,
     articleBody,
-    image: absoluteUrl(tenant, seoImage(tenant, post.meta?.image)),
+    image: absoluteUrl(tenant, seoImage(tenant, seo.image)),
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
     inLanguage: localeOf(tenant),

@@ -9,18 +9,38 @@ import {
   getTenantIDsWithRoles,
   isPreviewReader,
   isSuperAdmin,
+  superAdminOnly,
   TENANT_ROLES,
 } from '@/access/roles'
-import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
-import { searchFields } from '@/search/fieldOverrides'
+import {
+  GenerateDescription,
+  GenerateImage,
+  GenerateTitle,
+  GenerateURL,
+} from '@payloadcms/plugin-seo/types'
+import { labelSearchField, searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import type { Config, Page, Post } from '@/payload-types'
 import { getTenantSiteURL } from '@/utilities/tenantSite'
 import { t } from '@/utilities/labels'
+import { excerpt, lexicalText } from '@/utilities/seo'
 
-const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Digio` : 'Digio'
+// The title only: the website adds the property's suffix (" | Digio", " • Uber Conta") on the <title>.
+const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => doc?.title ?? ''
+
+// Start of the post text (the form data holds the raw Lexical tree), cut for Google's snippet.
+const generateDescription: GenerateDescription<Post | Page> = ({ doc }) => {
+  const content = (doc as Partial<Post>)?.content
+  return content ? excerpt(lexicalText((content as { root?: unknown }).root)) : ''
+}
+
+// Featured image of a post or hero image of a page (ids in the form data); videos do not count.
+const generateImage: GenerateImage<Post | Page> = ({ doc }) => {
+  const id = (value: unknown) =>
+    typeof value === 'object' && value ? (value as { id?: number | string }).id : value
+  const image = (doc as Partial<Post>)?.heroImage ?? (doc as Partial<Page>)?.hero?.media
+  return (id(image) as string) ?? ''
 }
 
 // Canonical URL on the document's own website (its tenant's siteUrl).
@@ -48,15 +68,42 @@ const tenantScopedCollections: TenantScoped[] = [
   'search',
 ]
 
+/**
+ * seoPlugin 3.90 only answers its "generate" endpoints (URL, title, description, image) for the
+ * collections listed in `collections`, and lists them by also appending its own `meta` group.
+ * Pages and posts already carry the SEO tab (src/fields/seo.ts), so the appended group is dropped.
+ * Without this the Google preview stays at "https://..." and the generate buttons answer 403.
+ */
+const seoCollections = ['pages', 'posts']
+const seo = (config: Parameters<Plugin>[0]) => {
+  const out = seoPlugin({
+    collections: seoCollections,
+    generateTitle,
+    generateDescription,
+    generateImage,
+    generateURL,
+  })(config)
+  return {
+    ...out,
+    collections: out.collections?.map((collection) =>
+      seoCollections.includes(collection.slug)
+        ? {
+            ...collection,
+            fields: collection.fields.filter(
+              (field) => !(field.type === 'group' && 'name' in field && field.name === 'meta'),
+            ),
+          }
+        : collection,
+    ),
+  }
+}
+
 export const plugins: Plugin[] = [
   nestedDocsPlugin({
     collections: ['categories'],
     generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
   }),
-  seoPlugin({
-    generateTitle,
-    generateURL,
-  }),
+  seo,
   searchPlugin({
     collections: ['posts'],
     beforeSync: beforeSyncWithSearch,
@@ -65,12 +112,23 @@ export const plugins: Plugin[] = [
         singular: t('Resultado de busca', 'Search result'),
         plural: t('Índice de busca', 'Search index'),
       },
-      admin: { group: t('Blog', 'Blog') },
+      admin: {
+        group: t('Blog', 'Blog'),
+        // Automatic copy of the posts that the blog search reads (kept by the plugin on every post
+        // save). Nothing to edit there, so it is out of the admin menu for everyone.
+        hidden: true,
+        description: t(
+          'Cópia automática dos posts usada pela busca do blog, mantida sozinha a cada post salvo, publicado ou apagado. Não edite aqui: edite o post.',
+          'Automatic copy of the posts used by the blog search, kept up to date whenever a post is saved, published or deleted. Do not edit it here: edit the post.',
+        ),
+      },
       access: {
         read: anyone,
+        update: superAdminOnly,
+        delete: superAdminOnly,
       },
       fields: ({ defaultFields }) => {
-        return [...defaultFields, ...searchFields]
+        return [...defaultFields.map(labelSearchField), ...searchFields]
       },
     },
   }),

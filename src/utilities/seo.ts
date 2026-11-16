@@ -39,20 +39,73 @@ export const collapse = (value: string) => value.replace(/\s+/g, ' ').trim()
 export const seoTitle = (tenant: Tenant, title?: string | null) =>
   title ? `${title}${tenant.seoTitleSuffix || ` | ${tenant.name}`}` : tenant.name
 
-const mediaUrl = (image?: Media | number | null) =>
-  image && typeof image === 'object' && 'url' in image && image.url
-    ? getMediaUrl(image.sizes?.og?.url || image.url)
+/** The upload as a populated image (not an id, not a video), or undefined. */
+const imageOf = (image?: Media | number | null): Media | undefined =>
+  image &&
+  typeof image === 'object' &&
+  image.url &&
+  (!image.mimeType || image.mimeType.startsWith('image/'))
+    ? image
     : undefined
+
+export type ShareImage = { url: string; width?: number; height?: number; alt?: string }
+
+const shareImageOf = (image?: Media | number | null): ShareImage | undefined => {
+  const media = imageOf(image)
+  if (!media) return undefined
+  // The 1200px "og" size when it exists; its own dimensions then, the original's otherwise.
+  const og = media.sizes?.og
+  const sized = og?.url ? og : media
+  return {
+    url: getMediaUrl(sized.url!),
+    width: sized.width ?? undefined,
+    height: sized.height ?? undefined,
+    alt: media.alt || undefined,
+  }
+}
 
 /**
  * Share image: the page's own, then the property's default, then the property's app icon (its logo,
  * better than another brand's image), then the platform's.
  */
+export const seoShareImage = (tenant: Tenant, image?: Media | number | null): ShareImage =>
+  shareImageOf(image) ??
+  shareImageOf(tenant.seoDefaultImage) ??
+  shareImageOf(tenant.appIcon) ?? { url: '/website-template-OG.webp' }
+
 export const seoImage = (tenant: Tenant, image?: Media | number | null) =>
-  mediaUrl(image) ??
-  mediaUrl(tenant.seoDefaultImage) ??
-  mediaUrl(tenant.appIcon) ??
-  '/website-template-OG.webp'
+  seoShareImage(tenant, image).url
+
+/** Description length that Google shows without cutting. */
+export const DESCRIPTION_MAX = 160
+
+/** `text` cut at a word boundary within `max` characters, with an ellipsis when cut. */
+export const excerpt = (text: string, max = DESCRIPTION_MAX) => {
+  const flat = collapse(text)
+  if (flat.length <= max) return flat
+  const cut = flat.slice(0, max - 1)
+  const space = cut.lastIndexOf(' ')
+  return `${(space > max * 0.6 ? cut.slice(0, space) : cut).replace(/[\s,;:.\-–—]+$/, '')}…`
+}
+
+type SeoDoc = {
+  title?: string | null
+  meta?: { title?: string | null; description?: string | null; image?: Media | number | null } | null
+  heroImage?: Media | number | null
+  hero?: { media?: Media | number | null } | null
+  content?: unknown
+}
+
+/**
+ * What a page or post sends when its SEO tab is left empty: its own title; for posts the start of
+ * the text; its featured image (post) or hero image (page).
+ */
+export const documentSeo = (doc?: SeoDoc | null) => ({
+  title: doc?.meta?.title || doc?.title,
+  description:
+    doc?.meta?.description || (doc?.content ? excerpt(lexicalText((doc.content as { root?: unknown }).root)) : undefined),
+  image: imageOf(doc?.meta?.image) ?? imageOf(doc?.heroImage) ?? imageOf(doc?.hero?.media),
+})
 
 type Args = {
   tenant: Tenant
@@ -88,7 +141,7 @@ export const buildMetadata = ({
   noindex,
 }: Args): Metadata => {
   const url = `${tenant.siteUrl}${path}`
-  const imageUrl = seoImage(tenant, image)
+  const shareImage = seoShareImage(tenant, image)
   const shareTitle = title || tenant.name
   const description = seoDescription(tenant, ownDescription)
   return {
@@ -103,7 +156,14 @@ export const buildMetadata = ({
       description: description || undefined,
       url,
       siteName: tenant.name,
-      images: [{ url: imageUrl, alt: tenant.name }],
+      images: [
+        {
+          url: shareImage.url,
+          width: shareImage.width,
+          height: shareImage.height,
+          alt: shareImage.alt || shareTitle,
+        },
+      ],
       ...(type === 'article'
         ? { publishedTime: publishedTime ?? undefined, modifiedTime: modifiedTime ?? undefined }
         : {}),
@@ -112,7 +172,7 @@ export const buildMetadata = ({
       card: 'summary_large_image',
       title: shareTitle,
       description: description || undefined,
-      images: [imageUrl],
+      images: [{ url: shareImage.url, alt: shareImage.alt || shareTitle }],
     },
   }
 }

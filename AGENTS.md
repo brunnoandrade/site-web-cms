@@ -39,10 +39,11 @@ Coleções:
 - `posts`, `categories`, `authors` (blog; `authors` são perfis públicos, separados dos usuários do admin)
 - `media`
 - `faqs`, `help-categories`, `help-topics` (central de ajuda, ~29 tópicos, navegação por categoria, sem busca própria)
+- `search` (índice da busca do blog, criado pelo plugin de busca a cada post salvo; escondido do admin, só leitura; reindexar: botão do plugin, desligado com a tela escondida)
 - `tenants` (propriedades: nome, slug, URL pública, domínios) e `users`
   - papéis globais: `super-admin` (todas as propriedades) e `preview` (conta de serviço, só leitura);
   - papéis por propriedade: `admin`, `editor` e `seo`.
-- `header` e `footer`: um documento por propriedade (coleções com `isGlobal` do plugin multi-tenant, porque globals do Payload não têm tenant)). No admin, Cabeçalho e Rodapé abrem uma lista com uma linha por propriedade (`src/components/admin/LayoutList`), em vez do salto automático do plugin para o documento da propriedade selecionada; escolher a linha também troca a propriedade selecionada.
+- `header` e `footer`: um documento por propriedade (coleções com `isGlobal` do plugin multi-tenant, porque globals do Payload não têm tenant)). No admin, Cabeçalho e Rodapé abrem a lista padrão do Payload (busca, colunas, filtros), já filtrada pela propriedade selecionada no seletor, em vez do salto automático do plugin para o documento (`src/components/admin/LayoutViewRedirect.tsx` desliga o salto só na lista).
 
 Toda coleção de conteúdo tem o campo `tenant`; slugs são únicos por tenant. No site, as rotas ficam em `app/(frontend)/[tenant]/...` e o `proxy.ts` reescreve o domínio da requisição para o tenant.
 
