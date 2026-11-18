@@ -134,10 +134,16 @@ export default buildConfig({
       },
       bucket: process.env.S3_BUCKET,
       config: {
-        credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID,
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-        },
+        // Without keys (UAT/PRD) the SDK uses the pod's IAM role (IRSA). An empty `credentials`
+        // object would count as explicit credentials and block that fallback.
+        ...(process.env.S3_ACCESS_KEY_ID && process.env.S3_SECRET_ACCESS_KEY
+          ? {
+              credentials: {
+                accessKeyId: process.env.S3_ACCESS_KEY_ID,
+                secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+              },
+            }
+          : {}),
         region: process.env.S3_REGION,
         endpoint: process.env.S3_ENDPOINT || undefined,
         forcePathStyle: process.env.S3_FORCE_PATH_STYLE === 'true',

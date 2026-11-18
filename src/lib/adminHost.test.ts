@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { isAdminHost, isAdminHostAllowed } from './adminHost'
+import { isAdminHost, isAdminHostAllowed, isPublicApiPath } from './adminHost'
 
 describe('isAdminHostAllowed', () => {
   it('allows every host when ADMIN_HOST is empty', () => {
@@ -38,5 +38,23 @@ describe('isAdminHost', () => {
   it('is true only for the admin host', () => {
     expect(isAdminHost('admin.digio.com.br', 'admin.digio.com.br')).toBe(true)
     expect(isAdminHost('digio.com.br', 'admin.digio.com.br')).toBe(false)
+  })
+})
+
+describe('isPublicApiPath', () => {
+  it('allows the probes, the help suggestions and the revalidation webhook', () => {
+    for (const path of [
+      '/api/health',
+      '/api/health/',
+      '/api/health/ready',
+      '/api/help-suggest',
+      '/api/revalidate/',
+    ])
+      expect(isPublicApiPath(path)).toBe(true)
+  })
+
+  it('keeps Payload REST routes for the admin host', () => {
+    for (const path of ['/api/users/login', '/api/pages', '/api/media', '/api/health/x', '/api/'])
+      expect(isPublicApiPath(path)).toBe(false)
   })
 })

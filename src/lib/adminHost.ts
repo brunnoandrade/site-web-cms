@@ -20,3 +20,15 @@ export function isAdminHostAllowed(host: string, adminHost: string | undefined):
 export function isAdminHost(host: string, adminHost: string | undefined): boolean {
   return Boolean(normalize(adminHost ?? '')) && isAdminHostAllowed(host, adminHost)
 }
+
+/**
+ * API routes that the public site (or the platform probes and the app itself) call on any host.
+ * Every other /api route is Payload's REST API (login, writes, drafts) and answers only on the
+ * admin host, so a tenant's public domain does not expose it.
+ */
+const publicApiPaths = ['/api/health', '/api/health/ready', '/api/help-suggest', '/api/revalidate']
+
+export function isPublicApiPath(pathname: string): boolean {
+  const path = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname
+  return publicApiPaths.includes(path)
+}

@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 
-import { isAdminHost, isAdminHostAllowed } from './lib/adminHost'
+import { isAdminHost, isAdminHostAllowed, isPublicApiPath } from './lib/adminHost'
 import { resolveTenant, type TenantInfo } from './lib/tenantResolver'
 import { internalPath, policyRedirect } from './lib/urlPolicy'
 
@@ -34,8 +34,9 @@ const isAdminPath = (pathname: string) =>
 
 /**
  * Entry point of every page request:
- * 0. the CMS admin (/admin) and the SSO routes (/auth) are not tenant pages. With ADMIN_HOST set
- *    they answer 404 on every other host; the admin gets its language and theme defaults;
+ * 0. the CMS admin (/admin), the SSO routes (/auth) and Payload's REST API (/api, except the
+ *    public routes) are not tenant pages. With ADMIN_HOST set they answer 404 on every other
+ *    host; the admin gets its language and theme defaults;
  * 1. resolves the request host to a tenant;
  * 2. applies the property's URL policy (trailing slash form, flat blog URLs; see lib/urlPolicy.ts);
  * 3. rewrites to the internal `/<tenant>/...` routes (app/(frontend)/[tenant]).
@@ -44,6 +45,13 @@ export async function proxy(request: NextRequest) {
   // Behind the CDN the original host may come in X-Forwarded-Host.
   const host = request.headers.get('x-forwarded-host') ?? request.headers.get('host') ?? ''
   const adminHost = process.env.ADMIN_HOST
+
+  // Payload's REST API is part of the CMS: only the admin host answers it (see isPublicApiPath).
+  if (request.nextUrl.pathname.startsWith('/api/')) {
+    return isPublicApiPath(request.nextUrl.pathname) || isAdminHostAllowed(host, adminHost)
+      ? NextResponse.next()
+      : new NextResponse('Não encontrado.', { status: 404 })
+  }
 
   if (isAdminPath(request.nextUrl.pathname)) {
     if (!isAdminHostAllowed(host, adminHost))
@@ -86,9 +94,9 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Everything except Next.js internals, the API (Payload and the website's endpoints) and static
-  // files. /admin and /auth are matched on purpose: see isAdminPath.
+  // Everything except Next.js internals and static files. /admin, /auth and /api are matched on
+  // purpose: see isAdminPath and isPublicApiPath.
   matcher: [
-    '/((?!_next/|api/|next/|brand/|fonts/|favicon\\.ico|favicon\\.svg|website-template-OG\\.webp).*)',
+    '/((?!_next/|next/|brand/|fonts/|favicon\\.ico|favicon\\.svg|website-template-OG\\.webp).*)',
   ],
 }
