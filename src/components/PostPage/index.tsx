@@ -17,6 +17,7 @@ import { UberPost, latestPostsOf } from '@/components/UberPost'
 import { blogPostingNode, breadcrumbNode, webPageNode } from '@/lib/jsonld'
 import { collapse, lexicalText } from '@/utilities/seo'
 import { isUberConta } from '@/lib/uber-help'
+import { getCMSPublicURL } from '@/utilities/getURL'
 
 export const queryPostBySlug = cache(async ({ tenant, slug }: { tenant: string; slug: string }) => {
   const { isEnabled: draft } = await draftMode()
@@ -68,6 +69,7 @@ export async function PostPage({
     return (
       <LivePreviewPost
         initialData={post}
+        cmsURL={getCMSPublicURL()}
         variant={uber ? 'uber' : 'default'}
         latest={uber ? await latestPostsOf(tenant.slug) : []}
       />

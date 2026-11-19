@@ -14,6 +14,7 @@ import { requireTenant } from '@/lib/tenant'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { robotsOf, seoDescription } from '@/utilities/seo'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
+import { getCMSPublicURL } from '@/utilities/getURL'
 
 // Tenants are rendered on the first request and cached (ISR); nothing is prerendered at build.
 export function generateStaticParams() {
@@ -34,6 +35,7 @@ export default async function TenantLayout({ children, params }: Args) {
   return (
     <div data-theme={tenant.themePreset ?? undefined} style={themeStyle(tenant.themePreset)}>
       <AdminBar
+        cmsURL={getCMSPublicURL()}
         adminBarProps={{
           preview: isEnabled,
         }}

@@ -8,8 +8,6 @@ import { PayloadAdminBar } from '@payloadcms/admin-bar'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { getCMSPublicURL } from '@/utilities/getURL'
-
 const baseClass = 'admin-bar'
 
 const collectionLabels = {
@@ -27,8 +25,10 @@ const Title: React.FC = () => <span>Dashboard</span>
 
 export const AdminBar: React.FC<{
   adminBarProps?: PayloadAdminBarProps
+  /** Public URL of the CMS, read at runtime by the server. */
+  cmsURL: string
 }> = (props) => {
-  const { adminBarProps } = props || {}
+  const { adminBarProps, cmsURL } = props || {}
   const segments = useSelectedLayoutSegments()
   const [show, setShow] = useState(false)
   // Segments below [tenant]/layout.tsx, e.g. ['posts', 'my-post'] or ['about'].
@@ -56,7 +56,7 @@ export const AdminBar: React.FC<{
             logo: 'text-white',
             user: 'text-white',
           }}
-          cmsURL={getCMSPublicURL()}
+          cmsURL={cmsURL}
           collectionSlug={collection}
           collectionLabels={{
             plural: collectionLabels[collection]?.plural || 'Pages',

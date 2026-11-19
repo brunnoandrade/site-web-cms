@@ -88,8 +88,6 @@ services:
     build:
       context: .
       args:
-        NEXT_PUBLIC_CMS_URL: http://localhost:${APP_PORT:-3000}
-        NEXT_PUBLIC_WEB_URL: http://localhost:${APP_PORT:-3000}
         NEXT_PUBLIC_MEDIA_URL: http://localhost:${MINIO_API_PORT:-9200}/${S3_BUCKET:-digio-media}
         IMAGES_ALLOW_LOCAL_IP: 'true'
     restart: unless-stopped

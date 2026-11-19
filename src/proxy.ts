@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 
+import { frameAncestors } from './lib/frameAncestors'
 import { isAdminHost, isAdminHostAllowed, isPublicApiPath } from './lib/adminHost'
 import { resolveTenant, type TenantInfo } from './lib/tenantResolver'
 import { internalPath, policyRedirect } from './lib/urlPolicy'
@@ -90,7 +91,13 @@ export async function proxy(request: NextRequest) {
   const url = request.nextUrl.clone()
   url.pathname = `/${tenant}${internalPath(pathname)}`
 
-  return NextResponse.rewrite(url)
+  // The site is embedded only by the admin's live preview.
+  const response = NextResponse.rewrite(url)
+  response.headers.set(
+    'Content-Security-Policy',
+    `frame-ancestors ${frameAncestors({ SERVER_URL: process.env.SERVER_URL, ADMIN_HOST: adminHost })}`,
+  )
+  return response
 }
 
 export const config = {

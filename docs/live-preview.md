@@ -11,8 +11,8 @@ Abre no admin pelo botão do olho (barra do documento). O iframe carrega o site 
 
 ## Pontos que quebram o preview
 
-- **CSP `frame-ancestors`**: o site do tenant (`uberconta.localhost`, `www.uberconta.com.br`) fica em outra origem que o admin, então `'self'` bloqueava o iframe (tela em branco, sem aba funcionando). `next.config.ts` agora permite `'self'` + origem de `NEXT_PUBLIC_CMS_URL`/`SERVER_URL` + `https://$ADMIN_HOST`. São lidas **no build**: ao mudar `ADMIN_HOST` em um ambiente, refaça o build.
-- `NEXT_PUBLIC_CMS_URL` precisa ser exatamente a origem do admin: o `postMessage` só é aceito dessa origem.
+- **CSP `frame-ancestors`**: o site do tenant (`uberconta.localhost`, `www.uberconta.com.br`) fica em outra origem que o admin, então `'self'` bloqueava o iframe (tela em branco, sem aba funcionando). o `src/proxy.ts` agora envia `'self'` + origem de `SERVER_URL` + `https://$ADMIN_HOST` (`src/lib/frameAncestors.ts`). São lidas **a cada requisição** (runtime), não no build: a mesma imagem serve todos os ambientes.
+- `SERVER_URL` precisa ser exatamente a origem do admin (a barra de admin e o live preview a recebem do servidor): o `postMessage` só é aceito dessa origem.
 - Cookie de draft em Safari/HTTP: em dev usa `Secure` em `*.localhost`; Safari pode recusar. Teste com Chrome.
 - Admin: o botão do olho é o Live Preview; o ícone ao lado ("abrir em nova aba") é o preview comum.
 - `AdminBar` dentro do iframe de outro tenant tenta chamar `/api/users/me` entre origens e loga erro de CORS no console. É inofensivo.

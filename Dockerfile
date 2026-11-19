@@ -19,15 +19,12 @@ COPY package.json package-lock.json .npmrc ./
 RUN npm ci
 
 FROM base AS builder
-# NEXT_PUBLIC_* values and the image host allowlist are fixed at build time,
-# so each environment (DEV/HML/PRD) builds its own image with its own values.
-ARG NEXT_PUBLIC_CMS_URL=http://localhost:3000
-ARG NEXT_PUBLIC_WEB_URL=http://localhost:3000
+# Only the image host allowlist (next/image remotePatterns) is fixed at build time: the CMS and
+# site URLs are read at runtime (SERVER_URL, WEB_URL), so the image is the same in every
+# environment except for the media host.
 ARG NEXT_PUBLIC_MEDIA_URL=http://localhost:9200/digio-media
 ARG IMAGES_ALLOW_LOCAL_IP=false
-ENV NEXT_PUBLIC_CMS_URL=$NEXT_PUBLIC_CMS_URL \
-    NEXT_PUBLIC_WEB_URL=$NEXT_PUBLIC_WEB_URL \
-    NEXT_PUBLIC_MEDIA_URL=$NEXT_PUBLIC_MEDIA_URL \
+ENV NEXT_PUBLIC_MEDIA_URL=$NEXT_PUBLIC_MEDIA_URL \
     IMAGES_ALLOW_LOCAL_IP=$IMAGES_ALLOW_LOCAL_IP \
     NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /repo/node_modules ./node_modules

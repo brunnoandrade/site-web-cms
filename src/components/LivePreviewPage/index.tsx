@@ -9,10 +9,11 @@ import { ArchiveBlockView } from '@/blocks/ArchiveBlock/View'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { relayRequest } from '@/lib/livePreviewRelay'
-import { getCMSPublicURL } from '@/utilities/getURL'
 
 type Props = {
   initialData: Page
+  /** Origin of the admin (postMessage is accepted only from it). */
+  cmsURL: string
   tenant: string
   /** Posts of the archive blocks, by block id, fetched by the server when the page loaded. */
   archivePosts: Record<string, Post[]>
@@ -27,6 +28,7 @@ type Props = {
  */
 export const LivePreviewPage: React.FC<Props> = ({
   initialData,
+  cmsURL,
   tenant,
   archivePosts,
   header,
@@ -34,7 +36,7 @@ export const LivePreviewPage: React.FC<Props> = ({
 }) => {
   const { data } = useLivePreview<Page>({
     initialData,
-    serverURL: getCMSPublicURL(),
+    serverURL: cmsURL,
     depth: 2,
     requestHandler: relayRequest,
   })

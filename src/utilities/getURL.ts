@@ -14,7 +14,9 @@ export const getWebURL = () => process.env.WEB_URL || getServerSideURL()
 export const getWebInternalURL = () => process.env.WEB_INTERNAL_URL || getWebURL()
 
 /**
- * Public URL of the CMS as seen by the browser: admin bar, live preview and form submissions.
+ * Public URL of the CMS as seen by the browser: admin bar and live preview.
+ * Read at runtime from SERVER_URL (not a NEXT_PUBLIC_* variable, which Next freezes at build), so
+ * one image serves every environment. Server only: client components receive it as a prop.
  * Server-side data is read through the Local API (see src/lib/cms.ts), without a URL.
  */
-export const getCMSPublicURL = () => process.env.NEXT_PUBLIC_CMS_URL || 'http://localhost:3000'
+export const getCMSPublicURL = () => getServerSideURL()

@@ -19,6 +19,7 @@ import { SkipLink } from '@/components/SiteChrome/SkipLink'
 import { getLayout } from '@/layouts'
 import { faqPageNode, webPageNode } from '@/lib/jsonld'
 import { LivePreviewPage } from '@/components/LivePreviewPage'
+import { getCMSPublicURL } from '@/utilities/getURL'
 
 // Pages are rendered on the first request and cached per tenant (ISR), then refreshed by the
 // CMS revalidation webhook. Nothing is prerendered at build time: the build has no CMS access.
@@ -70,6 +71,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     return (
       <LivePreviewPage
         initialData={page}
+        cmsURL={getCMSPublicURL()}
         tenant={tenant.slug}
         archivePosts={archivePosts}
         header={

@@ -54,7 +54,7 @@ BOOTSTRAP_ADMIN_EMAIL=voce@digio.com.br BOOTSTRAP_ADMIN_PASSWORD=<senha> \
 npm run bootstrap:dev
 ```
 
-**Imagem de container** (Podman ou Docker): `podman build -t digio-site .` e `podman run --env-file .env -p 3000:3000 digio-site`. Os valores `NEXT_PUBLIC_*` são fixados no build (`--build-arg`).
+**Imagem de container** (Podman ou Docker): `podman build -t digio-site .` e `podman run --env-file .env -p 3000:3000 digio-site`. As URLs do CMS e do site vêm do ambiente em runtime (`SERVER_URL`, `WEB_URL`); só o host das imagens (`NEXT_PUBLIC_MEDIA_URL`) é fixado no build (`--build-arg`), porque o Next grava `images.remotePatterns` no build.
 
 **Máquina nova, um comando só:** `BOOTSTRAP_ADMIN_EMAIL=voce@digio.com.br BOOTSTRAP_ADMIN_PASSWORD='<senha>' npm run setup:local` ([scripts/setup-local.sh](scripts/setup-local.sh)). Cria o `.env` com segredos gerados (incluindo `CMS_API_KEY`), sobe Postgres, MinIO e Keycloak, instala as dependências e roda o `bootstrap:dev`. Não sobrescreve `.env` existente. Para ter um usuário de cada perfil, com senha fácil, rode depois `npm run users:local` (ver `docs/usuarios-locais.md`). O que **não** vem do git: edições feitas pelo admin, mídia enviada e posts do WordPress (`blog:migrate`); o conteúdo de seed (Digio e Uber Conta, com imagens) é todo versionado.
 
@@ -158,7 +158,7 @@ docker compose --profile app up -d --build     # ou: podman compose --profile ap
 
 **Banco do container:** a imagem em produção aplica as migrations pendentes ao subir (`prodMigrations`), então ela espera um banco vazio ou criado por migration. Apontada para o banco de desenvolvimento local, que o `npm run dev` montou por _push_ do schema, o Payload faz uma pergunta interativa sobre migrations e o container fica parado sem responder. Para testar a imagem localmente, use um banco novo (`create database digio_imgtest`) ou o `docker compose --profile app` com o banco do compose vazio.
 
-As variáveis `NEXT_PUBLIC_*` e o host de imagens entram no build (`--build-arg`), então cada ambiente (DEV/HML/PRD) gera a sua imagem. Os ambientes, a CDN e a configuração real do CI/CD são do responsável de infra; o [Jenkinsfile](Jenkinsfile) é genérico (registry, credenciais e URLs por ambiente estão marcados com `TODO`).
+Só o host de imagens (`NEXT_PUBLIC_MEDIA_URL`, e `IMAGES_ALLOW_LOCAL_IP` se precisar) entra no build (`--build-arg`); as URLs do CMS e do site e o `frame-ancestors` do preview são lidos em runtime (`SERVER_URL`, `WEB_URL`, `ADMIN_HOST`). Os ambientes, a CDN e a configuração real do CI/CD são do responsável de infra; o [Jenkinsfile](Jenkinsfile) é genérico (registry, credenciais e URLs por ambiente estão marcados com `TODO`).
 
 ## Scripts (na raiz)
 

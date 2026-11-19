@@ -9,7 +9,6 @@ declare global {
       ADMIN_HOST?: string
       WEB_URL?: string
       WEB_INTERNAL_URL?: string
-      NEXT_PUBLIC_WEB_URL?: string
       CRON_SECRET: string
       PREVIEW_SECRET: string
       REVALIDATE_SECRET: string
@@ -20,8 +19,6 @@ declare global {
       S3_ENDPOINT?: string
       S3_FORCE_PATH_STYLE?: string
       MEDIA_PUBLIC_URL: string
-      /** CMS URL as seen by the browser (admin bar, live preview, form submissions). */
-      NEXT_PUBLIC_CMS_URL?: string
       /** Public media storage URL (bucket or CDN), matching MEDIA_PUBLIC_URL. */
       NEXT_PUBLIC_MEDIA_URL?: string
       IMAGES_ALLOW_LOCAL_IP?: string

@@ -12,6 +12,7 @@ import { requireTenant } from '@/lib/tenant'
 import { isUberConta } from '@/lib/uber-help'
 import { pathsOf } from '@/lib/urlStyle'
 import { findOne } from '@/lib/cms'
+import { getCMSPublicURL } from '@/utilities/getURL'
 
 import { UberBlog } from './UberBlog'
 
@@ -64,7 +65,7 @@ export async function BlogListing({ tenant, category, page }: Props) {
         urls={urls}
         current={category}
         hero={blogPage?.hero}
-        heroNode={draft && blogPage ? <LivePreviewHero initialData={blogPage} /> : undefined}
+        heroNode={draft && blogPage ? <LivePreviewHero cmsURL={getCMSPublicURL()} initialData={blogPage} /> : undefined}
         hrefFor={hrefFor}
         page={posts.page ?? 1}
         posts={posts.docs}
