@@ -1,6 +1,9 @@
 {
   "name": "site-web-digio",
   "private": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "description": "Site V2 Digio: site público e CMS (Payload) em um único app Next.js",
   "type": "module",
   "scripts": {
